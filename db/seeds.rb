@@ -9,6 +9,6 @@
 Language.create(:name => 'Deutsch')
 Language.create(:name => 'English')
 
-AvailableCodec.create(:name => 'GSM')
-AvailableCodec.create(:name => 'ulaw')
-AvailableCodec.create(:name => 'alaw')
+Codec.create(:name => 'GSM')
+Codec.create(:name => 'ulaw')
+Codec.create(:name => 'alaw')

@@ -2,6 +2,6 @@ require 'test_helper'
 
 class PhoneTest < ActiveSupport::TestCase
   should "be valid" do
-    assert Phone.new.valid?
+    assert Factory.build(:phone).valid?
   end
 end

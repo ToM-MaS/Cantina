@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20110113094740) do
 
   create_table "sip_accounts", :force => true do |t|
     t.string   "name"
+    t.integer  "phone_id"
     t.string   "auth_user"
     t.string   "user"
     t.string   "password"

@@ -18,7 +18,7 @@ class LanguagesControllerTest < ActionController::TestCase
 
   test "should create language" do
     assert_difference('Language.count') do
-      post :create, :language => @language.attributes
+      post :create, :language => Factory.attributes_for(:language)
     end
 
     assert_redirected_to language_path(assigns(:language))

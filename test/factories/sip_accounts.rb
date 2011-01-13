@@ -2,6 +2,7 @@
 
 Factory.define :sip_account do |f|
   f.name "MyString"
+  f.phone_id 1
   f.auth_user "MyString"
   f.user "MyString"
   f.password "MyString"

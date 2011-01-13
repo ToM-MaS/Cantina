@@ -2,6 +2,6 @@ require 'test_helper'
 
 class TranslationTest < ActiveSupport::TestCase
   should "be valid" do
-    assert Translation.new.valid?
+    assert Factory.build(:translation).valid?
   end
 end

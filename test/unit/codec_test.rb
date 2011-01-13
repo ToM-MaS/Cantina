@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CodecTest < ActiveSupport::TestCase
-  should "not be valid" do
-    assert !Codec.new.valid?
+  should "be valid" do
+     assert Factory.build(:codec).valid?
   end
 end

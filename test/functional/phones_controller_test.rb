@@ -18,7 +18,7 @@ class PhonesControllerTest < ActionController::TestCase
 
   test "should create phone" do
     assert_difference('Phone.count') do
-      post :create, :phone => @phone.attributes
+      post :create, :phone => Factory.attributes_for(:phone)
     end
 
     assert_redirected_to phone_path(assigns(:phone))

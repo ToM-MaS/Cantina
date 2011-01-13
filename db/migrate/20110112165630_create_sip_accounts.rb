@@ -2,6 +2,7 @@ class CreateSipAccounts < ActiveRecord::Migration
   def self.up
     create_table :sip_accounts do |t|
       t.string :name
+      t.integer :phone_id
       t.string :auth_user
       t.string :user
       t.string :password

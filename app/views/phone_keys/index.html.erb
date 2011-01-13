@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Phone</th>
+    <th>Sip Account</th>
     <th>Phone model key</th>
     <th>Phone key function definition</th>
     <th>Value</th>
@@ -13,7 +13,7 @@
 
 <% @phone_keys.each do |phone_key| %>
   <tr>
-    <td><%= phone_key.phone_id %></td>
+    <td><%= phone_key.sip_account_id %></td>
     <td><%= phone_key.phone_model_key_id %></td>
     <td><%= phone_key.phone_key_function_definition_id %></td>
     <td><%= phone_key.value %></td>

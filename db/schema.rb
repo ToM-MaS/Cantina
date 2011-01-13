@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113094740) do
+ActiveRecord::Schema.define(:version => 20110113200244) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(:version => 20110113094740) do
   end
 
   create_table "phone_keys", :force => true do |t|
-    t.integer  "phone_id"
     t.integer  "phone_model_key_id"
     t.integer  "phone_key_function_definition_id"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sip_account_id"
   end
 
   create_table "phone_model_keys", :force => true do |t|

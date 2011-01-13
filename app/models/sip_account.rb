@@ -30,6 +30,9 @@ class SipAccount < ActiveRecord::Base
   has_many :sip_account_codecs, :dependent => :destroy
   has_many :codecs, :through => :sip_account_codecs
   
+  # Keys
+  has_many :phone_keys, :dependent => :destroy
+  
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
   

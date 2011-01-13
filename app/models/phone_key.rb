@@ -13,7 +13,7 @@
 #
 
 class PhoneKey < ActiveRecord::Base
-  belongs_to :phone
+  belongs_to :sip_account
   belongs_to :phone_model_key
   belongs_to :phone_key_function_definition
   

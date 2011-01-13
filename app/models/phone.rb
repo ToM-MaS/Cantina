@@ -23,9 +23,6 @@ class Phone < ActiveRecord::Base
   # Internal phonebook
   has_many :vcards, :as => :vcardable, :dependent => :destroy
   
-  # Keys
-  has_many :phone_keys, :dependent => :destroy
-
   # SIP Accounts
   has_many :sip_accounts, :order => "position", :dependent => :destroy
   

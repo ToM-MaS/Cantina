@@ -1,0 +1,29 @@
+<h1>Listing translations</h1>
+
+<table>
+  <tr>
+    <th>Value</th>
+    <th>Language</th>
+    <th>Translatable type</th>
+    <th>Translatable</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @translations.each do |translation| %>
+  <tr>
+    <td><%= translation.value %></td>
+    <td><%= translation.language_id %></td>
+    <td><%= translation.translatable_type %></td>
+    <td><%= translation.translatable_id %></td>
+    <td><%= link_to 'Show', translation %></td>
+    <td><%= link_to 'Edit', edit_translation_path(translation) %></td>
+    <td><%= link_to 'Destroy', translation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Translation', new_translation_path %>

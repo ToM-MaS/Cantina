@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Available codec:</b>
+  <%= @sip_account_codec.codec_id %>
+</p>
+
+<p>
+  <b>Sip account:</b>
+  <%= @sip_account_codec.sip_account_id %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @sip_account_codec.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_sip_account_codec_path(@sip_account_codec) %> |
+<%= link_to 'Back', sip_account_codecs_path %>

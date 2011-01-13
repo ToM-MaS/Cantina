@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @phone_key_function_definition.name %>
+</p>
+
+<p>
+  <b>Class name:</b>
+  <%= @phone_key_function_definition.type_of_class %>
+</p>
+
+<p>
+  <b>Regex validation:</b>
+  <%= @phone_key_function_definition.regex_validation %>
+</p>
+
+
+<%= link_to 'Edit', edit_phone_key_function_definition_path(@phone_key_function_definition) %> |
+<%= link_to 'Back', phone_key_function_definitions_path %>

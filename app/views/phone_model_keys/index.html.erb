@@ -1,0 +1,27 @@
+<h1>Listing phone_model_keys</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Phone model</th>
+    <th>Position</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @phone_model_keys.each do |phone_model_key| %>
+  <tr>
+    <td><%= phone_model_key.name %></td>
+    <td><%= phone_model_key.phone_model_id %></td>
+    <td><%= phone_model_key.position %></td>
+    <td><%= link_to 'Show', phone_model_key %></td>
+    <td><%= link_to 'Edit', edit_phone_model_key_path(phone_model_key) %></td>
+    <td><%= link_to 'Destroy', phone_model_key, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Phone model key', new_phone_model_key_path %>

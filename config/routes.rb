@@ -1,4 +1,30 @@
 Cantina::Application.routes.draw do
+  resources :phone_keys
+
+  resources :phones
+
+  resources :codecs
+
+  resources :sip_accounts
+
+  resources :sip_account_codecs
+
+  resources :phone_key_function_definitions
+
+  resources :phone_model_keys
+
+  resources :phone_models
+
+  resources :descriptions
+
+  resources :translations
+
+  resources :languages
+
+  resources :manufacturers
+
+  resources :vcards
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

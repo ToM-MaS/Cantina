@@ -1,0 +1,29 @@
+<%= form_for(@sip_account_codec) do |f| %>
+  <% if @sip_account_codec.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sip_account_codec.errors.count, "error") %> prohibited this sip_account_codec from being saved:</h2>
+
+      <ul>
+      <% @sip_account_codec.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :codec_id %><br />
+    <%= f.text_field :codec_id %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_account_id %><br />
+    <%= f.text_field :sip_account_id %>
+  </div>
+  <div class="field">
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,90 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sip_account.name %>
+</p>
+
+<p>
+  <b>Auth user:</b>
+  <%= @sip_account.auth_user %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @sip_account.user %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @sip_account.password %>
+</p>
+
+<p>
+  <b>Registrar:</b>
+  <%= @sip_account.registrar %>
+</p>
+
+<p>
+  <b>Registrar port:</b>
+  <%= @sip_account.registrar_port %>
+</p>
+
+<p>
+  <b>Outbound proxy:</b>
+  <%= @sip_account.outbound_proxy %>
+</p>
+
+<p>
+  <b>Outbound proxy port:</b>
+  <%= @sip_account.outbound_proxy_port %>
+</p>
+
+<p>
+  <b>Sip proxy:</b>
+  <%= @sip_account.sip_proxy %>
+</p>
+
+<p>
+  <b>Sip proxy port:</b>
+  <%= @sip_account.sip_proxy_port %>
+</p>
+
+<p>
+  <b>Realm:</b>
+  <%= @sip_account.realm %>
+</p>
+
+<p>
+  <b>Screen name:</b>
+  <%= @sip_account.screen_name %>
+</p>
+
+<p>
+  <b>Display name:</b>
+  <%= @sip_account.display_name %>
+</p>
+
+<p>
+  <b>Registration expiry time:</b>
+  <%= @sip_account.registration_expiry_time %>
+</p>
+
+<p>
+  <b>Dtmf mode:</b>
+  <%= @sip_account.dtmf_mode %>
+</p>
+
+<p>
+  <b>Remote password:</b>
+  <%= @sip_account.remote_password %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @sip_account.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_sip_account_path(@sip_account) %> |
+<%= link_to 'Back', sip_accounts_path %>

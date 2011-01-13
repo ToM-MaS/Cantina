@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @phone_model.name %>
+</p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @phone_model.manufacturer_id %>
+</p>
+
+<p>
+  <b>Max number of sip accounts:</b>
+  <%= @phone_model.max_number_of_sip_accounts %>
+</p>
+
+<p>
+  <b>Number of keys:</b>
+  <%= @phone_model.number_of_keys %>
+</p>
+
+<p>
+  <b>Max number of phone book entries:</b>
+  <%= @phone_model.max_number_of_phone_book_entries %>
+</p>
+
+
+<%= link_to 'Edit', edit_phone_model_path(@phone_model) %> |
+<%= link_to 'Back', phone_models_path %>

@@ -7,9 +7,6 @@ gem 'rails', '3.0.3'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-# Generators
-gem "rails3-generators", :group => :development
-
 # https://github.com/nono/acts_as_list
 gem "acts_as_list"
 
@@ -22,7 +19,11 @@ gem 'faker'
 
 # Testing stuff
 gem "shoulda"
-gem "factory_girl"
+# https://github.com/thoughtbot/factory_girl_rails
+gem 'factory_girl_rails'
+
+# Generators
+gem "rails3-generators", :group => :development
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -1,0 +1,29 @@
+<%= form_for(@phone_key_function_definition) do |f| %>
+  <% if @phone_key_function_definition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@phone_key_function_definition.errors.count, "error") %> prohibited this phone_key_function_definition from being saved:</h2>
+
+      <ul>
+      <% @phone_key_function_definition.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :type_of_class %><br />
+    <%= f.text_field :type_of_class %>
+  </div>
+  <div class="field">
+    <%= f.label :regex_validation %><br />
+    <%= f.text_field :regex_validation %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

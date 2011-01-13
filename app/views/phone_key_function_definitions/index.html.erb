@@ -1,0 +1,27 @@
+<h1>Listing phone_key_function_definitions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Class name</th>
+    <th>Regex validation</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @phone_key_function_definitions.each do |phone_key_function_definition| %>
+  <tr>
+    <td><%= phone_key_function_definition.name %></td>
+    <td><%= phone_key_function_definition.type_of_class %></td>
+    <td><%= phone_key_function_definition.regex_validation %></td>
+    <td><%= link_to 'Show', phone_key_function_definition %></td>
+    <td><%= link_to 'Edit', edit_phone_key_function_definition_path(phone_key_function_definition) %></td>
+    <td><%= link_to 'Destroy', phone_key_function_definition, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Phone key function definition', new_phone_key_function_definition_path %>

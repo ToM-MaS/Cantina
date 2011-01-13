@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Phone:</b>
+  <%= @phone_key.phone_id %>
+</p>
+
+<p>
+  <b>Phone model key:</b>
+  <%= @phone_key.phone_model_key_id %>
+</p>
+
+<p>
+  <b>Phone key function definition:</b>
+  <%= @phone_key.phone_key_function_definition_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @phone_key.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_phone_key_path(@phone_key) %> |
+<%= link_to 'Back', phone_keys_path %>

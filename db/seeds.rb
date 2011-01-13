@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+Language.create(:name => 'Deutsch')
+Language.create(:name => 'English')
+
+AvailableCodec.create(:name => 'GSM')
+AvailableCodec.create(:name => 'ulaw')
+AvailableCodec.create(:name => 'alaw')

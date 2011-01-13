@@ -1,0 +1,27 @@
+<h1>Listing sip_account_codecs</h1>
+
+<table>
+  <tr>
+    <th>Available codec</th>
+    <th>Sip account</th>
+    <th>Position</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sip_account_codecs.each do |sip_account_codec| %>
+  <tr>
+    <td><%= sip_account_codec.codec_id %></td>
+    <td><%= sip_account_codec.sip_account_id %></td>
+    <td><%= sip_account_codec.position %></td>
+    <td><%= link_to 'Show', sip_account_codec %></td>
+    <td><%= link_to 'Edit', edit_sip_account_codec_path(sip_account_codec) %></td>
+    <td><%= link_to 'Destroy', sip_account_codec, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sip account codec', new_sip_account_codec_path %>

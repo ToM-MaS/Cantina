@@ -1,0 +1,29 @@
+<h1>Listing phone_keys</h1>
+
+<table>
+  <tr>
+    <th>Phone</th>
+    <th>Phone model key</th>
+    <th>Phone key function definition</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @phone_keys.each do |phone_key| %>
+  <tr>
+    <td><%= phone_key.phone_id %></td>
+    <td><%= phone_key.phone_model_key_id %></td>
+    <td><%= phone_key.phone_key_function_definition_id %></td>
+    <td><%= phone_key.value %></td>
+    <td><%= link_to 'Show', phone_key %></td>
+    <td><%= link_to 'Edit', edit_phone_key_path(phone_key) %></td>
+    <td><%= link_to 'Destroy', phone_key, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Phone key', new_phone_key_path %>

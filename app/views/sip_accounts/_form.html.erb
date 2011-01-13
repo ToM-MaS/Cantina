@@ -1,0 +1,85 @@
+<%= form_for(@sip_account) do |f| %>
+  <% if @sip_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sip_account.errors.count, "error") %> prohibited this sip_account from being saved:</h2>
+
+      <ul>
+      <% @sip_account.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :auth_user %><br />
+    <%= f.text_field :auth_user %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :registrar %><br />
+    <%= f.text_field :registrar %>
+  </div>
+  <div class="field">
+    <%= f.label :registrar_port %><br />
+    <%= f.text_field :registrar_port %>
+  </div>
+  <div class="field">
+    <%= f.label :outbound_proxy %><br />
+    <%= f.text_field :outbound_proxy %>
+  </div>
+  <div class="field">
+    <%= f.label :outbound_proxy_port %><br />
+    <%= f.text_field :outbound_proxy_port %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_proxy %><br />
+    <%= f.text_field :sip_proxy %>
+  </div>
+  <div class="field">
+    <%= f.label :sip_proxy_port %><br />
+    <%= f.text_field :sip_proxy_port %>
+  </div>
+  <div class="field">
+    <%= f.label :realm %><br />
+    <%= f.text_field :realm %>
+  </div>
+  <div class="field">
+    <%= f.label :screen_name %><br />
+    <%= f.text_field :screen_name %>
+  </div>
+  <div class="field">
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </div>
+  <div class="field">
+    <%= f.label :registration_expiry_time %><br />
+    <%= f.text_field :registration_expiry_time %>
+  </div>
+  <div class="field">
+    <%= f.label :dtmf_mode %><br />
+    <%= f.text_field :dtmf_mode %>
+  </div>
+  <div class="field">
+    <%= f.label :remote_password %><br />
+    <%= f.text_field :remote_password %>
+  </div>
+  <div class="field">
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

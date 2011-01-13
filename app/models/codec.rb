@@ -14,4 +14,6 @@ class Codec < ActiveRecord::Base
   
   has_many :sip_account_codecs, :dependent => :destroy
   has_many :sip_accounts, :through => :sip_account_codecs
+  
+  #TODO: Validations
 end

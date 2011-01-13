@@ -33,4 +33,5 @@ class SipAccount < ActiveRecord::Base
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
   
+  #TODO: Validations
 end

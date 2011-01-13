@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20110113094740
+#
+# Table name: phones
+#
+#  id             :integer         not null, primary key
+#  mac_address    :string(255)
+#  phone_model_id :integer
+#  ip_address     :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Phone < ActiveRecord::Base
   # Have a look at http://railscasts.com/episodes/237-dynamic-attr-accessible
   #

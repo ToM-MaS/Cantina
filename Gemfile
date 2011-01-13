@@ -25,6 +25,9 @@ gem 'factory_girl_rails'
 # Generators
 gem "rails3-generators", :group => :development
 
+# run ./script/annotate to annotate
+gem 'annotate-models'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

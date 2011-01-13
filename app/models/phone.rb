@@ -1,7 +1,7 @@
 class Phone < ActiveRecord::Base
   # Have a look at http://railscasts.com/episodes/237-dynamic-attr-accessible
   #
-  attr_accessible :mac_address, :phone_model_id
+  attr_accessible :mac_address, :phone_model_id, :ip_address
   
   belongs_to :phone_model
 
@@ -21,8 +21,12 @@ class Phone < ActiveRecord::Base
   validates_presence_of :mac_address
   validates_format_of :mac_address, :with => /^ [0-9A-F]{2} (?: [:]? [0-9A-F]{2} ){5} $/ix
   validates_uniqueness_of :mac_address
+
+  validates_uniqueness_of :ip_address, :allow_nil => true
+  # TODO validate ip_address
   
   validates_presence_of :phone_model_id
+  validates_numericality_of :phone_model_id
 
   after_validation :format_mac_address
   

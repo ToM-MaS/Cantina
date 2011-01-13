@@ -28,6 +28,13 @@ gem "rails3-generators", :group => :development
 # run ./script/annotate to annotate
 gem 'annotate-models'
 
+
+# Rails ERD (aptitude install graphviz)
+group :development do
+  gem "rails-erd"
+end
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

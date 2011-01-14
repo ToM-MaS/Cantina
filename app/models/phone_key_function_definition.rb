@@ -16,5 +16,15 @@ class PhoneKeyFunctionDefinition < ActiveRecord::Base
   has_many :descriptions, :as => :descriptionable, :dependent => :destroy
   has_many :phone_keys, :dependent => :destroy
   
-  #TODO: Validations
+  validates_presence_of  :type_of_class
+  validates_inclusion_of :type_of_class, :in => [
+    'string',
+    'integer',
+    'boolean',
+    'url',
+    'uri',
+  ]
+  
+  #TODO: validate regex_validation?
+  
 end

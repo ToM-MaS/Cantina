@@ -4,77 +4,65 @@ class PhoneTest < ActiveSupport::TestCase
   should "be valid" do
     assert Factory.build(:phone).valid?
   end
-  
-  # Test not valid mac addresses
+
+  # Test invalid mac addresses
   #
-  should "not be valid" do
-    assert !Factory.build(:phone, :mac_address => nil).valid?
+  [
+    nil,
+    '007',
+    'AAFF0011',
+    '1122334455GG',
+    '11:22:33:aa:bb:cc:',
+    '112233aabbcc11',
+    '00-11-22-33-44-55',
+    'not_a_valid_MAC_Address'
+    ].each do |invalid_mac_address|
+    should "not allow #{invalid_mac_address} as an mac_address" do
+      assert !Factory.build(:phone, :mac_address => invalid_mac_address).valid?
+    end
   end
 
-  should "not be valid" do
-    assert !Factory.build(:phone, :mac_address => '007').valid?
-  end
-
-  should "not be valid" do
-    assert !Factory.build(:phone, :mac_address => 'AAFF0011').valid?
-  end
-
-  should "not be valid" do
-    assert !Factory.build(:phone, :mac_address => '1122334455GG').valid?
-  end
-  
-  should "not be valid" do
-    assert !Factory.build(:phone, :mac_address => '11:22:33:aa:bb:cc:').valid?
-  end
-
-  should "not be valid" do
-    assert !Factory.build(:phone, :mac_address => '112233aabbcc11').valid?
-  end
-  
-  
   # Test valid mac addresses
   #
-  should "be valid" do
-    assert Factory.build(:phone, :mac_address => '11:22:33:aa:bb:cc').valid?
-  end
-  
-  should "be valid" do
-    assert Factory.build(:phone, :mac_address => '00-11-22-33-44-55').valid?
-  end
-  
-  should "be valid" do
-    assert Factory.build(:phone, :mac_address => '11:22:33:AA:BB:cc').valid?
+  [
+    '11:22:33:aa:bb:cc',
+     '11:22:33:AA:BB:cc',
+     '112233AABBcc'
+     ].each do |valid_mac_address|
+    should "allow #{valid_mac_address} as an mac_address" do
+      assert Factory.build(:phone, :mac_address => valid_mac_address).valid?
+    end
   end
 
-  should "be valid" do
-    assert Factory.build(:phone, :mac_address => '112233AABBcc').valid?
-  end
-  
-  # mc address has to be unique
+  # mac_address has to be unique
   #
-  should "not be valid" do
+  should "not allow two phone entries with the same mac_address" do
     phone = Factory.create(:phone)
     assert !Factory.build(:phone, :mac_address => phone.mac_address).valid?
   end
 
-
   # Test invalid ip addresses
-  should "not be valid" do
-    assert Factory.build(:phone, :ip_address => '1.2.3.').valid?
+  [
+    '1.2.3.',
+     '1.2.3.256',
+     'asfd',
+     '112233AABBcc'
+     ].each do |invalid_ip_address|
+    should "not allow #{invalid_ip_address} as an ip_address" do
+      assert !Factory.build(:phone, :ip_address => invalid_ip_address).valid?
+    end
   end
 
-  should "not be valid" do
-    assert Factory.build(:phone, :ip_address => '1.2.3.256').valid?
-  end
-  
   # Test valid ip addresses
-  #
-  should "be valid" do
-    assert Factory.build(:phone, :ip_address => '1.2.3.4').valid?
-  end
-
-  should "be valid" do
-    assert Factory.build(:phone, :ip_address => '255.255.255.255').valid?
+  [
+    '1.2.3.4',
+     '255.255.255.255',
+     '123.123.123.123',
+     '1.10.100.250'
+     ].each do |valid_ip_address|
+    should "allow #{valid_ip_address} as an ip_address" do
+      assert Factory.build(:phone, :ip_address => valid_ip_address).valid?
+    end
   end
 
   # ip_address has to be unique
@@ -83,5 +71,5 @@ class PhoneTest < ActiveSupport::TestCase
     phone = Factory.create(:phone)
     assert !Factory.build(:phone, :ip_address => phone.ip_address).valid?
   end
-  
+
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110113094740
+# Schema version: 20110113200244
 #
 # Table name: translations
 #

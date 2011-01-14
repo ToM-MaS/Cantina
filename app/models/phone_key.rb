@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 20110113094740
+# Schema version: 20110113200244
 #
 # Table name: phone_keys
 #
 #  id                               :integer         not null, primary key
-#  phone_id                         :integer
 #  phone_model_key_id               :integer
 #  phone_key_function_definition_id :integer
 #  value                            :string(255)
 #  created_at                       :datetime
 #  updated_at                       :datetime
+#  sip_account_id                   :integer
 #
 
 class PhoneKey < ActiveRecord::Base

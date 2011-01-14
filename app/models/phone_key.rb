@@ -30,23 +30,23 @@ class PhoneKey < ActiveRecord::Base
 	
 	def validate_softkey
 		if self.phone_key_function_definition == nil
-			errors.add( :phone_key_function_definition, "Softkey function cannot be nil." )
+			errors.add( :phone_key_function_definition, "cannot be nil." )
 		else
 			case self.phone_key_function_definition.type_of_class
 				
 				when 'string'
 					if ! self.value.class.ancestors.include?( String )
-						errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be a string." )
+						errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be a string." )
 					end
 				
 				when 'integer'
 					if ! self.value.match( /^\-?[0-9]{1,9}$/ )
-						errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be numerical." )
+						errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be numerical." )
 					end
 				
 				when 'boolean'
 					if ! self.value.match( /^(?:true|false)$/ )
-						errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be boolean (\"true\" or \"false\")." )
+						errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be boolean (\"true\" or \"false\")." )
 					end
 				
 				when 'url'
@@ -55,10 +55,10 @@ class PhoneKey < ActiveRecord::Base
 						uri = URI.parse( self.value )
 						# Require an absolute URI (i.e. with a scheme):
 						if ! uri.absolute?
-							errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URL with a scheme." )
+							errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URL with a scheme." )
 						end
 					rescue URI::InvalidURIError
-						errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URL." )
+						errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URL." )
 					end
 				
 				when 'uri'
@@ -68,21 +68,21 @@ class PhoneKey < ActiveRecord::Base
 						# Strictly speaking, if the thing has a fragment ("#frag")
 						# then it's not a "URI" (but maybe a "URI-reference").
 						if ! uri.fragment.nil?
-							errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URI (URI's don't have a fragment)." )
+							errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URI (URI's don't have a fragment)." )
 						end
 					rescue URI::InvalidURIError
-						errors.add( :value, "Value (\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URI." )
+						errors.add( :value, "(\"#{self.value}\") for \"#{self.phone_key_function_definition.name}\" softkey has to be an URI." )
 					end
 				
 				else
 					errors.add( :'phone_key_function_definition.type_of_class',
-						"Don't know how to validate softkey function type \"#{self.phone_key_function_definition.name}\"." )
+						"(\"#{self.phone_key_function_definition.type_of_class}\") is not validatable for softkey function type \"#{self.phone_key_function_definition.name}\"." )
 			end
 			
 			if ! self.phone_key_function_definition.regex_validation.blank?
 				re = Regexp.new( self.phone_key_function_definition.regex_validation )
 				if ! re.match( self.value )
-					errors.add( :value, "Value \"#{self.value}\" does not match the required format for softkey function type \"#{self.phone_key_function_definition.name}\"." )
+					errors.add( :value, "(\"#{self.value}\") does not match the required format for softkey function type \"#{self.phone_key_function_definition.name}\"." )
 				end
 			end
 		end

@@ -1,0 +1,5 @@
+#! /bin/sh
+
+rake erd polymorphism=true
+
+

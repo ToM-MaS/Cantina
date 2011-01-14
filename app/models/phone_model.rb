@@ -18,5 +18,34 @@ class PhoneModel < ActiveRecord::Base
   has_many :descriptions, :as => :descriptionable, :dependent => :destroy
   has_many :phone_model_keys, :dependent => :destroy
   
-  #TODO: Validations
+  validates_presence_of     :manufacturer_id
+  validates_numericality_of :manufacturer_id, :only_integer => true
+  
+  validates_presence_of     :max_number_of_sip_accounts
+  validates_numericality_of :max_number_of_sip_accounts, :only_integer => true, :greater_than_or_equal_to => 1
+  
+  validates_presence_of     :number_of_keys
+  validates_numericality_of :number_of_keys, :only_integer => true, :greater_than_or_equal_to => 0
+  
+  validates_presence_of     :max_number_of_phone_book_entries
+  validates_numericality_of :max_number_of_phone_book_entries, :only_integer => true, :greater_than_or_equal_to => 1
+  
+  validate :does_a_manufacturer_to_this_phone_model_exist
+  
+  after_initialize :set_defaults
+  
+  private
+  
+  def set_defaults
+    self.max_number_of_sip_accounts = 1 if self.max_number_of_sip_accounts.nil?
+    self.number_of_keys = 0 if self.number_of_keys.nil?
+    self.max_number_of_phone_book_entries = 0 if self.number_of_keys.nil?
+  end
+  
+  def does_a_manufacturer_to_this_phone_model_exist
+    if ! Manufacturer.exists?(:id => self.manufacturer_id)
+      errors.add(:manufacturer_id, "There is no Manufacturer with the given id #{self.manufacturer_id}.")
+    end      
+  end
+  
 end

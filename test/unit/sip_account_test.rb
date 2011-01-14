@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
   should "be valid" do
-    assert Factory.build(:sip_account).valid?
+    phone = Factory.create(:phone)
+    assert Factory.build(:sip_account, :phone_id => phone.id).valid?
   end
 end

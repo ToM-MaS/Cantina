@@ -14,7 +14,7 @@
 class Phone < ActiveRecord::Base
   # Have a look at http://railscasts.com/episodes/237-dynamic-attr-accessible
   #
-  attr_accessible :mac_address, :phone_model_id, :ip_address
+  # attr_accessible :mac_address, :phone_model_id, :ip_address
   
   belongs_to :phone_model
 

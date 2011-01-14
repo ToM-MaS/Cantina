@@ -17,5 +17,10 @@ class PhoneModelKey < ActiveRecord::Base
   has_many :phone_key_function_definitions
   has_many :phone_keys, :dependent => :destroy
   
-  #TODO: Validations
+  validates_presence_of     :phone_model_id
+  validates_numericality_of :phone_model_id, :only_integer => true
+  
+  validates_presence_of     :position
+  validates_numericality_of :position, :only_integer => true, :greater_than_or_equal_to => 0
+  
 end

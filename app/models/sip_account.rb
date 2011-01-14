@@ -35,6 +35,30 @@ class SipAccount < ActiveRecord::Base
   
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
+  validates_uniqueness_of :realm 
+  validates_presence_of :user
+  validates_presence_of :phone_id
+  validates_numericality_of :phone_id
+  validate :does_a_phone_to_this_sip_account_exist
+  validate :number_of_sip_accounts_is_possible, :on => :create
   
+
+private
+  def set_defaults
+    self.dtmf_mode = 'rfc2833' if self.dtmf_mode.blank?
+  end
+
+  def does_a_phone_to_this_sip_account_exist
+    if !Phone.exists?(:id => self.phone_id)
+      errors.add(:phone_id, "There is no Phone with the given id #{self.phone_id}.")
+    end      
+  end
+    
+  def number_of_sip_accounts_is_possible
+    if !self.phone.nil? and !(self.phone.sip_accounts.count < self.phone.phone_model.max_number_of_sip_accounts) 
+      errors.add(:phone_id, "only #{self.phone.phone_model.max_number_of_sip_accounts} SIP Accounts possible")
+    end  
+  end
+
   #TODO: Validations
 end

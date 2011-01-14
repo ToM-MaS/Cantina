@@ -46,7 +46,7 @@ class SipAccount < ActiveRecord::Base
 
 private
   def set_defaults
-    self.dtmf_mode = 'rfc2833' if self.dtmf_mode.blank?
+    self.dtmf_mode = 'rfc2833' if self.new_record? and self.dtmf_mode.blank?
   end
 
   def does_a_phone_to_this_sip_account_exist
@@ -56,7 +56,12 @@ private
   end
     
   def number_of_sip_accounts_is_possible
-    if !self.phone.nil? and !(self.phone.sip_accounts.count < self.phone.phone_model.max_number_of_sip_accounts) 
+    if self.phone.sip_accounts.include?(self)
+      my_self = 1
+    else
+      my_self = 0
+    end
+    if !self.phone.nil? and !((self.phone.sip_accounts.count - my_self) < self.phone.phone_model.max_number_of_sip_accounts) 
       errors.add(:phone_id, "only #{self.phone.phone_model.max_number_of_sip_accounts} SIP Accounts possible")
     end  
   end

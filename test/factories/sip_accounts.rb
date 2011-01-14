@@ -2,9 +2,11 @@
 
 Factory.define :sip_account do |f|
   #f.name "Example SIP-Account"
-  f.phone_id 1
+#  f.phone_id 1
   # f.auth_user "MyString"
-  f.user "test_sip_user"
+  f.sequence(:user) { |n| "test sip user #{n}" }
+  
+#  f.user "test_sip_user"
   # f.password "MyString"
   # f.registrar "10.0.0.1"
   # f.registrar_port 1

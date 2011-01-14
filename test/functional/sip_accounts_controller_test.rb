@@ -16,14 +16,14 @@ class SipAccountsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # TODO
-  # test "should create sip_account" do
-  #   assert_difference('SipAccount.count') do
-  #     post :create, :sip_account => Factory.attributes_for(:sip_account)
-  #   end
-  # 
-  #   assert_redirected_to sip_account_path(assigns(:sip_account))
-  # end
+  test "should create sip_account" do
+    assert_difference('SipAccount.count') do
+      sip_account = Factory.build(:sip_account)
+      post :create, :sip_account => sip_account.attributes
+    end
+  
+    assert_redirected_to sip_account_path(assigns(:sip_account))
+  end
 
   test "should show sip_account" do
     get :show, :id => @sip_account.to_param
@@ -35,11 +35,10 @@ class SipAccountsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # TODO
-  # test "should update sip_account" do
-  #   put :update, :id => @sip_account.to_param, :sip_account => @sip_account.attributes
-  #   assert_redirected_to sip_account_path(assigns(:sip_account))
-  # end
+  test "should update sip_account" do
+    put :update, :id => @sip_account.to_param, :sip_account => @sip_account.attributes
+    assert_redirected_to sip_account_path(assigns(:sip_account))
+  end
 
   test "should destroy sip_account" do
     assert_difference('SipAccount.count', -1) do

@@ -29,7 +29,7 @@ class Phone < ActiveRecord::Base
   # Validations
   #
   validates_presence_of :mac_address
-  validates_format_of :mac_address, :with => /^ [0-9A-F]{2} (?: [:]? [0-9A-F]{2} ){5} $/ix
+  validates_format_of :mac_address, :with => /^ [0-9A-F]{2} (?: [:\-]? [0-9A-F]{2} ){5} $/ix
   validates_uniqueness_of :mac_address
 
   validates_uniqueness_of :ip_address, :allow_nil => true

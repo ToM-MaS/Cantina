@@ -33,7 +33,7 @@ class Phone < ActiveRecord::Base
   validates_uniqueness_of :mac_address
 
   validates_uniqueness_of :ip_address, :allow_nil => true
-  # TODO validate ip_address
+  validates_format_of :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_nil => true
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id
@@ -42,6 +42,6 @@ class Phone < ActiveRecord::Base
   
   def format_mac_address
     self.mac_address = self.mac_address.to_s.upcase.gsub(/[^A-F0-9]/,'')
-  end  
+  end
   
 end

@@ -13,7 +13,20 @@ Codec.create(:name => 'GSM')
 Codec.create(:name => 'ulaw')
 Codec.create(:name => 'alaw')
 
-Manufacturer.create(:name => 'Snom')
+# Phone Models
+#
+Manufacturer.create(
+	:name => 'Snom'
+).phone_models.create([
+	{ :name => 'Snom 360', :max_number_of_sip_accounts => 12, :number_of_keys => 12 },
+	{ :name => 'Snom 370', :max_number_of_sip_accounts => 12, :number_of_keys => 12 },
+	{ :name => 'Snom 320', :max_number_of_sip_accounts => 12, :number_of_keys => 12 },
+	{ :name => 'Snom 300', :max_number_of_sip_accounts =>  2 },
+	{ :name => 'Snom 821', :max_number_of_sip_accounts => 12, :number_of_keys =>  8 },
+	{ :name => 'Snom 820', :max_number_of_sip_accounts => 12, :number_of_keys =>  8 },
+	{ :name => 'Snom 871', :max_number_of_sip_accounts => 12, :number_of_keys =>  8 }
+])
+
 Manufacturer.create(
 	:name => 'Aastra'
 ).phone_models.create([
@@ -22,7 +35,17 @@ Manufacturer.create(
 	{ :name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6, :max_number_of_phone_book_entries => 200 },
 	{ :name => '51i' }
 ])
-Manufacturer.create(:name => 'Tiptel')
+
+Manufacturer.create(
+	:name => 'Tiptel'
+).phone_models.create([
+	{ :name => 'IP 286', :max_number_of_sip_accounts => 16 },
+	{ :name => 'IP 280', :max_number_of_sip_accounts => 2 },
+	{ :name => 'IP 284', :max_number_of_sip_accounts => 13 },
+	{ :name => 'VP 28' },
+	{ :name => 'IP 28 XS' }
+])
+
 Manufacturer.create(:name => 'Grandstream')
 
 # Softkey functions:

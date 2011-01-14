@@ -18,7 +18,7 @@ class ManufacturersControllerTest < ActionController::TestCase
 
   test "should create manufacturer" do
     assert_difference('Manufacturer.count') do
-      post :create, :manufacturer => @manufacturer.attributes
+      post :create, :manufacturer => Factory.attributes_for(:manufacturer)
     end
 
     assert_redirected_to manufacturer_path(assigns(:manufacturer))

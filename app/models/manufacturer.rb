@@ -12,5 +12,8 @@
 class Manufacturer < ActiveRecord::Base
   has_many :vcards, :as => :vcardable, :dependent => :destroy
   
+  validates_presence_of :name
+  validates_uniqueness_of :name
+  
   #TODO: Validations
 end

@@ -27,6 +27,8 @@
 #
 
 class SipAccount < ActiveRecord::Base
+  after_initialize :set_defaults
+  
   has_many :sip_account_codecs, :dependent => :destroy
   has_many :codecs, :through => :sip_account_codecs
   
@@ -35,13 +37,12 @@ class SipAccount < ActiveRecord::Base
   
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
-  validates_uniqueness_of :realm 
+  validates_uniqueness_of :realm, :allow_nil => true
   validates_presence_of :user
   validates_presence_of :phone_id
   validates_numericality_of :phone_id
   validate :does_a_phone_to_this_sip_account_exist
-  validate :number_of_sip_accounts_is_possible, :on => :create
-  
+  validate :number_of_sip_accounts_is_possible
 
 private
   def set_defaults

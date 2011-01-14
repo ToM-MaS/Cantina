@@ -37,7 +37,11 @@ class PhoneTest < ActiveSupport::TestCase
   should "be valid" do
     assert Factory.build(:phone, :mac_address => '11:22:33:aa:bb:cc').valid?
   end
-
+  
+  should "be valid" do
+    assert Factory.build(:phone, :mac_address => '00-11-22-33-44-55').valid?
+  end
+  
   should "be valid" do
     assert Factory.build(:phone, :mac_address => '11:22:33:AA:BB:cc').valid?
   end

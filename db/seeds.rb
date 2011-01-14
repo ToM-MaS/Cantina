@@ -13,6 +13,10 @@ Codec.create(:name => 'GSM')
 Codec.create(:name => 'ulaw')
 Codec.create(:name => 'alaw')
 
+Manufacturer.create(:name => 'Snom')
+Manufacturer.create(:name => 'Aastra')
+Manufacturer.create(:name => 'Tiptel')
+Manufacturer.create(:name => 'Grandstream')
 
 # Softkey functions:
 #

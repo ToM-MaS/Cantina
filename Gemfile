@@ -34,6 +34,8 @@ group :development do
   gem "rails-erd"
 end
 
+# https://github.com/FooBarWidget/default_value_for
+gem 'default_value_for'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -56,14 +56,32 @@ class PhoneTest < ActiveSupport::TestCase
     phone = Factory.create(:phone)
     assert !Factory.build(:phone, :mac_address => phone.mac_address).valid?
   end
+
+
+  # Test invalid ip addresses
+  should "not be valid" do
+    assert Factory.build(:phone, :ip_address => '1.2.3.').valid?
+  end
+
+  should "not be valid" do
+    assert Factory.build(:phone, :ip_address => '1.2.3.256').valid?
+  end
   
+  # Test valid ip addresses
+  #
+  should "be valid" do
+    assert Factory.build(:phone, :ip_address => '1.2.3.4').valid?
+  end
+
+  should "be valid" do
+    assert Factory.build(:phone, :ip_address => '255.255.255.255').valid?
+  end
+
   # ip_address has to be unique
   #
   should "not be valid" do
     phone = Factory.create(:phone)
     assert !Factory.build(:phone, :ip_address => phone.ip_address).valid?
   end
-  
-
   
 end

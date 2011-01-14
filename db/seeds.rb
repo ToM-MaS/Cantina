@@ -46,7 +46,19 @@ Manufacturer.create(
 	{ :name => 'IP 28 XS' }
 ])
 
-Manufacturer.create(:name => 'Grandstream')
+Manufacturer.create(
+	:name => 'Grandstream'
+).phone_models.create([
+	{ :name => 'GXP 280' },
+	{ :name => 'GXP 1200' },
+	{ :name => 'GXP 2000' },
+	{ :name => 'GXP 2010' },
+	{ :name => 'GXP 2020' },
+	{ :name => 'GXV 3000' },
+	{ :name => 'GXV 3005' },
+	{ :name => 'GXV 3140' },
+])
+
 
 # Softkey functions:
 #

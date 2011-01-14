@@ -6,9 +6,16 @@ class ManufacturerTest < ActiveSupport::TestCase
   end
   
   # A manufacturer name must be unique
+  #
   should "not be valid with not unique name" do
     manufacturer = Factory.create(:manufacturer)
     assert !Factory.build(:manufacturer, :name => manufacturer.name).valid?
   end
   
+  # A manufacturer has to have a name
+  #
+  should "not be valid with nil name" do
+    manufacturer = Factory.create(:manufacturer)
+    assert !Factory.build(:manufacturer, :name => nil).valid?
+  end
 end

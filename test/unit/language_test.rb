@@ -4,4 +4,17 @@ class LanguageTest < ActiveSupport::TestCase
   should "be valid" do
     assert Factory.build(:language).valid?
   end
+  
+  # A language name must be unique
+  should "not be valid with not unique name" do
+    language = Factory.create(:language)
+    assert !Factory.build(:language, :name => language.name).valid?
+  end
+  
+  # A language has to have a name
+  #
+  should "not be valid with nil name" do
+    language = Factory.create(:language)
+    assert !Factory.build(:language, :name => nil).valid?
+  end
 end

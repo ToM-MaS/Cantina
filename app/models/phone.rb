@@ -37,7 +37,9 @@ class Phone < ActiveRecord::Base
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id
-
+  
+  # TODO: Validate that the phone_model with the given phone_model_id exists?
+  
   after_validation :format_mac_address
   
   def format_mac_address

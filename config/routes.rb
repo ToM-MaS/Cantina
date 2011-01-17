@@ -1,4 +1,6 @@
 Cantina::Application.routes.draw do
+  resources :phone_model_mac_addresses
+
   resources :phone_keys
 
   resources :phones

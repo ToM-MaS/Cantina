@@ -34,11 +34,15 @@ class PhoneModel < ActiveRecord::Base
   
   validate :does_a_manufacturer_to_this_phone_model_exist
 
+  # TODO: URL validieren
+
   # Associations
   #
   belongs_to :manufacturer
   has_many :descriptions, :as => :descriptionable, :dependent => :destroy
   has_many :phone_model_keys, :dependent => :destroy
+  
+  has_many :phone_model_mac_addresses, :dependent => :destroy
   
   private
 

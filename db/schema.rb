@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110117113404) do
+ActiveRecord::Schema.define(:version => 20110117122740) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -72,8 +72,16 @@ ActiveRecord::Schema.define(:version => 20110117113404) do
     t.datetime "updated_at"
   end
 
+  create_table "phone_model_mac_addresses", :force => true do |t|
+    t.integer  "phone_model_id"
+    t.string   "starts_with"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "phone_models", :force => true do |t|
     t.string   "name"
+    t.string   "url"
     t.integer  "manufacturer_id"
     t.integer  "max_number_of_sip_accounts"
     t.integer  "number_of_keys"

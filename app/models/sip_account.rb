@@ -94,7 +94,7 @@ private
           [0-9]{1,3}(\.[0-9]{1,3} ){3}
         )
       ) |
-      \s*(
+      (
         (
           ( [0-9A-Fa-f]{1,4}: ){7} ( [0-9A-Fa-f]{1,4} |: )
         )|
@@ -183,7 +183,7 @@ private
           )
         )
       )
-      (%.+)?\s*
+      (%.+)?
     $/x, :allow_nil => true, :allow_blank => true
   
   # Validate registrar_port, outbound_proxy_port, sip_proxy_port

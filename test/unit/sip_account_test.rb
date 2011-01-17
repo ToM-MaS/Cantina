@@ -62,6 +62,7 @@ class SipAccountTest < ActiveSupport::TestCase
     assert sip_account_1.position == 1 and sip_account_2.position == 2 and sip_account_3.position == 3
   end
   
+  
   # Some tests for valid registrar
   #
   [
@@ -90,7 +91,7 @@ class SipAccountTest < ActiveSupport::TestCase
     'abc',
     'abc.',
   ].each { |valid_registrar|
-    should "be possible to set registrar to \"#{valid_registrar}\"" do
+    should "be possible to set registrar to #{valid_registrar.inspect}" do
       assert Factory.build(:sip_account, :registrar => valid_registrar).valid?
     end
   }
@@ -117,10 +118,11 @@ class SipAccountTest < ActiveSupport::TestCase
     '_c',
     'a_c',
   ].each { |invalid_registrar|
-    should "not be possible to set registrar to \"#{invalid_registrar}\"" do
+    should "not be possible to set registrar to #{invalid_registrar.inspect}" do
       assert !Factory.build(:sip_account, :registrar => invalid_registrar).valid?
     end
   }
+  
   
   # valid realm
   #
@@ -131,7 +133,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '123',
     '123\\"123',
   ].each { |valid_realm|
-    should "be possible to set realm to \"#{valid_realm}\"" do
+    should "be possible to set realm to #{valid_realm.inspect}" do
       assert Factory.build( :sip_account, :realm => valid_realm ).valid?
     end
   }
@@ -141,10 +143,11 @@ class SipAccountTest < ActiveSupport::TestCase
   [
     '123"123',
   ].each { |invalid_realm|
-    should "not be possible to set realm to \"#{invalid_realm}\"" do
+    should "not be possible to set realm to #{invalid_realm.inspect}" do
       assert ! Factory.build( :sip_account, :realm => invalid_realm ).valid?
     end
   }
+  
   
   # valid display_name
   #
@@ -164,7 +167,7 @@ class SipAccountTest < ActiveSupport::TestCase
     "-\\\x09-",  # escaped \x09 (tab) char
     "-\\\x00-",  # escaped \x00 (nul) char
   ].each { |valid_display_name|
-    should "be possible to set display_name to \"#{valid_display_name}\"" do
+    should "be possible to set display_name to #{valid_display_name.inspect}" do
       assert Factory.build( :sip_account, :display_name => valid_display_name ).valid?
     end
   }
@@ -180,8 +183,84 @@ class SipAccountTest < ActiveSupport::TestCase
     "-\\\x0D-",  # escaped \x0D (carriage return) char
     "-\x00-",    # unescaped \x00 (nul) char
   ].each { |invalid_display_name|
-    should "not be possible to set display_name to \"#{invalid_display_name}\"" do
+    should "not be possible to set display_name to #{invalid_display_name.inspect}" do
       assert ! Factory.build( :sip_account, :display_name => invalid_display_name ).valid?
+    end
+  }
+  
+  
+  # valid registrar_port, outbound_proxy_port, sip_proxy_port
+  #
+  [
+    1,
+    65535,
+    '1',
+    '',
+    nil,
+  ].each { |port|
+    should "be possible to set registrar_port to #{port.inspect}" do
+      assert Factory.build( :sip_account, :registrar_port => port ).valid?
+    end
+    should "be possible to set outbound_proxy_port to #{port.inspect}" do
+      assert Factory.build( :sip_account, :outbound_proxy_port => port ).valid?
+    end
+    should "be possible to set sip_proxy_port to #{port.inspect}" do
+      assert Factory.build( :sip_account, :sip_proxy_port => port ).valid?
+    end
+  }
+  
+  # invalid registrar_port, outbound_proxy_port, sip_proxy_port
+  #
+  [
+    0,
+    '0',
+    65536,
+    ' 1',
+    3.14,
+    '3.14',
+    'foo',
+  ].each { |port|
+    should "not be possible to set registrar_port to #{port.inspect}" do
+      assert ! Factory.build( :sip_account, :registrar_port => port ).valid?
+    end
+    should "not be possible to set outbound_proxy_port to #{port.inspect}" do
+      assert ! Factory.build( :sip_account, :outbound_proxy_port => port ).valid?
+    end
+    should "not be possible to set sip_proxy_port to #{port.inspect}" do
+      assert ! Factory.build( :sip_account, :sip_proxy_port => port ).valid?
+    end
+  }
+  
+  
+  # valid registration_expiry_time
+  #
+  [
+    1,
+    65535,
+    2147483647,
+    4294967295,  # (2**32)-1, see https://tools.ietf.org/html/rfc3261#section-10.2
+    '1',
+    '',
+    nil,
+  ].each { |registration_expiry_time|
+    should "be possible to set registration_expiry_time to #{registration_expiry_time.inspect}" do
+      assert Factory.build( :sip_account, :registration_expiry_time => registration_expiry_time ).valid?
+    end
+  }
+  
+  # invalid registration_expiry_time
+  #
+  [
+    0,
+    '0',
+    ' 1',
+    3.14,
+    '3.14',
+    'foo',
+    4294967296,
+  ].each { |registration_expiry_time|
+    should "not be possible to set registration_expiry_time to #{registration_expiry_time.inspect}" do
+      assert ! Factory.build( :sip_account, :registration_expiry_time => registration_expiry_time ).valid?
     end
   }
 

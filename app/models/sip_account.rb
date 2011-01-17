@@ -180,7 +180,7 @@ class SipAccount < ActiveRecord::Base
   validates_numericality_of [ :registrar_port, :outbound_proxy_port, :sip_proxy_port ], :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
   
   # Validate registration_expiry_time
-  validates_numericality_of :registration_expiry_time, :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
+  validates_numericality_of :registration_expiry_time, :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 4294967295, :allow_nil => true, :allow_blank => true
   
   # Validate screen_name
   # (phone-specific)

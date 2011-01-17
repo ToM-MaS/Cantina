@@ -37,11 +37,21 @@ class Phone < ActiveRecord::Base
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id
-
+  
+  validate :validate_phone_model_exists
+  
   after_validation :format_mac_address
   
   def format_mac_address
     self.mac_address = self.mac_address.to_s.upcase.gsub(/[^A-F0-9]/,'')
+  end
+  
+  private
+  
+  def validate_phone_model_exists()
+    if ! PhoneModel.exists?( :id => self.phone_model_id )
+      errors.add( :phone_model_id, "There is no phone model with the given ID #{self.phone_model_id}." )
+    end
   end
   
 end

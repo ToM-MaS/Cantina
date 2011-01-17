@@ -29,7 +29,6 @@
 class SipAccount < ActiveRecord::Base
   default_value_for :dtmf_mode, 'rfc2833'
   
-  validates_uniqueness_of :realm, :allow_nil => true
   validates_presence_of :user
   validates_presence_of :phone_id
   validates_numericality_of :phone_id
@@ -45,13 +44,14 @@ class SipAccount < ActiveRecord::Base
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
 
-private
+  private
   def does_a_phone_to_this_sip_account_exist
     if !Phone.exists?(:id => self.phone_id)
       errors.add(:phone_id, "There is no Phone with the given id #{self.phone_id}.")
     end      
   end
-    
+  
+  private
   def number_of_sip_accounts_is_possible
     if !self.phone.nil? and self.phone.sip_accounts.include?(self)
       my_self = 1
@@ -63,7 +63,7 @@ private
     end  
   end
 
-  #TODO: Validations
+  public
   
   # Validate auth_user. This is the "user" rule from RFC 3261.
   validates_format_of :auth_user , :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,;?\/] ){1,255}$/x, :allow_nil => true, :allow_blank => false
@@ -95,99 +95,99 @@ private
           \.?
         ) |
         (?:
-          (?: 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-          (?: \. (?: 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+          (?: 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+          (?: \. (?: 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
         )
       ) |
       (
         (
-          ( [0-9A-Fa-f]{1,4} : ){7} ( [0-9A-Fa-f]{1,4} | : )
+          ( [0-9A-Fa-f]{1,4} [:] ){7} ( [0-9A-Fa-f]{1,4} | [:] )
         )|
         (
-          ( [0-9A-Fa-f]{1,4} : ){6}
+          ( [0-9A-Fa-f]{1,4} [:] ){6}
           (
-            :[0-9A-Fa-f]{1,4} |
+            [:] [0-9A-Fa-f]{1,4} |
             (
-              ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-              ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
-            ) | :
+              ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+              ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+            ) | [:]
           )
         )|
         (
-          ( [0-9A-Fa-f]{1,4} : ){5}
+          ( [0-9A-Fa-f]{1,4} [:] ){5}
             (
               (
-                ( : [0-9A-Fa-f]{1,4} ){1,2}
+                ( [:] [0-9A-Fa-f]{1,4} ){1,2}
               )|
-              :(
-                ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-                ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+              [:](
+                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
               )|
-              :
+              [:]
             )
         )|
         (
-          ( [0-9A-Fa-f]{1,4} : ){4}
+          ( [0-9A-Fa-f]{1,4} [:] ){4}
           (
-            ( ( : [0-9A-Fa-f]{1,4} ){1,3} ) |
+            ( ( [:] [0-9A-Fa-f]{1,4} ){1,3} ) |
             (
-              ( : [0-9A-Fa-f]{1,4} )? :
+              ( [:] [0-9A-Fa-f]{1,4} )? [:]
               (
-                ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-                ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
               )
-            ) | :
+            ) | [:]
           )
         )|
         (
-          ( [0-9A-Fa-f]{1,4} : ){3}
+          ( [0-9A-Fa-f]{1,4} [:] ){3}
           (
-            ( ( : [0-9A-Fa-f]{1,4} ){1,4} ) |
+            ( ( [:] [0-9A-Fa-f]{1,4} ){1,4} ) |
             (
-              ( : [0-9A-Fa-f]{1,4} ){0,2} :
+              ( [:] [0-9A-Fa-f]{1,4} ){0,2} [:]
               (
-                ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-                ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
               )
-            ) | :
+            ) | [:]
           )
         )|
         (
-          ( [0-9A-Fa-f]{1,4} : ){2}
+          ( [0-9A-Fa-f]{1,4} [:] ){2}
           (
-            ( ( : [0-9A-Fa-f]{1,4} ){1,5} ) |
+            ( ( [:] [0-9A-Fa-f]{1,4} ){1,5} ) |
             (
-              ( : [0-9A-Fa-f]{1,4} ){0,3} :
+              ( [:] [0-9A-Fa-f]{1,4} ){0,3} [:]
               (
-                ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-                ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
               )
-            ) | :
+            ) | [:]
           )
         )|
         (
-          ( [0-9A-Fa-f]{1,4} : ){1}
+          ( [0-9A-Fa-f]{1,4} [:] ){1}
           (
-            ( ( : [0-9A-Fa-f]{1,4} ){1,6} ) |
+            ( ( [:] [0-9A-Fa-f]{1,4} ){1,6} ) |
             (
-              ( : [0-9A-Fa-f]{1,4} ){0,4} :
+              ( [:] [0-9A-Fa-f]{1,4} ){0,4} [:]
               (
-                ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-                ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
               )
-            ) | :
+            ) | [:]
           )
         )|
         (
-          :(
-            ( ( : [0-9A-Fa-f]{1,4} ){1,7} ) |
+          [:](
+            ( ( [:] [0-9A-Fa-f]{1,4} ){1,7} ) |
             (
-              ( : [0-9A-Fa-f]{1,4} ){0,5} :
+              ( [:] [0-9A-Fa-f]{1,4} ){0,5} [:]
               (
-                ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
-                ( \. ( 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
+                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
               )
-            ) | :
+            ) | [:]
           )
         )
       )
@@ -205,6 +205,7 @@ private
   #Validate realm
   validate :validate_realm
   
+  private
   def validate_quoted_pair( val )
    ret = true
    if val != nil
@@ -223,12 +224,14 @@ private
     return ret
   end
   
+  private
   def validate_display_name
     if ! validate_quoted_pair( self.display_name )
       errors.add( :display_name , "Invalid display name (see RFC 3261)." )
     end
   end
   
+  private
   def validate_realm
     if ! validate_quoted_pair( self.realm )
       errors.add( :realm        , "Invalid realm (see RFC 3261)." )

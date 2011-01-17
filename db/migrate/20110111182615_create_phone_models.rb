@@ -2,6 +2,7 @@ class CreatePhoneModels < ActiveRecord::Migration
   def self.up
     create_table :phone_models do |t|
       t.string :name
+      t.string :url
       t.integer :manufacturer_id
       t.integer :max_number_of_sip_accounts
       t.integer :number_of_keys

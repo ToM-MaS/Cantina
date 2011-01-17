@@ -1,0 +1,25 @@
+<h1>Listing phone_model_mac_addresses</h1>
+
+<table>
+  <tr>
+    <th>Phone model</th>
+    <th>Starts with</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @phone_model_mac_addresses.each do |phone_model_mac_address| %>
+  <tr>
+    <td><%= phone_model_mac_address.phone_model_id %></td>
+    <td><%= phone_model_mac_address.starts_with %></td>
+    <td><%= link_to 'Show', phone_model_mac_address %></td>
+    <td><%= link_to 'Edit', edit_phone_model_mac_address_path(phone_model_mac_address) %></td>
+    <td><%= link_to 'Destroy', phone_model_mac_address, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Phone model mac address', new_phone_model_mac_address_path %>

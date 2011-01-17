@@ -39,5 +39,6 @@ class PhoneModelTest < ActiveSupport::TestCase
     assert !phone_model.valid?
   end
 
+  # TODO: URL testen
   
 end

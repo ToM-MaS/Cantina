@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Phone model:</b>
+  <%= @phone_model_mac_address.phone_model_id %>
+</p>
+
+<p>
+  <b>Starts with:</b>
+  <%= @phone_model_mac_address.starts_with %>
+</p>
+
+
+<%= link_to 'Edit', edit_phone_model_mac_address_path(@phone_model_mac_address) %> |
+<%= link_to 'Back', phone_model_mac_addresses_path %>

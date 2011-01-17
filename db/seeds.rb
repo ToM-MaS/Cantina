@@ -10,19 +10,25 @@
 # Import the OUI List for the Phone Manufacturer MAC Address list
 # http://standards.ieee.org/develop/regauth/oui36/index.html
 #
-require 'open-uri'
-oui_input = Array.new
-open('http://standards.ieee.org/develop/regauth/oui/oui.txt') {|f|
-  f.each_line do |line|
-    parts = line.partition(/   \(hex\)\t\t/)
-    if (parts[0] =~ /[A-Z0-9]{2}-[A-Z0-9]{2}-[A-Z0-9]{2}/) == 0 and parts[2].chomp != nil
-      manufacturer = Manufacturer.find_or_create_by_ieee_name(parts[2].chomp)
-      manufacturer.update_attributes(:name => parts[2].chomp) if manufacturer.name.blank?
-      manufacturer.ouis.create(:value => parts[0].upcase.gsub(/[^A-F0-9]/,''))
-      puts "#{manufacturer.name} => #{Manufacturer.where(:id => manufacturer.id).first.ouis.count}"
-    end
-  end
-}
+# require 'open-uri'
+# oui_input = Array.new
+# open('http://standards.ieee.org/develop/regauth/oui/oui.txt') {|f|
+#   f.each_line do |line|
+#     if (line =~ /Snom/i) != nil
+#       parts = line.partition(/   \(hex\)\t\t/)
+#       if (parts[0] =~ /[A-Z0-9]{2}-[A-Z0-9]{2}-[A-Z0-9]{2}/) == 0 and parts[2].chomp != nil
+#         manufacturer = Manufacturer.find_or_create_by_ieee_name(parts[2].chomp)
+#         manufacturer.update_attributes(:name => parts[2].chomp) if manufacturer.name.blank?
+#         manufacturer.ouis.create(:value => parts[0].upcase.gsub(/[^A-F0-9]/,''))
+#       end
+#     end
+#   end
+# }
+
+Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG').ouis.create(:value => '000413')
+Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'DeTeWe').ouis.create(:value => '003042')
+Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').ouis.create(:value => '001565')
+Manufacturer.find_or_create_by_ieee_name('Grandstream Networks, Inc.', :name => 'Grandstream Networks, Inc.').ouis.create(:value => '000B82')
 
 Language.create(:name => 'Deutsch')
 Language.create(:name => 'English')
@@ -33,6 +39,42 @@ Codec.create(:name => 'alaw')
 
 # Phone Models
 #
+
+# Snom
+# http://wiki.snom.com/Settings/mac
+#
+snom = Manufacturer.where(:ieee_name => 'SNOM Technology AG').first
+snom.phone_models.create(:name => 'Snom 190').phone_model_mac_addresses.create(:starts_with => '00041322')
+snom300 = snom.phone_models.create(:name => 'Snom 300', :url => 'http://www.snom.com/en/products/ip-phones/snom-300/')
+snom300.phone_model_mac_addresses.create([
+                                         {:starts_with => '00041325'},
+                                         {:starts_with => '00041328'},
+                                         {:starts_with => '0004132D'},
+                                         {:starts_with => '0004132F'},
+                                         {:starts_with => '00041334'},
+                                         {:starts_with => '00041350'},
+                                         {:starts_with => '0004133B'},
+                                         {:starts_with => '00041337'}
+                                         ])
+# ('0004133687F0'.hex .. '00041336FFFF'.hex).each do |snom300_mac_address|
+#   snom300_mac_address = snom300_mac_address.to_s(16)
+#   (snom300_mac_address.length .. 11).each do |i|
+#     snom300_mac_address = '0' + snom300_mac_address
+#   end
+#   snom300.phone_model_mac_addresses.create(:starts_with => snom300_mac_address.upcase)
+# end
+snom.phone_models.create(:name => 'Snom 320', :url => 'http://www.snom.com/en/products/ip-phones/snom-320/').
+                         phone_model_mac_addresses.create([
+                           {:starts_with => '00041324'},
+                           {:starts_with => '00041327'},
+                           {:starts_with => '0004132C'},
+                           {:starts_with => '00041331'},
+                           {:starts_with => '00041335'},
+                           {:starts_with => '00041338'},
+                           {:starts_with => '00041351'}
+                                         ])
+
+
 Manufacturer.where(
   :ieee_name => 'SNOM Technology AG'
 ).first.phone_models.create([

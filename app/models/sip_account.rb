@@ -75,8 +75,8 @@ private
   # Validate password, remote_password. This is the "password" rule from RFC 3261.
   validates_format_of [ :password, :remote_password ], :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,] ){0,255}$/x, :allow_nil => true, :allow_blank => true
   
-  # Validate registrar, outbound_proxy, sip_proxy. This is the "host" rule from RFC 3261.
-  # TODO: Add IPv6 addresses ("IPv6reference").
+  # Validate registrar, outbound_proxy, sip_proxy. This is the "host" rule from RFC 3261
+  # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
   validates_format_of [ :registrar, :outbound_proxy, :sip_proxy ], :with =>
     /^
       (?:
@@ -93,7 +93,8 @@ private
           ) \.?
         ) |
         (?:
-          [0-9]{1,3} ( \. [0-9]{1,3} ){3}
+          (?: 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d )
+          (?: \. (?: 25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d ) ){3}
         )
       ) |
       (

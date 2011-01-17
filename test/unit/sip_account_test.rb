@@ -70,7 +70,7 @@ class SipAccountTest < ActiveSupport::TestCase
     'abc',
     'abc.',
   ].each { |valid_registrar|
-    should "be possible to set registrar to #{valid_registrar}" do
+    should "be possible to set registrar to \"#{valid_registrar}\"" do
       assert Factory.build(:sip_account, :registrar => valid_registrar).valid?
     end
   }
@@ -94,7 +94,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '_c',
     'a_c',
   ].each { |invalid_registrar|
-    should "not be possible to set registrar to #{invalid_registrar}" do
+    should "not be possible to set registrar to \"#{invalid_registrar}\"" do
       assert !Factory.build(:sip_account, :registrar => invalid_registrar).valid?
     end
   }
@@ -107,7 +107,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '123',
     '123\\"123',
   ].each { |valid_realm|
-    should "be possible to set realm to #{valid_realm}" do
+    should "be possible to set realm to \"#{valid_realm}\"" do
       assert Factory.build( :sip_account, :registrar => valid_realm ).valid?
     end
   }
@@ -117,7 +117,7 @@ class SipAccountTest < ActiveSupport::TestCase
   [
     '123"123',
   ].each { |invalid_realm|
-    should "not be possible to set realm to #{invalid_realm}" do
+    should "not be possible to set realm to \"#{invalid_realm}\"" do
       assert ! Factory.build( :sip_account, :registrar => invalid_realm ).valid?
     end
   }

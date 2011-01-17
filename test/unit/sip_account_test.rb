@@ -157,9 +157,12 @@ class SipAccountTest < ActiveSupport::TestCase
     'Elvis \\"The King\\" Presley',
     'äöüßé',
     ' !#$%&\'()*+,-./0123:;<=>?@AZ[]^_`az{|}~',
-    "-\\\x08",  # there's an escaped \x08 (backspace) char in the string
-    "-\\\x18-",  # there's an escaped \x18 (escape) char in the string
-    "-\\\x7F-",  # there's an escaped \x7F (delete) char in the string
+    'まつもと ゆきひろ (a.k.a. Matz)',
+    "-\\\x08-",  # escaped \x08 (backspace) char
+    "-\\\x18-",  # escaped \x18 (escape) char
+    "-\\\x7F-",  # escaped \x7F (delete) char
+    "-\\\x09-",  # escaped \x09 (tab) char
+    "-\\\x00-",  # escaped \x00 (nul) char
   ].each { |valid_display_name|
     should "be possible to set display_name to \"#{valid_display_name}\"" do
       assert Factory.build( :sip_account, :display_name => valid_display_name ).valid?
@@ -169,12 +172,13 @@ class SipAccountTest < ActiveSupport::TestCase
   # invalid display_name
   #
   [
-    "-\x08-",  # there's an unescaped \x08 (backspace) char in the string
-    "-\x18-",  # there's an unescaped \x18 (escape) char in the string
+    "-\x08-",    # unescaped \x08 (backspace) char
+    "-\x18-",    # unescaped \x18 (escape) char
     '-"-',
     '\\',
-    "-\x7F-",  # there's an unescaped \x7F (delete) char in the string
-    "-\\\x0D-",  # there's an escaped \x0D (carriage return) char in the string
+    "-\x7F-",    # unescaped \x7F (delete) char
+    "-\\\x0D-",  # escaped \x0D (carriage return) char
+    "-\x00-",    # unescaped \x00 (nul) char
   ].each { |invalid_display_name|
     should "not be possible to set display_name to \"#{invalid_display_name}\"" do
       assert ! Factory.build( :sip_account, :display_name => invalid_display_name ).valid?

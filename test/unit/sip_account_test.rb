@@ -263,5 +263,48 @@ class SipAccountTest < ActiveSupport::TestCase
       assert ! Factory.build( :sip_account, :registration_expiry_time => registration_expiry_time ).valid?
     end
   }
-
+  
+  
+  # valid password, remote_password
+  #
+  [
+    nil,
+    '',
+    'ABCabc012',
+    '-_.!~*\'()',
+    '&=+$,',
+    '%00',
+    '%20',
+    '%FF',
+  ].each { |password|
+    should "be possible to set password to #{password.inspect}" do
+      assert Factory.build( :sip_account, :password => password ).valid?
+    end
+    should "be possible to set remote_password to #{password.inspect}" do
+      assert Factory.build( :sip_account, :remote_password => password ).valid?
+    end
+  }
+  
+  # invalid password, remote_password
+  #
+  [
+    '%2',
+    '%XX',
+    '%ff',
+    '%Ff',
+    '%',
+    '%%%',
+    '"',
+    ':',
+    '#',
+    '\\',
+  ].each { |password|
+    should "not be possible to set password to #{password.inspect}" do
+      assert ! Factory.build( :sip_account, :password => password ).valid?
+    end
+    should "not be possible to set remote_password to #{password.inspect}" do
+      assert ! Factory.build( :sip_account, :remote_password => password ).valid?
+    end
+  }
+  
 end

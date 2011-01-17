@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110113200244
+# Schema version: 20110117122740
 #
 # Table name: sip_accounts
 #

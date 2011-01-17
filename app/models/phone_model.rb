@@ -1,10 +1,11 @@
 # == Schema Information
-# Schema version: 20110113200244
+# Schema version: 20110117122740
 #
 # Table name: phone_models
 #
 #  id                               :integer         not null, primary key
 #  name                             :string(255)
+#  url                              :string(255)
 #  manufacturer_id                  :integer
 #  max_number_of_sip_accounts       :integer
 #  number_of_keys                   :integer

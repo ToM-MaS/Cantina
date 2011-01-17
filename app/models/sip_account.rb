@@ -77,6 +77,123 @@ class SipAccount < ActiveRecord::Base
   
   # Validate registrar, outbound_proxy, sip_proxy. This is the "host" rule from RFC 3261
   # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
+#  validates_format_of [ :registrar, :outbound_proxy, :sip_proxy ], :with =>
+#    /^
+#      (?:
+#        (?:
+#          (?:
+#            (?:
+#              [A-Za-z0-9] |
+#              [A-Za-z0-9] [A-Za-z0-9\-]* [A-Za-z0-9]
+#            )
+#            \.
+#          )*
+#          (?:
+#            [A-Za-z] |
+#            [A-Za-z] [A-Za-z0-9\-]* [A-Za-z0-9]
+#          )
+#          \.?
+#        ) |
+#        (?:
+#          (?: 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#          (?: \. (?: 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#        )
+#      ) |
+#      (
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){7} ( [0-9A-Fa-f]{1,4} | [:] )
+#        )|
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){6}
+#          (
+#            [:] [0-9A-Fa-f]{1,4} |
+#            (
+#              ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#              ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#            ) | [:]
+#          )
+#        )|
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){5}
+#            (
+#              (
+#                ( [:] [0-9A-Fa-f]{1,4} ){1,2}
+#              )|
+#              [:](
+#                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#              )|
+#              [:]
+#            )
+#        )|
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){4}
+#          (
+#            ( ( [:] [0-9A-Fa-f]{1,4} ){1,3} ) |
+#            (
+#              ( [:] [0-9A-Fa-f]{1,4} )? [:]
+#              (
+#                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#              )
+#            ) | [:]
+#          )
+#        )|
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){3}
+#          (
+#            ( ( [:] [0-9A-Fa-f]{1,4} ){1,4} ) |
+#            (
+#              ( [:] [0-9A-Fa-f]{1,4} ){0,2} [:]
+#              (
+#                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#              )
+#            ) | [:]
+#          )
+#        )|
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){2}
+#          (
+#            ( ( [:] [0-9A-Fa-f]{1,4} ){1,5} ) |
+#            (
+#              ( [:] [0-9A-Fa-f]{1,4} ){0,3} [:]
+#              (
+#                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#              )
+#            ) | [:]
+#          )
+#        )|
+#        (
+#          ( [0-9A-Fa-f]{1,4} [:] ){1}
+#          (
+#            ( ( [:] [0-9A-Fa-f]{1,4} ){1,6} ) |
+#            (
+#              ( [:] [0-9A-Fa-f]{1,4} ){0,4} [:]
+#              (
+#                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#              )
+#            ) | [:]
+#          )
+#        )|
+#        (
+#          [:]
+#          (
+#            ( ( [:] [0-9A-Fa-f]{1,4} ){1,7} ) |
+#            (
+#              ( [:] [0-9A-Fa-f]{1,4} ){0,5} [:]
+#              (
+#                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
+#                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
+#              )
+#            ) | [:]
+#          )
+#        )
+#      )
+#    $/x, :allow_nil => true, :allow_blank => true
+  
   validates_format_of [ :registrar, :outbound_proxy, :sip_proxy ], :with =>
     /^
       (?:
@@ -98,99 +215,6 @@ class SipAccount < ActiveRecord::Base
           (?: 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
           (?: \. (?: 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
         )
-      ) |
-      (
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){7} ( [0-9A-Fa-f]{1,4} | [:] )
-        )|
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){6}
-          (
-            [:] [0-9A-Fa-f]{1,4} |
-            (
-              ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-              ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-            ) | [:]
-          )
-        )|
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){5}
-            (
-              (
-                ( [:] [0-9A-Fa-f]{1,4} ){1,2}
-              )|
-              [:](
-                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-              )|
-              [:]
-            )
-        )|
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){4}
-          (
-            ( ( [:] [0-9A-Fa-f]{1,4} ){1,3} ) |
-            (
-              ( [:] [0-9A-Fa-f]{1,4} )? [:]
-              (
-                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-              )
-            ) | [:]
-          )
-        )|
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){3}
-          (
-            ( ( [:] [0-9A-Fa-f]{1,4} ){1,4} ) |
-            (
-              ( [:] [0-9A-Fa-f]{1,4} ){0,2} [:]
-              (
-                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-              )
-            ) | [:]
-          )
-        )|
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){2}
-          (
-            ( ( [:] [0-9A-Fa-f]{1,4} ){1,5} ) |
-            (
-              ( [:] [0-9A-Fa-f]{1,4} ){0,3} [:]
-              (
-                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-              )
-            ) | [:]
-          )
-        )|
-        (
-          ( [0-9A-Fa-f]{1,4} [:] ){1}
-          (
-            ( ( [:] [0-9A-Fa-f]{1,4} ){1,6} ) |
-            (
-              ( [:] [0-9A-Fa-f]{1,4} ){0,4} [:]
-              (
-                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-              )
-            ) | [:]
-          )
-        )|
-        (
-          [:]
-          (
-            ( ( [:] [0-9A-Fa-f]{1,4} ){1,7} ) |
-            (
-              ( [:] [0-9A-Fa-f]{1,4} ){0,5} [:]
-              (
-                ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d )
-                ( \. ( 25[0-5] | 2[0-4]\d | 1\d\d | [1-9]?\d ) ){3}
-              )
-            ) | [:]
-          )
-        )
       )
     $/x, :allow_nil => true, :allow_blank => true
   
@@ -200,25 +224,56 @@ class SipAccount < ActiveRecord::Base
   # Validate registration_expiry_time
   validates_numericality_of :registration_expiry_time, :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
   
+  # Validate screen_name
+  # (phone-specific)
+  
   # Validate display_name
   validate :validate_display_name
   
   #Validate realm
   validate :validate_realm
   
+  # Validate display_name. This is the "display-name" rule from RFC 3261
+  # (or rather the '*(qdtext / quoted-pair )' part of it).
+  #
+  # display-name   =  *(token LWS)/ quoted-string
+  # quoted-string  =  SWS DQUOTE *(qdtext / quoted-pair ) DQUOTE
+  # SWS  =  [LWS] ; sep whitespace
+  # LWS  =  [*WSP CRLF] 1*WSP ; linear whitespace
+  # WSP            =  SP / HTAB
+  #                        ; white space
+  # SP             =  %x20
+  # HTAB           =  %x09
+  #                        ; horizontal tab
+  # CRLF           =  %x0D %x0A
+  # DQUOTE         =  %x22
+  #                        ; " (Double Quote)
+  # qdtext         =  LWS / %x21 / %x23-5B / %x5D-7E
+  #                   / UTF8-NONASCII
+  # quoted-pair  =  "\" (%x00-09 / %x0B-0C
+  #                 / %x0E-7F)
+  # UTF8-NONASCII   =  %xC0-DF 1UTF8-CONT
+  #                 /  %xE0-EF 2UTF8-CONT
+  #                 /  %xF0-F7 3UTF8-CONT
+  #                 /  %xF8-Fb 4UTF8-CONT
+  #                 /  %xFC-FD 5UTF8-CONT
+  # UTF8-CONT       =  %x80-BF
+  #
   private
-  def validate_quoted_pair( val )
-   ret = true
-   if val != nil
-      if ! /^(?:
-               (?:
-                  (?: (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,} ) |
-                  [\x21\x23-\x5B\x5D-\x7E] |
-                  x
-                ) |
-                (?: [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F] )
-              )*
-            $/x.match( val.dup.force_encoding('BINARY') )
+  def validate_a_display_name( val )
+    ret = true
+    if val != nil
+      # FIXME: Where did the UTF8-NONASCII part go?
+      if ! /^
+        (?:
+          (?:
+            (?: (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,} ) |
+            [\x21\x23-\x5B\x5D-\x7E] |
+            xxxxxxxx
+          ) |
+          (?: [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F] )
+        )*
+      $/x.match( val.dup.force_encoding('BINARY') )
         ret = false
       end
     end
@@ -227,14 +282,14 @@ class SipAccount < ActiveRecord::Base
   
   private
   def validate_display_name
-    if ! validate_quoted_pair( self.display_name )
+    if ! validate_a_display_name( self.display_name )
       errors.add( :display_name , "Invalid display name (see RFC 3261)." )
     end
   end
   
   private
   def validate_realm
-    if ! validate_quoted_pair( self.realm )
+    if ! validate_a_display_name( self.realm )
       errors.add( :realm        , "Invalid realm (see RFC 3261)." )
     end
   end

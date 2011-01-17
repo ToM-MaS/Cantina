@@ -77,10 +77,48 @@ private
   
   # Validate registrar, outbound_proxy, sip_proxy. This is the "host" rule from RFC 3261.
   # TODO: Add IPv6 addresses ("IPv6reference").
-  validates_format_of [ :registrar, :outbound_proxy, :sip_proxy ], :with => /^(?: (?: (?: (?:[A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]) \.)* (?:[A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9]) \.? ) | (?: [0-9]{1,3}(\.[0-9]{1,3}){3} ) )$/x, :allow_nil => true, :allow_blank => true
+  validates_format_of [ :registrar, :outbound_proxy, :sip_proxy ], :with => /^(?: (?: (?: (?:[A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]) \.)* (?:[A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9]) \.? ) | (?: [0-9]{1,3}(\.[0-9]{1,3}){3} ) ) |\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s* $/x, :allow_nil => true, :allow_blank => true
   
   # Validate registrar_port, outbound_proxy_port, sip_proxy_port
   validates_numericality_of [ :registrar_port, :outbound_proxy_port, :sip_proxy_port ], :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
   
+  # Validate registration_expiry_time
+  validates_numericality_of :registration_expiry_time, :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
+  
+  # Validate display_name
+  validate :validate_display_name
+  
+  #Validate realm
+  validate :validate_realm
+  
+  def validate_quoted_pair( val )
+   ret = true
+   if val != nil
+      if ! /^(?:
+               (?:
+                  (?: (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,} ) |
+                  [\x21\x23-\x5B\x5D-\x7E] |
+                  x
+                ) |
+                (?: [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F] )
+              )*
+            $/x.match( val.dup.force_encoding('BINARY') )
+        ret = false
+      end
+    end
+    return ret
+  end
+  
+  def validate_display_name
+    if ! validate_quoted_pair( self.display_name )
+      errors.add( :display_name , "Invalid display name (see RFC 3261)." )
+    end
+  end
+  
+  def validate_realm
+    if ! validate_quoted_pair( self.realm )
+      errors.add( :realm        , "Invalid realm (see RFC 3261)." )
+    end
+  end
   
 end

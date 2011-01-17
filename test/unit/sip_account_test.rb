@@ -67,6 +67,8 @@ class SipAccountTest < ActiveSupport::TestCase
     'www.amooma.de',
     '2001:0db8:85a3:0000:0000:8a2e:0370:7334',
     'example.com123',
+    'abc',
+    'abc.',
   ].each { |valid_registrar|
     should "be possible to set registrar to #{valid_registrar}" do
       assert Factory.build(:sip_account, :registrar => valid_registrar).valid?
@@ -80,9 +82,43 @@ class SipAccountTest < ActiveSupport::TestCase
     'www.amooma.01',
     '2001:0xb8:85a3:0000:0000:8a2e:0370:7334',
     'example.123com',
+    '123',
+    '.',
+    ' abc',
+    'abc ',
+    '[',
+    'abc.[',
+    'a c',
+    'a#c',
+    '_',
+    '_c',
+    'a_c',
   ].each { |invalid_registrar|
     should "not be possible to set registrar to #{invalid_registrar}" do
       assert !Factory.build(:sip_account, :registrar => invalid_registrar).valid?
+    end
+  }
+  
+  # valid realm
+  #
+  [
+    'amooma.de',
+    'my-realm',
+    '123',
+    '123\\"123',
+  ].each { |valid_realm|
+    should "be possible to set realm to #{valid_realm}" do
+      assert Factory.build( :sip_account, :registrar => valid_realm ).valid?
+    end
+  }
+  
+  # invalid realm
+  #
+  [
+    '123"123',
+  ].each { |invalid_realm|
+    should "not be possible to set realm to #{invalid_realm}" do
+      assert ! Factory.build( :sip_account, :registrar => invalid_realm ).valid?
     end
   }
 

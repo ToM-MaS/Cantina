@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113200244) do
+ActiveRecord::Schema.define(:version => 20110117100855) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20110113200244) do
 
   create_table "languages", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "manufacturer_ouis", :force => true do |t|
+    t.string   "oui"
+    t.integer  "manufacturer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

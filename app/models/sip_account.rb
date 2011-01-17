@@ -183,7 +183,6 @@ private
           )
         )
       )
-      (%.+)?
     $/x, :allow_nil => true, :allow_blank => true
   
   # Validate registrar_port, outbound_proxy_port, sip_proxy_port

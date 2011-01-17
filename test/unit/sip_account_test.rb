@@ -104,6 +104,7 @@ class SipAccountTest < ActiveSupport::TestCase
   [
     'amooma.de',
     'my-realm',
+    'abc',
     '123',
     '123\\"123',
   ].each { |valid_realm|

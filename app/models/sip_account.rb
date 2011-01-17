@@ -64,4 +64,23 @@ private
   end
 
   #TODO: Validations
+  
+  # Validate auth_user. This is the "user" rule from RFC 3261.
+  validates_format_of :auth_user , :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,;?\/] ){1,255}$/x, :allow_nil => true, :allow_blank => false
+  
+  # Validate user. This is the "user" rule from RFC 3261.
+  validates_format_of :user      , :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,;?\/] ){1,255}$/x#, :allow_nil => false, :allow_blank => false
+  
+  
+  # Validate password, remote_password. This is the "password" rule from RFC 3261.
+  validates_format_of [ :password, :remote_password ], :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,] ){0,255}$/x, :allow_nil => true, :allow_blank => true
+  
+  # Validate registrar, outbound_proxy, sip_proxy. This is the "host" rule from RFC 3261.
+  # TODO: Add IPv6 addresses ("IPv6reference").
+  validates_format_of [ :registrar, :outbound_proxy, :sip_proxy ], :with => /^(?: (?: (?: (?:[A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]) \.)* (?:[A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9]) \.? ) | (?: [0-9]{1,3}(\.[0-9]{1,3}){3} ) )$/x, :allow_nil => true, :allow_blank => true
+  
+  # Validate registrar_port, outbound_proxy_port, sip_proxy_port
+  validates_numericality_of [ :registrar_port, :outbound_proxy_port, :sip_proxy_port ], :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
+  
+  
 end

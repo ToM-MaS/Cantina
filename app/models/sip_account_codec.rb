@@ -12,7 +12,11 @@
 #
 
 class SipAccountCodec < ActiveRecord::Base
-  belongs_to :available_codec
+  validates_presence_of :codec_id
+  validates_presence_of :sip_account_id
+  validates_numericality_of :codec_id, :only_integer => true, :greater_than_or_equal_to => 0
+  validates_numericality_of :sip_account_id, :only_integer => true, :greater_than_or_equal_to => 0
   
-  #TODO: Validations
+  belongs_to :sip_account
+  belongs_to :codec
 end

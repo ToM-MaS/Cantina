@@ -240,15 +240,26 @@ class SipAccount < ActiveRecord::Base
   def validate_a_display_name( val )
     ret = true
     if val != nil
-      # FIXME: Where did the UTF8-NONASCII part go?
       if ! /^
         (?:
           (?:
-            (?: (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,} ) |
-            [\x21\x23-\x5B\x5D-\x7E] |
-            xxxxxxxx
+            (?:
+              (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,}
+            ) |
+            (?:
+              [\x21\x23-\x5B\x5D-\x7E]
+            ) |
+            (?:
+              [\xC0-\xDF] [\x80-\xBF]{1} |
+              [\xE0-\xEF] [\x80-\xBF]{2} |
+              [\xF0-\xF7] [\x80-\xBF]{3} |
+              [\xF8-\xFB] [\x80-\xBF]{4} |
+              [\xFC-\xFD] [\x80-\xBF]{5}
+            )
           ) |
-          (?: [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F] )
+          (?:
+            [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F]
+          )
         )*
       $/x.match( val.dup.force_encoding('BINARY') )
         ret = false

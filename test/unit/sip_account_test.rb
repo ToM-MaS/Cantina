@@ -109,7 +109,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '123\\"123',
   ].each { |valid_realm|
     should "be possible to set realm to \"#{valid_realm}\"" do
-      assert Factory.build( :sip_account, :registrar => valid_realm ).valid?
+      assert Factory.build( :sip_account, :realm => valid_realm ).valid?
     end
   }
   
@@ -119,7 +119,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '123"123',
   ].each { |invalid_realm|
     should "not be possible to set realm to \"#{invalid_realm}\"" do
-      assert ! Factory.build( :sip_account, :registrar => invalid_realm ).valid?
+      assert ! Factory.build( :sip_account, :realm => invalid_realm ).valid?
     end
   }
 

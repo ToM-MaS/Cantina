@@ -1,0 +1,3 @@
+# ignore cached gems (from `bundle package`)
+/cache/*.gem
+

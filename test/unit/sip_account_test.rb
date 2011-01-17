@@ -307,4 +307,66 @@ class SipAccountTest < ActiveSupport::TestCase
     end
   }
   
+  
+  # valid auth_user
+  #
+  [
+    nil,
+    'elvis',
+    'Elvis123',
+    '-_.!~*\'()',
+    '%FF',
+    '&=+$,;?/',
+  ].each { |username|
+    should "be possible to set auth_user to #{username.inspect}" do
+      assert Factory.build( :sip_account, :auth_user => username ).valid?
+    end
+  }
+  
+  # invalid auth_user
+  #
+  [
+    '',
+    '%A',
+    '%XX',
+    '%Ff',
+    "\x00",
+    '\\',
+    '"',
+  ].each { |username|
+    should "not be possible to set auth_user to #{username.inspect}" do
+      assert ! Factory.build( :sip_account, :auth_user => username ).valid?
+    end
+  }
+  
+  
+  # valid user
+  #
+  [
+    'elvis',
+    '-_.!~*\'()',
+  ].each { |username|
+    should "be possible to set user to #{username.inspect}" do
+      assert Factory.build( :sip_account, :user => username ).valid?
+    end
+  }
+  
+  # invalid user
+  #
+  [
+    nil,
+    '',
+    '#',
+    ':',
+    '^',
+    '<',
+    '[',
+    '{',
+  ].each { |username|
+    should "not be possible to set user to #{username.inspect}" do
+      assert ! Factory.build( :sip_account, :user => username ).valid?
+    end
+  }
+  
+  
 end

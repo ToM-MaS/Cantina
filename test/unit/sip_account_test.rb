@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class SipAccountTest < ActiveSupport::TestCase
+  
   should "be valid" do
     assert Factory.build(:sip_account).valid?
   end
@@ -58,16 +59,21 @@ class SipAccountTest < ActiveSupport::TestCase
     sip_account_3 = Factory.create(:sip_account, :phone_id => phone.id)
     assert sip_account_1.position == 1 and sip_account_2.position == 2 and sip_account_3.position == 3
   end
-  # Some Tests for valid registrar
   
+  # Some tests for valid registrar
+  #
   [ '10.0.0.0', 'www.amooma.de', '2001:0db8:85a3:0000:0000:8a2e:0370:7334'].each do |valid_registrar|
     should "be possible to set registrar to #{valid_registrar}" do
       assert Factory.build(:sip_account, :registrar => valid_registrar).valid?
     end
   end
+  
+  # Some tests for invalid registrar
+  #
 #  [ '10.0.x.0', 'www.amooma.01', '2001:0xb8:85a3:0000:0000:8a2e:0370:7334'].each do |invalid_registrar|
 #    should "not be possible to set registrar to #{invalid_registrar}" do
 #      assert !Factory.build(:sip_account, :registrar => invalid_registrar).valid?
 #    end
 #  end
+
 end

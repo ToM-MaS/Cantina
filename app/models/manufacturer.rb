@@ -1,10 +1,12 @@
 # == Schema Information
-# Schema version: 20110113200244
+# Schema version: 20110117122740
 #
 # Table name: manufacturers
 #
 #  id         :integer         not null, primary key
 #  name       :string(255)
+#  ieee_name  :string(255)
+#  url        :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #

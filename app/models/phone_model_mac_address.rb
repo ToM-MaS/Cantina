@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20110117122740
+#
+# Table name: phone_model_mac_addresses
+#
+#  id             :integer         not null, primary key
+#  phone_model_id :integer
+#  starts_with    :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class PhoneModelMacAddress < ActiveRecord::Base
   validates_presence_of :starts_with
   validates_uniqueness_of :starts_with

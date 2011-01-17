@@ -35,35 +35,15 @@ class SipAccount < ActiveRecord::Base
   validates_inclusion_of :dtmf_mode, :in => ['rfc2833', 'inband', 'info']
   validate :does_a_phone_to_this_sip_account_exist
   validate :number_of_sip_accounts_is_possible
-
+  
   has_many :sip_account_codecs, :dependent => :destroy
   has_many :codecs, :through => :sip_account_codecs
   
   has_many :phone_keys, :dependent => :destroy
-
+  
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
-
-  private
-  def does_a_phone_to_this_sip_account_exist
-    if !Phone.exists?(:id => self.phone_id)
-      errors.add(:phone_id, "There is no Phone with the given id #{self.phone_id}.")
-    end      
-  end
   
-  private
-  def number_of_sip_accounts_is_possible
-    if !self.phone.nil? and self.phone.sip_accounts.include?(self)
-      my_self = 1
-    else
-      my_self = 0
-    end
-    if !self.phone.nil? and !((self.phone.sip_accounts.count - my_self) < self.phone.phone_model.max_number_of_sip_accounts) 
-      errors.add(:phone_id, "only #{self.phone.phone_model.max_number_of_sip_accounts} SIP Accounts for the Phone with the ID #{self.phone.id} possible")
-    end  
-  end
-
-  public
   
   # Validate auth_user. This is the "user" rule from RFC 3261.
   validates_format_of :auth_user , :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,;?\/] ){1,255}$/x, :allow_nil => true, :allow_blank => false
@@ -233,6 +213,26 @@ class SipAccount < ActiveRecord::Base
   #Validate realm
   validate :validate_realm
   
+  
+  private
+  
+  def does_a_phone_to_this_sip_account_exist
+    if !Phone.exists?(:id => self.phone_id)
+      errors.add(:phone_id, "There is no Phone with the given id #{self.phone_id}.")
+    end      
+  end
+  
+  def number_of_sip_accounts_is_possible
+    if !self.phone.nil? and self.phone.sip_accounts.include?(self)
+      my_self = 1
+    else
+      my_self = 0
+    end
+    if !self.phone.nil? and !((self.phone.sip_accounts.count - my_self) < self.phone.phone_model.max_number_of_sip_accounts) 
+      errors.add(:phone_id, "only #{self.phone.phone_model.max_number_of_sip_accounts} SIP Accounts for the Phone with the ID #{self.phone.id} possible")
+    end  
+  end
+
   # Validate display_name. This is the "display-name" rule from RFC 3261
   # (or rather the '*(qdtext / quoted-pair )' part of it).
   #
@@ -259,7 +259,6 @@ class SipAccount < ActiveRecord::Base
   #                 /  %xFC-FD 5UTF8-CONT
   # UTF8-CONT       =  %x80-BF
   #
-  private
   def validate_a_display_name( val )
     ret = true
     if val != nil
@@ -280,14 +279,12 @@ class SipAccount < ActiveRecord::Base
     return ret
   end
   
-  private
   def validate_display_name
     if ! validate_a_display_name( self.display_name )
       errors.add( :display_name , "Invalid display name (see RFC 3261)." )
     end
   end
   
-  private
   def validate_realm
     if ! validate_a_display_name( self.realm )
       errors.add( :realm        , "Invalid realm (see RFC 3261)." )

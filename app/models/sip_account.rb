@@ -179,7 +179,8 @@ class SipAccount < ActiveRecord::Base
           )
         )|
         (
-          [:](
+          [:]
+          (
             ( ( [:] [0-9A-Fa-f]{1,4} ){1,7} ) |
             (
               ( [:] [0-9A-Fa-f]{1,4} ){0,5} [:]

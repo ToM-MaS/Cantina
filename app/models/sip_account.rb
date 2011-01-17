@@ -46,14 +46,43 @@ class SipAccount < ActiveRecord::Base
   
   
   # Validate auth_user. This is the "user" rule from RFC 3261.
-  validates_format_of :auth_user , :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,;?\/] ){1,255}$/x, :allow_nil => true, :allow_blank => false
+  validates_format_of :auth_user , :with =>
+    /^
+      (?:
+        (?:
+          [A-Za-z0-9] |
+          [\-_.!~*'()]
+        ) |
+        %[0-9A-F]{2} |
+        [&=+$,;?\/]
+      ){1,255}
+    $/x, :allow_nil => true, :allow_blank => false
   
   # Validate user. This is the "user" rule from RFC 3261.
-  validates_format_of :user      , :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,;?\/] ){1,255}$/x#, :allow_nil => false, :allow_blank => false
+  validates_format_of :user      , :with => /^
+      (?:
+        (?:
+          [A-Za-z0-9] |
+          [\-_.!~*'()]
+        ) |
+        %[0-9A-F]{2} |
+        [&=+$,;?\/]
+      ){1,255}
+    $/x#, :allow_nil => false, :allow_blank => false
   
   
   # Validate password, remote_password. This is the "password" rule from RFC 3261.
-  validates_format_of [ :password, :remote_password ], :with => /^(?: (?: [A-Za-z0-9] | [\-_.!~*'()] )| %[0-9A-F]{2} | [&=+$,] ){0,255}$/x, :allow_nil => true, :allow_blank => true
+  validates_format_of [ :password, :remote_password ], :with =>
+    /^
+      (?:
+        (?:
+          [A-Za-z0-9] |
+          [\-_.!~*'()]
+        ) |
+        %[0-9A-F]{2} |
+        [&=+$,]
+      ){0,255}
+    $/x, :allow_nil => true, :allow_blank => true
   
   # Validate registrar, outbound_proxy, sip_proxy. This is the "host" rule from RFC 3261
   # (but the patterns for IPv4 and IPv6 addresses have been fixed here).
@@ -180,7 +209,7 @@ class SipAccount < ActiveRecord::Base
   validates_numericality_of [ :registrar_port, :outbound_proxy_port, :sip_proxy_port ], :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
   
   # Validate registration_expiry_time
-  validates_numericality_of :registration_expiry_time, :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 65535, :allow_nil => true, :allow_blank => true
+  validates_numericality_of :registration_expiry_time, :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 4294967295, :allow_nil => true, :allow_blank => true
   
   # Validate screen_name
   # (phone-specific)

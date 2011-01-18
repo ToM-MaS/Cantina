@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'test_helper'
 
 class LanguageTest < ActiveSupport::TestCase
@@ -17,4 +19,30 @@ class LanguageTest < ActiveSupport::TestCase
     language = Factory.create(:language)
     assert !Factory.build(:language, :name => nil).valid?
   end
+  
+  
+  # Test valid language
+  [
+    'Deutsch',
+    'English',
+    'Klingon',
+    '日本語',
+    'Limba Română',
+  ].each { |lang|
+    should "allow #{lang.inspect} as language" do
+      assert Factory.build( :language, :name => lang ).valid?
+    end
+  }
+  
+  # Test invalid language
+  [
+    '',
+    nil,
+  ].each { |lang|
+    should "not allow #{lang.inspect} as language" do
+      assert ! Factory.build( :language, :name => lang ).valid?
+    end
+  }
+  
+  
 end

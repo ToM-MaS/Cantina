@@ -298,6 +298,7 @@ class SipAccountTest < ActiveSupport::TestCase
     ':',
     '#',
     '\\',
+    'x' * 256,
   ].each { |password|
     should "not be possible to set password to #{password.inspect}" do
       assert ! Factory.build( :sip_account, :password => password ).valid?
@@ -333,6 +334,7 @@ class SipAccountTest < ActiveSupport::TestCase
     "\x00",
     '\\',
     '"',
+    'x' * 256,
   ].each { |username|
     should "not be possible to set auth_user to #{username.inspect}" do
       assert ! Factory.build( :sip_account, :auth_user => username ).valid?
@@ -362,6 +364,7 @@ class SipAccountTest < ActiveSupport::TestCase
     '<',
     '[',
     '{',
+    'x' * 256,
   ].each { |username|
     should "not be possible to set user to #{username.inspect}" do
       assert ! Factory.build( :sip_account, :user => username ).valid?

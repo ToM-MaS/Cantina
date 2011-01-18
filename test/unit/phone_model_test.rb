@@ -61,8 +61,32 @@ class PhoneModelTest < ActiveSupport::TestCase
     mac_address = mac_address + 'AAAAAAAAAAAAAAAA'
     assert !(PhoneModel.find_by_mac_address(mac_address) == phone_model_mac_address.phone_model)
   end
-
-
-  # TODO: URL testen
+  
+  
+  # valid url
+  [
+    nil,
+    'http://www.snom.com/de/produkte/ip-telefone/snom-370/',
+    'http://user:pass@example.com/',
+  ].each { |url|
+    should "be ok to set url to #{url.inspect}" do
+      assert Factory.build( :phone_model, :url => url ).valid?
+    end
+  }
+  
+  # invalid url
+  [
+    '',
+    '##',
+    '/de/produkte/ip-telefone/snom-370/',
+    'http:www.snom.com/',
+    'mailto:user@example.com',
+    'foobar://example.com/',
+  ].each { |url|
+    should "not be ok to set url to #{url.inspect}" do
+      assert ! Factory.build( :phone_model, :url => url ).valid?
+    end
+  }
+  
   
 end

@@ -175,3 +175,16 @@ PhoneKeyFunctionDefinition.create([
   { :name => 'Auto-answer'      , :type_of_class => 'integer' , :regex_validation => nil },
   { :name => 'Def. function?'   , :type_of_class => 'boolean' , :regex_validation => nil },
 ])
+
+# Sample Phones (Testphones Sascha)
+#Manufacturer.where (
+#  :ieee_name => 'DeTeWe'
+#).first.Phone.create([
+#  { :mac_address => "00156513EC2F", :phone_model_id => ""}
+#])
+#
+#(1..10).each do |mem_num|
+#  PhoneModelKey.create ([
+#    { :name => "memory#{mem_num}", :phone_model_id => "14", :position => "#{mem_num}" }
+#  ])
+#end

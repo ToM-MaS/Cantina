@@ -34,9 +34,9 @@ class PhoneModel < ActiveRecord::Base
   validates_numericality_of :max_number_of_phone_book_entries, :only_integer => true, :greater_than_or_equal_to => 0
 
   validate :does_a_manufacturer_to_this_phone_model_exist
-
-  # TODO: URL validieren
-
+  
+  validate :validate_url
+  
   # Associations
   #
   belongs_to :manufacturer
@@ -72,5 +72,23 @@ class PhoneModel < ActiveRecord::Base
       errors.add(:manufacturer_id, "There is no Manufacturer with the given id #{self.manufacturer_id}.")
     end      
   end
-
+  
+  def validate_url()
+    if self.url != nil
+      require 'uri'
+      begin
+        uri = URI.parse( self.url )
+        if ! uri.absolute?
+          errors.add( :url, "is invalid (has to have a scheme)" )
+        elsif ! uri.hierarchical?
+          errors.add( :url, "is invalid (not hierarchical)" )
+        elsif !( uri.is_a?( URI::HTTP ) || uri.is_a?( URI::HTTPS ) )
+          errors.add( :url, "is invalid (must have http or https scheme)" )
+        end
+      rescue URI::InvalidURIError
+        errors.add( :url, "is invalid" )
+      end
+    end
+  end
+  
 end

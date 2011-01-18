@@ -45,6 +45,8 @@ class PhoneTest < ActiveSupport::TestCase
   [
     '1.2.3.',
     '1.2.3.256',
+    '010.000.00.005',
+    '1.1.1.',
     'asfd',
     '112233AABBcc'
   ].each do |invalid_ip_address|
@@ -71,5 +73,14 @@ class PhoneTest < ActiveSupport::TestCase
     phone = Factory.create(:phone)
     assert !Factory.build(:phone, :ip_address => phone.ip_address).valid?
   end
-
+  
+  # Test invalid phone model
+  [
+    -1,
+  ].each do |phone_model_id|
+    should "not allow #{phone_model_id.inspect} as a phone_model_id" do
+      assert ! Factory.build( :phone, :phone_model_id => phone_model_id ).valid?
+    end
+  end
+  
 end

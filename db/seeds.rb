@@ -1,12 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
-
-
 # Import the OUI List for the Phone Manufacturer MAC Address list
 # http://standards.ieee.org/develop/regauth/oui36/index.html
 #
@@ -25,6 +16,8 @@
 #   end
 # }
 
+# To make it a bit faster we'll include a couple of the manufacturers here:
+#
 Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG').ouis.create(:value => '000413')
 Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'DeTeWe').ouis.create(:value => '003042')
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').ouis.create(:value => '001565')
@@ -45,7 +38,9 @@ Codec.create(:name => 'alaw')
 #
 snom = Manufacturer.where(:ieee_name => 'SNOM Technology AG').first
 snom.phone_models.create(:name => 'Snom 190').phone_model_mac_addresses.create(:starts_with => '00041322')
-snom300 = snom.phone_models.create(:name => 'Snom 300', :url => 'http://www.snom.com/en/products/ip-phones/snom-300/')
+snom300 = snom.phone_models.create(:name => 'Snom 300', 
+                                   :url => 'http://www.snom.com/en/products/ip-phones/snom-300/',
+                                   :max_number_of_sip_accounts =>  2 )
 snom300.phone_model_mac_addresses.create([
                                          {:starts_with => '00041325'},
                                          {:starts_with => '00041328'},
@@ -56,6 +51,9 @@ snom300.phone_model_mac_addresses.create([
                                          {:starts_with => '0004133B'},
                                          {:starts_with => '00041337'}
                                          ])
+# Uncomment the following code if you need all Snom 300 MAC Addresses
+# It'll fill your database by some 30,000 items.
+#                                                                                
 # ('0004133687F0'.hex .. '00041336FFFF'.hex).each do |snom300_mac_address|
 #   snom300_mac_address = snom300_mac_address.to_s(16)
 #   (snom300_mac_address.length .. 11).each do |i|
@@ -63,7 +61,10 @@ snom300.phone_model_mac_addresses.create([
 #   end
 #   snom300.phone_model_mac_addresses.create(:starts_with => snom300_mac_address.upcase)
 # end
-snom.phone_models.create(:name => 'Snom 320', :url => 'http://www.snom.com/en/products/ip-phones/snom-320/').
+snom.phone_models.create(:name => 'Snom 320', 
+                         :url => 'http://www.snom.com/en/products/ip-phones/snom-320/',
+                         :max_number_of_sip_accounts => 12,
+                         :number_of_keys => 12 ).
                          phone_model_mac_addresses.create([
                            {:starts_with => '00041324'},
                            {:starts_with => '00041327'},
@@ -73,20 +74,51 @@ snom.phone_models.create(:name => 'Snom 320', :url => 'http://www.snom.com/en/pr
                            {:starts_with => '00041338'},
                            {:starts_with => '00041351'}
                                          ])
-
-
-Manufacturer.where(
-  :ieee_name => 'SNOM Technology AG'
-).first.phone_models.create([
-  { :name => 'Snom 360', :max_number_of_sip_accounts => 12, :number_of_keys => 12 },
-  { :name => 'Snom 370', :max_number_of_sip_accounts => 12, :number_of_keys => 12 },
-  { :name => 'Snom 320', :max_number_of_sip_accounts => 12, :number_of_keys => 12 },
-  { :name => 'Snom 300', :max_number_of_sip_accounts =>  2 },
-  { :name => 'Snom 821', :max_number_of_sip_accounts => 12, :number_of_keys =>  8 },
-  { :name => 'Snom 820', :max_number_of_sip_accounts => 12, :number_of_keys =>  8 },
-  { :name => 'Snom 871', :max_number_of_sip_accounts => 12, :number_of_keys =>  8 }
-])
-# http://wiki.snom.com/Settings/mac
+snom.phone_models.create(:name => 'Snom 360', 
+                        :url => 'http://www.snom.com/en/products/ip-phones/snom-360/',
+                        :max_number_of_sip_accounts => 12,
+                        :number_of_keys => 12 ).
+                        phone_model_mac_addresses.create([
+                          {:starts_with => '00041323'},
+                          {:starts_with => '00041329'},
+                          {:starts_with => '0004132B'},
+                          {:starts_with => '00041339'},
+                          {:starts_with => '00041390'}
+                                        ])
+snom.phone_models.create(:name => 'Snom 370', 
+                        :url => 'http://www.snom.com/en/products/ip-phones/snom-370/',
+                        :max_number_of_sip_accounts => 12,
+                        :number_of_keys => 12 ).
+                        phone_model_mac_addresses.create([
+                          {:starts_with => '00041326'},
+                          {:starts_with => '0004132E'},
+                          {:starts_with => '0004133A'},
+                          {:starts_with => '00041352'}
+                                        ])
+snom.phone_models.create(:name => 'Snom 820', 
+                        :url => 'http://www.snom.com/en/products/ip-phones/snom-820/',
+                        :max_number_of_sip_accounts => 12,
+                        :number_of_keys => 12 ).
+                        phone_model_mac_addresses.create([
+                          {:starts_with => '00041326'},
+                          {:starts_with => '0004132E'},
+                          {:starts_with => '0004133A'},
+                          {:starts_with => '00041352'}
+                                        ])
+snom.phone_models.create(:name => 'Snom 821', 
+                        :url => 'http://www.snom.com/en/products/ip-phones/snom-821/',
+                        :max_number_of_sip_accounts => 12,
+                        :number_of_keys => 12 ).
+                        phone_model_mac_addresses.create([
+                          {:starts_with => '00041345'}
+                                        ])
+snom.phone_models.create(:name => 'Snom 870', 
+                        :url => 'http://www.snom.com/en/products/ip-phones/snom-870/',
+                        :max_number_of_sip_accounts => 12,
+                        :number_of_keys => 12 ).
+                        phone_model_mac_addresses.create([
+                          {:starts_with => '00041341'}
+                                        ])
 
 Manufacturer.where(
   :ieee_name => 'DeTeWe-Deutsche Telephonwerke'

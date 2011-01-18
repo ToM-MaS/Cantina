@@ -42,11 +42,10 @@ class Phone < ActiveRecord::Base
   
   after_validation :format_mac_address
   
+  private
   def format_mac_address
     self.mac_address = self.mac_address.to_s.upcase.gsub(/[^A-F0-9]/,'')
   end
-  
-  private
   
   def validate_phone_model_exists()
     if ! PhoneModel.exists?( :id => self.phone_model_id )

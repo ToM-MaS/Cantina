@@ -39,6 +39,54 @@ class PhoneModelTest < ActiveSupport::TestCase
     assert !phone_model.valid?
   end
 
-  # TODO: URL testen
+  # find_by_mac_address(mac_address)
+  #
+  should "find a phone_model by a mac_address or a fragment" do
+    phone_model_mac_address = Factory.create(:phone_model_mac_address)
+    mac_address = phone_model_mac_address.starts_with
+    mac_address = mac_address + 'A' if mac_address.length != 12
+    assert PhoneModel.find_by_mac_address(mac_address) == phone_model_mac_address.phone_model
+  end
+
+  should "not find a phone_model by a too short mac_address fragment" do
+    phone_model_mac_address = Factory.create(:phone_model_mac_address)
+    mac_address = phone_model_mac_address.starts_with
+    mac_address = mac_address[0,4]
+    assert !(PhoneModel.find_by_mac_address(mac_address) == phone_model_mac_address.phone_model)
+  end
+
+  should "not find a phone_model by a too long mac_address fragment" do
+    phone_model_mac_address = Factory.create(:phone_model_mac_address)
+    mac_address = phone_model_mac_address.starts_with
+    mac_address = mac_address + 'AAAAAAAAAAAAAAAA'
+    assert !(PhoneModel.find_by_mac_address(mac_address) == phone_model_mac_address.phone_model)
+  end
+  
+  
+  # valid url
+  [
+    nil,
+    'http://www.snom.com/de/produkte/ip-telefone/snom-370/',
+    'http://user:pass@example.com/',
+  ].each { |url|
+    should "be ok to set url to #{url.inspect}" do
+      assert Factory.build( :phone_model, :url => url ).valid?
+    end
+  }
+  
+  # invalid url
+  [
+    '',
+    '##',
+    '/de/produkte/ip-telefone/snom-370/',
+    'http:www.snom.com/',
+    'mailto:user@example.com',
+    'foobar://example.com/',
+  ].each { |url|
+    should "not be ok to set url to #{url.inspect}" do
+      assert ! Factory.build( :phone_model, :url => url ).valid?
+    end
+  }
+  
   
 end

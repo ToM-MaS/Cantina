@@ -16,5 +16,5 @@ class Translation < ActiveRecord::Base
   belongs_to :language
   belongs_to :translatable, :polymorphic => true
   
-  #TODO: Validations
+  #TODO: Validations (polymorphic association)
 end

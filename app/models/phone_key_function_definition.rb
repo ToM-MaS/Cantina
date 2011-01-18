@@ -25,6 +25,18 @@ class PhoneKeyFunctionDefinition < ActiveRecord::Base
     'uri',
   ]
   
-  #TODO: validate regex_validation?
+  validate :validate_regex_validation
+    
+  private
   
+  def validate_regex_validation()
+    if self.regex_validation != nil
+      begin
+        re = Regexp.new( self.regex_validation )
+      rescue RegexpError
+        errors.add( :regex_validation, "is invalid." )
+      end
+    end
+  end
+    
 end

@@ -177,14 +177,13 @@ PhoneKeyFunctionDefinition.create([
 ])
 
 # Sample Phones (Testphones Sascha)
-#Manufacturer.where (
-#  :ieee_name => 'DeTeWe'
-#).first.Phone.create([
-#  { :mac_address => "00156513EC2F", :phone_model_id => ""}
-#])
-#
-#(1..10).each do |mem_num|
-#  PhoneModelKey.create ([
-#    { :name => "memory#{mem_num}", :phone_model_id => "14", :position => "#{mem_num}" }
-#  ])
-#end
+
+PhoneModel.where(
+  :name => 'IP 284' 
+).first.phones.create([
+  { :mac_address => '00156513EC2F' } 
+])
+(1..10).each { |mem_num| 
+  PhoneModel.where( :name => 'IP 284' ).first.phone_model_keys.create([
+    { :name => "memory#{mem_num}", :position => "#{mem_num}" } 
+  ]) }

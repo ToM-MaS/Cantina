@@ -44,6 +44,7 @@ class PhoneModel < ActiveRecord::Base
   has_many :phone_model_keys, :dependent => :destroy
 
   has_many :phone_model_mac_addresses, :dependent => :destroy
+  has_many :phones, :dependent => :destroy
 
   # Find a phone_model by a given MAC Address
   #

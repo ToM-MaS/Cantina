@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'test_helper'
 
 class CodecTest < ActiveSupport::TestCase
@@ -42,4 +44,35 @@ class CodecTest < ActiveSupport::TestCase
     end
     assert !Factory.build(:codec, :name => codec_name).valid?
   end
+  
+  
+  # valid name
+  [
+    'gsm',
+    'GSM',
+    'alaw',
+    'aLaw',
+    'g711a',
+    'G.711a',
+    'G.711-a',
+    'G.711.1',
+  ].each { |name|
+    should "be possible to use #{name.inspect} as name" do
+      assert Factory.build( :codec, :name => name ).valid?
+    end
+  }
+  
+  # invalid name
+  [
+    nil,
+    '',
+    ' ',
+    'G.711 a',
+    'μ-law',
+  ].each { |name|
+    should "not be possible to use #{name.inspect} as name" do
+      assert ! Factory.build( :codec, :name => name ).valid?
+    end
+  }
+  
 end

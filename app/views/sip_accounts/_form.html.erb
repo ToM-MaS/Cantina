@@ -83,6 +83,18 @@
     <%= f.label :position %><br />
     <%= f.text_field :position %>
   </div>
+  <% if @sip_account.phone_id != nil %>
+  <div class="field">
+  <%= f.label :sip_account_codecs %>
+  <% @sip_account.phone.phone_model.codecs.each do |codec|%>
+    
+      <input type="checkbox" value="<%= codec.id %> name="sip_account_codecs" "
+	  <%= @sip_account.sip_account_codecs.map{|c| c.codec_id}.include?( codec.id) ? ' checked="checked"' :'' %>
+	  ><%= codec.name %></input>
+    
+  <% end %>
+  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

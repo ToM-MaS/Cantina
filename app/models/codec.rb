@@ -17,4 +17,6 @@ class Codec < ActiveRecord::Base
   has_many :sip_account_codecs, :dependent => :destroy
   has_many :sip_accounts, :through => :sip_account_codecs
   
+  has_many :phone_model_codecs, :dependent => :destroy
+  has_many :phone_models, :through => :phone_model_codecs
 end

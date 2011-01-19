@@ -46,6 +46,9 @@ class PhoneModel < ActiveRecord::Base
   has_many :phone_model_mac_addresses, :dependent => :destroy
   has_many :phones, :dependent => :destroy
 
+  has_many :phone_model_codecs, :order => 'position', :dependent => :destroy
+  has_many :codecs, :through => :phone_model_codecs
+
   # Find a phone_model by a given MAC Address
   #
   def self.find_by_mac_address(mac_address)

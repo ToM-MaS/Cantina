@@ -85,6 +85,20 @@
   <%= @sip_account.position %>
 </p>
 
+<div>
+  <b>Codecs:</b>
+<% if @sip_account.sip_account_codecs.length > 0 %>
+  <ul>
+<%   @sip_account.sip_account_codecs.each { |codec| %>
+    <li><%= codec.name %></li>
+<%   } %>
+  </ul>
+<% else %>
+  -
+<% end %>
+</div>
+
+<hr />
 
 <%= link_to 'Edit', edit_sip_account_path(@sip_account) %> |
 <%= link_to 'Back', sip_accounts_path %>

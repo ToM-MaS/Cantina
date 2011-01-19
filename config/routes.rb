@@ -5,10 +5,10 @@ Cantina::Application.routes.draw do
 
   # http://guides.rubyonrails.org/routing.html#nested-resources
   resources :phones do
-    resources :sip_accounts
+    resources :sip_accounts, :path => "sip-accounts"
   end
 
-  resources :sip_accounts
+  resources :sip_accounts, :path => "sip-accounts"
 
   resources :codecs
 

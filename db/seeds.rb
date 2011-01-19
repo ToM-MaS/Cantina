@@ -152,6 +152,11 @@ Manufacturer.where(
   { :name => 'GXV 3140' },
 ])
 
+# Codecs for phone_models
+#
+PhoneModel.all.each do |phone_model|
+  phone_model.codecs << Codec.all
+end
 
 # Softkey functions:
 #

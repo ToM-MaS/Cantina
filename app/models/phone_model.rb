@@ -62,7 +62,7 @@ class PhoneModel < ActiveRecord::Base
       mac_address = mac_address.upcase.gsub(/[^A-F0-9]/,'')
       (6 .. mac_address.length).each do |length|
         phone_model_mac_addresses = PhoneModelMacAddress.where(:starts_with => mac_address[0,length])
-        phone_model = PhoneModel.where(:id => phone_model_mac_addresses.first).first if !phone_model_mac_addresses.nil?
+	phone_model = PhoneModel.where(:id => phone_model_mac_addresses.first.phone_model_id).first if !phone_model_mac_addresses.first.nil?
         break if !phone_model.nil?
       end
     end

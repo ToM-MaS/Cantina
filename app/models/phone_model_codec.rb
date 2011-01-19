@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20110119105502
+#
+# Table name: phone_model_codecs
+#
+#  id             :integer         not null, primary key
+#  phone_model_id :integer
+#  codec_id       :integer
+#  position       :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class PhoneModelCodec < ActiveRecord::Base
   belongs_to :phone_model
   belongs_to :codec

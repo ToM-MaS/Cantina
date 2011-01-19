@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110117122740
+# Schema version: 20110119105502
 #
 # Table name: phones
 #

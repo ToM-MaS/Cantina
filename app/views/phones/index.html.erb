@@ -14,17 +14,20 @@
 <% @phones.each do |phone| %>
   <tr>
     <td><%= link_to phone.mac_address, phone %></td>
-    <td><%= truncate(phone.phone_model.manufacturer.name, :length => 10) %>
+    <td><%=
+      truncate( phone.phone_model.manufacturer.name, :length => 20 ) .
+        downcase.split(' ').select {|w| w.capitalize! || w }.join(' ')
+    %></td>
     <td><%= phone.phone_model.name %></td>
     <td><%= phone.ip_address %></td>
     <td>
-	  <ul>
-	  <% phone.sip_accounts.each do |sip_account| %>
-	    <li><%= link_to sip_account.name, phone_sip_account_path(phone, sip_account) %></li>
-	  <% end %>
-	    <li><%= link_to 'create new sip account', new_phone_sip_account_path(phone) %></li>
-	  </ul>
-	</td>
+      <ul>
+<% phone.sip_accounts.each do |sip_account| %>
+        <li><%= link_to sip_account.name, phone_sip_account_path(phone, sip_account) %></li>
+<% end %>
+        <li><%= link_to 'create new sip account', new_phone_sip_account_path(phone) %></li>
+      </ul>
+    </td>
     <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
     <td><%= link_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

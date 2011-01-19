@@ -25,6 +25,7 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts/new.xml
   def new
     @sip_account = SipAccount.new
+    @sip_account.phone_id = params[:phone_id]
 
     respond_to do |format|
       format.html # new.html.erb

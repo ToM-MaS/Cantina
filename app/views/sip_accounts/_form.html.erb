@@ -16,6 +16,7 @@
     <%= f.text_field :name %>
   </div>
   <% if @sip_account.phone_id.blank? %>
+  <% #TODO das hier muss eine Drop-Down-Liste sein %>
 	  <div class="field">
 	    <%= f.label :phone_id %><br />
 	    <%= f.text_field :phone_id %>
@@ -24,12 +25,12 @@
     <%= f.hidden_field :phone_id %>
   <% end %>
   <div class="field">
-    <%= f.label :auth_user %><br />
-    <%= f.text_field :auth_user %>
-  </div>
-  <div class="field">
     <%= f.label :user %><br />
     <%= f.text_field :user %>
+  </div>
+  <div class="field">
+    <%= f.label :auth_user %><br />
+    <%= f.text_field :auth_user %>
   </div>
   <div class="field">
     <%= f.label :password %><br />

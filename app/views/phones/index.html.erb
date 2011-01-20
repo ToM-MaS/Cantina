@@ -1,39 +1,7 @@
 <h1>Listing phones</h1>
 
-<table>
-  <tr>
-    <th>Mac address</th>
-    <th>Manufacturer</th>
-    <th>Phone model</th>
-    <th>Ip address</th>
-    <th>SIP Accounts</th>
-    <th></th>
-    <th></th>
-  </tr>
+<p>
+<%= link_to 'Create a new phone', new_phone_path %>
+</p>
+<%= render :partial => 'table_of_phones', :locals => {:phones => @phones} %>
 
-<% @phones.each do |phone| %>
-  <tr>
-    <td><%= link_to phone.mac_address, phone %></td>
-    <td><%=
-      truncate( phone.phone_model.manufacturer.name, :length => 20 ) .
-        downcase.split(' ').select {|w| w.capitalize! || w }.join(' ')
-    %></td>
-    <td><%= phone.phone_model.name %></td>
-    <td><%= phone.ip_address %></td>
-    <td>
-      <ul>
-<% phone.sip_accounts.each do |sip_account| %>
-        <li><%= link_to sip_account.name, phone_sip_account_path(phone, sip_account) %></li>
-<% end %>
-        <li><%= link_to 'create new sip account', new_phone_sip_account_path(phone) %></li>
-      </ul>
-    </td>
-    <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
-    <td><%= link_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Phone', new_phone_path %>

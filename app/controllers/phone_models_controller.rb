@@ -25,7 +25,6 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/new.xml
   def new
     @phone_model = PhoneModel.new
-
     @manufacturers = Manufacturer.order(:name)
 
     if params[:manufacturer_id].nil?

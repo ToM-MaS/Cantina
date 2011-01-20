@@ -313,6 +313,7 @@ class SipAccountTest < ActiveSupport::TestCase
   #
   [
     nil,
+    '',
     'elvis',
     'Elvis123',
     '-_.!~*\'()',
@@ -327,7 +328,6 @@ class SipAccountTest < ActiveSupport::TestCase
   # invalid auth_user
   #
   [
-    '',
     '%A',
     '%XX',
     '%Ff',

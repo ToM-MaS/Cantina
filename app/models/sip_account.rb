@@ -56,7 +56,7 @@ class SipAccount < ActiveRecord::Base
         %[0-9A-F]{2} |
         [&=+$,;?\/]
       ){1,255}
-    $/x, :allow_nil => true, :allow_blank => false
+    $/x, :allow_nil => true, :allow_blank => true
   
   # Validate user. This is the "user" rule from RFC 3261.
   validates_format_of :user      , :with => /^

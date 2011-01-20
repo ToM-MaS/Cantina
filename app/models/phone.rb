@@ -20,8 +20,9 @@ class Phone < ActiveRecord::Base
   validates_format_of :mac_address, :with => /^ [0-9A-F]{2} (?: [:\-]? [0-9A-F]{2} ){5} $/ix
   validates_uniqueness_of :mac_address
 
-  validates_uniqueness_of :ip_address, :allow_nil => true
+  validates_uniqueness_of :ip_address, :allow_nil => true, :allow_blank => true
   validates_format_of :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
+  # TODO test for '' as not unqiueness
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id

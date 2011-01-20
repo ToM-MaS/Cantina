@@ -26,7 +26,11 @@ class PhonesController < ApplicationController
   def new
     @phone = Phone.new
     @phone_models = PhoneModel.order(:name)
-    @phone.phone_model_id = Phone.last.phone_model.id
+    if !params[:phone_model_id].nil? and PhoneModel.exists?(params[:phone_model_id])
+      @phone.phone_model_id = params[:phone_model_id]
+    else
+      @phone.phone_model_id = Phone.last.phone_model.id
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +48,7 @@ class PhonesController < ApplicationController
   # POST /phones.xml
   def create
     @phone = Phone.new(params[:phone])
+    @phone_models = PhoneModel.order(:name)
 
     respond_to do |format|
       if @phone.save

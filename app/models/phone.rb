@@ -49,10 +49,13 @@ class Phone < ActiveRecord::Base
   end
   
   private
+  
+  # Formats a MAC address.
   def format_mac_address
     self.mac_address = self.mac_address.to_s.upcase.gsub(/[^A-F0-9]/,'')
   end
   
+  # Validates if the phone model exists.
   def validate_phone_model_exists()
     if ! PhoneModel.exists?( :id => self.phone_model_id )
       errors.add( :phone_model_id, "There is no phone model with the given ID #{self.phone_model_id}." )

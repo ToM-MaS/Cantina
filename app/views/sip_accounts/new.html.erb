@@ -1,4 +1,8 @@
-<h1>New SIP account</h1>
+<% if !@sip_account.phone_id.blank? and Phone.exists?(@sip_account.phone_id) %>
+  <h1>New SIP account for <%= "#{@sip_account.phone.phone_model.name} (#{@sip_account.phone.mac_address})" %></h1>
+<% else %>
+  <h1>New SIP account</h1>
+<% end %>
 
 <%= render 'form' %>
 

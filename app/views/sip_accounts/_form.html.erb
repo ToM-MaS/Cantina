@@ -15,10 +15,14 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :phone_id %><br />
-    <%= f.text_field :phone_id %>
-  </div>
+  <% if @sip_account.phone_id.blank? %>
+	  <div class="field">
+	    <%= f.label :phone_id %><br />
+	    <%= f.text_field :phone_id %>
+	  </div>
+  <% else %>
+    <%= f.hidden_field :phone_id %>
+  <% end %>
   <div class="field">
     <%= f.label :auth_user %><br />
     <%= f.text_field :auth_user %>

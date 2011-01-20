@@ -28,7 +28,9 @@ Cantina::Application.routes.draw do
     resources :phone_models
   end
 
-  resources :phone_models
+  resources :phone_models do
+    resources :phones
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

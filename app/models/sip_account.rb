@@ -223,12 +223,17 @@ class SipAccount < ActiveRecord::Base
   
   private
   
+  # Checks if in the phone database a phone with the same
+  # id as self.phone_id exists.
   def does_a_phone_to_this_sip_account_exist
     if !Phone.exists?(:id => self.phone_id)
       errors.add(:phone_id, "There is no Phone with the given id #{self.phone_id}.")
     end      
   end
   
+  # A given phone_model has a maximum amounts of possible 
+  # sip_accounts. This method checks if this sip_account is 
+  # within this range.
   def number_of_sip_accounts_is_possible
     if !self.phone.nil? and self.phone.sip_accounts.include?(self)
       my_self = 1
@@ -297,12 +302,16 @@ class SipAccount < ActiveRecord::Base
     return ret
   end
   
+  # Validates if a display_name is valid refering to
+  # the RFC 3261.
   def validate_display_name
     if ! validate_a_display_name( self.display_name )
       errors.add( :display_name , "Invalid display name (see RFC 3261)." )
     end
   end
   
+  # Validates if a realm is valid refering to
+  # the RFC 3261.
   def validate_realm
     if ! validate_a_display_name( self.realm )
       errors.add( :realm        , "Invalid realm (see RFC 3261)." )

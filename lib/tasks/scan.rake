@@ -71,11 +71,6 @@ namespace :network do
       abort("Windows OS not supported. Please install Debian Linux for better results.")
     end
       
-    #if (FileTest.exist?('/etc/debian_versions'))
-    #  return true
-    #elsif(FileTest.exist?('/etc/SuSE-release'))
-    #  return true
-    #end
     abort("Unsupported operating system")
   end
 
@@ -102,7 +97,7 @@ namespace :network do
 	    link = true
 	  elsif (entry =~ /state DOWN/)
 	    break
-	  elsif (entry =~ /state UNKNOWN/)
+	  elsif (entry =~ /LOOPBACK/)
 	    break
 	  end
 	  if (entry =~ IPNET_REGEXP)
@@ -134,7 +129,7 @@ namespace :network do
       nmap_hosts = nmap.value.split(/\n/)
       nmap_hosts.each do |nmap_host|
 	if (nmap_host =~ HOST_REGEXP)
-	  host = nmap_host.split(/Nmap scan report for /, 2)[1]
+	  host = nmap_host[HOST_REGEXP].split(/(Nmap scan report for |Host )/, 2)[2]
 	  hosts.push(host)
 	end
       end
@@ -146,7 +141,13 @@ namespace :network do
     end
 
     def arp(ip_addr)
-      arp = Thread.new { `arp -an #{ip_addr}` } 
+      if(FileTest.exist?('/etc/SuSE-release'))
+	arp_binary = "/sbin/arp -an"
+      else
+	arp_binary = "/usr/sbin/arp -an"
+      end
+
+      arp = Thread.new { `#{arp_binary} #{ip_addr}` } 
       arp_entries = arp.value.split(/\n/)   
       arp_entries.each do |arp_entry|
 	arp_entry_values = arp_entry.split()

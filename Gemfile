@@ -18,20 +18,18 @@ gem "shoulda"
 # https://github.com/thoughtbot/factory_girl_rails
 gem 'factory_girl_rails'
 
-group :development do
-    # Render Diagrams of the DBs http://rails-erd.rubyforge.org/
- 	gem "rails-erd"
+# Render Diagrams of the DBs http://rails-erd.rubyforge.org/
+gem "rails-erd"
 
-	# Generators
-	gem "rails3-generators"
+# Generators
+gem "rails3-generators"
 
-	# run ./script/annotate to annotate
-	gem 'annotate-models'
-	
-	# https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
-	# nicer table like output on the console
-	gem 'hirb'
-end
+# run ./script/annotate to annotate
+gem 'annotate-models'
+
+# https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
+# nicer table like output on the console
+gem 'hirb'
 
 # https://github.com/FooBarWidget/default_value_for
 gem 'default_value_for'

@@ -10,10 +10,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # https://github.com/nono/acts_as_list
 gem "acts_as_list"
 
-# https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
-# nicer table like output on the console
-gem 'hirb'
-
 # Test-Data => http://faker.rubyforge.org/
 gem 'faker'
 
@@ -22,16 +18,19 @@ gem "shoulda"
 # https://github.com/thoughtbot/factory_girl_rails
 gem 'factory_girl_rails'
 
-# Generators
-gem "rails3-generators", :group => :development
-
-# run ./script/annotate to annotate
-gem 'annotate-models'
-
-
-# Rails ERD (aptitude install graphviz)
 group :development do
-  gem "rails-erd"
+    # Render Diagrams of the DBs http://rails-erd.rubyforge.org/
+ 	gem "rails-erd"
+
+	# Generators
+	gem "rails3-generators"
+
+	# run ./script/annotate to annotate
+	gem 'annotate-models'
+	
+	# https://github.com/cldwalker/hirb and http://tagaholic.me/hirb/
+	# nicer table like output on the console
+	gem 'hirb'
 end
 
 # https://github.com/FooBarWidget/default_value_for

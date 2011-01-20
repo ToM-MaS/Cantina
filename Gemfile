@@ -18,6 +18,7 @@ gem "shoulda"
 # https://github.com/thoughtbot/factory_girl_rails
 gem 'factory_girl_rails'
 
+# Rails ERD (aptitude install graphviz)
 # Render Diagrams of the DBs http://rails-erd.rubyforge.org/
 gem "rails-erd"
 

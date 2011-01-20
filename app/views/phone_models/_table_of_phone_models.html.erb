@@ -2,6 +2,7 @@
   <tr>
     <th>Name</th>
     <th>Manufacturer</th>
+    <th>Number of phones</th>
     <th>Max number of sip accounts</th>
     <th>Number of keys</th>
     <th>Max number of phone book entries</th>
@@ -13,6 +14,7 @@
   <tr class="<%= cycle("even", "odd") %>">
     <td><%= link_to phone_model.name, phone_model %></td>
     <td><%= link_to truncate(phone_model.manufacturer.name, :length => 15), phone_model.manufacturer %></td>
+    <td><%= phone_model.phones.count %></td>
     <td><%= phone_model.max_number_of_sip_accounts %></td>
     <td><%= phone_model.number_of_keys %></td>
     <td><%= phone_model.max_number_of_phone_book_entries %></td>

@@ -25,7 +25,10 @@ class PhoneKeyFunctionDefinitionsController < ApplicationController
   # GET /phone_key_function_definitions/new.xml
   def new
     @phone_key_function_definition = PhoneKeyFunctionDefinition.new
-
+    
+    @phone_key_function_definition_type_of_classes = [ 'string', 'integer', 'boolean', 'url', 'uri' ]
+    @default_for_select_phone_key_function_definition_type_of_class = 'string'
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @phone_key_function_definition }
@@ -35,6 +38,9 @@ class PhoneKeyFunctionDefinitionsController < ApplicationController
   # GET /phone_key_function_definitions/1/edit
   def edit
     @phone_key_function_definition = PhoneKeyFunctionDefinition.find(params[:id])
+    
+    @phone_key_function_definition_type_of_classes = [ 'string', 'integer', 'boolean', 'url', 'uri' ]
+    @default_for_select_phone_key_function_definition_type_of_class = @phone_key_function_definition.type_of_class
   end
 
   # POST /phone_key_function_definitions

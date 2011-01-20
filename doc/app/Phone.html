@@ -287,17 +287,19 @@ TODO muss noch getestet werden log a provisioning
 
 				<div class="method-description">
 					
-					
+					<p>
+Formats a MAC address.
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="format-mac-address-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone.rb, line 52</span>
-52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_mac_address</span>
-53:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
-54:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/phone.rb, line 54</span>
+54:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_mac_address</span>
+55:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mac_address</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
+56:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -321,19 +323,21 @@ TODO muss noch getestet werden log a provisioning
 
 				<div class="method-description">
 					
-					
+					<p>
+Validates if the phone model exists.
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="validate-phone-model-exists-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone.rb, line 56</span>
-56:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_phone_model_exists</span>()
-57:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_id</span> )
-58:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_id</span>, <span class="ruby-node">&quot;There is no phone model with the given ID #{self.phone_model_id}.&quot;</span> )
-59:     <span class="ruby-keyword kw">end</span>
-60:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/phone.rb, line 59</span>
+59:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_phone_model_exists</span>()
+60:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_id</span> )
+61:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_id</span>, <span class="ruby-node">&quot;There is no phone model with the given ID #{self.phone_model_id}.&quot;</span> )
+62:     <span class="ruby-keyword kw">end</span>
+63:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

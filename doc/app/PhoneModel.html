@@ -304,19 +304,21 @@ Find a phone_model by a given MAC Address
 
 				<div class="method-description">
 					
-					
+					<p>
+Validates if the phone model has a manufacturer.
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="does-a-manufacturer-to-this-phone-model-exist-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 78</span>
-78:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">does_a_manufacturer_to_this_phone_model_exist</span>
-79:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">manufacturer_id</span>)
-80:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:manufacturer_id</span>, <span class="ruby-node">&quot;There is no Manufacturer with the given id #{self.manufacturer_id}.&quot;</span>)
-81:     <span class="ruby-keyword kw">end</span>      
-82:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 79</span>
+79:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">does_a_manufacturer_to_this_phone_model_exist</span>
+80:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">manufacturer_id</span>)
+81:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:manufacturer_id</span>, <span class="ruby-node">&quot;There is no Manufacturer with the given id #{self.manufacturer_id}.&quot;</span>)
+82:     <span class="ruby-keyword kw">end</span>      
+83:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -340,31 +342,33 @@ Find a phone_model by a given MAC Address
 
 				<div class="method-description">
 					
-					
+					<p>
+Validates the URL.
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="validate-url-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 84</span>
- 84:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_url</span>()
- 85:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">blank?</span>
- 86:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
- 87:       <span class="ruby-keyword kw">begin</span>
- 88:         <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url</span> )
- 89:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">absolute?</span>
- 90:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (has to have a scheme)&quot;</span> )
- 91:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hierarchical?</span>
- 92:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (not hierarchical)&quot;</span> )
- 93:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span>( <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPS</span> ) )
- 94:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (must have http or https scheme)&quot;</span> )
- 95:         <span class="ruby-keyword kw">end</span>
- 96:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
- 97:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid&quot;</span> )
- 98:       <span class="ruby-keyword kw">end</span>
- 99:     <span class="ruby-keyword kw">end</span>
-100:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone_model.rb, line 86</span>
+ 86:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_url</span>()
+ 87:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url</span>.<span class="ruby-identifier">blank?</span>
+ 88:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
+ 89:       <span class="ruby-keyword kw">begin</span>
+ 90:         <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url</span> )
+ 91:         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">absolute?</span>
+ 92:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (has to have a scheme)&quot;</span> )
+ 93:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hierarchical?</span>
+ 94:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (not hierarchical)&quot;</span> )
+ 95:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span>( <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span> ) <span class="ruby-operator">||</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPS</span> ) )
+ 96:           <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid (must have http or https scheme)&quot;</span> )
+ 97:         <span class="ruby-keyword kw">end</span>
+ 98:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+ 99:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:url</span>, <span class="ruby-value str">&quot;is invalid&quot;</span> )
+100:       <span class="ruby-keyword kw">end</span>
+101:     <span class="ruby-keyword kw">end</span>
+102:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

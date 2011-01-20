@@ -239,23 +239,26 @@ Table name: phone_key_function_definitions
 
 				<div class="method-description">
 					
-					
+					<p>
+Validates the regex_validation of the <a
+href="PhoneKeyFunctionDefinition.html">PhoneKeyFunctionDefinition</a>.
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="validate-regex-validation-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone_key_function_definition.rb, line 31</span>
-31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_regex_validation</span>()
-32:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
-33:       <span class="ruby-keyword kw">begin</span>
-34:         <span class="ruby-identifier">re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> )
-35:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">RegexpError</span>
-36:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:regex_validation</span>, <span class="ruby-value str">&quot;is invalid.&quot;</span> )
-37:       <span class="ruby-keyword kw">end</span>
-38:     <span class="ruby-keyword kw">end</span>
-39:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/phone_key_function_definition.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_regex_validation</span>()
+33:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
+34:       <span class="ruby-keyword kw">begin</span>
+35:         <span class="ruby-identifier">re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">regex_validation</span> )
+36:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">RegexpError</span>
+37:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:regex_validation</span>, <span class="ruby-value str">&quot;is invalid.&quot;</span> )
+38:       <span class="ruby-keyword kw">end</span>
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

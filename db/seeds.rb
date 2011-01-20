@@ -20,7 +20,7 @@
 #
 Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG').ouis.create(:value => '000413')
 Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'DeTeWe').ouis.create(:value => '003042')
-Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').ouis.create(:value => '001565')
+Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel').ouis.create(:value => '001565')
 Manufacturer.find_or_create_by_ieee_name('Grandstream Networks, Inc.', :name => 'Grandstream Networks, Inc.').ouis.create(:value => '000B82')
 
 Language.create(:name => 'Deutsch')

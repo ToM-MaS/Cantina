@@ -88,5 +88,6 @@ class PhoneModelTest < ActiveSupport::TestCase
     end
   }
   
+  # TODO default_http_user and default_http_password test
   
 end

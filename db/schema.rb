@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20110119105502) do
     t.integer  "max_number_of_sip_accounts"
     t.integer  "number_of_keys"
     t.integer  "max_number_of_phone_book_entries"
+    t.string   "default_http_user"
+    t.string   "default_http_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20110119105502) do
     t.string   "mac_address"
     t.integer  "phone_model_id"
     t.string   "ip_address"
+    t.string   "http_user"
+    t.string   "http_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

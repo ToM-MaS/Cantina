@@ -83,4 +83,35 @@ class PhoneTest < ActiveSupport::TestCase
     end
   end
   
+  # # check a full setup
+  # #
+  # should "have all bells and whistles" do
+  #   phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => 3)
+  #   phone_model.codecs << Factory.create(:codec)
+  #   phone_model.codecs << Factory.create(:codec)
+  #   phone_model.codecs << Factory.create(:codec)
+  #   phone_model.codecs << Factory.create(:codec)
+  #   phone_model.codecs << Factory.create(:codec)
+  #   
+  #   assert phone_model.codecs.size == 5    
+  #   
+  #   phone = Factory.create(:phone, :phone_model_id => phone_model.id)
+  #   phone.sip_accounts << Factory.create(:sip_account)
+  #   phone.sip_accounts << Factory.create(:sip_account)
+  #   phone.sip_accounts << Factory.create(:sip_account)
+  #   
+  #   assert phone.sip_accounts.size == 3
+  #   
+  #   (0 .. 2).each do |i|
+  #     (0 .. i).each do |codec_i|
+  #       phone.sip_accounts[i].codecs << phone_model.codecs[codec_i]
+  #     end
+  #   end
+  #   
+  #   assert phone.sip_accounts.first.codecs.count == 1
+  #   assert phone.sip_accounts.last.codecs.count == 3
+  # end
+  
+  # TODO http_user and http_password test (validation too?)
+  
 end

@@ -1,6 +1,7 @@
 namespace :network do
   desc "Displays available local networks"
   task :subnets do
+    system_type_supported()
     ns = LocalNetworkScan.new()
     subnets = ns.subnets()
     puts "available local networks: #{subnets.join(', ')}"
@@ -8,6 +9,7 @@ namespace :network do
 
   desc "Displays hosts on local networks"
   task :hosts do
+    system_type_supported()
     ns = LocalNetworkScan.new()
     subnets = ns.subnets()
     hosts = ns.hosts()
@@ -19,6 +21,7 @@ namespace :network do
 
   desc "Displays known VoIP phones"
   task :phones => :environment do
+    system_type_supported()
     phones_count = 0
     ns = LocalNetworkScan.new()
     subnets = ns.subnets()
@@ -38,6 +41,7 @@ namespace :network do
 
   desc "Finds and adds new phones to database"
   task :addphones => :environment do
+    system_type_supported()
     phones_count = 0
     ns = LocalNetworkScan.new()
     subnets = ns.subnets()
@@ -56,6 +60,23 @@ namespace :network do
       end
     end
     puts "#{phones_count} new phone(s) added" 
+  end
+
+  def system_type_supported()
+    if (RUBY_PLATFORM.downcase.include?("linux"))
+      return true
+    elsif (RUBY_PLATFORM.downcase.include?("darwin"))
+      abort("OSX not supported. Please install Debian Linux for better results.")
+    elsif (RUBY_PLATFORM.downcase.include?("mswin"))
+      abort("Windows OS not supported. Please install Debian Linux for better results.")
+    end
+      
+    #if (FileTest.exist?('/etc/debian_versions'))
+    #  return true
+    #elsif(FileTest.exist?('/etc/SuSE-release'))
+    #  return true
+    #end
+    abort("Unsupported operating system")
   end
 
   class LocalNetworkScan
@@ -89,9 +110,11 @@ namespace :network do
 	    networks.push(output[1])
 	  end
 	end
-      end
+	end
       @subnets = networks
       return networks
+    rescue => error
+	abort("ERROR: retrieving local networks failed")
     end
 
     def hosts(subnets = nil)
@@ -102,6 +125,11 @@ namespace :network do
       end
 
       hosts = []
+
+      if (subnets_str == '')
+	return hosts
+      end
+
       nmap = Thread.new { `nmap -n -sP #{subnets_str}` }    
       nmap_hosts = nmap.value.split(/\n/)
       nmap_hosts.each do |nmap_host|
@@ -111,7 +139,10 @@ namespace :network do
 	end
       end
       @hosts = hosts
-      return hosts 
+      return hosts
+    
+    rescue => error
+      abort("ERROR: retrieving hosts failed")
     end
 
     def arp(ip_addr)
@@ -125,7 +156,9 @@ namespace :network do
 	  end
 	end
       end
-      return nil 
+      return nil
+    rescue => error
+      abort("ERROR: retrieving MAC failed")
     end
 
   end

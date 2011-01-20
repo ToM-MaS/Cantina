@@ -11,10 +11,10 @@ Cantina::Application.routes.draw do
 
   # http://guides.rubyonrails.org/routing.html#nested-resources
   resources :phones do
-    resources :sip_accounts, :path => "sip-accounts"
+    resources :sip_accounts
   end
 
-  resources :sip_accounts, :path => "sip-accounts"
+  resources :sip_accounts
 
   resources :codecs
 
@@ -24,10 +24,9 @@ Cantina::Application.routes.draw do
 
   resources :phone_model_keys
 
-  resources :phone_models
-
   resources :manufacturers
 
+  resources :phone_models
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

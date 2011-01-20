@@ -1,17 +1,21 @@
 <h1>Cantina</h1>
-<p>This is a very basic webinterface to the Cantina Phone Provisioning System.</p>
-<h2>Manufacturer</h2>
+
+<p>This is a very basic web interface to the Cantina Phone Provisioning System.</p>
+
+<h2>Phone Manufacturers</h2>
 <ul>
-<li><%= link_to "List all manufacturers (current number: #{@number_of_manufacturers})", manufacturers_path%></li>	
-<li><%= link_to "Create a new manufacturer", new_manufacturer_path%></li>	
+	<li><%= link_to "List all manufacturers (#{@number_of_manufacturers})", manufacturers_path %></li>	
+	<li><%= link_to "Create a new manufacturer", new_manufacturer_path%></li>	
 </ul>
+
 <h2>Phone Models</h2>
 <ul>
-<li><%= link_to "List all phone models (current number: #{@number_of_phone_models})", phone_models_path%></li>	
-<li><%= link_to "Create a new phone model", new_phone_model_path%></li>	
+	<li><%= link_to "List all phone models (#{@number_of_phone_models})", phone_models_path %></li>	
+	<li><%= link_to "Create a new phone model", new_phone_model_path%></li>	
 </ul>
+
 <h2>Phones</h2>
 <ul>
-<li><%= link_to "List all phones (current number: #{@number_of_phones})", phones_path%></li>	
-<li><%= link_to "Create a new phone", new_phone_path%></li>	
+	<li><%= link_to "List all phones (#{@number_of_phones})", phones_path %></li>	
+	<li><%= link_to "Create a new phone", new_phone_path %></li>	
 </ul>

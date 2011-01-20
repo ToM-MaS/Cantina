@@ -25,6 +25,8 @@ class PhonesController < ApplicationController
   # GET /phones/new.xml
   def new
     @phone = Phone.new
+    @phone_models = PhoneModel.order(:name)
+    @last_created_phone_phone_model = Phone.last.phone_model
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +37,8 @@ class PhonesController < ApplicationController
   # GET /phones/1/edit
   def edit
     @phone = Phone.find(params[:id])
+    @phone_models = PhoneModel.order(:name)
+    @last_created_phone_phone_model = @phone.phone_model
   end
 
   # POST /phones

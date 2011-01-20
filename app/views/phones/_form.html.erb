@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :phone_model_id %><br />
-    <%= f.text_field :phone_model_id %>
+    <%= select(:phone, "phone_model_id", @phone_models.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @last_created_phone_phone_model.id}) %>
   </div>
   <div class="field">
     <%= f.label :ip_address %><br />

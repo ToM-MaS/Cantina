@@ -37,6 +37,8 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/1/edit
   def edit
     @phone_model = PhoneModel.find(params[:id])
+    @manufacturers = Manufacturer.order(:name)
+    @last_created_phone_model_manufacturer = @phone_model.manufacturer
   end
 
   # POST /phone_models

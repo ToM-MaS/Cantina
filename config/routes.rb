@@ -5,36 +5,42 @@ Cantina::Application.routes.draw do
   
   root :to => "pages#index"
 
-  resources :phone_model_mac_addresses
+  #resources :phone_model_mac_addresses
 
-  resources :phone_keys
+  # TODO: disable here, and make this a nested route in :phones
+  resources :phone_keys, :path => "phone-keys"
 
   # http://guides.rubyonrails.org/routing.html#nested-resources
   resources :phones do
     resources :sip_accounts, :path => "sip-accounts"
+    resources :phone_keys, :path => "phone-keys"
   end
 
+  # TODO: disable here, and make this a nested route in :phones
   resources :sip_accounts, :path => "sip-accounts"
 
-  resources :codecs
-
+  # TODO: disable here, and make this a nested route in :phones -> :sip_accounts
   resources :sip_account_codecs
 
-  resources :phone_key_function_definitions
+  #resources :codecs
 
-  resources :phone_model_keys
+  #resources :phone_key_function_definitions
 
+  #resources :phone_model_keys
+
+  # TODO: disable these routes. :phone_models are seeded. The index page shouldn't offer a link to add a phone_model.
   resources :phone_models
 
-  resources :descriptions
+  #resources :descriptions
 
-  resources :translations
+  #resources :translations
 
-  resources :languages
+  #resources :languages
 
+  # TODO: disable these routes. :manufacturers are seeded. The index page shouldn't offer a link to add a manufacturer.
   resources :manufacturers
 
-  resources :vcards
+  #resources :vcards
 
 
   # The priority is based upon order of creation:

@@ -81,7 +81,7 @@ namespace :network do
 
   class LocalNetworkScan
     IPNET_REGEXP=/\s{4}inet\s(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3}\/\d{1,2}/x
-    HOST_REGEXP=/Nmap\sscan\sreport\sfor\s(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3}/x
+    HOST_REGEXP=/((Nmap\sscan\sreport\sfor\s)|(Host\s))(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3}/x
     MAC_REGEXP=/^ [0-9A-F]{2} (?: [:\-]? [0-9A-F]{2} ){5} $/ix
 
     def initialize 

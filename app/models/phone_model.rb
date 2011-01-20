@@ -75,12 +75,14 @@ class PhoneModel < ActiveRecord::Base
   
   private
 
+  # Validates if the phone model has a manufacturer.
   def does_a_manufacturer_to_this_phone_model_exist
     if ! Manufacturer.exists?(:id => self.manufacturer_id)
       errors.add(:manufacturer_id, "There is no Manufacturer with the given id #{self.manufacturer_id}.")
     end      
   end
   
+  # Validates the URL.
   def validate_url()
     if !self.url.blank?
       require 'uri'

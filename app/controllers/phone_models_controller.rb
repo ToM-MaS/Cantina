@@ -2,7 +2,7 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models
   # GET /phone_models.xml
   def index
-    @phone_models = PhoneModel.all
+    @phone_models = PhoneModel.order(:manufacturer_id, :name).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,8 +25,14 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/new.xml
   def new
     @phone_model = PhoneModel.new
+
     @manufacturers = Manufacturer.order(:name)
-    @phone_model.manufacturer_id = PhoneModel.last.manufacturer.id
+
+    if params[:manufacturer_id].nil?
+      @phone_model.manufacturer_id = PhoneModel.last.manufacturer.id
+    else
+      @phone_model.manufacturer_id = params[:manufacturer_id]
+    end
 
     respond_to do |format|
       format.html # new.html.erb

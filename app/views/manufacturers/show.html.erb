@@ -5,11 +5,14 @@
   <%= @manufacturer.name %>
 </p>
 
-
 <%= link_to 'Edit', edit_manufacturer_path(@manufacturer) %> |
 <%= link_to 'Back', manufacturers_path %>
 
 <h2>Phone models by this manufacturer</h2>
+
+<p>
+<%= link_to 'Create a new phone model', new_manufacturer_phone_model_path(@manufacturer) %>	
+</p>
 
 <% @manufacturer.phone_models.each do |phone_model| %>
 

@@ -24,7 +24,9 @@ Cantina::Application.routes.draw do
 
   resources :phone_model_keys
 
-  resources :manufacturers
+  resources :manufacturers do
+    resources :phone_models
+  end
 
   resources :phone_models
 

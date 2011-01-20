@@ -66,6 +66,7 @@ class PhoneModelTest < ActiveSupport::TestCase
   # valid url
   [
     nil,
+    '',
     'http://www.snom.com/de/produkte/ip-telefone/snom-370/',
     'http://user:pass@example.com/',
   ].each { |url|
@@ -76,7 +77,6 @@ class PhoneModelTest < ActiveSupport::TestCase
   
   # invalid url
   [
-    '',
     '##',
     '/de/produkte/ip-telefone/snom-370/',
     'http:www.snom.com/',

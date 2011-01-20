@@ -12,7 +12,6 @@
 #
 
 class Manufacturer < ActiveRecord::Base
-  has_many :vcards, :as => :vcardable, :dependent => :destroy
   has_many :phone_models, :dependent => :destroy
   has_many :ouis, :dependent => :destroy
   validates_presence_of :name

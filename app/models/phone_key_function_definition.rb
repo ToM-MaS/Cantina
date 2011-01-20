@@ -28,6 +28,7 @@ class PhoneKeyFunctionDefinition < ActiveRecord::Base
     
   private
   
+  # Validates the regex_validation of the PhoneKeyFunctionDefinition.
   def validate_regex_validation()
     if self.regex_validation != nil
       begin

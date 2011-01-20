@@ -12,10 +12,7 @@
 <% phones.each do |phone| %>
   <tr>
     <td><%= link_to phone.mac_address, phone %></td>
-    <td><%=
-      truncate( phone.phone_model.manufacturer.name, :length => 20 ) .
-        downcase.split(' ').select {|w| w.capitalize! || w }.join(' ')
-    %></td>
+    <td><%= link_to truncate(phone.phone_model.manufacturer.name, :length => 20), phone.phone_model.manufacturer %></td>
     <td><%= link_to phone.phone_model.name, phone.phone_model %></td>
     <td><%= phone.ip_address %></td>
     <td>

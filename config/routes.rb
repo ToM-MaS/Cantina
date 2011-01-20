@@ -1,4 +1,10 @@
 Cantina::Application.routes.draw do
+  get "manufacturer_aastra/show"
+
+  get "manufacturer_tiptel/show"
+
+  get "manufacturer_snom/show"
+
   get "pages/index"
   
   root :to => "pages#index"

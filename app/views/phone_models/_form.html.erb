@@ -21,7 +21,8 @@
   </div>
   <div class="field">
     <%= f.label :manufacturer_id %><br />
-    <%= f.text_field :manufacturer_id %>
+
+    <%= select(:phone_model, "manufacturer_id", @manufacturers.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @last_created_phone_model_manufacturer.id}) %>
   </div>
   <div class="field">
     <%= f.label :default_http_user %><br />

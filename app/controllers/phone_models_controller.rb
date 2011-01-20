@@ -25,6 +25,8 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/new.xml
   def new
     @phone_model = PhoneModel.new
+    @manufacturers = Manufacturer.order(:name)
+    @last_created_phone_model_manufacturer = PhoneModel.last.manufacturer
 
     respond_to do |format|
       format.html # new.html.erb

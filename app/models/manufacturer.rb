@@ -12,7 +12,7 @@
 #
 
 class Manufacturer < ActiveRecord::Base
-  has_many :phone_models, :dependent => :destroy
+  has_many :phone_models, :order => :name, :dependent => :destroy
   has_many :ouis, :dependent => :destroy
   validates_presence_of :name
   validates_uniqueness_of :name

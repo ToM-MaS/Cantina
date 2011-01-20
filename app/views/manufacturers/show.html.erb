@@ -8,3 +8,13 @@
 
 <%= link_to 'Edit', edit_manufacturer_path(@manufacturer) %> |
 <%= link_to 'Back', manufacturers_path %>
+
+<h2>Phone models by this manufacturer</h2>
+
+<% @manufacturer.phone_models.each do |phone_model| %>
+
+<%= render :partial => 'phone_models/show_single_phone', :locals => {:phone_model => phone_model} %>
+
+<hr />
+
+<% end %>

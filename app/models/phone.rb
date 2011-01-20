@@ -36,9 +36,6 @@ class Phone < ActiveRecord::Base
 
   has_many :descriptions, :as => :descriptionable, :dependent => :destroy
   
-  # Internal phonebook
-  has_many :vcards, :as => :vcardable, :dependent => :destroy
-  
   # SIP Accounts
   has_many :sip_accounts, :order => 'position', :dependent => :destroy
   

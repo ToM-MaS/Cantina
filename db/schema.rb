@@ -158,14 +158,4 @@ ActiveRecord::Schema.define(:version => 20110120120511) do
     t.datetime "updated_at"
   end
 
-  create_table "vcards", :force => true do |t|
-    t.string   "name"
-    t.text     "content"
-    t.integer  "position"
-    t.string   "vcardable_type"
-    t.integer  "vcardable_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end

@@ -17,7 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :type_of_class %><br />
-    <%= f.text_field :type_of_class %>
+    <%= f.select( :type_of_class, @phone_key_function_definition_type_of_classes.collect {|r|
+      [ r, r ]
+      },
+      { :include_blank => false, :selected => (! @default_for_select_phone_key_function_definition_type_of_class.nil? ? @default_for_select_phone_key_function_definition_type_of_class : nil) }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :regex_validation %><br />

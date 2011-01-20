@@ -67,16 +67,23 @@ div.field, div.actions {
 
 table th,
 table td {
-  border-width: 1px 1px 1px 1px;
+  border-width: 1px;
   border-style: solid;
-  border-color: rgba(0,0,0,0.2) rgba(255,255,255,0.2) rgba(255,255,255,0.2) rgba(0,0,0,0.2);
-  padding: 0.08em 0.15em;
+  border-color: rgba(0,0,0,0.05);
+  padding: 0.15em 0.4em;
   text-align: left;
   vertical-align: top;
   background-color: #f3f3f3;
 }
 table th {
-  background-color: #ddd;
+  background-color: #bbf;
+}
+
+table tr.even > td {
+  background-color: #f0f0f0;
+}
+table tr.odd  > td {
+  background-color: #dddddd;
 }
 
 div#header {

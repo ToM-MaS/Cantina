@@ -12,20 +12,6 @@
 #
 
 class Phone < ActiveRecord::Base
-  # Have a look at http://railscasts.com/episodes/237-dynamic-attr-accessible
-  #
-  # attr_accessible :mac_address, :phone_model_id, :ip_address
-  
-  belongs_to :phone_model
-
-  has_many :descriptions, :as => :descriptionable, :dependent => :destroy
-  
-  # Internal phonebook
-  has_many :vcards, :as => :vcardable, :dependent => :destroy
-  
-  # SIP Accounts
-  has_many :sip_accounts, :order => "position", :dependent => :destroy
-  
   # Validations
   #
   validates_presence_of :mac_address
@@ -41,6 +27,29 @@ class Phone < ActiveRecord::Base
   validate :validate_phone_model_exists
   
   after_validation :format_mac_address
+  
+  # Have a look at http://railscasts.com/episodes/237-dynamic-attr-accessible
+  #
+  # attr_accessible :mac_address, :phone_model_id, :ip_address
+  
+  belongs_to :phone_model
+
+  has_many :descriptions, :as => :descriptionable, :dependent => :destroy
+  
+  # Internal phonebook
+  has_many :vcards, :as => :vcardable, :dependent => :destroy
+  
+  # SIP Accounts
+  has_many :sip_accounts, :order => 'position', :dependent => :destroy
+  
+  # History
+  has_many :provisioning_log_entries, :order => 'created_at'
+  
+  # TODO muss noch getestet werden
+  # log a provisioning
+  def log_provisioning(memo = nil, succeeded = true)
+    self.provisioning_log_entries.create(:memo => memo, :succeeded => true)
+  end
   
   private
   def format_mac_address

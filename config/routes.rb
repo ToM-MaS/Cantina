@@ -5,6 +5,8 @@ Cantina::Application.routes.draw do
 
   get "manufacturer_snom/show"
 
+  resources :provisioning_log_entries, :only => [:index, :show]
+
   get "pages/index"
   
   root :to => "pages#index"

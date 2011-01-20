@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119105502) do
+ActiveRecord::Schema.define(:version => 20110120120511) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(:version => 20110119105502) do
     t.string   "ip_address"
     t.string   "http_user"
     t.string   "http_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "provisioning_log_entries", :force => true do |t|
+    t.integer  "phone_id"
+    t.string   "memo"
+    t.boolean  "succeeded"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

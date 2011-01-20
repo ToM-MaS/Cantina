@@ -20,7 +20,7 @@
     <%= f.select( :type_of_class, @phone_key_function_definition_type_of_classes.collect {|r|
       [ r, r ]
       },
-      { :include_blank => false, :selected => (! @default_for_select_phone_key_function_definition_type_of_class.nil? ? @default_for_select_phone_key_function_definition_type_of_class : nil) }
+      { :include_blank => false, :selected => @default_for_select_phone_key_function_definition_type_of_class }
     ) %>
   </div>
   <div class="field">

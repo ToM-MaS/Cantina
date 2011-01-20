@@ -63,7 +63,10 @@ class PhoneKeyFunctionDefinitionsController < ApplicationController
   # PUT /phone_key_function_definitions/1.xml
   def update
     @phone_key_function_definition = PhoneKeyFunctionDefinition.find(params[:id])
-
+    
+    @phone_key_function_definition_type_of_classes = [ 'string', 'integer', 'boolean', 'url', 'uri' ]
+    @default_for_select_phone_key_function_definition_type_of_class = @phone_key_function_definition.type_of_class
+    
     respond_to do |format|
       if @phone_key_function_definition.update_attributes(params[:phone_key_function_definition])
         format.html { redirect_to(@phone_key_function_definition, :notice => 'Phone key function definition was successfully updated.') }

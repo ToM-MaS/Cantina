@@ -50,7 +50,7 @@ namespace :phone do
   end
 
   def reboot_phone(phone)
-    #TODO: Different reboot behavior according to phone model
+    # TODO Different reboot behavior according to phone model
       
     if (phone.class != Phone)
       return false
@@ -77,7 +77,7 @@ namespace :phone do
       request.basic_auth(options[:user], options[:password])
       response = http.request(request)
       
-      # TODO: Proper exception handling, more response codes
+      # TODO Proper exception handling, more response codes
       success = case response.code
 	when "200" then true
 	when "302" then true

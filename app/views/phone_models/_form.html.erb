@@ -22,7 +22,7 @@
   <div class="field">
     <%= f.label :manufacturer_id %><br />
 
-    <%= select(:phone_model, "manufacturer_id", @manufacturers.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @default_for_select.id}) %>
+    <%= select(:phone_model, "manufacturer_id", @manufacturers.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @phone_model.manufacturer_id}) %>
   </div>
   <div class="field">
     <%= f.label :default_http_user %><br />

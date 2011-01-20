@@ -1,4 +1,8 @@
 Cantina::Application.routes.draw do
+  get "pages/index"
+  
+  root :to => "pages#index"
+
   resources :phone_model_mac_addresses
 
   resources :phone_keys
@@ -30,7 +34,6 @@ Cantina::Application.routes.draw do
 
   resources :vcards
 
-  root :to => "phones#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110119105502
+# Schema version: 20110120120511
 #
 # Table name: phone_models
 #
@@ -10,6 +10,8 @@
 #  max_number_of_sip_accounts       :integer
 #  number_of_keys                   :integer
 #  max_number_of_phone_book_entries :integer
+#  default_http_user                :string(255)
+#  default_http_password            :string(255)
 #  created_at                       :datetime
 #  updated_at                       :datetime
 #

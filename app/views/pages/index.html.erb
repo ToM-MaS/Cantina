@@ -4,13 +4,29 @@
 
 <h2>Phone Manufacturers</h2>
 <ul>
-	<li><%= link_to "List all manufacturers (#{@number_of_manufacturers})", manufacturers_path %></li>	
+	<li><%= link_to "List all manufacturers (#{@number_of_manufacturers})", manufacturers_path %>
+		<% if !@popular_manufacturers.nil? %>
+			<br />
+			Popular manufacturers: 
+			<% @popular_manufacturers.each do |manufacturer| %>
+			  <%= link_to manufacturer.name, manufacturer %>
+			<% end %>
+		<% end %>
+	</li>	
 	<li><%= link_to "Create a new manufacturer", new_manufacturer_path%></li>	
 </ul>
 
 <h2>Phone Models</h2>
 <ul>
-	<li><%= link_to "List all phone models (#{@number_of_phone_models})", phone_models_path %></li>	
+	<li><%= link_to "List all phone models (#{@number_of_phone_models})", phone_models_path %>
+		<% if !@popular_phones_models.nil? %>
+			<br />
+			Popular phones: 
+			<% @popular_phones_models.each do |phone_model| %>
+			  <%= link_to phone_model.name, phone_model %>
+			<% end %>
+		<% end %>
+		</li>	
 	<li><%= link_to "Create a new phone model", new_phone_model_path%></li>	
 </ul>
 

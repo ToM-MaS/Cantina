@@ -23,9 +23,24 @@ Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name 
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel').ouis.create(:value => '001565')
 Manufacturer.find_or_create_by_ieee_name('Grandstream Networks, Inc.', :name => 'Grandstream Networks, Inc.').ouis.create(:value => '000B82')
 
-Codec.create(:name => 'GSM')
+
+Codec.create(:name => 'gsm')
 Codec.create(:name => 'ulaw')
 Codec.create(:name => 'alaw')
+Codec.create(:name => 'g722')
+Codec.create(:name => 'g723')
+Codec.create(:name => 'g726')
+Codec.create(:name => 'g729')
+Codec.create(:name => 'ilbc')
+Codec.create(:name => 'speex')
+Codec.create(:name => 'lpc10')
+Codec.create(:name => 'slin')
+Codec.create(:name => 'adpcm')
+Codec.create(:name => 'amr')
+Codec.create(:name => 'h261')
+Codec.create(:name => 'h263')
+Codec.create(:name => 'h263+')
+Codec.create(:name => 'h264')
 
 # Phone Models
 #

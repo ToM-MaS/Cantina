@@ -26,7 +26,7 @@ class PhonesController < ApplicationController
   def new
     @phone = Phone.new
     @phone_models = PhoneModel.order(:name)
-    @last_created_phone_phone_model = Phone.last.phone_model
+    @default_for_select = Phone.last.phone_model
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +38,7 @@ class PhonesController < ApplicationController
   def edit
     @phone = Phone.find(params[:id])
     @phone_models = PhoneModel.order(:name)
-    @last_created_phone_phone_model = @phone.phone_model
+    @default_for_select = @phone.phone_model
   end
 
   # POST /phones

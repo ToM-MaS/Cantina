@@ -12,7 +12,7 @@
 <% @manufacturers.each do |manufacturer| %>
   <tr class="<%= cycle("even", "odd") %>">
     <td><%= link_to manufacturer.name, manufacturer %></td>
-    <td><%= link_to manufacturer.url, manufacturer.url %></td>
+    <td><%= link_to manufacturer.url, manufacturer.url, :target => '_blank' %></td>
     <td><%= manufacturer.phone_models.count %></td>
     <td><%= link_to 'Edit', edit_manufacturer_path(manufacturer) %></td>
     <td><%= link_to 'Destroy', manufacturer, :confirm => 'Are you sure?', :method => :delete %></td>

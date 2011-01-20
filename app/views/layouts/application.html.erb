@@ -9,7 +9,11 @@
 <body>
 
 <div id="header">
-	Cantina SIP Phone Provisioning
+	<% if current_page?(root_url) %>
+	  Cantina SIP Phone Provisioning
+	<% else %>
+	  <a href="/">Cantina SIP Phone Provisioning</a>
+	<% end %>
 </div>
 
 <%= yield %>

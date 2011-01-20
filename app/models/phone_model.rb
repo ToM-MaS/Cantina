@@ -40,7 +40,6 @@ class PhoneModel < ActiveRecord::Base
   # Associations
   #
   belongs_to :manufacturer
-  has_many :descriptions, :as => :descriptionable, :dependent => :destroy
   has_many :phone_model_keys, :dependent => :destroy
 
   has_many :phone_model_mac_addresses, :dependent => :destroy

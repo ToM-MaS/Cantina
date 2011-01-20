@@ -26,12 +26,6 @@ Cantina::Application.routes.draw do
 
   resources :phone_models
 
-  resources :descriptions
-
-  resources :translations
-
-  resources :languages
-
   resources :manufacturers
 
 

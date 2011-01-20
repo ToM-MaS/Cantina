@@ -13,7 +13,6 @@
 
 class PhoneKeyFunctionDefinition < ActiveRecord::Base
   belongs_to :phone_model_key
-  has_many :descriptions, :as => :descriptionable, :dependent => :destroy
   has_many :phone_keys, :dependent => :destroy
   
   validates_presence_of  :type_of_class

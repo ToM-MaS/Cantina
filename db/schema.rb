@@ -18,20 +18,6 @@ ActiveRecord::Schema.define(:version => 20110120120511) do
     t.datetime "updated_at"
   end
 
-  create_table "descriptions", :force => true do |t|
-    t.string   "name"
-    t.string   "descriptionable_type"
-    t.integer  "descriptionable_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "languages", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "manufacturers", :force => true do |t|
     t.string   "name"
     t.string   "ieee_name"
@@ -145,15 +131,6 @@ ActiveRecord::Schema.define(:version => 20110120120511) do
     t.string   "dtmf_mode"
     t.string   "remote_password"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "translations", :force => true do |t|
-    t.string   "value"
-    t.integer  "language_id"
-    t.string   "translatable_type"
-    t.integer  "translatable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

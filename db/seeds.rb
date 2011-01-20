@@ -23,9 +23,6 @@ Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name 
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel').ouis.create(:value => '001565')
 Manufacturer.find_or_create_by_ieee_name('Grandstream Networks, Inc.', :name => 'Grandstream Networks, Inc.').ouis.create(:value => '000B82')
 
-Language.create(:name => 'Deutsch')
-Language.create(:name => 'English')
-
 Codec.create(:name => 'GSM')
 Codec.create(:name => 'ulaw')
 Codec.create(:name => 'alaw')

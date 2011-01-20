@@ -34,8 +34,6 @@ class Phone < ActiveRecord::Base
   
   belongs_to :phone_model
 
-  has_many :descriptions, :as => :descriptionable, :dependent => :destroy
-  
   # SIP Accounts
   has_many :sip_accounts, :order => 'position', :dependent => :destroy
   

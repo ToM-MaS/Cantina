@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110119105502
+# Schema version: 20110120120511
 #
 # Table name: phone_key_function_definitions
 #

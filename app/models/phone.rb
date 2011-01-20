@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110119105502
+# Schema version: 20110120120511
 #
 # Table name: phones
 #
@@ -7,6 +7,8 @@
 #  mac_address    :string(255)
 #  phone_model_id :integer
 #  ip_address     :string(255)
+#  http_user      :string(255)
+#  http_password  :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
 #

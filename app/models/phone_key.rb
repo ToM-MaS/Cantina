@@ -28,6 +28,7 @@ class PhoneKey < ActiveRecord::Base
 	
 	private
 	
+	# Validates the softkey definition.
 	def validate_softkey
 		if self.phone_key_function_definition == nil
 			errors.add( :phone_key_function_definition, "cannot be nil." )

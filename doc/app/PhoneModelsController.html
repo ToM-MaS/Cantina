@@ -246,20 +246,20 @@ POST /phone_models POST /phone_models.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 45</span>
-45:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-46:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_model</span>])
-47: 
-48:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-49:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">save</span>
-50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_model</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone model was successfully created.'</span>) }
-51:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span> }
-52:       <span class="ruby-keyword kw">else</span>
-53:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-54:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-55:       <span class="ruby-keyword kw">end</span>
-56:     <span class="ruby-keyword kw">end</span>
-57:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 51</span>
+51:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+52:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_model</span>])
+53: 
+54:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+55:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">save</span>
+56:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_model</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone model was successfully created.'</span>) }
+57:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span> }
+58:       <span class="ruby-keyword kw">else</span>
+59:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+60:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+61:       <span class="ruby-keyword kw">end</span>
+62:     <span class="ruby-keyword kw">end</span>
+63:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -292,16 +292,16 @@ DELETE /phone_models/1 DELETE /phone_models/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 78</span>
-78:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-79:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-80:     <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">destroy</span>
-81: 
-82:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-83:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">phone_models_url</span>) }
-84:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-85:     <span class="ruby-keyword kw">end</span>
-86:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 84</span>
+84:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+85:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+86:     <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">destroy</span>
+87: 
+88:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+89:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">phone_models_url</span>) }
+90:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+91:     <span class="ruby-keyword kw">end</span>
+92:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -334,11 +334,11 @@ GET /phone_models/1/edit
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 38</span>
-38:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-39:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-40:     <span class="ruby-ivar">@manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
-41:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 44</span>
+44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+45:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+46:     <span class="ruby-ivar">@manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
+47:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -373,7 +373,7 @@ GET /phone_models GET /phone_models.xml
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 4</span>
  4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 5:     <span class="ruby-ivar">@phone_models</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">all</span>
+ 5:     <span class="ruby-ivar">@phone_models</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:manufacturer_id</span>, <span class="ruby-value">:name</span>).<span class="ruby-identifier">all</span>
  6: 
  7:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
  8:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
@@ -415,14 +415,20 @@ GET /phone_models/new GET /phone_models/new.xml
     <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 26</span>
 26:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
 27:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">new</span>
-28:     <span class="ruby-ivar">@manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
-29:     <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">manufacturer_id</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">manufacturer</span>.<span class="ruby-identifier">id</span>
+28: 
+29:     <span class="ruby-ivar">@manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
 30: 
-31:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-32:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-33:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span> }
-34:     <span class="ruby-keyword kw">end</span>
-35:   <span class="ruby-keyword kw">end</span></pre>
+31:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:manufacturer_id</span>].<span class="ruby-identifier">nil?</span>
+32:       <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">manufacturer_id</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">manufacturer</span>.<span class="ruby-identifier">id</span>
+33:     <span class="ruby-keyword kw">else</span>
+34:       <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">manufacturer_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:manufacturer_id</span>]
+35:     <span class="ruby-keyword kw">end</span>
+36: 
+37:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+38:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+39:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span> }
+40:     <span class="ruby-keyword kw">end</span>
+41:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -496,21 +502,21 @@ PUT /phone_models/1 PUT /phone_models/1.xml
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 61</span>
-61:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-62:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-63:     <span class="ruby-ivar">@manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
-64: 
-65:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-66:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_model</span>])
-67:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_model</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone model was successfully updated.'</span>) }
-68:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-69:       <span class="ruby-keyword kw">else</span>
-70:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-71:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-72:       <span class="ruby-keyword kw">end</span>
-73:     <span class="ruby-keyword kw">end</span>
-74:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_models_controller.rb, line 67</span>
+67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+68:     <span class="ruby-ivar">@phone_model</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+69:     <span class="ruby-ivar">@manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
+70: 
+71:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+72:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_model</span>])
+73:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_model</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone model was successfully updated.'</span>) }
+74:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+75:       <span class="ruby-keyword kw">else</span>
+76:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+77:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_model</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+78:       <span class="ruby-keyword kw">end</span>
+79:     <span class="ruby-keyword kw">end</span>
+80:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

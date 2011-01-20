@@ -1,4 +1,4 @@
-Thu, 20 Jan 2011 18:31:31 +0100
+Thu, 20 Jan 2011 18:34:52 +0100
 doc/README_FOR_APP	Tue, 11 Jan 2011 22:44:01 +0100
 app/helpers/application_helper.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/helpers/codecs_helper.rb	Tue, 11 Jan 2011 22:43:59 +0100
@@ -15,7 +15,7 @@ app/helpers/sip_account_codecs_helper.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/helpers/phone_key_function_definitions_helper.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/models/phone_model_mac_address.rb	Thu, 20 Jan 2011 17:17:59 +0100
 app/models/phone_model_key.rb	Thu, 20 Jan 2011 17:17:59 +0100
-app/models/phone_model.rb	Thu, 20 Jan 2011 17:17:59 +0100
+app/models/phone_model.rb	Thu, 20 Jan 2011 18:34:13 +0100
 app/models/oui.rb	Thu, 20 Jan 2011 17:17:59 +0100
 app/models/sip_account_codec.rb	Thu, 20 Jan 2011 17:17:59 +0100
 app/models/phone_model_codec.rb	Thu, 20 Jan 2011 17:17:59 +0100
@@ -34,7 +34,7 @@ app/controllers/phones_controller.rb	Thu, 20 Jan 2011 13:40:31 +0100
 app/controllers/phone_model_keys_controller.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/controllers/sip_account_codecs_controller.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/controllers/pages_controller.rb	Thu, 20 Jan 2011 13:40:31 +0100
-app/controllers/phone_models_controller.rb	Thu, 20 Jan 2011 13:40:31 +0100
+app/controllers/phone_models_controller.rb	Thu, 20 Jan 2011 18:34:13 +0100
 app/controllers/phone_model_mac_addresses_controller.rb	Mon, 17 Jan 2011 18:00:10 +0100
 app/controllers/phone_keys_controller.rb	Thu, 20 Jan 2011 13:35:00 +0100
 app/controllers/manufacturers_controller.rb	Tue, 11 Jan 2011 22:43:59 +0100

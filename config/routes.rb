@@ -1,4 +1,6 @@
 Cantina::Application.routes.draw do
+  resources :provisioning_log_entries, :only => [:index, :show]
+
   get "pages/index"
   
   root :to => "pages#index"

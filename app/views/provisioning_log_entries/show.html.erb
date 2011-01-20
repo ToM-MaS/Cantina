@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Phone:</b>
+  <%= @provisioning_log_entry.phone_id %>
+</p>
+
+<p>
+  <b>Memo:</b>
+  <%= @provisioning_log_entry.memo %>
+</p>
+
+<p>
+  <b>Succeeded:</b>
+  <%= @provisioning_log_entry.succeeded %>
+</p>
+
+
+<%= link_to 'Back', provisioning_log_entries_path %>

@@ -1,4 +1,4 @@
-<%= form_for(@phone_model) do |f| %>
+<%= form_for([@phone_model.manufacturer, @phone_model]) do |f| %>
   <% if @phone_model.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@phone_model.errors.count, "error") %> prohibited this phone_model from being saved:</h2>
@@ -19,11 +19,16 @@
     <%= f.label :url %><br />
     <%= f.text_field :url %>
   </div>
-  <div class="field">
-    <%= f.label :manufacturer_id %><br />
 
-    <%= select(:phone_model, "manufacturer_id", @manufacturers.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @phone_model.manufacturer_id}) %>
-  </div>
+  <% if params[:manufacturer_id].nil? %>
+	  <div class="field">
+	    <%= f.label :manufacturer_id %><br />
+	    <%= select(:phone_model, "manufacturer_id", @manufacturers.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @phone_model.manufacturer_id}) %>
+	  </div>
+  <% else %>
+    <%= f.hidden_field :manufacturer_id %>
+  <% end %>
+
   <div class="field">
     <%= f.label :default_http_user %><br />
     <%= f.text_field :default_http_user %>

@@ -23,6 +23,9 @@ class PhoneModel < ActiveRecord::Base
 
   # Validations
   #
+  validates_presence_of :name
+  # TODO test for name
+  
   validates_presence_of     :manufacturer_id
   validates_numericality_of :manufacturer_id, :only_integer => true
 
@@ -79,7 +82,7 @@ class PhoneModel < ActiveRecord::Base
   end
   
   def validate_url()
-    if self.url != nil
+    if !self.url.blank?
       require 'uri'
       begin
         uri = URI.parse( self.url )

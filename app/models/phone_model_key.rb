@@ -21,6 +21,6 @@ class PhoneModelKey < ActiveRecord::Base
   
   validates_presence_of     :phone_model_id
   validates_numericality_of :phone_model_id, :only_integer => true
-  
+  # TODO Validate number of PhoneModelKeys for PhoneModel!
   # TODO tests acts_as_list
 end

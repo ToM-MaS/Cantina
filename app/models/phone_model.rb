@@ -45,7 +45,7 @@ class PhoneModel < ActiveRecord::Base
   # Associations
   #
   belongs_to :manufacturer
-  has_many :phone_model_keys, :dependent => :destroy
+  has_many :phone_model_keys, :order => 'position', :dependent => :destroy
 
   has_many :phone_model_mac_addresses, :dependent => :destroy
   has_many :phones, :dependent => :destroy

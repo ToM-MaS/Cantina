@@ -12,7 +12,9 @@
 #
 
 class PhoneKeyFunctionDefinition < ActiveRecord::Base
-  belongs_to :phone_model_key
+  has_many :phone_key_to_function_mappings
+  has_many :phone_model_keys, :through => :phone_key_to_function_mappings
+
   has_many :phone_keys, :dependent => :destroy
   
   validates_presence_of  :type_of_class

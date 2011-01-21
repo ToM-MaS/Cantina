@@ -21,7 +21,6 @@
 Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG', :url => 'http://www.snom.com/').ouis.create(:value => '000413')
 Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create(:value => '003042')
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/').ouis.create(:value => '001565')
-Manufacturer.find_or_create_by_ieee_name('Grandstream Networks, Inc.', :name => 'Grandstream Networks, Inc.', :url => 'http://www.grandstream.com/').ouis.create(:value => '000B82')
 
 
 Codec.create(:name => 'gsm')
@@ -151,18 +150,7 @@ Manufacturer.where(
   { :name => 'IP 28 XS' }
 ])
 
-Manufacturer.where(
-  :ieee_name => 'Grandstream Networks, Inc.'
-).first.phone_models.create([
-  { :name => 'GXP 280' },
-  { :name => 'GXP 1200' },
-  { :name => 'GXP 2000' },
-  { :name => 'GXP 2010' },
-  { :name => 'GXP 2020' },
-  { :name => 'GXV 3000' },
-  { :name => 'GXV 3005' },
-  { :name => 'GXV 3140' },
-])
+
 
 # Codecs for phone_models
 #

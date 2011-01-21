@@ -13,7 +13,7 @@
 <% @phone_model_keys.each do |phone_model_key| %>
   <tr>
     <td><%= phone_model_key.name %></td>
-    <td><%= phone_model_key.phone_model_id %></td>
+    <td><%= phone_model_key.phone_model.name %></td>
     <td><%= phone_model_key.position %></td>
     <td><%= link_to 'Show', phone_model_key %></td>
     <td><%= link_to 'Edit', edit_phone_model_key_path(phone_model_key) %></td>

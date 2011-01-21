@@ -1,5 +1,19 @@
 <% if @phone != nil %>
+<%
+key_func = { 
+	:"BLF" => "16",
+	:"SpeedDial" => "13",
+	:"ActioUrl" => "17",
+	:"Line"	=> "15"
+}
+dtmf_map = {
+	:"rfc2833" => "1",
+	:"inband" => "0",
+	:"info" => "2"
+}
+%>
 <% @phone.sip_accounts.each do |sip_account| %>
+
 [account]
 path=/yealink/config/voip/sipAccount<%= sip_account.position - 1%>.cfg
 Enable=1
@@ -8,9 +22,24 @@ Username=<%= sip_account.user%>
 AuthName=<%= sip_account.auth_user %>
 Password=<%= sip_account.password%>
 SIPServerHost=<%= sip_account.registrar %>
+SIPServerPort=<%= sip_account.registrar_port %>
+<% if sip_account.outbound_proxy != nil %>
+UseOutboundProxy=1
+OutboundHost=<%= sip_account.outbound_proxy %>
+OutboundPort=<%= sip_account.outbound_proxy_port %>
+<% end %>
 RegisterLine=1
 RegisterMac=1
+[ DTMF ]
+path = /config/voip/sipAccount<%= sip_account.position - 1%>.cfg
+DTMFInbandTransfer=<%= dtmf_map[ :"#{sip_account.dtmf_mode}" ] %>
 <% end %>
+
+<% 
+%>
+
+
+
 
 
 <% else %>

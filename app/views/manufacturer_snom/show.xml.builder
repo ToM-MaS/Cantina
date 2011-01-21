@@ -51,29 +51,24 @@ xml.settings {
 				# sip_account.sip_proxy_port
 				# sip_account.sip_proxy
 				# sip_account.remote_password
+				
+				
+				# FIXME - read codecs from the database once http://groups.google.com/group/amooma-dev/browse_thread/thread/b126253ccc0419ac has been solved
+				xml.comment! "codecs for SIP account position #{sip_account.position}"  # <!-- a comment -->
+				# See http://wiki.snom.com/Settings/codec_name
+				# (Note: Snom's documentation is wrong.)
+				[
+					 8,  # G.711 alaw
+					 0,  # G.711 ulaw
+					 3,  # GSM
+					 2,  # G.726-32
+					18,  # G.729a
+					 9,  # G.722
+					 4,  # G.723.1
+				].each_with_index {  |codec_num, codec_idx|
+					xml.tag! "codec#{1+codec_idx}_name", codec_num, saopts_r
+				}
 			}
-			
-			
-			
-			# OPTIMIZE - codecs on Snom
-			# Codecs in the database are per SIP account
-			# (SipAccountCodecs) but the Snom supports only global
-			# codec settings. (is that true?)
-			
-			xml.comment! "codecs"  # <!-- a comment -->
-			# see http://wiki.snom.com/Settings/codec_name			
-			[
-				 8,  # G.711 alaw
-				 0,  # G.711 ulaw
-				 3,  # GSM
-				 2,  # G.726-32
-				18,  # G.729a
-				 9,  # G.722
-				 4,  # G.723.1
-			].each_with_index {  |codec_num, codec_idx|
-				xml.codec_name( codec_num, :idx => 1+codec_idx, :perm => 'R' )
-			}
-			
 		end
 		
 		#xml.comment! "function keys"  # <!-- a comment -->

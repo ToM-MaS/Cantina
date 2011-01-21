@@ -25,7 +25,13 @@ class PhoneKeysController < ApplicationController
   # GET /phone_keys/new.xml
   def new
     @phone_key = PhoneKey.new
-
+    
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
+    @phone_model_keys = PhoneModelKey.order(:position)
+    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @phone_key }
@@ -35,13 +41,26 @@ class PhoneKeysController < ApplicationController
   # GET /phone_keys/1/edit
   def edit
     @phone_key = PhoneKey.find(params[:id])
+    
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
+    @phone_model_keys = PhoneModelKey.order(:position)
+    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
+    
   end
 
   # POST /phone_keys
   # POST /phone_keys.xml
   def create
     @phone_key = PhoneKey.new(params[:phone_key])
-
+    
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
+    @phone_model_keys = PhoneModelKey.order(:position)
+    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
+    
     respond_to do |format|
       if @phone_key.save
         format.html { redirect_to(@phone_key, :notice => 'Phone key was successfully created.') }
@@ -57,7 +76,13 @@ class PhoneKeysController < ApplicationController
   # PUT /phone_keys/1.xml
   def update
     @phone_key = PhoneKey.find(params[:id])
-
+    
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
+    @phone_model_keys = PhoneModelKey.order(:position)
+    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
+    
     respond_to do |format|
       if @phone_key.update_attributes(params[:phone_key])
         format.html { redirect_to(@phone_key, :notice => 'Phone key was successfully updated.') }

@@ -25,6 +25,7 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/new.xml
   def new
     @phone_model = PhoneModel.new
+    
     @manufacturers = Manufacturer.order(:name)
 
     if params[:manufacturer_id].nil?
@@ -42,6 +43,7 @@ class PhoneModelsController < ApplicationController
   # GET /phone_models/1/edit
   def edit
     @phone_model = PhoneModel.find(params[:id])
+    
     @manufacturers = Manufacturer.order(:name)
   end
 
@@ -49,7 +51,9 @@ class PhoneModelsController < ApplicationController
   # POST /phone_models.xml
   def create
     @phone_model = PhoneModel.new(params[:phone_model])
-
+    
+    @manufacturers = Manufacturer.order(:name)
+    
     respond_to do |format|
       if @phone_model.save
         format.html { redirect_to(@phone_model, :notice => 'Phone model was successfully created.') }
@@ -65,6 +69,7 @@ class PhoneModelsController < ApplicationController
   # PUT /phone_models/1.xml
   def update
     @phone_model = PhoneModel.find(params[:id])
+    
     @manufacturers = Manufacturer.order(:name)
 
     respond_to do |format|

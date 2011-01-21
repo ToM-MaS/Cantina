@@ -47,7 +47,10 @@ class PhoneKeyFunctionDefinitionsController < ApplicationController
   # POST /phone_key_function_definitions.xml
   def create
     @phone_key_function_definition = PhoneKeyFunctionDefinition.new(params[:phone_key_function_definition])
-
+    
+    @phone_key_function_definition_type_of_classes = [ 'string', 'integer', 'boolean', 'url', 'uri' ]
+    @default_for_select_phone_key_function_definition_type_of_class = @phone_key_function_definition.type_of_class
+    
     respond_to do |format|
       if @phone_key_function_definition.save
         format.html { redirect_to(@phone_key_function_definition, :notice => 'Phone key function definition was successfully created.') }

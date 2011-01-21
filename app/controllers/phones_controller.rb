@@ -41,6 +41,7 @@ class PhonesController < ApplicationController
   # GET /phones/1/edit
   def edit
     @phone = Phone.find(params[:id])
+    
     @phone_models = PhoneModel.order(:name)
   end
 
@@ -48,8 +49,9 @@ class PhonesController < ApplicationController
   # POST /phones.xml
   def create
     @phone = Phone.new(params[:phone])
+    
     @phone_models = PhoneModel.order(:name)
-
+    
     respond_to do |format|
       if @phone.save
         format.html { redirect_to(@phone, :notice => 'Phone was successfully created.') }
@@ -65,8 +67,9 @@ class PhonesController < ApplicationController
   # PUT /phones/1.xml
   def update
     @phone = Phone.find(params[:id])
+    
     @phone_models = PhoneModel.order(:name)
-
+    
     respond_to do |format|
       if @phone.update_attributes(params[:phone])
         format.html { redirect_to(@phone, :notice => 'Phone was successfully updated.') }

@@ -1,0 +1,18 @@
+<% if @phone != nil %>
+<% @phone.sip_accounts.each do |sip_account| %>
+[account]
+path=/yealink/config/voip/sipAccount<%= sip_account.position - 1%>.cfg
+Enable=1
+Label=<%= sip_account.user%>
+Username=<%= sip_account.user%>
+AuthName=<%= sip_account.auth_user %>
+Password=<%= sip_account.password%>
+SIPServerHost=<%= sip_account.registrar %>
+RegisterLine=1
+RegisterMac=1
+<% end %>
+
+
+<% else %>
+No Phone found!
+<% end %>

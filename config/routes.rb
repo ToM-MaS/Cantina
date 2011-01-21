@@ -1,11 +1,14 @@
 Cantina::Application.routes.draw do
-  get "manufacturer_aastra/show"
-
-  get "manufacturer_tiptel/show"
-
-  get "manufacturer_snom/show"
-
+  
+  resources :manufacturer_snom, :only => [:index ]
+  resources :manufacturer_aastra, :only => [:index ]
+  resources :manufacturer_tiptel, :only => [:index ]
+  
   resources :provisioning_log_entries, :only => [:index, :show]
+
+  match 'aastra/:mac_address.cfg'  => 'manufacturer_aastra#show', :format => 'txt'
+  match 'tiptel/:mac_address.cfg'  => 'manufacturer_tiptel#show', :format => 'txt'
+  match 'snom/:mac_address.cfg'  => 'manufacturer_snom#show', :format => 'xml'
 
   get "pages/index"
   

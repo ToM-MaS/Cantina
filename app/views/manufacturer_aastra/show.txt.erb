@@ -1,0 +1,14 @@
+<% if @phone != nil %>
+<%  @phone.sip_accounts.each do |sip_account| %>
+sip line<%= sip_account.position %> user name: <%= sip_account.user%>
+sip line<%= sip_account.position %> password: <%= sip_account.password%>
+sip line<%= sip_account.position %> registrar: <%= sip_account.registrar%>
+
+<% end %>
+
+
+
+
+<% else %>
+No Phone found!
+<% end %>

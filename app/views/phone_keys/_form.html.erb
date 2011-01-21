@@ -13,15 +13,24 @@
 
   <div class="field">
     <%= f.label :sip_account_id %><br />
-    <%= f.text_field :sip_account_id %>
+    <%= f.select( :sip_account_id,
+      @sip_accounts.collect {|r| [ r.name, r.id ] },
+      { :include_blank => false, :selected => @phone_key.sip_account_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :phone_model_key_id %><br />
-    <%= f.text_field :phone_model_key_id %>
+    <%= f.select( :phone_model_key_id,
+      @phone_model_keys.collect {|r| [ "#{r.name} (position #{r.position.to_s})", r.id ] },
+      { :include_blank => false, :selected => @phone_key.phone_model_key_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :phone_key_function_definition_id %><br />
-    <%= f.text_field :phone_key_function_definition_id %>
+    <%= f.select( :phone_key_function_definition_id,
+      @phone_key_function_definitions.collect {|r| [ r.name, r.id ] },
+      { :include_blank => false, :selected => @phone_key.phone_key_function_definition_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :value %><br />

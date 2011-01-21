@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Phone model</th>
-    <th>Starts with</th>
+    <th>MAC addr. starts with</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +11,8 @@
 
 <% @phone_model_mac_addresses.each do |phone_model_mac_address| %>
   <tr>
-    <td><%= phone_model_mac_address.phone_model_id %></td>
-    <td><%= phone_model_mac_address.starts_with %></td>
+    <td><%= phone_model_mac_address.phone_model.name %></td>
+    <td><%= phone_model_mac_address.starts_with.gsub(/[0-9A-Z]{2}/i, '\\0:') %></td>
     <td><%= link_to 'Show', phone_model_mac_address %></td>
     <td><%= link_to 'Edit', edit_phone_model_mac_address_path(phone_model_mac_address) %></td>
     <td><%= link_to 'Destroy', phone_model_mac_address, :confirm => 'Are you sure?', :method => :delete %></td>

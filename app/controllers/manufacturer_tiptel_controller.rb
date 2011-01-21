@@ -14,7 +14,8 @@ def show
 end
 
 def index
-    @phones = Manufacturer.where(:ieee_name => "XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD").first.phones
+    mfc = Manufacturer.where(:ieee_name => "XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD").first
+    @phones = mfc ? mfc.phones : []
 
     respond_to do |format|
       format.html # index.html.erb

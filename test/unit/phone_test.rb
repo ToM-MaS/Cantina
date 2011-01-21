@@ -86,12 +86,26 @@ class PhoneTest < ActiveSupport::TestCase
   # check a full setup
   #
   should "have all bells and whistles" do
+    # Create a phone_model with some codecs and some keys
+    #
     phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => 3)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
+
+    PhoneKeyFunctionDefinition.create([
+      { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
+      { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil }
+    ])  
+    
+    (1..10).each do |key_number|
+      phone_key = phone_model.phone_model_keys.create(:name => "F#{key_number}")
+      phone_key.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+    end
     
     phone = Factory.create(:phone, :phone_model_id => phone_model.id)
     phone.sip_accounts << Factory.create(:sip_account)
@@ -103,6 +117,15 @@ class PhoneTest < ActiveSupport::TestCase
         phone.sip_accounts[i].codecs << phone_model.codecs[codec_i]
       end
     end
+
+    first_sip_account = phone.sip_accounts.first
+    
+    # Lets create a BLF 42 on the first key at the first sip_account
+    f1 = first_sip_account.phone_keys.create
+    f1.phone_model_key_id = phone_model.phone_model_keys.first
+    f1.phone_key_function_definition_id = phone_model.phone_model_keys.first.phone_key_function_definitions.first.id
+    f1.value = "42"
+    f1.save
 
     assert phone_model.codecs.size == 5    
     assert phone.sip_accounts.size == 3

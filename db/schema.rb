@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110120120511) do
+ActiveRecord::Schema.define(:version => 20110121121114) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(:version => 20110120120511) do
     t.string   "name"
     t.string   "type_of_class"
     t.string   "regex_validation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "phone_key_to_function_mappings", :force => true do |t|
+    t.integer  "phone_model_key_id"
+    t.integer  "phone_key_function_definitions_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

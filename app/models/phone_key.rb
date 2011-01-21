@@ -20,7 +20,9 @@ class PhoneKey < ActiveRecord::Base
 	validates_presence_of      :value
 	validates_presence_of      :phone_key_function_definition_id
 	validates_numericality_of  :phone_key_function_definition_id, :only_integer => true
-	
+	validates_presence_of :sip_account_id
+  validates_numericality_of :sip_account_id, :only_integer => true
+  #TODO Validate Only existing sip_account_id
 	# is this a good way?:
 	#validates_presence_of      :phone_key_function_definition
 	

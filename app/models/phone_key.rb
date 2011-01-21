@@ -18,16 +18,20 @@ class PhoneKey < ActiveRecord::Base
 	belongs_to :phone_key_function_definition
 	
 	validates_presence_of      :value
+	validates_presence_of      :phone_model_key_id
+	validates_numericality_of  :phone_model_key_id, :only_integer => true
 	validates_presence_of      :phone_key_function_definition_id
 	validates_numericality_of  :phone_key_function_definition_id, :only_integer => true
-	validates_presence_of :sip_account_id
-  validates_numericality_of :sip_account_id, :only_integer => true
+	validates_presence_of      :sip_account_id
+  validates_numericality_of  :sip_account_id, :only_integer => true
+
   #TODO Validate Only existing sip_account_id
 	# is this a good way?:
 	#validates_presence_of      :phone_key_function_definition
 	
 	validate :validate_softkey
 	validate :key_must_be_a_possible_key_from_the_phone_model
+	validate :phone_key_function_definition_must_be_valid
 	
 	private
 	
@@ -98,6 +102,15 @@ class PhoneKey < ActiveRecord::Base
 	  phone_model = self.sip_account.phone.phone_model
 	  if !phone_model.phone_model_keys.exists?(self.phone_model_key_id)
 	    errors.add( :phone_model_key_id, "Is not a valid PhoneModelKey for the PhoneModel #{phone_model.name} (ID #{phone_model.id})." )
+	  end
+	end
+	
+	# Checks if the phone_key_function_definition is valid for 
+	# the given PhoneModelKey
+	#
+	def phone_key_function_definition_must_be_valid
+	  if !self.sip_account.phone.phone_model.phone_model_keys.first.phone_key_function_definitions.exists?(self.phone_key_function_definition_id)
+	    errors.add( :phone_key_function_definition_id, "Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}." )
 	  end
 	end
 		

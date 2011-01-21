@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <b>Auth user:</b>
+  <b>Auth. user:</b>
   <%= @sip_account.auth_user %>
 </p>
 
@@ -41,12 +41,12 @@
 </p>
 
 <p>
-  <b>Sip proxy:</b>
+  <b>SIP proxy:</b>
   <%= @sip_account.sip_proxy %>
 </p>
 
 <p>
-  <b>Sip proxy port:</b>
+  <b>SIP proxy port:</b>
   <%= @sip_account.sip_proxy_port %>
 </p>
 
@@ -71,7 +71,7 @@
 </p>
 
 <p>
-  <b>Dtmf mode:</b>
+  <b>DTMF mode:</b>
   <%= @sip_account.dtmf_mode %>
 </p>
 
@@ -89,8 +89,8 @@
   <b>Codecs:</b>
 <% if @sip_account.sip_account_codecs.length > 0 %>
   <ul>
-<%   @sip_account.sip_account_codecs.each { |codec| %>
-    <li><%= codec.name %></li>
+<%   @sip_account.sip_account_codecs.each { |sip_account_codec| %>
+    <li><%= sip_account_codec.codec.name %></li>
 <%   } %>
   </ul>
 <% else %>

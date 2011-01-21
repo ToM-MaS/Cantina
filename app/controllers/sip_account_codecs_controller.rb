@@ -25,7 +25,11 @@ class SipAccountCodecsController < ApplicationController
   # GET /sip_account_codecs/new.xml
   def new
     @sip_account_codec = SipAccountCodec.new
-
+    
+    @codecs = Codec.all
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account_codec }
@@ -35,13 +39,21 @@ class SipAccountCodecsController < ApplicationController
   # GET /sip_account_codecs/1/edit
   def edit
     @sip_account_codec = SipAccountCodec.find(params[:id])
+    
+    @codecs = Codec.all
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
   end
 
   # POST /sip_account_codecs
   # POST /sip_account_codecs.xml
   def create
     @sip_account_codec = SipAccountCodec.new(params[:sip_account_codec])
-
+    
+    @codecs = Codec.all
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    
     respond_to do |format|
       if @sip_account_codec.save
         format.html { redirect_to(@sip_account_codec, :notice => 'Sip account codec was successfully created.') }
@@ -57,7 +69,11 @@ class SipAccountCodecsController < ApplicationController
   # PUT /sip_account_codecs/1.xml
   def update
     @sip_account_codec = SipAccountCodec.find(params[:id])
-
+    
+    @codecs = Codec.all
+    # FIXME - some kind of .find() or .where() here?
+    @sip_accounts = SipAccount.order(:name)
+    
     respond_to do |format|
       if @sip_account_codec.update_attributes(params[:sip_account_codec])
         format.html { redirect_to(@sip_account_codec, :notice => 'Sip account codec was successfully updated.') }

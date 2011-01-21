@@ -10,14 +10,20 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
-    <%= f.label :codec_id %><br />
-    <%= f.text_field :codec_id %>
+    <%= f.label :sip_account_id, 'SIP account' %><br />
+    <%= f.select( :sip_account_id,
+      @sip_accounts.collect {|r| [ "#{r.name} (#{r.user}@#{r.registrar})", r.id ] },
+      { :include_blank => false, :selected => @sip_account_codec.sip_account_id }
+    ) %>
   </div>
   <div class="field">
-    <%= f.label :sip_account_id %><br />
-    <%= f.text_field :sip_account_id %>
+    <%= f.label :codec_id %><br />
+    <%= f.select( :codec_id,
+      @codecs.collect {|r| [ r.name, r.id ] },
+      { :include_blank => false, :selected => @sip_account_codec.codec_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :position %><br />

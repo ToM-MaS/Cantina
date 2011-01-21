@@ -1,9 +1,9 @@
-<h1>Listing sip account codecs</h1>
+<h1>Listing SIP account codecs</h1>
 
 <table>
   <tr>
-    <th>Available codec</th>
-    <th>Sip account</th>
+    <th>SIP account</th>
+    <th>Codec</th>
     <th>Position</th>
     <th></th>
     <th></th>
@@ -12,8 +12,9 @@
 
 <% @sip_account_codecs.each do |sip_account_codec| %>
   <tr>
-    <td><%= sip_account_codec.codec_id %></td>
-    <td><%= sip_account_codec.sip_account_id %></td>
+    <td><%= sip_account_codec.sip_account.name %>
+      (<%= sip_account_codec.sip_account.user %>@<%= sip_account_codec.sip_account.registrar %>)</td>
+    <td><%= sip_account_codec.codec.name %></td>
     <td><%= sip_account_codec.position %></td>
     <td><%= link_to 'Show', sip_account_codec %></td>
     <td><%= link_to 'Edit', edit_sip_account_codec_path(sip_account_codec) %></td>

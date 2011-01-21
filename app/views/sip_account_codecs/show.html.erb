@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Available codec:</b>
-  <%= @sip_account_codec.codec_id %>
+  <b>SIP account:</b>
+  <%= @sip_account_codec.sip_account.name %>
+  (<%= @sip_account_codec.sip_account.user %>@<%= @sip_account_codec.sip_account.registrar %>)
 </p>
 
 <p>
-  <b>Sip account:</b>
-  <%= @sip_account_codec.sip_account_id %>
+  <b>Codec:</b>
+  <%= @sip_account_codec.codec.name %>
 </p>
 
 <p>

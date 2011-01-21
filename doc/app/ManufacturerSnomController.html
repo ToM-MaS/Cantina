@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Class: PhoneModelMacAddress</title>
+	<title>Class: ManufacturerSnomController</title>
 
 	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./app/models/phone_model_mac_address_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="app/models/phone_model_mac_address.rb">app/models/phone_model_mac_address.rb</a></li>
+						<li><a href="./app/controllers/manufacturer_snom_controller_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/controllers/manufacturer_snom_controller.rb">app/controllers/manufacturer_snom_controller.rb</a></li>
 					
 					</ul>
 				</div>
@@ -55,7 +55,7 @@
 			<div id="parent-class-section" class="section">
 				<h3 class="section-header">Parent</h3>
 				
-				<p class="link">ActiveRecord::Base</p>
+				<p class="link"><a href="ApplicationController.html">ApplicationController</a></p>
 				
 			</div>
 			
@@ -64,6 +64,17 @@
 			
 
 			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-index">#index</a></li>
+					
+					<li><a href="#method-i-show">#show</a></li>
+					
+				</ul>
+			</div>
 			
 
 			<!-- Included Modules -->
@@ -197,23 +208,10 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="class">PhoneModelMacAddress</h1>
+		<h1 class="class">ManufacturerSnomController</h1>
 
 		<div id="description">
-			<h2>Schema Information</h2>
-<p>
-Schema version: 20110120120511
-</p>
-<p>
-Table name: phone_model_mac_addresses
-</p>
-<pre>
- id             :integer         not null, primary key
- phone_model_id :integer
- starts_with    :string(255)
- created_at     :datetime
- updated_at     :datetime</pre>
-
+			
 		</div>
 
 		<!-- Constants -->
@@ -224,6 +222,96 @@ Table name: phone_model_mac_addresses
 
 		<!-- Methods -->
 		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="index-method" class="method-detail ">
+				<a name="method-i-index"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">index</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="index-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 17</span>
+17: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+18:     <span class="ruby-ivar">@phones</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SNOM Technology AG&quot;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">phones</span>
+19: 
+20:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+21:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
+22:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phones</span> }
+23:     <span class="ruby-keyword kw">end</span>
+24:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="show-method" class="method-detail ">
+				<a name="method-i-show"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">show</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="show-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 2</span>
+ 2: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+ 3:   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">nil?</span>
+ 4:       <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+ 5:     <span class="ruby-keyword kw">else</span>
+ 6:       <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
+ 7:       <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:mac_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>).<span class="ruby-identifier">first</span>
+ 8:       
+ 9:     <span class="ruby-keyword kw">end</span>
+10: 
+11:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+12:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
+13:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  <span class="ruby-comment cmt">#{ render :xml =&gt; @phone }</span>
+14:     <span class="ruby-keyword kw">end</span>
+15: <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

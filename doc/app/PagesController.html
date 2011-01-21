@@ -119,6 +119,18 @@
 				
 					<li><a href="./Manufacturer.html">Manufacturer</a></li>
 				
+					<li><a href="./ManufacturerAastraController.html">ManufacturerAastraController</a></li>
+				
+					<li><a href="./ManufacturerAastraHelper.html">ManufacturerAastraHelper</a></li>
+				
+					<li><a href="./ManufacturerSnomController.html">ManufacturerSnomController</a></li>
+				
+					<li><a href="./ManufacturerSnomHelper.html">ManufacturerSnomHelper</a></li>
+				
+					<li><a href="./ManufacturerTiptelController.html">ManufacturerTiptelController</a></li>
+				
+					<li><a href="./ManufacturerTiptelHelper.html">ManufacturerTiptelHelper</a></li>
+				
 					<li><a href="./ManufacturersController.html">ManufacturersController</a></li>
 				
 					<li><a href="./ManufacturersHelper.html">ManufacturersHelper</a></li>
@@ -237,7 +249,10 @@
 3:     <span class="ruby-ivar">@number_of_manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">count</span>
 4:     <span class="ruby-ivar">@number_of_phone_models</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">count</span>
 5:     <span class="ruby-ivar">@number_of_phones</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">count</span>
-6:   <span class="ruby-keyword kw">end</span></pre>
+6:     
+7:     <span class="ruby-ivar">@popular_phones_models</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:phone_model_id</span>, <span class="ruby-value">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">x</span>)}
+8:     <span class="ruby-ivar">@popular_manufacturers</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:phone_model</span>).<span class="ruby-identifier">count</span>(<span class="ruby-value">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:manufacturer_id</span>).<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">x</span>)}
+9:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

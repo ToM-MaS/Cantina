@@ -2,21 +2,22 @@
 
 <table>
   <tr>
+    <th>Phone</th>
     <th>Name</th>
-    <th>Auth user</th>
+    <th>Auth. user</th>
     <th>User</th>
     <th>Password</th>
     <th>Registrar</th>
     <th>Registrar port</th>
     <th>Outbound proxy</th>
     <th>Outbound proxy port</th>
-    <th>Sip proxy</th>
-    <th>Sip proxy port</th>
+    <th>SIP proxy</th>
+    <th>SIP proxy port</th>
     <th>Realm</th>
     <th>Screen name</th>
     <th>Display name</th>
     <th>Registration expiry time</th>
-    <th>Dtmf mode</th>
+    <th>DTMF mode</th>
     <th>Remote password</th>
     <th>Position</th>
     <th></th>
@@ -26,6 +27,7 @@
 
 <% @sip_accounts.each do |sip_account| %>
   <tr>
+    <td><%= sip_account.phone.mac_address %></td>
     <td><%= sip_account.name %></td>
     <td><%= sip_account.auth_user %></td>
     <td><%= sip_account.user %></td>

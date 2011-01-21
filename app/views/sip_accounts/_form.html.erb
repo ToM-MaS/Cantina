@@ -15,21 +15,24 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <% if @sip_account.phone_id.blank? %>
-  <% #TODO das hier muss eine Drop-Down-Liste sein %>
-	  <div class="field">
-	    <%= f.label :phone_id %><br />
-	    <%= f.text_field :phone_id %>
-	  </div>
-  <% else %>
-    <%= f.hidden_field :phone_id %>
-  <% end %>
+  <div class="field">
+    <%= f.label :phone_id %><br />
+<% if @sip_account.phone_id.blank? %>
+    <%= f.select( :phone_id,
+      @phones.collect {|r| [ r.mac_address, r.id ] },
+      { :include_blank => false, :selected => @sip_account.phone_id }
+    ) %>
+<% else %>
+  <%= f.hidden_field :phone_id %>
+  <%= @sip_account.phone.mac_address %>
+<% end %>
+  </div>
   <div class="field">
     <%= f.label :user %><br />
     <%= f.text_field :user %>
   </div>
   <div class="field">
-    <%= f.label :auth_user %><br />
+    <%= f.label :auth_user, 'Auth. user' %><br />
     <%= f.text_field :auth_user %>
   </div>
   <div class="field">
@@ -53,11 +56,11 @@
     <%= f.text_field :outbound_proxy_port %>
   </div>
   <div class="field">
-    <%= f.label :sip_proxy %><br />
+    <%= f.label :sip_proxy, 'SIP proxy' %><br />
     <%= f.text_field :sip_proxy %>
   </div>
   <div class="field">
-    <%= f.label :sip_proxy_port %><br />
+    <%= f.label :sip_proxy_port, 'SIP proxy port' %><br />
     <%= f.text_field :sip_proxy_port %>
   </div>
   <div class="field">
@@ -77,7 +80,7 @@
     <%= f.text_field :registration_expiry_time %>
   </div>
   <div class="field">
-    <%= f.label :dtmf_mode %><br />
+    <%= f.label :dtmf_mode, 'DTMF mode' %><br />
     <%= f.text_field :dtmf_mode %>
   </div>
   <div class="field">

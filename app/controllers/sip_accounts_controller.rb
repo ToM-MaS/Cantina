@@ -26,7 +26,9 @@ class SipAccountsController < ApplicationController
   def new
     @sip_account = SipAccount.new
     @sip_account.phone_id = params[:phone_id]
-
+    
+    @phones = Phone.order(:mac_address)
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sip_account }
@@ -36,13 +38,17 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts/1/edit
   def edit
     @sip_account = SipAccount.find(params[:id])
+    
+    @phones = Phone.order(:mac_address)
   end
 
   # POST /sip_accounts
   # POST /sip_accounts.xml
   def create
     @sip_account = SipAccount.new(params[:sip_account])
-
+    
+    @phones = Phone.order(:mac_address)
+    
     respond_to do |format|
       if @sip_account.save
         format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully created.') }
@@ -58,7 +64,9 @@ class SipAccountsController < ApplicationController
   # PUT /sip_accounts/1.xml
   def update
     @sip_account = SipAccount.find(params[:id])
-
+    
+    @phones = Phone.order(:mac_address)
+    
     respond_to do |format|
       if @sip_account.update_attributes(params[:sip_account])
         format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully updated.') }

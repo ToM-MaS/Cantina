@@ -7,7 +7,7 @@
 
 <p>
   <b>Phone model:</b>
-  <%= @phone_model_key.phone_model.name %>
+  <%= @phone_model_key.phone_model ? @phone_model_key.phone_model.name : '?' %>
 </p>
 
 <p>

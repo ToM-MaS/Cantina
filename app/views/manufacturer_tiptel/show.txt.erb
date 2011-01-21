@@ -1,6 +1,6 @@
 <% if @phone != nil %>
 <%
-key_func = { 
+key_map = { 
 	:"BLF" => "16",
 	:"SpeedDial" => "13",
 	:"ActioUrl" => "17",
@@ -10,6 +10,9 @@ dtmf_map = {
 	:"rfc2833" => "1",
 	:"inband" => "0",
 	:"info" => "2"
+}
+codec_map = {
+		
 }
 %>
 <% @phone.sip_accounts.each do |sip_account| %>
@@ -34,11 +37,6 @@ RegisterMac=1
 path = /config/voip/sipAccount<%= sip_account.position - 1%>.cfg
 DTMFInbandTransfer=<%= dtmf_map[ :"#{sip_account.dtmf_mode}" ] %>
 <% end %>
-
-<% 
-%>
-
-
 
 
 

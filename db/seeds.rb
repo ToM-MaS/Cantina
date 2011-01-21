@@ -159,6 +159,7 @@ PhoneModel.all.each do |phone_model|
 end
 
 # Softkey functions:
+# DO NOT RENAME THEM! The name is magic and serves as an identifier!
 #
 PhoneKeyFunctionDefinition.create([
   { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },

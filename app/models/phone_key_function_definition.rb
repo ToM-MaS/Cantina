@@ -12,11 +12,6 @@
 #
 
 class PhoneKeyFunctionDefinition < ActiveRecord::Base
-  has_many :phone_key_to_function_mappings
-  has_many :phone_model_keys, :through => :phone_key_to_function_mappings
-
-  has_many :phone_keys, :dependent => :destroy
-  
   validates_presence_of  :type_of_class
   validates_inclusion_of :type_of_class, :in => [
     'string',
@@ -27,6 +22,12 @@ class PhoneKeyFunctionDefinition < ActiveRecord::Base
   ]
   
   validate :validate_regex_validation
+  validates_presence_of :name
+
+  has_many :phone_key_to_function_mappings, :dependent => :destroy
+  has_many :phone_model_keys, :through => :phone_key_to_function_mappings
+
+  has_many :phone_keys, :dependent => :destroy
     
   private
   

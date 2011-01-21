@@ -143,9 +143,9 @@ Manufacturer.where(
 Manufacturer.where(
   :ieee_name => 'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD'
 ).first.phone_models.create([
-  { :name => 'IP 286', :max_number_of_sip_accounts => 16 },
+  { :name => 'IP 286', :max_number_of_sip_accounts => 16, :number_of_keys => 10 },
   { :name => 'IP 280', :max_number_of_sip_accounts => 2 },
-  { :name => 'IP 284', :max_number_of_sip_accounts => 13 },
+  { :name => 'IP 284', :max_number_of_sip_accounts => 13, :number_of_keys => 10 },
   { :name => 'VP 28' },
   { :name => 'IP 28 XS' }
 ])

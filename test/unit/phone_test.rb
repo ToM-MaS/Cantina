@@ -103,8 +103,8 @@ class PhoneTest < ActiveSupport::TestCase
     ])  
     
     (1..10).each do |key_number|
-      phone_key = phone_model.phone_model_keys.create(:name => "F#{key_number}")
-      phone_key.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+      phone_model_key = phone_model.phone_model_keys.create(:name => "F#{key_number}")
+      phone_model_key.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
     end
     
     phone = Factory.create(:phone, :phone_model_id => phone_model.id)
@@ -131,6 +131,8 @@ class PhoneTest < ActiveSupport::TestCase
     assert phone.sip_accounts.size == 3
     assert phone.sip_accounts.first.codecs.count == 1
     assert phone.sip_accounts.last.codecs.count == 3
+    assert f1.valid?
+    assert first_sip_account.valid?
   end
   
   # TODO http_user and http_password test (validation too?)

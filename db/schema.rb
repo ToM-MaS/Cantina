@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110121121114) do
 
   create_table "phone_key_to_function_mappings", :force => true do |t|
     t.integer  "phone_model_key_id"
-    t.integer  "phone_key_function_definitions_id"
+    t.integer  "phone_key_function_definition_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

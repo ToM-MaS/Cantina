@@ -1,0 +1,26 @@
+xml.instruct!             # <?xml version="1.0" encoding="UTF-8"?>
+
+xml.settings {
+  xml.comment! "a comment"  # <!-- a comment -->
+
+  xml.tag! 'phone-settings' do
+    xml.web_language('English', :perm => 'RW')
+    xml.timezone('GMT+1', :perm => 'RW')
+    xml.date_us_format('on', :perm => 'R')    
+    xml.time_24_format('off', :perm => 'R')    
+
+    @phone.sip_accounts.each do |sip_account|
+      xml.comment! "SIP-Account Position #{sip_account.position}"  # <!-- a comment -->
+      xml.user_pname(sip_account.user, :idx => sip_account.position, :perm => 'R')
+      xml.user_pass(sip_account.password, :idx => sip_account.position, :perm => 'R')
+      xml.user_host(sip_account.registrar, :idx => sip_account.position, :perm => 'R')
+    end
+  end
+
+#  xml.tag! 'functionKeys' do
+#     @phone.phone_keys.each do |phone_key|
+#       xml.fkey("blf #{phone_key.value}", :label => phone_key.label,:idx => phone_key.id, :context => 'active', :perm => 'R')
+#     end
+#  end
+}
+

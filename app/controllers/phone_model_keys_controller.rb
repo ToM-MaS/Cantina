@@ -25,7 +25,9 @@ class PhoneModelKeysController < ApplicationController
   # GET /phone_model_keys/new.xml
   def new
     @phone_model_key = PhoneModelKey.new
-
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @phone_model_key }
@@ -35,13 +37,17 @@ class PhoneModelKeysController < ApplicationController
   # GET /phone_model_keys/1/edit
   def edit
     @phone_model_key = PhoneModelKey.find(params[:id])
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
   end
 
   # POST /phone_model_keys
   # POST /phone_model_keys.xml
   def create
     @phone_model_key = PhoneModelKey.new(params[:phone_model_key])
-
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
+    
     respond_to do |format|
       if @phone_model_key.save
         format.html { redirect_to(@phone_model_key, :notice => 'Phone model key was successfully created.') }
@@ -57,7 +63,9 @@ class PhoneModelKeysController < ApplicationController
   # PUT /phone_model_keys/1.xml
   def update
     @phone_model_key = PhoneModelKey.find(params[:id])
-
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
+    
     respond_to do |format|
       if @phone_model_key.update_attributes(params[:phone_model_key])
         format.html { redirect_to(@phone_model_key, :notice => 'Phone model key was successfully updated.') }

@@ -17,7 +17,10 @@
   </div>
   <div class="field">
     <%= f.label :phone_model_id %><br />
-    <%= f.text_field :phone_model_id %>
+    <%= f.select( :phone_model_id,
+      @phone_models.collect {|r| [ r.name, r.id ] },
+      { :include_blank => false, :selected => @phone_model_key.phone_model_id }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :position %><br />

@@ -81,3 +81,7 @@ xml.settings {
 	end
 }
 
+
+# Local Variables:
+# mode: ruby
+# End:

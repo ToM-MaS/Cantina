@@ -29,7 +29,7 @@ class PhonesController < ApplicationController
     if !params[:phone_model_id].nil? and PhoneModel.exists?(params[:phone_model_id])
       @phone.phone_model_id = params[:phone_model_id]
     else
-      @phone.phone_model_id = Phone.last.phone_model.id
+      @phone.phone_model_id = Phone.last ? Phone.last.phone_model.id : nil
     end
 
     respond_to do |format|

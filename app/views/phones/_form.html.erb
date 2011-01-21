@@ -12,23 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :mac_address %><br />
+    <%= f.label :mac_address, 'MAC address' %><br />
     <%= f.text_field :mac_address %>
   </div>
   <div class="field">
     <%= f.label :phone_model_id %><br />
-    <%= select(:phone, "phone_model_id", @phone_models.collect {|r| [ r.name, r.id ] }, { :include_blank => false, :selected => @phone.phone_model_id}) %>
+    <%= f.select( :phone_model_id,
+      @phone_models.collect {|r| [ r.name, r.id ] },
+      { :include_blank => false, :selected => @phone.phone_model_id }
+    ) %>
   </div>
   <div class="field">
-    <%= f.label :ip_address %><br />
+    <%= f.label :ip_address, 'IP address' %><br />
     <%= f.text_field :ip_address %>
   </div>
   <div class="field">
-    <%= f.label :http_user %><br />
+    <%= f.label :http_user, 'HTTP user' %><br />
     <%= f.text_field :http_user %>
   </div>
   <div class="field">
-    <%= f.label :http_password %><br />
+    <%= f.label :http_password, 'HTTP password' %><br />
     <%= f.text_field :http_password %>
   </div>
   <div class="actions">

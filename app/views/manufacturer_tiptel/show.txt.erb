@@ -1,29 +1,26 @@
 <% if @phone != nil %>
 <%
-key_map = { 
-	:"BLF" => "16",
-	:"SpeedDial" => "13",
-	:"ActioUrl" => "17",
-	:"Line"	=> "15"
+key_map = {
+:"BLF" => "16",
+:"SpeedDial" => "13",
+:"ActioUrl" => "17",
+:"Line"	=> "15"
 }
 dtmf_map = {
-	:"rfc2833" => "1",
-	:"inband" => "0",
-	:"info" => "2"
+:"rfc2833" => "1",
+:"inband" => "0",
+:"info" => "2"
 }
 codec_map = {
-		
-}
-%>
+} %>
 <% @phone.sip_accounts.each do |sip_account| %>
-
 [account]
-path=/yealink/config/voip/sipAccount<%= sip_account.position - 1%>.cfg
+path=/yealink/config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
 Enable=1
-Label=<%= sip_account.user%>
-Username=<%= sip_account.user%>
+Label=<%= sip_account.user %>
+Username=<%= sip_account.user %>
 AuthName=<%= sip_account.auth_user %>
-Password=<%= sip_account.password%>
+Password=<%= sip_account.password %>
 SIPServerHost=<%= sip_account.registrar %>
 SIPServerPort=<%= sip_account.registrar_port %>
 <% if sip_account.outbound_proxy != nil %>
@@ -34,22 +31,17 @@ OutboundPort=<%= sip_account.outbound_proxy_port %>
 RegisterLine=1
 RegisterMac=1
 [ DTMF ]
-path = /config/voip/sipAccount<%= sip_account.position - 1%>.cfg
+path = /config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
 DTMFInbandTransfer=<%= dtmf_map[ :"#{sip_account.dtmf_mode}" ] %>
-
-
 <% @phone.sip_accounts.where( :position => sip_account.position).first.phone_keys.each do |phone_key| %>
-
 <% if key_map[ :"#{phone_key.phone_key_function_definition.name}" ] != nil %>
-
 [<%= phone_key.phone_model_key.name %>]
 path=/config/vpPhone/vpPhone.ini
 Value=<%= phone_key.value %>
 Label=<%= phone_key.value %>
-PickupValue=*8
-DKtype=<%= key_map[ :"#{phone_key.phone_key_function_definition.name}"]%>
+DKtype=<%= key_map[ :"#{phone_key.phone_key_function_definition.name}"] %>
 <% end %>
-<% end %>	
+<% end %>
 <% end %>
 <% else %>
 No Phone found!

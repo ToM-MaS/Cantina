@@ -5,7 +5,16 @@ class PhoneKeyFunctionDefinitionTest < ActiveSupport::TestCase
   should "be valid" do
     assert Factory.build(:phone_key_function_definition).valid?
   end
-  
+
+  # Test valid name
+  [
+    '',
+    nil
+  ].each do |name|
+    should "not allow #{name} as name" do
+      assert !Factory.build( :phone_key_function_definition, :name => name ).valid?
+    end
+  end
   
   # Test valid type_of_class
   [

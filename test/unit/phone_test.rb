@@ -122,7 +122,7 @@ class PhoneTest < ActiveSupport::TestCase
     
     # Lets create a BLF 42 on the first key at the first sip_account
     f1 = first_sip_account.phone_keys.create
-    f1.phone_model_key_id = phone_model.phone_model_keys.first
+    f1.phone_model_key_id = phone_model.phone_model_keys.first.id
     f1.phone_key_function_definition_id = phone_model.phone_model_keys.first.phone_key_function_definitions.first.id
     f1.value = "42"
     f1.save

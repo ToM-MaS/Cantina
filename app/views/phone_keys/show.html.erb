@@ -9,8 +9,8 @@
 
 <p>
   <b>Phone model key:</b>
-  <%= @phone_key.phone_model_key.name %>
-  (position: <%= @phone_key.phone_model_key.position %>)
+  <%= @phone_key.phone_model_key ? @phone_key.phone_model_key.name : '?' %>
+  (position: <%= @phone_key.phone_model_key ? @phone_key.phone_model_key.position : '?' %>)
 </p>
 
 <p>

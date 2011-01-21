@@ -16,7 +16,7 @@
     <td><%= phone_key.sip_account.user %>@<%= phone_key.sip_account.registrar %>
       (<%= phone_key.sip_account.name %>)
       (ID <%= phone_key.sip_account.id %>)</td>
-    <td><%= phone_key.phone_model_key.name %> (pos.: <%= phone_key.phone_model_key.position %>)</td>
+    <td><%= phone_key.phone_model_key ? phone_key.phone_model_key.name : '?' %> (pos.: <%= phone_key.phone_model_key ? phone_key.phone_model_key.position : '?' %>)</td>
     <td><%= phone_key.phone_key_function_definition.name %></td>
     <td><%= phone_key.value %></td>
     <td><%= link_to 'Show', phone_key %></td>

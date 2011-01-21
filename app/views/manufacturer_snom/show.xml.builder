@@ -71,13 +71,72 @@ xml.settings {
 			}
 		end
 		
-		#xml.comment! "function keys"  # <!-- a comment -->
-		#xml.tag! 'functionKeys' do
-		#	@phone.phone_keys.each do |phone_key|
-		#		xml.fkey("blf #{phone_key.value}", :label => phone_key.label,:idx => phone_key.id, :context => 'active', :perm => 'R')
-		#	end
-		#end
+		
+		xml.comment! "function keys"  # <!-- a comment -->
+		xml.tag! 'functionKeys' do
+			
+			#@phone.phone_keys.each do |phone_key|
+			#	xml.fkey("blf #{phone_key.value}", :label => phone_key.label,:idx => phone_key.id, :context => 'active', :perm => 'R')
+			#end
+			
+			softkeys = []
+			snom_sip_acct_idx = 0
+			@phone.sip_accounts.each { |sip_account|
+				#snom_sip_acct_idx = sip_account.position
+				snom_sip_acct_idx += 1
+				# Let's hope that we get the sip_accounts in the same
+				# order as above.
+				# Here we know the sip_account .
+				sip_account.phone_keys.each { |phone_key|
+					# Here we know phone_key.value .
+					# Here we know phone_key.phone_model_key.position .
+					# Here we know phone_key.phone_key_function_definition.name .
+					type = case (phone_key.phone_key_function_definition ? phone_key.phone_key_function_definition.name.downcase : nil)
+						when 'blf'              ; 'blf' # or 'dest'
+						when 'speed dial'       ; 'speed'
+						when 'actionurl'        ; 'url'
+						when 'line'             ; 'line'
+						when 'phone-spec. fn.'  ; nil  # or 'none'
+						when 'label'            ; nil  # or 'none'
+						when 'xml'              ; 'xml'
+						when 'intercom'         ; 'icom'
+						when 'parking'          ; 'orbit'
+						when 'recording'        ; 'recorder'
+						when 'dtmf'             ; 'dtmf'
+						when 'ptt'              ; 'p2t'
+						when 'button'           ; 'button'
+						when 'presence'         ; 'presence'
+						when 'transfer'         ; 'transfer'
+						when 'redirect'         ; 'redirect'
+						when 'auto-answer'      ; 'autoanswer'
+						when 'def. function?'   ; nil  # or 'none'
+						else                    ; nil  # or 'none'
+							# Someone renamed a PhoneKeyFunctionDefinition.
+					end
+					softkeys << {
+						:pos     => (phone_key.phone_model_key ? phone_key.phone_model_key.position : nil),
+						:type    => type,
+						:val     => phone_key.value,
+						:acctidx => snom_sip_acct_idx,
+					}
+				}
+			}
+			puts "---------------------------------------------------------"
+			pp softkeys
+			puts "---------------------------------------------------------"
+			# FIXME: remove log output.
+			# TODO: sort the array of hashes by :pos.
+			# (0..120).each ...
+			# Problem: Currently we can get more than one key per pos,
+			# and the pos can be nil.
+			
+			
+		end
 		
 	end
 }
 
+
+# Local Variables:
+# mode: ruby
+# End:

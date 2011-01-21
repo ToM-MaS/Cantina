@@ -1,23 +1,42 @@
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.settings {
-	
 	if @phone == nil
 		xml.comment! "Phone with the given MAC address not found."  # <!-- a comment -->
 	else
-				
+		
 		xml.tag! 'phone-settings' do
 			xml.web_language( 'English', :perm => 'RW' )
 			xml.timezone( 'GMT+1', :perm => 'RW' )
-			xml.date_us_format( 'on', :perm => 'R' )
-			xml.time_24_format( 'off', :perm => 'R' )
+			xml.date_us_format( 'off', :perm => 'RW' )
+			xml.time_24_format( 'on', :perm => 'RW' )
 			
-			@phone.sip_accounts.each do |sip_account|
+			@phone.sip_accounts.each { |sip_account|
 				xml.comment! "SIP account position #{sip_account.position}"  # <!-- a comment -->
-				xml.user_pname(sip_account.user, :idx => sip_account.position, :perm => 'R')
-				xml.user_pass(sip_account.password, :idx => sip_account.position, :perm => 'R')
-				xml.user_host(sip_account.registrar, :idx => sip_account.position, :perm => 'R')
-			end
+				xml.user_pname(  sip_account.user           , :idx => sip_account.position, :perm => 'R' )
+				xml.user_pass(   sip_account.password       , :idx => sip_account.position, :perm => 'R' )
+				xml.user_host(   sip_account.registrar      , :idx => sip_account.position, :perm => 'R' )
+			}
+			
+			
+			# OPTIMIZE - codecs on Snom
+			# Codecs in the database are per SIP account
+			# (SipAccountCodecs) but the Snom supports only global
+			# codec settings.
+						
+			# see http://wiki.snom.com/Settings/codec_name			
+			[
+				 8,  # G.711 alaw
+				 0,  # G.711 ulaw
+				 3,  # GSM
+				 2,  # G.726-32
+				18,  # G.729a
+				 9,  # G.722
+				 4,  # G.723.1
+			].each_with_index {  |codec_num, codec_idx|
+				xml.codec_name( codec_num, :idx => 1+codec_idx, :perm => 'R' )
+			}
+			
 		end
 	
 		#xml.tag! 'functionKeys' do
@@ -27,6 +46,5 @@ xml.settings {
 		#end
 		
 	end
-	
 }
 

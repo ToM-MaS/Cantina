@@ -25,7 +25,9 @@ class PhoneModelMacAddressesController < ApplicationController
   # GET /phone_model_mac_addresses/new.xml
   def new
     @phone_model_mac_address = PhoneModelMacAddress.new
-
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @phone_model_mac_address }
@@ -35,13 +37,17 @@ class PhoneModelMacAddressesController < ApplicationController
   # GET /phone_model_mac_addresses/1/edit
   def edit
     @phone_model_mac_address = PhoneModelMacAddress.find(params[:id])
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
   end
 
   # POST /phone_model_mac_addresses
   # POST /phone_model_mac_addresses.xml
   def create
     @phone_model_mac_address = PhoneModelMacAddress.new(params[:phone_model_mac_address])
-
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
+    
     respond_to do |format|
       if @phone_model_mac_address.save
         format.html { redirect_to(@phone_model_mac_address, :notice => 'Phone model mac address was successfully created.') }
@@ -57,7 +63,9 @@ class PhoneModelMacAddressesController < ApplicationController
   # PUT /phone_model_mac_addresses/1.xml
   def update
     @phone_model_mac_address = PhoneModelMacAddress.find(params[:id])
-
+    
+    @phone_models = PhoneModel.order( :manufacturer_id, :name )
+    
     respond_to do |format|
       if @phone_model_mac_address.update_attributes(params[:phone_model_mac_address])
         format.html { redirect_to(@phone_model_mac_address, :notice => 'Phone model mac address was successfully updated.') }

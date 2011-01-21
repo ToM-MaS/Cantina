@@ -2,12 +2,12 @@
 
 <p>
   <b>Phone model:</b>
-  <%= @phone_model_mac_address.phone_model_id %>
+  <%= @phone_model_mac_address.phone_model.name %>
 </p>
 
 <p>
-  <b>Starts with:</b>
-  <%= @phone_model_mac_address.starts_with %>
+  <b>MAC address starts with:</b>
+  <%= @phone_model_mac_address.starts_with.gsub(/[0-9A-Z]{2}/i, '\\0:') %>
 </p>
 
 

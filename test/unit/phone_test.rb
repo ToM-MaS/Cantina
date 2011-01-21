@@ -108,9 +108,9 @@ class PhoneTest < ActiveSupport::TestCase
     end
     
     phone = Factory.create(:phone, :phone_model_id => phone_model.id)
-    phone.sip_accounts << Factory.create(:sip_account)
-    phone.sip_accounts << Factory.create(:sip_account)
-    phone.sip_accounts << Factory.create(:sip_account)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
     
     (0 .. 2).each do |i|
       (0 .. i).each do |codec_i|

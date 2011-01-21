@@ -2,17 +2,20 @@
 
 <p>
   <b>Sip account:</b>
-  <%= @phone_key.sip_account %>
+  <%= @phone_key.sip_account.user %>@<%= @phone_key.sip_account.registrar %>
+  (<%= @phone_key.sip_account.name %>)
+  (ID <%= @phone_key.sip_account.id %>)
 </p>
 
 <p>
   <b>Phone model key:</b>
-  <%= @phone_key.phone_model_key_id %>
+  <%= @phone_key.phone_model_key.name %>
+  (position: <%= @phone_key.phone_model_key.position %>)
 </p>
 
 <p>
   <b>Phone key function definition:</b>
-  <%= @phone_key.phone_key_function_definition_id %>
+  <%= @phone_key.phone_key_function_definition.name %>
 </p>
 
 <p>

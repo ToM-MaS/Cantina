@@ -28,6 +28,7 @@ class SipAccountsController < ApplicationController
     @sip_account.phone_id = params[:phone_id]
     
     @phones = Phone.order(:mac_address)
+    @dtmf_modes = [ 'rfc2833', 'inband', 'info' ]
     
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +41,7 @@ class SipAccountsController < ApplicationController
     @sip_account = SipAccount.find(params[:id])
     
     @phones = Phone.order(:mac_address)
+    @dtmf_modes = [ 'rfc2833', 'inband', 'info' ]
   end
 
   # POST /sip_accounts
@@ -48,6 +50,7 @@ class SipAccountsController < ApplicationController
     @sip_account = SipAccount.new(params[:sip_account])
     
     @phones = Phone.order(:mac_address)
+    @dtmf_modes = [ 'rfc2833', 'inband', 'info' ]
     
     respond_to do |format|
       if @sip_account.save
@@ -66,6 +69,7 @@ class SipAccountsController < ApplicationController
     @sip_account = SipAccount.find(params[:id])
     
     @phones = Phone.order(:mac_address)
+    @dtmf_modes = [ 'rfc2833', 'inband', 'info' ]
     
     respond_to do |format|
       if @sip_account.update_attributes(params[:sip_account])

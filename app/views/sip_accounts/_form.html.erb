@@ -81,7 +81,10 @@
   </div>
   <div class="field">
     <%= f.label :dtmf_mode, 'DTMF mode' %><br />
-    <%= f.text_field :dtmf_mode %>
+    <%= f.select( :dtmf_mode,
+      @dtmf_modes.collect {|r| [ r, r ] },
+      { :include_blank => false, :selected => @sip_account.dtmf_mode }
+    ) %>
   </div>
   <div class="field">
     <%= f.label :remote_password %><br />
@@ -91,18 +94,20 @@
     <%= f.label :position %><br />
     <%= f.text_field :position %>
   </div>
-  <% if @sip_account.phone_id != nil %>
+
+<% if @sip_account.phone_id != nil %>
   <div class="field">
-  <%= f.label :sip_account_codecs %>
-  <% @sip_account.phone.phone_model.codecs.each do |codec|%>
-    
-      <input type="checkbox" value="<%= codec.id %> name="sip_account_codecs" "
-	  <%= @sip_account.sip_account_codecs.map{|c| c.codec_id}.include?( codec.id) ? ' checked="checked"' :'' %>
-	  ><%= codec.name %></input>
-    
-  <% end %>
+    <%= f.label :sip_account_codecs %><br />
+<% # FIXME - codecs can't be saved.
+%>
+<%   @sip_account.phone.phone_model.codecs.each { |codec| %>
+      <input type="checkbox" value="<%= codec.id %>" id="sip_account_codecs_<%= codec.id %>" name="sip_account_codecs" <%==
+        @sip_account.sip_account_codecs.map{|c| c.codec_id }.include?( codec.id ) ? ' checked="checked"' : ''
+        %> /><label for="sip_account_codecs_<%= codec.id %>"><%= codec.name %></label>
+<%   } %>
   </div>
-  <% end %>
+<% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

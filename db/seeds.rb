@@ -166,20 +166,7 @@ PhoneKeyFunctionDefinition.create([
   { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
   { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
   { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil },
-  { :name => 'Phone-spec. fn.'  , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Label'            , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'XML'              , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Intercom'         , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Parking'          , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Recording'        , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'DTMF'             , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'PTT'              , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Button'           , :type_of_class => 'integer' , :regex_validation => nil },
-  { :name => 'Presence'         , :type_of_class => 'url'     , :regex_validation => nil },
-  { :name => 'Transfer'         , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Redirect'         , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Auto-answer'      , :type_of_class => 'integer' , :regex_validation => nil },
-  { :name => 'Def. function?'   , :type_of_class => 'boolean' , :regex_validation => nil },
+  
 ])
 
 # Sample Phones (Testphones Sascha)

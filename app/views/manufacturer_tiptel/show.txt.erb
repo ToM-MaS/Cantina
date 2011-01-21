@@ -36,10 +36,18 @@ RegisterMac=1
 [ DTMF ]
 path = /config/voip/sipAccount<%= sip_account.position - 1%>.cfg
 DTMFInbandTransfer=<%= dtmf_map[ :"#{sip_account.dtmf_mode}" ] %>
+
+
+<% @phone.sip_accounts.where( :position => sip_account.position).first.phone_keys.each do |phone_key| %>
+
+[<%= phone_key.phone_model_key.name %>]
+path=/config/vpPhone/vpPhone.ini
+Value=<%= phone_key.value %>
+Label=<%= phone_key.value %>
+PickupValue=*8
+DKtype=<%= key_map[ :"#{phone_key.phone_key_function_definition.name}"]%>
 <% end %>
-
-
-
+<% end %>
 <% else %>
 No Phone found!
 <% end %>

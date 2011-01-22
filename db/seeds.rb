@@ -178,10 +178,11 @@ PhoneModel.where(
 ])
 
 ['IP 284', 'IP 286'].each do |p_model|
-(1..10).each { |mem_num| 
-  PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-    { :name => "memory#{mem_num}", :position => "#{mem_num}" } 
-  ]) }
+  (1..10).each { |mem_num| 
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+      { :name => "memory#{mem_num}", :position => "#{mem_num}" }
+    ])
+  }
 end
 
 PhoneModel.where(

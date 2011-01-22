@@ -158,6 +158,8 @@ PhoneModel.all.each do |phone_model|
   phone_model.codecs << Codec.all
 end
 
+
+
 # Softkey functions:
 # DO NOT RENAME THEM! The name is magic and serves as an identifier!
 #
@@ -169,6 +171,8 @@ PhoneKeyFunctionDefinition.create([
   
 ])
 
+
+
 # Sample Phones (Testphones Sascha)
 
 PhoneModel.where(
@@ -177,11 +181,23 @@ PhoneModel.where(
   { :mac_address => '00156513EC2F' } 
 ])
 
+
+# FIXME - removeme: Philipp's test phones:
+Phone.create(
+  :mac_address    => '00-04-13-29-68-87',
+  :phone_model_id => PhoneModel.where( :name => 'Snom 360' ).first.id
+)
+
+
+
+# ...
+
 ['IP 284', 'IP 286'].each do |p_model|
-(1..10).each { |mem_num| 
-  PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-    { :name => "memory#{mem_num}", :position => "#{mem_num}" } 
-  ]) }
+  (1..10).each { |mem_num| 
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+      { :name => "memory#{mem_num}", :position => "#{mem_num}" }
+    ])
+  }
 end
 
 PhoneModel.where(

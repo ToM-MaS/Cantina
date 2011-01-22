@@ -2,7 +2,19 @@ xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.settings {
 	if @phone == nil
+		
 		xml.comment! "Phone with the given MAC address not found."  # <!-- a comment -->
+		
+		xml.tag! 'phone-settings' do
+			xml.web_language( 'English', :perm => 'RW' )
+			xml.timezone( 'GMT+1', :perm => 'RW' )
+			xml.date_us_format( 'off', :perm => 'RW' )
+			xml.time_24_format( 'on', :perm => 'RW' )
+			
+			xml.update_policy( 'settings_only', :perm => 'RW' )
+			xml.firmware_status( '', :perm => 'RW' )
+		end
+		
 	else
 		
 		xml.tag! 'phone-settings' do
@@ -10,6 +22,9 @@ xml.settings {
 			xml.timezone( 'GMT+1', :perm => 'RW' )
 			xml.date_us_format( 'off', :perm => 'RW' )
 			xml.time_24_format( 'on', :perm => 'RW' )
+			
+			xml.update_policy( 'settings_only', :perm => 'RW' )
+			xml.firmware_status( '', :perm => 'RW' )
 			
 			xml.retry_after_failed_register( '70', :perm => 'RW' )
 			xml.encode_display_name( 'on', :perm => 'R' )

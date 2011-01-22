@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section version="5.0" xml:id="installation-cantina" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Installation des Cantina SIP Phone Provisioning Systems</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri>http://www.amooma.de/</uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Voraussetzung: Installation von Ruby on Rails 3 auf Debian 5 (siehe
+  <xref linkend="rails3-install-debian" />).</para>
+
+  <para></para>
+</section>

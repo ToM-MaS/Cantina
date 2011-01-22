@@ -34,6 +34,11 @@
   <chapter xml:id="installation">
     <title>Installation</title>
 
+    <para>Nachfolgend wird beschrieben wie zuerst Ruby on Rails installiert
+    wird und dann das eigentliche Provisionierungssystem.</para>
+
     <xi:include href="installation-ror-debian-5.xml" />
+
+    <xi:include href="installation-cantina.xml" />
   </chapter>
 </book>

@@ -13,7 +13,7 @@
 
 <% @reboot_requests.each do |reboot_request| %>
   <tr>
-    <td><%= link_to "#{reboot_request.phone.mac_address} - #{reboot_request.phone.name}", reboot_request.phone %></td>
+    <td><%= link_to "#{reboot_request.phone.mac_address} - #{reboot_request.phone.phone_model.name}", reboot_request.phone %></td>
     <td><%= reboot_request.start %></td>
     <td><%= reboot_request.end %></td>
     <td><%= reboot_request.successful %></td>

@@ -2,5 +2,6 @@
 
 Factory.define :phone_model do |f|
   f.sequence(:name) { |n| "Manufacturer #{n}" }
+  f.max_number_of_sip_accounts 5
   f.association :manufacturer
 end

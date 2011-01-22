@@ -88,6 +88,28 @@ class PhoneModelTest < ActiveSupport::TestCase
     end
   }
   
-  # TODO default_http_user and default_http_password test
+  # Test that reducing the max_number_of_sip_accounts will not create 
+  # a state where there are phones with too many sip_accounts.
+  should "not be ok to reduce the max_number_of_sip_accounts to a value below the value of already existing phones" do
+    phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => 3)
+
+    # create phones - each with a different amount of sip_accounts
+    phones = Array.new
+    (1 .. phone_model.max_number_of_sip_accounts).each do |i|
+      phones[i] = Factory.create(:phone, :phone_model_id => phone_model.id)
+      (1 .. i).each do |z|
+        Factory.create(:sip_account, :phone_id => phones[i].id)
+      end
+    end
+
+    phone_model.max_number_of_sip_accounts = 2
+    assert !phone_model.valid?
+
+    phone_model.max_number_of_sip_accounts = 3
+    assert phone_model.valid?
+
+    phone_model.max_number_of_sip_accounts = 4
+    assert phone_model.valid?
+  end
   
 end

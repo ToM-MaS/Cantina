@@ -42,6 +42,8 @@ class PhoneModel < ActiveRecord::Base
   
   validate :validate_url
   
+  validate :validate_max_number_of_sip_accounts_for_an_existing_phone_model
+  
   # Associations
   #
   belongs_to :manufacturer
@@ -97,6 +99,18 @@ class PhoneModel < ActiveRecord::Base
         end
       rescue URI::InvalidURIError
         errors.add( :url, "is invalid" )
+      end
+    end
+  end
+  
+  # Validates the number of sip_accounts on a phone_model
+  # If you change the number of maximum sip_accounts on an already
+  # existing model the system checks if there are any phones with 
+  # more than that in the system.
+  def validate_max_number_of_sip_accounts_for_an_existing_phone_model
+    if !self.new_record? and self.changed_attributes.keys.include?('max_number_of_sip_accounts') and self.max_number_of_sip_accounts < PhoneModel.find(self.id).max_number_of_sip_accounts
+      if self.phones.collect {|phone| phone.sip_accounts.count}.max > self.max_number_of_sip_accounts
+        errors.add( :max_number_of_sip_accounts, "There are already phones with more than #{self.max_number_of_sip_accounts} sip_accounts in the database. Delete sip_accounts first before reducing max_number_of_sip_accounts." )
       end
     end
   end

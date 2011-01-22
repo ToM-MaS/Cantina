@@ -26,4 +26,26 @@
   Zugriff?</para>
 
   <para></para>
+
+  <section xml:id="installation-datenbank">
+    <title>Installation der Datenbank</title>
+
+    <para>...</para>
+
+    <para>rake db:setup</para>
+
+    <para>...</para>
+  </section>
+
+  <section xml:id="server-starten">
+    <title>Provisioning-Server</title>
+
+    <para>...</para>
+
+    <para>rails server / rails s</para>
+
+    <para>Stoppen mit Ctrl-C.</para>
+
+    <para>...</para>
+  </section>
 </section>

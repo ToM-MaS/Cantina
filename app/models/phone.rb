@@ -34,6 +34,9 @@ class Phone < ActiveRecord::Base
   # SIP Accounts
   has_many :sip_accounts, :order => 'position', :dependent => :destroy
   
+  # PhoneKeys for shorter access 
+  has_many :phone_keys, :through => :sip_accounts
+ 
   # History
   has_many :provisioning_log_entries, :order => 'created_at'
 

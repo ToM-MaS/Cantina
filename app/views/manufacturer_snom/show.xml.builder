@@ -96,8 +96,8 @@ xml.settings {
 						when 'speed dial'       ; 'speed'
 						when 'actionurl'        ; 'url'
 						when 'line'             ; 'line'
-						when 'phone-spec. fn.'  ; nil  # or 'none'
-						when 'label'            ; nil  # or 'none'
+						when 'phone-spec. fn.'  ; 'none'  # or nil to make it undefined
+						when 'label'            ; 'none'  # or nil to make it undefined
 						when 'xml'              ; 'xml'
 						when 'intercom'         ; 'icom'
 						when 'parking'          ; 'orbit'
@@ -109,28 +109,60 @@ xml.settings {
 						when 'transfer'         ; 'transfer'
 						when 'redirect'         ; 'redirect'
 						when 'auto-answer'      ; 'autoanswer'
-						when 'def. function?'   ; nil  # or 'none'
-						else                    ; nil  # or 'none'
+						when 'def. function?'   ; 'none'  # or nil to make it undefined
+						else                    ; 'none'  # or nil to make it undefined
 							# Someone renamed a PhoneKeyFunctionDefinition.
 					end
 					softkeys << {
 						:pos     => (phone_key.phone_model_key ? phone_key.phone_model_key.position : nil),
 						:type    => type,
 						:val     => phone_key.value,
+					#	:label   => phone_key.label,
 						:acctidx => snom_sip_acct_idx,
 					}
 				}
 			}
-			puts "---------------------------------------------------------"
-			pp softkeys
-			puts "---------------------------------------------------------"
-			# FIXME: remove log output.
-			# TODO: sort the array of hashes by :pos.
-			# (0..120).each ...
-			# Problem: Currently we can get more than one key per pos,
-			# and the pos can be nil.
+			#puts "---------------------------------------------------------"
+			#pp softkeys
+			#puts "---------------------------------------------------------"
 			
+			snom_softkeys = {}
+			softkeys.each { |softkey|
+				if softkey[:pos] != nil
+					snom_softkeys[softkey[:pos]] = {
+						:type    => softkey[:type    ],
+						:val     => softkey[:val     ],
+					#	:label   => softkey[:label   ],
+						:acctidx => softkey[:acctidx ],
+					}
+				end
+			}
+			#puts "---------------------------------------------------------"
+			#pp snom_softkeys
+			#puts "---------------------------------------------------------"
 			
+			max_key_idx = 12 + (42 * 3) - 1
+			(0..max_key_idx).each { |idx|
+				snom_softkey = snom_softkeys[idx] || {
+					:type    => nil,
+					:val     => '',
+				#	:label   => '',
+					:acctidx => nil,
+				}
+				is_defined = (snom_softkey[:type] != nil)
+				xml.comment! "P #{1+idx}:"  # <!-- a comment -->
+				type = (snom_softkey[:type] || 'none')
+				kdef = type
+				if type != 'none'
+					kdef << ' ' << snom_softkey[:val]
+				end
+				xml.fkey( kdef,
+					:idx     => idx,
+					:context => (snom_softkey[:acctidx].to_i > 0) ? snom_softkey[:acctidx] : 'active',
+				#	:label  => snom_softkey[:label],
+					:perm    => is_defined ? 'R' : 'RW',
+				)
+			}
 		end
 		
 	end

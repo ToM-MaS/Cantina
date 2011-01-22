@@ -186,6 +186,4 @@ class PhoneModelTest < ActiveSupport::TestCase
     phone_model.number_of_keys = 6
     assert phone_model.valid?
   end
-  
-  
 end

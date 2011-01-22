@@ -1,4 +1,4 @@
-<% if @phone != nil %>
+	<% if @phone != nil %>
 <%
 key_map = {
 :"BLF" => "16",
@@ -44,6 +44,14 @@ Label=<%= phone_key.value %>
 DKtype=<%= key_map[ :"#{phone_key.phone_key_function_definition.name}"] %>
 
 <% end %>
+<% end %>
+<% (@phone.phone_model.phone_model_keys.collect {|x| x.id} - @phone.phone_keys.collect {|x| x.phone_model_key_id}).each do |del_id| %>
+[<%= @phone.phone_model.phone_model_keys.where("id = #{del_id}" ).first.name %>]
+path=/config/vpPhone/vpPhone.ini
+Value=
+Label=
+DKtype=0
+
 <% end %>
 <% end %>
 <% else %>

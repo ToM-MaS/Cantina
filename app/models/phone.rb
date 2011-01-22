@@ -39,6 +39,9 @@ class Phone < ActiveRecord::Base
 
   # Belongs to a phone_model
   belongs_to :phone_model
+  
+  # Can be rebooted
+  has_many :reboot_requests, :order => 'start', :dependent => :destroy
 
   # TODO muss noch getestet werden
   # log a provisioning

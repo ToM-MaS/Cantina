@@ -1,0 +1,23 @@
+<h1>Reboot Requests</h1>
+<p>
+	<%= link_to 'New Reboot request', new_reboot_request_path %>
+</p>
+<table>
+  <tr>
+    <th>Phone</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Successfull</th>
+    <th></th>
+  </tr>
+
+<% @reboot_requests.each do |reboot_request| %>
+  <tr>
+    <td><%= link_to "#{reboot_request.phone.mac_address} - #{reboot_request.phone.name}", reboot_request.phone %></td>
+    <td><%= reboot_request.start %></td>
+    <td><%= reboot_request.end %></td>
+    <td><%= reboot_request.successful %></td>
+    <td><%= link_to 'Show', reboot_request %></td>
+  </tr>
+<% end %>
+</table>

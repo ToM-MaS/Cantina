@@ -1,0 +1,31 @@
+<%= form_for(@reboot_request) do |f| %>
+  <% if @reboot_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reboot_request.errors.count, "error") %> prohibited this reboot_request from being saved:</h2>
+
+      <ul>
+      <% @reboot_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :phone_id %><br />
+    <%= f.select( :phone_id,
+      @phones.collect {|r| [ r.mac_address, r.id ] },
+      { :include_blank => false }
+    ) %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </div>
+  <%= f.hidden_field :successful %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -18,7 +18,7 @@ class PhoneModelKeysControllerTest < ActionController::TestCase
 
   test "should create phone_model_key" do
     assert_difference('PhoneModelKey.count') do
-      post :create, :phone_model_key => @phone_model_key.attributes
+      post :create, :phone_model_key => Factory.attributes_for(:phone_model_key, :phone_model_id => @phone_model_key.phone_model_id)
     end
 
     assert_redirected_to phone_model_key_path(assigns(:phone_model_key))

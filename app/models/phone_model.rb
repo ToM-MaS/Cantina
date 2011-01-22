@@ -125,6 +125,9 @@ class PhoneModel < ActiveRecord::Base
       if number_of_used_keys > self.number_of_keys
         errors.add( :number_of_keys, "There are already phones with more than #{self.number_of_keys} phone_keys in the database. Delete phone_keys first before reducing number_of_keys." )
       end
+      if self.phone_model_keys.count > self.number_of_keys
+        errors.add( :number_of_keys, "There are already more than #{self.number_of_keys} phone_model_keys in the database. Delete phone_model_keys first before reducing number_of_keys." )
+      end
     end
   end
 end

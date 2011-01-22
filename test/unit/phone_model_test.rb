@@ -118,7 +118,7 @@ class PhoneModelTest < ActiveSupport::TestCase
   should "not be ok to reduce the number_of_keys to a value below the value of already existing phones" do
     # Create a phone_model with some codecs and some keys
     #
-    phone_model = Factory.create(:phone_model, :number_of_keys => 5)
+    phone_model = Factory.create(:phone_model, :number_of_keys => 10)
 
     PhoneKeyFunctionDefinition.create([
       { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
@@ -150,10 +150,39 @@ class PhoneModelTest < ActiveSupport::TestCase
 
     phone_model.number_of_keys = 4
     assert !phone_model.valid?
-
+    
     phone_model.number_of_keys = 5
     assert phone_model.valid?
+    
+    phone_model.number_of_keys = 6
+    assert phone_model.valid?
+  end
+ 
+  # Test that reducing the number_of_keys will not create 
+  # a state where there are more already existing phone_model_keys than number_of_keys in the database.
+  should "not be ok to reduce the number_of_keys to a value below the number of already existing phone_model_keys" do
+    # Create a phone_model with some codecs and some keys
+    #
+    phone_model = Factory.create(:phone_model, :number_of_keys => 10)
 
+    PhoneKeyFunctionDefinition.create([
+      { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
+      { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil }
+    ])  
+    
+    (1..5).each do |key_number|
+      phone_model_key = phone_model.phone_model_keys.create(:name => "F#{key_number}")
+      phone_model_key.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+    end
+    
+    phone_model.number_of_keys = 4
+    assert !phone_model.valid?
+    
+    phone_model.number_of_keys = 5
+    assert phone_model.valid?
+    
     phone_model.number_of_keys = 6
     assert phone_model.valid?
   end

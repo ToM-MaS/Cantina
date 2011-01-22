@@ -134,4 +134,14 @@ class PhoneTest < ActiveSupport::TestCase
     assert f1.valid?
     assert first_sip_account.valid?
   end
+  
+  # Test invalid phone model
+  [
+    -1,
+  ].each do |phone_model_id|
+    should "not allow #{phone_model_id.inspect} as a phone_model_id" do
+      assert ! Factory.build( :phone, :phone_model_id => phone_model_id ).valid?
+    end
+  end
+  
 end

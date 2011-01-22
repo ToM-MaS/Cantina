@@ -14,6 +14,8 @@ class PhonesController < ApplicationController
   # GET /phones/1.xml
   def show
     @phone = Phone.find(params[:id])
+    
+    @sip_accounts = @phone.sip_accounts
 
     respond_to do |format|
       format.html # show.html.erb

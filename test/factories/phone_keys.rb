@@ -10,4 +10,6 @@ Factory.define :phone_key do |f|
   # f.sip_account_id 1
   # f.phone_model_key_id 1
   # f.phone_key_function_definition_id 1
+  
+  # TODO Maybe it is possible to create a valid Factory for phone_key
 end

@@ -28,13 +28,15 @@ class SipAccountTest < ActiveSupport::TestCase
   # for a given phone
   #
   should "not be possible to have more sip_accounts as set in the phone_model" do
-    max = 5
-    phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => max)
+    phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => 3)
+    
     phone = Factory.create(:phone, :phone_model_id => phone_model.id)
-    (1..max).each do
-      Factory.create(:sip_account, :phone_id => phone.id)
-    end
-    assert !Factory.build(:sip_account, :phone_id => phone.id).valid?
+    Factory.create(:sip_account, :phone_id => phone.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    
+    assert phone.sip_accounts.count == 3
+    assert !Factory.build(:sip_account, :phone_id => phone.id).valid?    
   end
   
   # No sip_account without an existing phone

@@ -1,5 +1,7 @@
 Cantina::Application.routes.draw do
   
+  resources :reboot_requests, :only => [:index, :show, :create, :new ]
+
   resources :manufacturer_snom, :only => [:index ]
   resources :manufacturer_aastra, :only => [:index ]
   resources :manufacturer_tiptel, :only => [:index ]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121121114) do
+ActiveRecord::Schema.define(:version => 20110122171701) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -107,6 +107,15 @@ ActiveRecord::Schema.define(:version => 20110121121114) do
     t.integer  "phone_id"
     t.string   "memo"
     t.boolean  "succeeded"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reboot_requests", :force => true do |t|
+    t.integer  "phone_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.boolean  "successful"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

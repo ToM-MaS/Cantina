@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110120120511
+# Schema version: 20110121121114
 #
 # Table name: phone_key_function_definitions
 #
@@ -23,6 +23,8 @@ class PhoneKeyFunctionDefinition < ActiveRecord::Base
   
   validate :validate_regex_validation
   validates_presence_of :name
+
+  # TODO uniqueness
 
   has_many :phone_key_to_function_mappings, :dependent => :destroy
   has_many :phone_model_keys, :through => :phone_key_to_function_mappings

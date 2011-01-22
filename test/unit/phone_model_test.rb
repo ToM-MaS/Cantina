@@ -88,6 +88,104 @@ class PhoneModelTest < ActiveSupport::TestCase
     end
   }
   
-  # TODO default_http_user and default_http_password test
+  # Test that reducing the max_number_of_sip_accounts will not create 
+  # a state where there are phones with too many sip_accounts.
+  should "not be ok to reduce the max_number_of_sip_accounts to a value below the value of already existing phones" do
+    phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => 3)
+
+    # create phones - each with a different amount of sip_accounts
+    phones = Array.new
+    (1 .. phone_model.max_number_of_sip_accounts).each do |i|
+      phones[i] = Factory.create(:phone, :phone_model_id => phone_model.id)
+      (1 .. i).each do |z|
+        Factory.create(:sip_account, :phone_id => phones[i].id)
+      end
+    end
+
+    phone_model.max_number_of_sip_accounts = 2
+    assert !phone_model.valid?
+
+    phone_model.max_number_of_sip_accounts = 3
+    assert phone_model.valid?
+
+    phone_model.max_number_of_sip_accounts = 4
+    assert phone_model.valid?
+  end
+
+  
+  # Test that reducing the number_of_keys will not create 
+  # a state where there are phones with too many keys in the database.
+  should "not be ok to reduce the number_of_keys to a value below the value of already existing phones" do
+    # Create a phone_model with some codecs and some keys
+    #
+    phone_model = Factory.create(:phone_model, :number_of_keys => 10)
+
+    PhoneKeyFunctionDefinition.create([
+      { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
+      { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil }
+    ])  
+    
+    (1..5).each do |key_number|
+      phone_model_key = phone_model.phone_model_keys.create(:name => "F#{key_number}")
+      phone_model_key.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+    end
+    
+    phone = Factory.create(:phone, :phone_model_id => phone_model.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    Factory.create(:sip_account, :phone_id => phone.id)
+    
+    (0 .. 2).each do |i|
+      sip_account = phone.sip_accounts[i]
+      (1 .. 5).each do |z|
+        key = sip_account.phone_keys.create
+        key.phone_model_key_id = phone_model.phone_model_keys[z-1].id
+        key.phone_key_function_definition_id = phone_model.phone_model_keys.first.phone_key_function_definitions.first.id
+        key.value = "42"
+        key.save
+      end
+    end
+
+    phone_model.number_of_keys = 4
+    assert !phone_model.valid?
+    
+    phone_model.number_of_keys = 5
+    assert phone_model.valid?
+    
+    phone_model.number_of_keys = 6
+    assert phone_model.valid?
+  end
+ 
+  # Test that reducing the number_of_keys will not create 
+  # a state where there are more already existing phone_model_keys than number_of_keys in the database.
+  should "not be ok to reduce the number_of_keys to a value below the number of already existing phone_model_keys" do
+    # Create a phone_model with some codecs and some keys
+    #
+    phone_model = Factory.create(:phone_model, :number_of_keys => 10)
+
+    PhoneKeyFunctionDefinition.create([
+      { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
+      { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
+      { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil }
+    ])  
+    
+    (1..5).each do |key_number|
+      phone_model_key = phone_model.phone_model_keys.create(:name => "F#{key_number}")
+      phone_model_key.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+    end
+    
+    phone_model.number_of_keys = 4
+    assert !phone_model.valid?
+    
+    phone_model.number_of_keys = 5
+    assert phone_model.valid?
+    
+    phone_model.number_of_keys = 6
+    assert phone_model.valid?
+  end
+  
   
 end

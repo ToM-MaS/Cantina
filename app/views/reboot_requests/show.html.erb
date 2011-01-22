@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Phone:</b>
+  <%= @reboot_request.phone_id %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @reboot_request.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @reboot_request.end %>
+</p>
+
+<p>
+  <b>Successfull:</b>
+  <%= @reboot_request.successful %>
+</p>
+
+
+<%= link_to 'Back', reboot_requests_path %>

@@ -1,0 +1,2 @@
+module RebootRequestsHelper
+end

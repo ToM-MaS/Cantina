@@ -22,5 +22,8 @@
   <para>Voraussetzung: Installation von Ruby on Rails 3 auf Debian 5 (siehe
   <xref linkend="rails3-install-debian" />).</para>
 
+  <para>#TODO: Tarball? Oder Git? Mit welchen Credentials hat man
+  Zugriff?</para>
+
   <para></para>
 </section>

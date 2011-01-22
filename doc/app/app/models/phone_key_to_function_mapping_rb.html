@@ -6,7 +6,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>File: manufacturer.rb [Rails Application Documentation]</title>
+	<title>File: phone_key_to_function_mapping.rb [Rails Application Documentation]</title>
 
 	<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet" />
 
@@ -48,15 +48,14 @@
 Schema version: 20110121121114
 </p>
 <p>
-Table name: manufacturers
+Table name: phone_key_to_function_mappings
 </p>
 <pre>
- id         :integer         not null, primary key
- name       :string(255)
- ieee_name  :string(255)
- url        :string(255)
- created_at :datetime
- updated_at :datetime</pre>
+ id                               :integer         not null, primary key
+ phone_model_key_id               :integer
+ phone_key_function_definition_id :integer
+ created_at                       :datetime
+ updated_at                       :datetime</pre>
 
 		</div>
 		

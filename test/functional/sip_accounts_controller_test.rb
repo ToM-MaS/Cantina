@@ -22,7 +22,7 @@ class SipAccountsControllerTest < ActionController::TestCase
       post :create, :sip_account => sip_account.attributes
     end
   
-    assert_redirected_to sip_account_path(assigns(:sip_account))
+    assert_redirected_to phone_path(assigns(:sip_account).phone)
   end
 
   test "should show sip_account" do

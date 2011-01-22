@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>Phone</th>
+    <th>Name</th>
+    <th>Auth. user</th>
+    <th>User</th>
+    <th>Password</th>
+    <th>Registrar</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% sip_accounts.each do |sip_account| %>
+  <tr>
+    <td><%= link_to sip_account.phone.mac_address, sip_account %></td>
+    <td><%= sip_account.name %></td>
+    <td><%= sip_account.auth_user %></td>
+    <td><%= sip_account.user %></td>
+    <td><%= sip_account.password %></td>
+    <td><%= sip_account.registrar %></td>
+    <td></td>
+    <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
+    <td><%= link_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

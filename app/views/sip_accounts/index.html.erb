@@ -1,57 +1,10 @@
 <h1>Listing SIP accounts</h1>
 
-<table>
-  <tr>
-    <th>Phone</th>
-    <th>Name</th>
-    <th>Auth. user</th>
-    <th>User</th>
-    <th>Password</th>
-    <th>Registrar</th>
-    <th>Registrar port</th>
-    <th>Outbound proxy</th>
-    <th>Outbound proxy port</th>
-    <th>SIP proxy</th>
-    <th>SIP proxy port</th>
-    <th>Realm</th>
-    <th>Screen name</th>
-    <th>Display name</th>
-    <th>Registration expiry time</th>
-    <th>DTMF mode</th>
-    <th>Remote password</th>
-    <th>Position</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<p>
+	<%= link_to 'New Sip account', new_sip_account_path %>
+</p>
 
-<% @sip_accounts.each do |sip_account| %>
-  <tr>
-    <td><%= sip_account.phone.mac_address %></td>
-    <td><%= sip_account.name %></td>
-    <td><%= sip_account.auth_user %></td>
-    <td><%= sip_account.user %></td>
-    <td><%= sip_account.password %></td>
-    <td><%= sip_account.registrar %></td>
-    <td><%= sip_account.registrar_port %></td>
-    <td><%= sip_account.outbound_proxy %></td>
-    <td><%= sip_account.outbound_proxy_port %></td>
-    <td><%= sip_account.sip_proxy %></td>
-    <td><%= sip_account.sip_proxy_port %></td>
-    <td><%= sip_account.realm %></td>
-    <td><%= sip_account.screen_name %></td>
-    <td><%= sip_account.display_name %></td>
-    <td><%= sip_account.registration_expiry_time %></td>
-    <td><%= sip_account.dtmf_mode %></td>
-    <td><%= sip_account.remote_password %></td>
-    <td><%= sip_account.position %></td>
-    <td><%= link_to 'Show', sip_account %></td>
-    <td><%= link_to 'Edit', edit_sip_account_path(sip_account) %></td>
-    <td><%= link_to 'Destroy', sip_account, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'table_of_sip_accounts', :locals => {:sip_accounts => @sip_accounts} %>
 
 <br />
 
-<%= link_to 'New Sip account', new_sip_account_path %>

@@ -54,7 +54,8 @@ class SipAccountsController < ApplicationController
     
     respond_to do |format|
       if @sip_account.save
-        format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully created.') }
+#        format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully created.') }
+        format.html { redirect_to(@sip_account.phone, :notice => 'Sip account was successfully created.') }
         format.xml  { render :xml => @sip_account, :status => :created, :location => @sip_account }
       else
         format.html { render :action => "new" }

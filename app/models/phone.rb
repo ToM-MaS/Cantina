@@ -31,18 +31,15 @@ class Phone < ActiveRecord::Base
   
   after_validation :format_mac_address
   
-  # Have a look at http://railscasts.com/episodes/237-dynamic-attr-accessible
-  #
-  # attr_accessible :mac_address, :phone_model_id, :ip_address
-  
-  belongs_to :phone_model
-
   # SIP Accounts
   has_many :sip_accounts, :order => 'position', :dependent => :destroy
   
   # History
   has_many :provisioning_log_entries, :order => 'created_at'
-  
+
+  # Belongs to a phone_model
+  belongs_to :phone_model
+
   # TODO muss noch getestet werden
   # log a provisioning
   def log_provisioning(memo = nil, succeeded = true)

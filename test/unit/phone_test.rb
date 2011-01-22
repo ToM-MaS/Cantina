@@ -134,7 +134,4 @@ class PhoneTest < ActiveSupport::TestCase
     assert f1.valid?
     assert first_sip_account.valid?
   end
-  
-  # TODO http_user and http_password test (validation too?)
-  
 end

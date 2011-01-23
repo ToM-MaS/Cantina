@@ -18,7 +18,9 @@ class PhoneKeyFunctionDefinitionsControllerTest < ActionController::TestCase
 
   test "should create phone_key_function_definition" do
     assert_difference('PhoneKeyFunctionDefinition.count') do
-      post :create, :phone_key_function_definition => @phone_key_function_definition.attributes
+      pkfd_attrs = @phone_key_function_definition.attributes
+      pkfd_attrs[:name] = "a unique name fnd29shbfwuz43u"
+      post :create, :phone_key_function_definition => pkfd_attrs
     end
 
     assert_redirected_to phone_key_function_definition_path(assigns(:phone_key_function_definition))

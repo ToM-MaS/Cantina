@@ -78,6 +78,10 @@ class Phone < ActiveRecord::Base
       end
       return success
     end
+    
+  rescue => error
+    reboot_request.update_attributes(:end => Time.now, :successful => false)
+    return false
   end
   
   

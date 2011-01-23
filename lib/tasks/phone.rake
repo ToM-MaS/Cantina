@@ -3,25 +3,27 @@ namespace :phone do
   task :reboot, :phone, :needs => :environment do |task_name, args|
     if (ip_address_valid(args[:phone]))
       phone = Phone.find_by_ip_address(args[:phone])
-      if (phone.class == Phone && ip_address_valid(phone.ip_address))
-	success = RebootRequest.trigger_reboot(phone.mac_address)
-      else
-	abort("ERROR: No phone found with IP #{args[:phone]}")
-      end
-    elsif (mac_address_valid(args[:phone]))
-      success = RebootRequest.trigger_reboot(args[:phone])
+    elsif (mac_address_valid(args[:phone]))    
+      phone = Phone.find_by_mac_address(args[:phone])
     else
-      abort("ERROR: No phone specified")
+      abort("ERROR: Malformed MAC or IP address: \"#{args[:phone]}\" ")
     end
-    if (success == false) 
-      abort("Reboot failed for phone \"#{args[:phone]}\"")
+    
+    if (phone.class == Phone)
+	success = phone.reboot()
     else
-      puts "Phone \"#{args[:phone]}\" performing reboot"
+	abort("ERROR: No phone found with IP/MAC: \"#{args[:phone]}\"")
+    end
+
+    if (success == false) 
+      abort("Reboot request failed: \"#{args[:phone]}\"")
+    else
+      puts "Reboot request successful: \"#{args[:phone]}\""
     end
   end
 
   def ip_address_valid(ip_address)
-    if (ip_address =~ /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} /x)
+    if (ip_address =~ /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $ /x)
       return true
     end
     return false

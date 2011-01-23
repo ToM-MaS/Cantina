@@ -130,8 +130,6 @@ snom.phone_models.create(:name => 'Snom 870',
                         phone_model_mac_addresses.create([
                           {:starts_with => '00041341'}
                                         ])
-
-                                        
 # Define Snom keys:
 [ 
   'Snom 190',
@@ -150,7 +148,7 @@ snom.phone_models.create(:name => 'Snom 870',
 	if max_key_idx >= 0
 		(0..max_key_idx).each { |idx|
 			pm.phone_model_keys.create(
-				{ :position => idx, :name => "P #{(1+idx).to_s.rjust(3,'0')}" }
+				{ :position => idx, :name => "P #{(1+idx).to_s.rjust(3,'0')} (fkey[#{idx}])" }
 				# FIXME: position is not stored correctly
 			)
 		}

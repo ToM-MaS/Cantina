@@ -13,7 +13,7 @@
 
 class PhoneModelKey < ActiveRecord::Base
   belongs_to :phone_model, :validate => true
-  acts_as_list :scope => :phone_model
+  #acts_as_list :scope => :phone_model
   
   has_many :phone_key_to_function_mappings
   has_many :phone_key_function_definitions, :through => :phone_key_to_function_mappings

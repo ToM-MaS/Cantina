@@ -10,7 +10,7 @@ Cantina::Application.routes.draw do
 
   match 'aastra/:mac_address.cfg'  => 'manufacturer_aastra#show', :format => 'txt'
   match 'tiptel/:mac_address.cfg'  => 'manufacturer_tiptel#show', :format => 'txt'
-  match 'snom/:mac_address.cfg'  => 'manufacturer_snom#show', :format => 'xml'
+  match 'snom/-:mac_address'  => 'manufacturer_snom#show', :format => 'xml'
 
   get "pages/index"
   
@@ -20,17 +20,17 @@ Cantina::Application.routes.draw do
 
   resources :phone_keys
 
+  match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
+
   # http://guides.rubyonrails.org/routing.html#nested-resources
   resources :phones do
     resources :sip_accounts
   end
 
-  # FIXME - do we need sip_accounts if we already have phones -> sip_accounts ?
   resources :sip_accounts
 
   resources :codecs
 
-  # FIXME - make this a nested route?
   resources :sip_account_codecs
 
   resources :phone_key_function_definitions

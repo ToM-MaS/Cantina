@@ -21,6 +21,7 @@ Label=<%= sip_account.user %>
 Username=<%= sip_account.user %>
 AuthName=<%= sip_account.auth_user %>
 Password=<%= sip_account.password %>
+DisplayName=<%= sip_account.display_name %>
 SIPServerHost=<%= sip_account.registrar %>
 SIPServerPort=<%= sip_account.registrar_port %>
 <% if sip_account.outbound_proxy != "" %>
@@ -42,7 +43,7 @@ path=/config/vpPhone/vpPhone.ini
 Value=<%= phone_key.value %>
 Label=<%= phone_key.value %>
 DKtype=<%= key_map[ :"#{phone_key.phone_key_function_definition.name}"] %>
-
+Line=<%= sip_account.position - 1 %>
 <% end %>
 <% end %>
 <% end %>

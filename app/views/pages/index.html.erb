@@ -2,10 +2,21 @@
 
 <p>This is a very basic web interface to the Cantina Phone Provisioning System.</p>
 
+<% if @popular_manufacturers.count == 0 and @popular_phones_models.count == 0 %>
+<h1>Empty database</h1>
+<p>
+There are no Manufacturers or Phones in the database. I propably want to feed the database with the default seeds. To do so, go to your command line and stop the rails server with CRTL-C than run the following commands: 
+</p>
+<pre>
+rake db:seed
+rails server
+</pre>
+<% end %>
+
 <h2>Phone Manufacturers</h2>
 <ul>
 	<li><%= link_to "List all manufacturers (#{@number_of_manufacturers})", manufacturers_path %>
-		<% if !@popular_manufacturers.nil? %>
+		<% if @popular_manufacturers.count != 0 %>
 			<br />
 			Popular manufacturers: 
 			<% @popular_manufacturers.each do |manufacturer| %>
@@ -19,7 +30,7 @@
 <h2>Phone Models</h2>
 <ul>
 	<li><%= link_to "List all phone models (#{@number_of_phone_models})", phone_models_path %>
-		<% if !@popular_phones_models.nil? %>
+		<% if @popular_phones_models.count != 0 %>
 			<br />
 			Popular phones: 
 			<% @popular_phones_models.each do |phone_model| %>

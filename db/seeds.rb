@@ -129,19 +129,19 @@ snom.phone_models.create(:name => 'Snom 870',
                         :number_of_keys => 12 ).
                         phone_model_mac_addresses.create([
                           {:starts_with => '00041341'}
-                                        ]
+                                        ])
 
                                         
 # Define Snom keys:
-[
-	'Snom 190',
+[ 
+  'Snom 190',
 	'Snom 300',
 	'Snom 320',
 	'Snom 360',
 	'Snom 370',
 	'Snom 820',
 	'Snom 821',
-	'Snom 870',
+	'Snom 870'
 ].each { |pm_name|
 	pm = PhoneModel.where(:name => pm_name).first
 	#num_exp_modules = 3

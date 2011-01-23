@@ -75,6 +75,10 @@ rails server --binding=your.ip.add.ress
 
 p. Now your Cantina server ist up and running.
 
+h1. Support
+
+p. There is a Google Group. Feel free to join and ask any question (German and English is fine). "http://groups.google.com/group/cantina-provisioning":http://groups.google.com/group/cantina-provisioning
+
 h1. About the ERD.pdf 
 
 p. Rails ERD is a great plugin for Ruby on Rails that generates diagrams based on your Active Record models.

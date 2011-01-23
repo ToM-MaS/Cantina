@@ -6,5 +6,13 @@ class RebootRequest < ActiveRecord::Base
 
   default_value_for :start, Time.now
   default_value_for :successful, false
-
+  
+  # private  
+  #   if (phone.phone_model.manufacturer.ieee_name == "SNOM Technology AG")
+  #     success = reboot_phone_by_http(:ip_address => phone.ip_address, :path => 'confirm.htm?REBOOT=yes', :user => phone.http_user, :password => phone.http_password)
+  #   elsif (phone.phone_model.manufacturer.ieee_name == "DeTeWe-Deutsche Telephonwerke")
+  #     success = reboot_phone_by_http(:ip_address => phone.ip_address, :path => 'logout.html', :user => phone.http_user, :password => phone.http_password)
+  #     success = reboot_phone_by_http(:ip_address => phone.ip_address, :path => 'logout.html', :user => phone.http_user, :password => phone.http_password)
+  #     success = reboot_phone_by_http(:ip_address => phone.ip_address, :path => 'reset.html', :post => {"resetOption" => "0"},:user => phone.http_user, :password => phone.http_password)
+  #   end
 end

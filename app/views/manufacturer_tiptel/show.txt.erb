@@ -2,8 +2,8 @@
 <%
 key_map = {
 :"BLF" => "16",
-:"SpeedDial" => "13",
-:"ActioUrl" => "17",
+:"Speed dial" => "13",
+:"Action	Url" => "17",
 :"Line"	=> "15"
 }
 dtmf_map = {
@@ -23,7 +23,7 @@ AuthName=<%= sip_account.auth_user %>
 Password=<%= sip_account.password %>
 SIPServerHost=<%= sip_account.registrar %>
 SIPServerPort=<%= sip_account.registrar_port %>
-<% if sip_account.outbound_proxy != nil %>
+<% if sip_account.outbound_proxy != "" %>
 UseOutboundProxy=1
 OutboundHost=<%= sip_account.outbound_proxy %>
 OutboundPort=<%= sip_account.outbound_proxy_port %>
@@ -45,14 +45,15 @@ DKtype=<%= key_map[ :"#{phone_key.phone_key_function_definition.name}"] %>
 
 <% end %>
 <% end %>
-<% (@phone.phone_model.phone_model_keys.collect {|x| x.id} - @phone.phone_keys.collect {|x| x.phone_model_key_id}).each do |del_id| %>
+<% end %>
+<% (@phone.phone_model.phone_model_keys.collect {|x| x.id} - @phone.phone_keys.collect {|x| x.phone_model_key_id}).flatten.each do |del_id| %>
 [<%= @phone.phone_model.phone_model_keys.where("id = #{del_id}" ).first.name %>]
 path=/config/vpPhone/vpPhone.ini
 Value=
 Label=
 DKtype=0
 
-<% end %>
+
 <% end %>
 <% else %>
 No Phone found!

@@ -197,7 +197,10 @@ Phone.create(
     PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
       { :name => "memory#{mem_num}", :position => "#{mem_num}" }
     ])
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "memory#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+
   }
+
 end
 
 PhoneModel.where(

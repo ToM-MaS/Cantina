@@ -165,9 +165,9 @@ end
 Manufacturer.where(
   :ieee_name => 'DeTeWe-Deutsche Telephonwerke'
 ).first.phone_models.create([
-  { :name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30, :max_number_of_phone_book_entries => 200 },
-  { :name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26, :max_number_of_phone_book_entries => 200 },
-  { :name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6, :max_number_of_phone_book_entries => 200 },
+  { :name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30 },
+  { :name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26 },
+  { :name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6 },
   { :name => '51i' }
 ])
 

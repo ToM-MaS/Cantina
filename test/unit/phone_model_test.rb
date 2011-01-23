@@ -10,7 +10,6 @@ class PhoneModelTest < ActiveSupport::TestCase
   [
     'max_number_of_sip_accounts',
     'number_of_keys',
-    'max_number_of_phone_book_entries',
     'manufacturer_id'
   ].each do |field_name|
     should "not be ok to set #{field_name} to nil" do
@@ -23,7 +22,6 @@ class PhoneModelTest < ActiveSupport::TestCase
   [
     'max_number_of_sip_accounts',
     'number_of_keys',
-    'max_number_of_phone_book_entries',
     'manufacturer_id'
   ].each do |field_name|
     should "not be ok to set #{field_name} to -1" do

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110121121114
+# Schema version: 20110122171701
 #
 # Table name: phone_models
 #
@@ -12,6 +12,10 @@
 #  max_number_of_phone_book_entries :integer
 #  default_http_user                :string(255)
 #  default_http_password            :string(255)
+#  http_port                        :integer
+#  reboot_request_path              :string(255)
+#  ssl                              :boolean
+#  http_request_timeout             :integer
 #  created_at                       :datetime
 #  updated_at                       :datetime
 #

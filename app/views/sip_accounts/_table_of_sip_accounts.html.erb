@@ -1,7 +1,8 @@
 <table>
   <tr>
-    <th>Phone</th>
     <th>Name</th>
+    <th>Phone</th>
+    <th>MAC Adress</th>
     <th>Auth. user</th>
     <th>User</th>
     <th>Password</th>
@@ -13,8 +14,9 @@
 
 <% sip_accounts.each do |sip_account| %>
   <tr>
-    <td><%= link_to sip_account.phone.mac_address, sip_account %></td>
-    <td><%= sip_account.name %></td>
+    <td><%= link_to sip_account.name, sip_account %></td>
+    <td><%= sip_account.phone.phone_model.name %></td>
+    <td><%= link_to sip_account.phone.mac_address, sip_account.phone %></td>
     <td><%= sip_account.auth_user %></td>
     <td><%= sip_account.user %></td>
     <td><%= sip_account.password %></td>

@@ -27,25 +27,95 @@
 
   <para></para>
 
-  <section xml:id="installation-datenbank">
-    <title>Installation der Datenbank</title>
+  <para></para>
 
-    <para>...</para>
+  <para></para>
 
-    <para>rake db:setup</para>
+  <section xml:id="rake-db-setup">
+    <title>Anlegen der Datenbank</title>
 
-    <para>...</para>
+    <para>Initial muß die Datenbank des Provisioning-Servers angelegt werden.
+    Wechseln Sie dazu in das Installations-Verzeichnis (abhängig von Ihrer
+    Installation, beispielsweise <filename>/home/cantina/</filename>):<screen>debian:~# <emphasis
+          role="bold"><command>cd /usr/src/Cantina/</command></emphasis></screen></para>
+
+    <para>Dann geben Sie den Befehl <emphasis role="bold"><command>rake
+    db:setup</command></emphasis> ein:<screen>debian:/usr/src/Cantina# <emphasis
+          role="bold"><command>rake db:setup</command></emphasis>
+(in /usr/src/Cantina)
+<replaceable>[...]</replaceable></screen></para>
+
+    <para>Die Datenbank ist nun angelegt.</para>
   </section>
 
   <section xml:id="server-starten">
-    <title>Provisioning-Server</title>
+    <title>Provisioning-Server starten</title>
+
+    <para>Um den Provisioning-Server zu starten wechseln Sie in das
+    Installations-Verzeichnis (abhängig von Ihrer Installation, beispielsweise
+    <filename>/home/cantina/</filename>):<screen>debian:~# <emphasis
+          role="bold"><command>cd /usr/src/Cantina/</command></emphasis></screen></para>
+
+    <para>Dann starten Sie den mitgelieferten Web-Server mit dem Befehl
+    <emphasis role="bold"><command>rails server</command></emphasis> (oder
+    kurz: <emphasis role="bold"><command>rails
+    s</command></emphasis>):<screen>debian:/usr/src/Cantina# <emphasis
+          role="bold"><command>rails server</command></emphasis>
+=&gt; Booting WEBrick
+=&gt; Rails 3.0.3 application starting in development on http://0.0.0.0:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+[2010-11-23 09:35:30] INFO  WEBrick 1.3.1
+[2010-11-23 09:35:30] INFO  ruby 1.9.2 (2010-08-18) [i686-linux]
+[2010-11-23 09:35:30] INFO  WEBrick::HTTPServer#start: pid=2910 port=3000
+
+</screen></para>
+
+    <para>Der Web-Server läuft nun auf allen IP-Adressen (0.0.0.0) des
+    Rechners auf Port 3000. Wie angezeigt läßt er sich mit <keycombo>
+        <keycap function="control">Ctrl</keycap>
+
+        <keycap>W</keycap>
+      </keycombo> stoppen.</para>
+
+    <para>Wenn man an den Befehl <emphasis role="bold"><command>rails
+    server</command></emphasis> die Option <emphasis
+    role="bold"><literal>-h</literal></emphasis> oder <emphasis
+    role="bold"><literal>--help</literal></emphasis> anhängt bekommt man eine
+    Hilfe angezeigt:<screen>debian:/usr/src/Cantina# <emphasis role="bold"><command>rails server -h</command></emphasis>
+Usage: rails server [mongrel, thin, etc] [options]
+  -p, --port=port         Runs Rails on the specified port.
+                          Default: 3000
+  -b, --binding=ip        Binds Rails to the specified ip.
+                          Default: 0.0.0.0
+  -c, --config=file       Use custom rackup configuration file
+  -d, --daemon            Make server run as a Daemon.
+  -u, --debugger          Enable ruby-debugging for the server.
+  -e, --environment=name  Specifies the environment to run
+                          this server under
+                          (test/development/production).
+                          Default: development
+  -P, --pid=pid           Specifies the PID file.
+                          Default: tmp/pids/server.pid
+
+  -h, --help              Show this help message.
+</screen></para>
+
+    <para>Will man den Server beispielsweise nur auf einer bestimmten
+    IP-Adresse des Rechners betreiben so geht dies mit der Option <emphasis
+    role="bold"><literal>-b</literal></emphasis> oder <emphasis
+    role="bold"><literal>--binding</literal></emphasis>, also z.B.<screen>debian:/usr/src/Cantina# <emphasis
+          role="bold"><command>rails server -b 127.0.0.1</command></emphasis>
+=&gt; Booting WEBrick
+=&gt; Rails 3.0.3 application starting in development on http://127.0.0.1:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+<replaceable>[...]</replaceable></screen></para>
 
     <para>...</para>
 
-    <para>rails server / rails s</para>
+    <para></para>
 
-    <para>Stoppen mit Ctrl-C.</para>
-
-    <para>...</para>
+    <para></para>
   </section>
 </section>

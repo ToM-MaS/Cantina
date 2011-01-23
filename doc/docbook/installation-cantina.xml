@@ -22,14 +22,9 @@
   <para>Voraussetzung: Installation von Ruby on Rails 3 auf Debian 5 (siehe
   <xref linkend="rails3-install-debian" />).</para>
 
-  <para>#TODO: Tarball? Oder Git? Mit welchen Credentials hat man
-  Zugriff?</para>
-
-  <para></para>
-
-  <para></para>
-
-  <para></para>
+  <para>Cantina ist verfügbar auf <uri
+  xlink:href="https://github.com/amooma/Cantina">https://github.com/amooma/Cantina</uri>
+  und kann von dort per Git installiert werden.</para>
 
   <section xml:id="rake-db-setup">
     <title>Anlegen der Datenbank</title>
@@ -111,11 +106,5 @@ Usage: rails server [mongrel, thin, etc] [options]
 =&gt; Call with -d to detach
 =&gt; Ctrl-C to shutdown server
 <replaceable>[...]</replaceable></screen></para>
-
-    <para>...</para>
-
-    <para></para>
-
-    <para></para>
   </section>
 </section>

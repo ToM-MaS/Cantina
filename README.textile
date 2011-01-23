@@ -73,6 +73,7 @@ rake db:seed
 
 rails server --binding=your.ip.add.ress
 
+p. Now your Cantina server ist up and running.
 
 h1. About the ERD.pdf 
 Rails ERD is a great plugin for Ruby on Rails that generates diagrams based on your Active Record models.

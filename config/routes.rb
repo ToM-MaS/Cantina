@@ -20,17 +20,17 @@ Cantina::Application.routes.draw do
 
   resources :phone_keys
 
+  match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
+
   # http://guides.rubyonrails.org/routing.html#nested-resources
   resources :phones do
     resources :sip_accounts
   end
 
-  # FIXME - do we need sip_accounts if we already have phones -> sip_accounts ?
   resources :sip_accounts
 
   resources :codecs
 
-  # FIXME - make this a nested route?
   resources :sip_account_codecs
 
   resources :phone_key_function_definitions

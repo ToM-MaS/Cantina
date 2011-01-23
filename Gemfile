@@ -32,6 +32,9 @@ gem 'annotate-models'
 # nicer table like output on the console
 gem 'hirb'
 
+# http://railscasts.com/episodes/234-simple-form
+gem "simple_form"
+
 # https://github.com/FooBarWidget/default_value_for
 gem 'default_value_for'
 

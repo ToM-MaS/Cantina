@@ -94,4 +94,11 @@ class PhonesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # Reboots the phone
+  def reboot
+    @phone = Phone.find(params[:id])
+    @phone.reboot
+    redirect_to(@phone, :notice => 'Phone is in the process of rebooting.')
+  end
 end

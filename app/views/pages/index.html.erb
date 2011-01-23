@@ -47,3 +47,7 @@ rails server
 	<% end %>	
 	<li><%= link_to "Create a new phone", new_phone_path %></li>	
 </ul>
+
+<h1>Misc</h1>
+<p>This server will provision the phones with a config that they will ask for new provisioning from 
+	<%= SERVER_IP_ADDRESS%> with port <%= SERVER_PORT %>. Feel free to change these values in config/initializers/cantina.rb</p>

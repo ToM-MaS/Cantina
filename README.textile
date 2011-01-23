@@ -76,9 +76,12 @@ rails server --binding=your.ip.add.ress
 p. Now your Cantina server ist up and running.
 
 h1. About the ERD.pdf 
-Rails ERD is a great plugin for Ruby on Rails that generates diagrams based on your Active Record models.
+
+p. Rails ERD is a great plugin for Ruby on Rails that generates diagrams based on your Active Record models.
 You'll find information at
 http://rails-erd.rubyforge.org/
 
-To render a new pdf:
-bc. rake erd title='Cantina - SIP Phone Provisioning' polymorphism=true indirect=true
+p. To render a new pdf:
+bc.. rake erd title='Cantina - SIP Phone Provisioning' polymorphism=true indirect=true
+
+p. You'll find the ERD.pdf file in the Cantina directory.

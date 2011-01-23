@@ -46,10 +46,17 @@ class Phone < ActiveRecord::Base
   # Can be rebooted
   has_many :reboot_requests, :order => 'start', :dependent => :destroy
 
-  # TODO muss noch getestet werden
   # log a provisioning
   def log_provisioning(memo = nil, succeeded = true)
     self.provisioning_log_entries.create(:memo => memo, :succeeded => true)
+  end
+  
+  def rebootable?
+    if self.phone_model.reboot_request_path.blank?
+      false
+    else
+      true
+    end    
   end
   
   # Reboots this phone

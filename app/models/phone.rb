@@ -14,6 +14,10 @@
 #
 
 class Phone < ActiveRecord::Base
+  default_value_for :ssl, false
+  default_value_for :http_port, 80
+  default_value_for :http_request_timeout, 5
+  
   # Validations
   #
   validates_presence_of :mac_address
@@ -51,6 +55,35 @@ class Phone < ActiveRecord::Base
   def log_provisioning(memo = nil, succeeded = true)
     self.provisioning_log_entries.create(:memo => memo, :succeeded => true)
   end
+  
+  # Reboots this phone
+  def reboot
+    reboot_request = RebootRequest.create(:phone_id => self.id)
+    require 'net/http'
+
+    http = Net::HTTP.new(self.ip_address, self.phone_model.http_port)
+    if (http)
+      http.use_ssl = self.phone_model.ssl
+      http.open_timeout = self.phone_model.http_request_timeout
+      http.read_timeout = self.phone_model.http_request_timeout
+      request = Net::HTTP::Get.new(self.phone_model.reboot_request_path, nil)
+      request.basic_auth(self.http_user, self.http_password)
+      response = http.request(request)
+
+      success = case response.code
+      when "200" then true
+      when "302" then true
+      else false
+      end
+      if success
+        reboot_request.update_attributes(:end => Time.now, :successful => true)
+      else
+        reboot_request.update_attributes(:end => Time.now, :successful => false)
+      end
+      return success
+    end
+  end
+  
   
   private
   

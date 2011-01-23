@@ -9,6 +9,10 @@ class CreatePhoneModels < ActiveRecord::Migration
       t.integer :max_number_of_phone_book_entries
       t.string :default_http_user
       t.string :default_http_password
+      t.integer :http_port
+      t.string :reboot_request_path
+      t.boolean :ssl
+      t.integer :http_request_timeout
 
       t.timestamps
     end

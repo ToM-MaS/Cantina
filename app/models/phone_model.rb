@@ -20,6 +20,9 @@ class PhoneModel < ActiveRecord::Base
   default_value_for :max_number_of_sip_accounts, 1
   default_value_for :number_of_keys, 0
   default_value_for :max_number_of_phone_book_entries, 0
+  default_value_for :ssl, false
+  default_value_for :http_port, 80
+  default_value_for :http_request_timeout, 5
 
   # Validations
   #

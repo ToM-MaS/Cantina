@@ -132,7 +132,7 @@ snom.phone_models.create(:name => 'Snom 870',
                                         ])
 
 snom.phone_models.each do |phone_model|
-  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'confirm.htm?REBOOT=yes', :ssl => true, :http_request_timeout => 5)
+  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'confirm.htm?REBOOT=yes', :http_request_timeout => 5)
 end
 
 Manufacturer.where(

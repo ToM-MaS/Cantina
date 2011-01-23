@@ -131,6 +131,10 @@ snom.phone_models.create(:name => 'Snom 870',
                           {:starts_with => '00041341'}
                                         ])
 
+snom.phone_models.each do |phone_model|
+  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'confirm.htm?REBOOT=yes', :ssl => true, :http_request_timeout => 5)
+end
+
 Manufacturer.where(
   :ieee_name => 'DeTeWe-Deutsche Telephonwerke'
 ).first.phone_models.create([

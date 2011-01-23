@@ -6,6 +6,9 @@ class PagesController < ApplicationController
     
     @popular_phones_models = Phone.count(:group => :phone_model_id, :limit => 5).keys.collect{|x| PhoneModel.find(x)}
     @popular_manufacturers = Phone.joins(:phone_model).count(:group => :manufacturer_id).keys.collect{|x| Manufacturer.find(x)}
+
+    rescue
+      redirect_to('/db_migrate_missing')
   end
 
 end

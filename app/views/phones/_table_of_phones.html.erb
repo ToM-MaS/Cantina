@@ -24,7 +24,11 @@
 <% end %>
       </ul>
     </td>
-    <td><%= link_to 'Reboot', phone_reboot_path(phone), :confirm => "Do you really want to reboot this #{phone.phone_model.name}?" %>
+    <td>
+	<% if phone.rebootable? %>
+    <%= link_to 'Reboot', phone_reboot_path(phone), :confirm => "Do you really want to reboot this #{phone.phone_model.name}?" %>
+    <% end %>
+    </td>
     <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
     <td><%= link_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

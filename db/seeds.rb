@@ -129,9 +129,9 @@ snom.phone_models.create(:name => 'Snom 870',
                         :number_of_keys => 12 ).
                         phone_model_mac_addresses.create([
                           {:starts_with => '00041341'}
-                                        ]
+                                        ])
 
-                                        
+
 # Define Snom keys:
 [
 	'Snom 190',

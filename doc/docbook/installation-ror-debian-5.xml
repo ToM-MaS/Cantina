@@ -11,11 +11,19 @@
   3.0 mit RVM auf Debian 5.0</title>
 
   <info>
-    <collab>
-      <person>
+    <authorgroup>
+      <author>
+        <personname><firstname>Stefan</firstname><surname>Wintermeyer</surname></personname>
+
+        <email>stefan.wintermeyer@amooma.de</email>
+      </author>
+
+      <author>
         <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
-      </person>
-    </collab>
+
+        <uri>http://www.kempgen.net/</uri>
+      </author>
+    </authorgroup>
   </info>
 
   <indexterm>
@@ -559,14 +567,5 @@ xyz@debian:~$ </screen></para>
 
     <para>Perfekt. Jetzt haben Sie Rails 3.0 installiert. <screen>xyz@debian:~$ <command>rails -v</command>
 Rails 3.0.0</screen></para>
-  </section>
-
-  <section xml:id="debian-install-danach">
-    <title xml:id="debian-install-danach.title">Und jetzt?</title>
-
-    <para>Wenn Sie noch nie mit Ruby gearbeitet haben, sollten Sie zuerst die
-    <xref linkend="ruby-grundlagen" /> lesen. Wenn Sie schon Ruby-Meister sind
-    und sich neu mit Rails beschäftigen wollen, dann empfehle ich Ihnen die
-    Lektüre von <xref linkend="erste_schritte_mit_rails" />.</para>
   </section>
 </section>

@@ -30,6 +30,8 @@ xml.settings {
 			xml.encode_display_name( 'on', :perm => 'R' )
 			xml.dtmf_payload_type( '101', :perm => 'RW' )
 			
+			
+			sip_accounts = {}
 			snom_sip_acct_idx = 0
 			@phone.sip_accounts.each { |sip_account|
 				# The sip_account.position which we get from the database
@@ -37,39 +39,70 @@ xml.settings {
 				# to be from 1 to 4, 7 or 12, depending on the phone model.
 				#snom_sip_acct_idx = sip_account.position
 				snom_sip_acct_idx += 1
+				sip_accounts[snom_sip_acct_idx] = sip_account
+			}
+			#puts "---------------------------------------------------------"
+			#pp sip_accounts
+			#puts "---------------------------------------------------------"
+			
+			max_sip_acct_idx = 12
+			(1..max_sip_acct_idx).each { |idx|
+				is_defined = (sip_accounts[idx] ? true : false)
+				sact = sip_accounts[idx]
+				sac = {
+					:id                       => (is_defined ? sact.id                       : nil ),
+					:name                     => (is_defined ? sact.name                     : ''  ),
+					:phone_id                 => (is_defined ? sact.phone_id                 : nil ),
+					:auth_user                => (is_defined ? sact.auth_user                : ''  ),
+					:user                     => (is_defined ? sact.user                     : ''  ),
+					:password                 => (is_defined ? sact.password                 : ''  ),
+					:registrar                => (is_defined ? sact.registrar                : nil ),
+					:registrar_port           => (is_defined ? sact.registrar_port           : nil ),
+					:outbound_proxy           => (is_defined ? sact.outbound_proxy           : nil ),
+					:outbound_proxy_port      => (is_defined ? sact.outbound_proxy_port      : nil ),
+					:sip_proxy                => (is_defined ? sact.sip_proxy                : nil ),
+					:sip_proxy_port           => (is_defined ? sact.sip_proxy_port           : nil ),
+					:realm                    => (is_defined ? sact.realm                    : nil ),
+					:screen_name              => (is_defined ? sact.screen_name              : nil ),
+					:display_name             => (is_defined ? sact.display_name             : nil ),
+					:registration_expiry_time => (is_defined ? sact.registration_expiry_time : nil ),
+					:dtmf_mode                => (is_defined ? sact.dtmf_mode                : nil ),
+					:remote_password          => (is_defined ? sact.remote_password          : nil ),
+					:position                 => (is_defined ? sact.position                 : nil ),
+				}
 				
-				saopts_r  = { :idx => snom_sip_acct_idx, :perm => 'R'  }
-				saopts_rw = { :idx => snom_sip_acct_idx, :perm => 'RW' }
+				saopts_r  = { :idx => idx, :perm => 'R'  }
+				saopts_rw = { :idx => idx, :perm => 'RW' }
 								
-				xml.comment! "SIP account position #{sip_account.position}"  # <!-- a comment -->
-				xml.user_active(            'on'                        , saopts_rw )
-				xml.user_pname(             sip_account.auth_user       , saopts_r  )
-				xml.user_pass(              sip_account.password        , saopts_r  )
-				xml.user_host(              sip_account.registrar       , saopts_r  )
-				xml.user_outbound(          sip_account.outbound_proxy  , saopts_r  )
-				xml.user_name(              sip_account.user            , saopts_r  )
-				xml.user_realname(          sip_account.display_name    , saopts_r  )
-				xml.user_idle_text(         sip_account.screen_name     , saopts_r  )
-				xml.user_expiry(            sip_account.registration_expiry_time || 3600 , saopts_r )
-				xml.user_server_type(       'default'                   , saopts_rw )
-				xml.user_send_local_name(   'on'                        , saopts_rw )
-				xml.user_dtmf_info(         sip_account.dtmf_mode == 'rfc2833' ? 'off' : 'sip_info_only' , saopts_r )
-				xml.user_dp_exp(            ''                          , saopts_rw )
-				xml.user_dp_str(            ''                          , saopts_rw )
-				xml.user_dp(                ''                          , saopts_rw )
-				xml.user_q(                 '1.0'                       , saopts_rw )
-				xml.user_full_sdp_answer(   'on'                        , saopts_rw )
-				xml.user_failover_identity( 'none'                      , saopts_rw )
-				# sip_account.realm
-				# sip_account.registrar_port
-				# sip_account.outbound_proxy_port
-				# sip_account.sip_proxy_port
-				# sip_account.sip_proxy
-				# sip_account.remote_password
+				xml.comment! "SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
+				xml.user_active(            (is_defined ? 'on' : 'off') , saopts_rw )
+				xml.user_pname(             sac[:auth_user]       , saopts_r  )
+				xml.user_pass(              sac[:password]        , saopts_r  )
+				xml.user_host(              sac[:registrar]       , saopts_r  )
+				xml.user_outbound(          sac[:outbound_proxy]  , saopts_r  )
+				xml.user_name(              sac[:user]            , saopts_r  )
+				xml.user_realname(          sac[:display_name]    , saopts_r  )
+				xml.user_idle_text(         sac[:screen_name]     , saopts_r  )
+				xml.user_expiry(            sac[:registration_expiry_time] || 3600 , saopts_r )
+				xml.user_server_type(       'default'             , saopts_rw )
+				xml.user_send_local_name(   'on'                  , saopts_rw )
+				xml.user_dtmf_info(         sac[:dtmf_mode] == 'rfc2833' ? 'off' : 'sip_info_only' , saopts_r )
+				xml.user_dp_exp(            ''                    , saopts_rw )
+				xml.user_dp_str(            ''                    , saopts_rw )
+				xml.user_dp(                ''                    , saopts_rw )
+				xml.user_q(                 '1.0'                 , saopts_rw )
+				xml.user_full_sdp_answer(   'on'                  , saopts_rw )
+				xml.user_failover_identity( 'none'                , saopts_rw )
+				# sac.realm
+				# sac.registrar_port
+				# sac.outbound_proxy_port
+				# sac.sip_proxy_port
+				# sac.sip_proxy
+				# sac.remote_password
 				
 				
 				# FIXME - read codecs from the database once http://groups.google.com/group/amooma-dev/browse_thread/thread/b126253ccc0419ac has been solved
-				xml.comment! "codecs for SIP account position #{sip_account.position}"  # <!-- a comment -->
+				xml.comment! "codecs for SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
 				# See http://wiki.snom.com/Settings/codec_name
 				# (Note: Snom's documentation is wrong.)
 				[

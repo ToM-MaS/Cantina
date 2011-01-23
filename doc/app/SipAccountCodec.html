@@ -65,6 +65,15 @@
 
 			<!-- Method Quickref -->
 			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-check_if_the_phone_model_offers_this_codec">#check_if_the_phone_model_offers_this_codec</a></li>
+					
+				</ul>
+			</div>
+			
 
 			<!-- Included Modules -->
 			
@@ -142,6 +151,8 @@
 				
 					<li><a href="./PhoneKeyFunctionDefinitionsHelper.html">PhoneKeyFunctionDefinitionsHelper</a></li>
 				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
 					<li><a href="./PhoneKeysController.html">PhoneKeysController</a></li>
 				
 					<li><a href="./PhoneKeysHelper.html">PhoneKeysHelper</a></li>
@@ -176,11 +187,15 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
+					<li><a href="./RebootRequestsController.html">RebootRequestsController</a></li>
+				
+					<li><a href="./RebootRequestsHelper.html">RebootRequestsHelper</a></li>
+				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
-				
-					<li><a href="./SipAccountCodecsController.html">SipAccountCodecsController</a></li>
 				
 					<li><a href="./SipAccountCodecsHelper.html">SipAccountCodecsHelper</a></li>
 				
@@ -202,7 +217,7 @@
 		<div id="description">
 			<h2>Schema Information</h2>
 <p>
-Schema version: 20110120120511
+Schema version: 20110121121114
 </p>
 <p>
 Table name: sip_account_codecs
@@ -225,6 +240,52 @@ Table name: sip_account_codecs
 
 		<!-- Methods -->
 		
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="check-if-the-phone-model-offers-this-codec-method" class="method-detail ">
+				<a name="method-i-check_if_the_phone_model_offers_this_codec"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check_if_the_phone_model_offers_this_codec</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+A sip_account can only uses codecs which are codecs for the phone_model  of
+the phone.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="check-if-the-phone-model-offers-this-codec-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account_codec.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_the_phone_model_offers_this_codec</span>
+32:     <span class="ruby-identifier">phone_model</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>
+33:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">codecs</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">codec_id</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+34:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:codec_id</span>, <span class="ruby-node">&quot;The PhoneModel #{phone_model.name} (ID #{phone_model.id}) doesn't support this codec (ID #{self.codec_id}).&quot;</span>)
+35:     <span class="ruby-keyword kw">end</span>
+36:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

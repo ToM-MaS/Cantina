@@ -153,6 +153,8 @@
 				
 					<li><a href="./PhoneKeyFunctionDefinitionsHelper.html">PhoneKeyFunctionDefinitionsHelper</a></li>
 				
+					<li><a href="./PhoneKeyToFunctionMapping.html">PhoneKeyToFunctionMapping</a></li>
+				
 					<li><a href="./PhoneKeysController.html">PhoneKeysController</a></li>
 				
 					<li><a href="./PhoneKeysHelper.html">PhoneKeysHelper</a></li>
@@ -187,11 +189,15 @@
 				
 					<li><a href="./ProvisioningLogEntry.html">ProvisioningLogEntry</a></li>
 				
+					<li><a href="./RebootRequest.html">RebootRequest</a></li>
+				
+					<li><a href="./RebootRequestsController.html">RebootRequestsController</a></li>
+				
+					<li><a href="./RebootRequestsHelper.html">RebootRequestsHelper</a></li>
+				
 					<li><a href="./SipAccount.html">SipAccount</a></li>
 				
 					<li><a href="./SipAccountCodec.html">SipAccountCodec</a></li>
-				
-					<li><a href="./SipAccountCodecsController.html">SipAccountCodecsController</a></li>
 				
 					<li><a href="./SipAccountCodecsHelper.html">SipAccountCodecsHelper</a></li>
 				
@@ -246,9 +252,10 @@
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/manufacturer_aastra_controller.rb, line 14</span>
-14: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-15:     <span class="ruby-ivar">@phones</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;DeTeWe-Deutsche Telephonwerke&quot;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">phones</span>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_aastra_controller.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+14:     <span class="ruby-identifier">mfc</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;DeTeWe-Deutsche Telephonwerke&quot;</span>).<span class="ruby-identifier">first</span>
+15:     <span class="ruby-ivar">@phones</span> = <span class="ruby-identifier">mfc</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mfc</span>.<span class="ruby-identifier">phones</span> <span class="ruby-operator">:</span> []
 16: 
 17:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 18:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
@@ -286,16 +293,15 @@
 						id="show-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/manufacturer_aastra_controller.rb, line 3</span>
- 3: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
- 4:         <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
- 5:       <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:mac_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>).<span class="ruby-identifier">first</span>
- 6:       
+ 3:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+ 4:     <span class="ruby-ivar">@mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>]
+ 5:     <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
+ 6:     <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:mac_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>).<span class="ruby-identifier">first</span>
  7: 
- 8: 
- 9:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-10:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">txt</span>
-11:     <span class="ruby-keyword kw">end</span>
-12: <span class="ruby-keyword kw">end</span></pre>
+ 8:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 9:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">txt</span>
+10:     <span class="ruby-keyword kw">end</span>
+11:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20110122171701
+#
+# Table name: reboot_requests
+#
+#  id         :integer         not null, primary key
+#  phone_id   :integer
+#  start      :datetime
+#  end        :datetime
+#  successful :boolean
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class RebootRequest < ActiveRecord::Base
   validates_presence_of :phone_id
   validates_numericality_of :phone_id, :only_integer => true, :greater_than_or_equal_to => 0

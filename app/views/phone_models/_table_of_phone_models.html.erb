@@ -5,7 +5,6 @@
     <th>Number of phones</th>
     <th>Max number of SIP accounts</th>
     <th>Number of keys</th>
-    <th>Max number of phone book entries</th>
     <th></th>
     <th></th>
   </tr>
@@ -17,7 +16,6 @@
     <td><%= phone_model.phones.count %></td>
     <td><%= phone_model.max_number_of_sip_accounts %></td>
     <td><%= phone_model.number_of_keys %></td>
-    <td><%= phone_model.max_number_of_phone_book_entries %></td>
     <td><%= link_to 'Edit', edit_phone_model_path(phone_model) %></td>
     <td><%= link_to 'Destroy', phone_model, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

@@ -14,10 +14,6 @@
 #
 
 class Phone < ActiveRecord::Base
-  default_value_for :ssl, false
-  default_value_for :http_port, 80
-  default_value_for :http_request_timeout, 5
-  
   # Validations
   #
   validates_presence_of :mac_address

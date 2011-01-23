@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(:version => 20110122171701) do
     t.integer  "manufacturer_id"
     t.integer  "max_number_of_sip_accounts"
     t.integer  "number_of_keys"
-    t.integer  "max_number_of_phone_book_entries"
     t.string   "default_http_user"
     t.string   "default_http_password"
     t.integer  "http_port"

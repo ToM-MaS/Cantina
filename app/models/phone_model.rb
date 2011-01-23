@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110121121114
+# Schema version: 20110122171701
 #
 # Table name: phone_models
 #
@@ -9,9 +9,12 @@
 #  manufacturer_id                  :integer
 #  max_number_of_sip_accounts       :integer
 #  number_of_keys                   :integer
-#  max_number_of_phone_book_entries :integer
 #  default_http_user                :string(255)
 #  default_http_password            :string(255)
+#  http_port                        :integer
+#  reboot_request_path              :string(255)
+#  ssl                              :boolean
+#  http_request_timeout             :integer
 #  created_at                       :datetime
 #  updated_at                       :datetime
 #
@@ -19,7 +22,9 @@
 class PhoneModel < ActiveRecord::Base
   default_value_for :max_number_of_sip_accounts, 1
   default_value_for :number_of_keys, 0
-  default_value_for :max_number_of_phone_book_entries, 0
+  default_value_for :ssl, false
+  default_value_for :http_port, 80
+  default_value_for :http_request_timeout, 5
 
   # Validations
   #
@@ -34,9 +39,6 @@ class PhoneModel < ActiveRecord::Base
 
   validates_presence_of     :number_of_keys
   validates_numericality_of :number_of_keys, :only_integer => true, :greater_than_or_equal_to => 0
-
-  validates_presence_of     :max_number_of_phone_book_entries
-  validates_numericality_of :max_number_of_phone_book_entries, :only_integer => true, :greater_than_or_equal_to => 0
 
   validate :does_a_manufacturer_to_this_phone_model_exist
   validate :validate_url

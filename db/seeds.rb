@@ -130,17 +130,44 @@ snom.phone_models.create(:name => 'Snom 870',
                         phone_model_mac_addresses.create([
                           {:starts_with => '00041341'}
                                         ])
+# Define Snom keys:
+[ 
+  'Snom 190',
+	'Snom 300',
+	'Snom 320',
+	'Snom 360',
+	'Snom 370',
+	'Snom 820',
+	'Snom 821',
+	'Snom 870'
+].each { |pm_name|
+	pm = PhoneModel.where(:name => pm_name).first
+	#num_exp_modules = 3
+	num_exp_modules = 0	
+	max_key_idx = pm.number_of_keys.to_i + (42 * num_exp_modules) - 1
+	if max_key_idx >= 0
+		(0..max_key_idx).each { |idx|
+			pm.phone_model_keys.create(
+				{ :position => idx, :name => "P #{(1+idx).to_s.rjust(3,'0')} (fkey[#{idx}])" }
+				# FIXME: position is not stored correctly
+			)
+		}
+	end
+}
+
+
+# ...
 
 snom.phone_models.each do |phone_model|
-  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'confirm.htm?REBOOT=yes', :ssl => true, :http_request_timeout => 5)
+  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'confirm.htm?REBOOT=yes', :http_request_timeout => 5)
 end
 
 Manufacturer.where(
   :ieee_name => 'DeTeWe-Deutsche Telephonwerke'
 ).first.phone_models.create([
-  { :name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30, :max_number_of_phone_book_entries => 200 },
-  { :name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26, :max_number_of_phone_book_entries => 200 },
-  { :name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6, :max_number_of_phone_book_entries => 200 },
+  { :name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30 },
+  { :name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26 },
+  { :name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6 },
   { :name => '51i' }
 ])
 

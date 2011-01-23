@@ -6,4 +6,8 @@ class RebootRequest < ActiveRecord::Base
   
   default_value_for :start, Time.now
   default_value_for :successful, false
+  
+  def self.trigger_reboot(mac_address)
+    # TODO Peter: Hier muss das Reboot Zeugs rein.
+  end
 end

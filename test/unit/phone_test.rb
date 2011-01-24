@@ -83,6 +83,13 @@ class PhoneTest < ActiveSupport::TestCase
     end
   end
   
+  
+  # Test if Phone has a log_provisioning() instance method.
+  should "have a \"log_provisioning\" instance method" do
+    assert Phone.new().respond_to?( :log_provisioning )
+  end
+  
+  
   # check a full setup
   #
   should "have all bells and whistles" do

@@ -22,7 +22,7 @@ class Phone < ActiveRecord::Base
 
   validates_uniqueness_of :ip_address, :allow_nil => true, :allow_blank => true
   validates_format_of :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
-  # TODO test for '' as not unqiueness
+  # TODO test for '' as not uniqueness
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id
@@ -46,10 +46,17 @@ class Phone < ActiveRecord::Base
   # Can be rebooted
   has_many :reboot_requests, :order => 'start', :dependent => :destroy
 
-  # TODO muss noch getestet werden
   # log a provisioning
   def log_provisioning(memo = nil, succeeded = true)
     self.provisioning_log_entries.create(:memo => memo, :succeeded => true)
+  end
+  
+  def rebootable?
+    if self.phone_model.reboot_request_path.blank?
+      false
+    else
+      true
+    end    
   end
   
   # Reboots this phone

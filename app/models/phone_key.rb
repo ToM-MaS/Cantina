@@ -18,16 +18,19 @@ class PhoneKey < ActiveRecord::Base
 	belongs_to :phone_key_function_definition
 	
 	validates_presence_of      :value
+	
 	validates_presence_of      :phone_model_key_id
 	validates_numericality_of  :phone_model_key_id, :only_integer => true
+	
 	validates_presence_of      :phone_key_function_definition_id
 	validates_numericality_of  :phone_key_function_definition_id, :only_integer => true
-	validates_presence_of      :sip_account_id
-  validates_numericality_of  :sip_account_id, :only_integer => true
-
-  #TODO Validate Only existing sip_account_id
+	
 	# is this a good way?:
 	#validates_presence_of      :phone_key_function_definition
+	
+	validates_presence_of      :sip_account_id
+	validates_numericality_of  :sip_account_id, :only_integer => true
+	#TODO Validate Only existing sip_account_id
 	
 	validate :validate_softkey
 	validate :key_must_be_a_possible_key_from_the_phone_model

@@ -52,11 +52,7 @@ class Phone < ActiveRecord::Base
   end
   
   def rebootable?
-    if self.phone_model.reboot_request_path.blank?
-      false
-    else
-      true
-    end    
+    return ((! self.phone_model.reboot_request_path.blank?) && (! self.ip_address.blank?))
   end
   
   # Reboots this phone

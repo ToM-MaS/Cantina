@@ -140,6 +140,24 @@
   Ruby-on-Rails-Projekten, was die EInstiegshürde für andere Entwickler
   niedrig hält.</para>
 
+  <para>Eine grafische Übersicht zu den Datenstrukturen findet sich in der
+  mitgelieferten Datei <filename>ERD.pdf</filename> in Form eines
+  Entity-Relationship-Diagramms.</para>
+
+  <figure pgwide="1">
+    <title>ER-Diagramm</title>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata align="center" fileref="../../ERD.pdf" format="PDF"></imagedata>
+      </imageobject>
+
+      <textobject>
+        <para>ER-Diagramm zum Datenbank-Schema</para>
+      </textobject>
+    </mediaobject>
+  </figure>
+
   <para>Im folgenden wird erklärt was die einzelnen Daten-Modelle enthalten.
   Wir gehen hier zwar zwecks leichterer Nachschlagbarkeit in alphabetischer
   Reihenfolge vor, jedoch sei schon mal vorab gesagt daß die zentralen

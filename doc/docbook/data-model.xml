@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="data-model" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Daten-Modell</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri>http://www.amooma.de/</uri>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Wie bei jedem Ruby-on-Rails-Projekt befinden sich die
+  Datenbank-<quote><foreignphrase xml:lang="en">Models</foreignphrase></quote>
+  im Unterverzeichnis <filename>app/models/</filename>. In jeder Datei wird
+  eine Klasse definiert, die eine entsprechende Tabelle in der Datenbank hat.
+  Das komplette Schema findet sich in <filename>db/schema.rb</filename>. Auch
+  in den jeweiligen <foreignphrase xml:lang="en">Models</foreignphrase> ist
+  jeweils oben in einem Kommentar die Tabellenstruktur beschrieben.</para>
+
+  <para>Ein Daten-Modell hat eine Reihe von Attributen (bzw. Feldern),
+  Relationen zu anderen Daten-Modellen, sowie Methoden zur Validierung von
+  übergebenen Daten für die Attribute.</para>
+
+  <para>In Cantina gibt es folgende Daten-Modelle:<informaltable>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Modell</entry>
+
+            <entry>Dateiname</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><classname>Codec</classname></entry>
+
+            <entry><filename>codec.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>Manufacturer</classname></entry>
+
+            <entry><filename>manufacturer.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>Oui</classname></entry>
+
+            <entry><filename>oui.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneKeyFunctionDefinition</classname></entry>
+
+            <entry><filename>phone_key_function_definition.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneKey</classname></entry>
+
+            <entry><filename>phone_key.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneKeyToFunctionMapping</classname></entry>
+
+            <entry><filename>phone_key_to_function_mapping.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneModelCodec</classname></entry>
+
+            <entry><filename>phone_model_codec.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneModelKey</classname></entry>
+
+            <entry><filename>phone_model_key.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneModelMacAddress</classname></entry>
+
+            <entry><filename>phone_model_mac_address.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>PhoneModel</classname></entry>
+
+            <entry><filename>phone_model.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>Phone</classname></entry>
+
+            <entry><filename>phone.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>ProvisioningLogEntry</classname></entry>
+
+            <entry><filename>provisioning_log_entry.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>RebootRequest</classname></entry>
+
+            <entry><filename>reboot_request.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>SipAccountCodec</classname></entry>
+
+            <entry><filename>sip_account_codec.rb</filename></entry>
+          </row>
+
+          <row>
+            <entry><classname>SipAccount</classname></entry>
+
+            <entry><filename>sip_account.rb</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable></para>
+
+  <para>Die Dateinamen und Klassen folgen der Standard-Konvention von
+  Ruby-on-Rails-Projekten, was die EInstiegshürde für andere Entwickler
+  niedrig hält.</para>
+
+  <para>Im folgenden wird erklärt was die einzelnen Daten-Modelle enthalten.
+  Wir gehen hier zwar zwecks leichterer Nachschlagbarkeit in alphabetischer
+  Reihenfolge vor, jedoch sei schon mal vorab gesagt daß die zentralen
+  Daten-Modelle <classname>Phone</classname> (die Telefone) und
+  <classname>SipAccount</classname> (die SIP-Accounts) sind.</para>
+
+  <para>Dabei sind immer auch die entsprechenden direkten Relationen
+  angegeben. Wir verwenden hierfür eine an ActiveRecord-Assoziationen
+  angelehnte Schreibweise, allerdings gleich mit einem Verweis bzw. Link auf
+  das jeweilige referenzierte Daten-Modell.</para>
+
+  <section xml:id="model-codec">
+    <title>Codec</title>
+
+    <para>Enthält die relevanten Audio-Codecs (<foreignphrase
+    xml:lang="en">codecs</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>has_many <xref linkend="model-sip-account-codec" /></para>
+          </listitem>
+
+          <listitem>
+            <para>has_many <xref linkend="model-phone-model-codec" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-manufacturer">
+    <title>Manufacturer</title>
+
+    <para>Enthält die Hersteller (<foreignphrase
+    xml:lang="en">manufacturer</foreignphrase>) der Telefon-Modelle
+    (<foreignphrase xml:lang="en">phone models</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>has_many <xref linkend="model-phone-model" /></para>
+          </listitem>
+
+          <listitem>
+            <para>has_many <xref linkend="model-oui" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-oui">
+    <title>Oui</title>
+
+    <para>Enthält die IEEE-Ethernet-OUIs (<link
+    xlink:href="http://de.wikipedia.org/wiki/MAC-Adresse#Herstellerkennungen">http://de.wikipedia.org/wiki/MAC-Adresse#Herstellerkennungen</link>)
+    der Hersteller (<foreignphrase
+    xml:lang="en">manufacturers</foreignphrase>).</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>belongs_to <xref linkend="model-manufacturer" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-key-function-definition">
+    <title>PhoneKeyFunctionDefinition</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-key">
+    <title>PhoneKey</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-key-to-function-mapping">
+    <title>PhoneKeyToFunctionMapping</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-model-codec">
+    <title>PhoneModelCodec</title>
+
+    <para>Enthält die auf den jeweiligen Telefon-Modellen (<foreignphrase
+    xml:lang="en">phone models</foreignphrase>) verfügbaren Codecs
+    (<foreignphrase xml:lang="en">codecs</foreignphrase>).</para>
+  </section>
+
+  <section xml:id="model-phone-model-key">
+    <title>PhoneModelKey</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-model-mac-address">
+    <title>PhoneModelMacAddress</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-model">
+    <title>PhoneModel</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone">
+    <title>Phone</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-provisioning-log-entry">
+    <title>ProvisioningLogEntry</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-reboot-request">
+    <title>RebootRequest</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-sip-account-codec">
+    <title>SipAccountCodec</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-sip-account">
+    <title>SipAccount</title>
+
+    <para></para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+</chapter>

@@ -42,6 +42,26 @@ Codec.create(:name => 'h263')
 Codec.create(:name => 'h263+')
 Codec.create(:name => 'h264')
 
+
+
+
+
+
+# Softkey functions:
+# DO NOT RENAME THEM! The name is magic and serves as an identifier!
+#
+PhoneKeyFunctionDefinition.create([
+  { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
+  { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
+  { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
+  { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil },
+  
+])
+
+
+
+
+
 # Phone Models
 #
 
@@ -133,14 +153,14 @@ snom.phone_models.create(:name => 'Snom 870',
                                         ])
 # Define Snom keys:
 [ 
-  'Snom 190',
+	'Snom 190',
 	'Snom 300',
 	'Snom 320',
 	'Snom 360',
 	'Snom 370',
 	'Snom 820',
 	'Snom 821',
-	'Snom 870'
+	'Snom 870',
 ].each { |pm_name|
 	pm = PhoneModel.where(:name => pm_name).first
 	#num_exp_modules = 3
@@ -148,12 +168,16 @@ snom.phone_models.create(:name => 'Snom 870',
 	max_key_idx = pm.number_of_keys.to_i + (42 * num_exp_modules) - 1
 	if max_key_idx >= 0
 		(0..max_key_idx).each { |idx|
+			key_title = "P #{(1+idx).to_s.rjust(3,'0')} (fkey[#{idx}])"
 			pm.phone_model_keys.create(
-				{ :position => idx, :name => "P #{(1+idx).to_s.rjust(3,'0')} (fkey[#{idx}])" }
-				# FIXME: position is not stored correctly
+				{ :position => idx, :name => key_title }
 			)
+			
+			pm.phone_model_keys.where( :name => key_title ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
 		}
 	end
+	
+	
 }
 
 
@@ -191,17 +215,6 @@ PhoneModel.all.each do |phone_model|
 end
 
 
-
-# Softkey functions:
-# DO NOT RENAME THEM! The name is magic and serves as an identifier!
-#
-PhoneKeyFunctionDefinition.create([
-  { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
-  { :name => 'ActionURL'        , :type_of_class => 'url'     , :regex_validation => nil },
-  { :name => 'Line'             , :type_of_class => 'integer' , :regex_validation => nil },
-  
-])
 
 
 

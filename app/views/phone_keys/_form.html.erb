@@ -21,7 +21,7 @@
   <div class="field">
     <%= f.label :phone_model_key_id %><br />
     <%= f.select( :phone_model_key_id,
-      @phone_model_keys.collect {|r| [ "#{r.name} (position #{r.position.to_s})", r.id ] },
+      @phone_model_keys.collect {|r| [ "#{r.name} (pos. #{r.position.to_s}) for #{r.phone_model.name}", r.id ] },
       { :include_blank => false, :selected => @phone_key.phone_model_key_id }
     ) %>
   </div>

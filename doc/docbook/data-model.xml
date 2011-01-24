@@ -14,7 +14,8 @@
       <author>
         <orgname>Amooma GmbH</orgname>
 
-        <uri>http://www.amooma.de/</uri>
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
       </author>
     </authorgroup>
   </info>
@@ -148,7 +149,10 @@
   <para>Dabei sind immer auch die entsprechenden direkten Relationen
   angegeben. Wir verwenden hierfür eine an ActiveRecord-Assoziationen
   angelehnte Schreibweise, allerdings gleich mit einem Verweis bzw. Link auf
-  das jeweilige referenzierte Daten-Modell.</para>
+  das jeweilige referenzierte Daten-Modell. Die verwendeten Assoziationen
+  bedeuten: <methodname>has_many</methodname> = <quote>hat viele</quote> (0,
+  1, oder mehrere), <methodname>belongs_to</methodname> = <quote>gehört
+  zu</quote> (genau eine).</para>
 
   <section xml:id="model-codec">
     <title>Codec</title>
@@ -161,11 +165,13 @@
 
       <para><itemizedlist>
           <listitem>
-            <para>has_many <xref linkend="model-sip-account-codec" /></para>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account-codec" /></para>
           </listitem>
 
           <listitem>
-            <para>has_many <xref linkend="model-phone-model-codec" /></para>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-model-codec" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -183,11 +189,13 @@
 
       <para><itemizedlist>
           <listitem>
-            <para>has_many <xref linkend="model-phone-model" /></para>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-model" /></para>
           </listitem>
 
           <listitem>
-            <para>has_many <xref linkend="model-oui" /></para>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-oui" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -206,7 +214,8 @@
 
       <para><itemizedlist>
           <listitem>
-            <para>belongs_to <xref linkend="model-manufacturer" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-manufacturer" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -215,14 +224,21 @@
   <section xml:id="model-phone-key-function-definition">
     <title>PhoneKeyFunctionDefinition</title>
 
-    <para></para>
+    <para>Enthält die verfügbaren Funktionen von Telefon-Tasten
+    (<foreignphrase xml:lang="en">phone keys</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key-to-function-mapping" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -231,14 +247,26 @@
   <section xml:id="model-phone-key">
     <title>PhoneKey</title>
 
-    <para></para>
+    <para>Enthält die zu den SIP-Accounts (<foreignphrase xml:lang="en">sip
+    accounts</foreignphrase>) gesetzten Softkeys.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-model-key" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-key-function-definition" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -247,14 +275,21 @@
   <section xml:id="model-phone-key-to-function-mapping">
     <title>PhoneKeyToFunctionMapping</title>
 
-    <para></para>
+    <para>Enthält eine Umsetzung der Telefon-Tasten auf
+    Tasten-Funktionen.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-model-key" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-key-function-definition" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -266,19 +301,52 @@
     <para>Enthält die auf den jeweiligen Telefon-Modellen (<foreignphrase
     xml:lang="en">phone models</foreignphrase>) verfügbaren Codecs
     (<foreignphrase xml:lang="en">codecs</foreignphrase>).</para>
-  </section>
-
-  <section xml:id="model-phone-model-key">
-    <title>PhoneModelKey</title>
-
-    <para></para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-model" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-codec" /></para>
+          </listitem>
+        </itemizedlist></para>
+    </formalpara>
+  </section>
+
+  <section xml:id="model-phone-model-key">
+    <title>PhoneModelKey</title>
+
+    <para>Enhält die auf dem jeweiligen Telefon-Model (<foreignphrase
+    xml:lang="en">phone model</foreignphrase>) verfügbaren Tasten.</para>
+
+    <formalpara>
+      <title>Verknüpfungen</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-model" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key-to-function-mapping" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key-function-definition" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -287,14 +355,15 @@
   <section xml:id="model-phone-model-mac-address">
     <title>PhoneModelMacAddress</title>
 
-    <para></para>
+    <para>Enthält bekannte MAC-Adressen zu den Telefon-Modellen.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-model" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -303,14 +372,36 @@
   <section xml:id="model-phone-model">
     <title>PhoneModel</title>
 
-    <para></para>
+    <para>Enthält die verfügbaren Telefon-Modelle (<foreignphrase
+    xml:lang="en">phone models</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-manufacturer" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-model-key" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-model-mac-address" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-model-codec" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -319,14 +410,36 @@
   <section xml:id="model-phone">
     <title>Phone</title>
 
-    <para></para>
+    <para>Enthält die Telefone (<foreignphrase
+    xml:lang="en">phones</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone-model" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-provisioning-log-entry" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-reboot-request" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -335,14 +448,17 @@
   <section xml:id="model-provisioning-log-entry">
     <title>ProvisioningLogEntry</title>
 
-    <para></para>
+    <para>Enthält Provisioning-Log-Einträge (<foreignphrase
+    xml:lang="en">provisioning log entries</foreignphrase>) zu den Telefonen
+    (<foreignphrase xml:lang="en">phones</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -351,14 +467,17 @@
   <section xml:id="model-reboot-request">
     <title>RebootRequest</title>
 
-    <para></para>
+    <para>Enthält Neustart-Anfragen (<foreignphrase xml:lang="en">reboot
+    requests</foreignphrase>) zu den Telefonen (<foreignphrase
+    xml:lang="en">phones</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -367,14 +486,22 @@
   <section xml:id="model-sip-account-codec">
     <title>SipAccountCodec</title>
 
-    <para></para>
+    <para>Enthält die den SIP-Accounts (<foreignphrase xml:lang="en">sip
+    accounts</foreignphrase>) zugeordneten Codecs (<foreignphrase
+    xml:lang="en">codecs</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-sip-account" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-codec" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>
@@ -383,14 +510,29 @@
   <section xml:id="model-sip-account">
     <title>SipAccount</title>
 
-    <para></para>
+    <para>Enthält die auf die Telefone (<foreignphrase
+    xml:lang="en">phones</foreignphrase>) zu provisionierenden SIP-Accounts.
+    Zu einem SIP-Account gehören Softkeys (<foreignphrase xml:lang="en">phone
+    keys</foreignphrase>) und zu verwendende Codecs (<foreignphrase
+    xml:lang="en">codecs</foreignphrase>).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
 
       <para><itemizedlist>
           <listitem>
-            <para>xxxxxxxxxx <xref linkend="xxxxxxxxxxxxxxxxxxxxxx" /></para>
+            <para><methodname>belongs_to</methodname> <xref
+            linkend="model-phone" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-phone-key" /></para>
+          </listitem>
+
+          <listitem>
+            <para><methodname>has_many</methodname> <xref
+            linkend="model-sip-account-codec" /></para>
           </listitem>
         </itemizedlist></para>
     </formalpara>

@@ -8,9 +8,9 @@ Cantina::Application.routes.draw do
   
   resources :provisioning_log_entries, :only => [:index, :show]
 
-  match 'aastra/:mac_address.cfg'  => 'manufacturer_aastra#show', :format => 'txt'
-  match 'tiptel/:mac_address.cfg'  => 'manufacturer_tiptel#show', :format => 'txt'
-  match 'snom/-:mac_address'  => 'manufacturer_snom#show', :format => 'xml'
+  match ':mac_address.cfg'  => 'manufacturer_aastra#show', :format => 'txt', :constraints  => { :mac_address  => /((003042)|(00085D)|(aastra)).*/ }
+  match ':mac_address.cfg'  => 'manufacturer_tiptel#show', :format => 'txt', :constraints  => { :mac_address  => /001565.*/ }
+  match '-:mac_address' => 'manufacturer_snom#show', :format => 'xml', :constraints  => { :mac_address  => /000413.*/ }
 
   get "pages/index"
   

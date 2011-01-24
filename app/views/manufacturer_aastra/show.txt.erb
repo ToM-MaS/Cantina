@@ -6,11 +6,11 @@ time format: 1
 date format: 11
 time zone name: DE-Berlin
 
-#global SIP settings
-sip proxy ip:
-sip proxy port: 5060
-sip registrar ip:
-sip registrar port: 5060
+# global SIP settings
+sip proxy ip: 0.0.0.0
+sip proxy port: 0
+sip registrar ip: 0.0.0.0
+sip registrar port: 0
 sip registration period: 3600
 sip nortel nat support: 0
 sip nortel nat timer: 0
@@ -60,13 +60,13 @@ sip line<%= sip_account.position %> mode: 0
 sip line<%= sip_account.position %> user name: <%= sip_account.user %>
 sip line<%= sip_account.position %> display name: <%= sip_account.display_name %>
 sip line<%= sip_account.position %> screen name: <%= sip_account.screen_name %>
-sip line<%= sip_account.position %> proxy ip: <%= sip_account.sip_proxy %>
-sip line<%= sip_account.position %> proxy port: <%= sip_account.sip_proxy_port %>
-sip line<%= sip_account.position %> registrar ip: <%= sip_account.registrar %>
-sip line<%= sip_account.position %> registrar port: <%= sip_account.registrar_port %>
-sip line<%= sip_account.position %> outbound proxy: <%= sip_account.outbound_proxy %>
-sip line<%= sip_account.position %> outbound proxy port: <%= sip_account.outbound_proxy_port %>
-sip line<%= sip_account.position %> registration period: <%= sip_account.registration_expiry_time %>
+sip line<%= sip_account.position %> proxy ip: <%= ((! sip_account.sip_proxy.blank?) ? sip_account.sip_proxy : '0.0.0.0') %>
+sip line<%= sip_account.position %> proxy port: <%= sip_account.sip_proxy_port.to_i %>
+sip line<%= sip_account.position %> registrar ip: <%= ((! sip_account.registrar.blank?) ? sip_account.registrar : '0.0.0.0') %>
+sip line<%= sip_account.position %> registrar port: <%= sip_account.registrar_port.to_i %>
+sip line<%= sip_account.position %> outbound proxy: <%= ((! sip_account.outbound_proxy.blank?) ? sip_account.outbound_proxy : '0.0.0.0') %>
+sip line<%= sip_account.position %> outbound proxy port: <%= sip_account.outbound_proxy_port.to_i %>
+sip line<%= sip_account.position %> registration period: <%= ((sip_account.registration_expiry_time.to_i > 0) ? sip_account.registration_expiry_time.to_i : 3600) %>
 <%
 if (sip_account.dtmf_mode == 'info')
   dtmf_method = 1

@@ -165,6 +165,7 @@ snom.phone_models.create(:name => 'Snom 870',
 	pm = PhoneModel.where(:name => pm_name).first
 	#num_exp_modules = 3
 	num_exp_modules = 0	
+	max_key_idx = pm.number_of_keys.to_i + (42 * num_exp_modules) - 1
 	if max_key_idx >= 0
 		(0..max_key_idx).each { |idx|
 			key_title = "P #{(1+idx).to_s.rjust(3,'0')} (fkey[#{idx}])"
@@ -279,3 +280,9 @@ PhoneModel.where(
 ).first.phones.create([
   { :mac_address => '000413271FDB' } 
 ])
+PhoneModel.where(
+  :name => 'Snom 320' 
+).first.phones.create([
+  { :mac_address => '000413271FD8' } 
+])
+

@@ -10,13 +10,14 @@ xml.settings {
 			xml.timezone( 'GMT+1', :perm => 'RW' )
 			xml.date_us_format( 'off', :perm => 'RW' )
 			xml.time_24_format( 'on', :perm => 'RW' )
-			
+			xml.tone_scheme('GER', :perm => 'RW' )
 			xml.update_policy( 'settings_only', :perm => 'RW' )
 			xml.firmware_status( '', :perm => 'RW' )
 		end
 		
 	else
-		
+		@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
+    
 		xml.tag! 'phone-settings' do
 			xml.web_language( 'English', :perm => 'RW' )
 			xml.timezone( 'GMT+1', :perm => 'RW' )

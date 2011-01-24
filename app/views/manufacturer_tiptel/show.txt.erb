@@ -12,7 +12,9 @@ dtmf_map = {
 :"info" => "2"
 }
 codec_map = {
-} %>
+} 
+@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
+%>
 <% @phone.sip_accounts.each do |sip_account| %>
 [account]
 path=/yealink/config/voip/sipAccount<%= sip_account.position - 1 %>.cfg

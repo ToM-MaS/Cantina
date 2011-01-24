@@ -9,7 +9,7 @@
 <tr class="<%= cycle("even", "odd") %>"> 
 <td><%= p.id %></td>
 <td><%= p.phone_model.name%></td>
-<td><%= link_to "#{p.mac_address}", "tiptel/#{p.mac_address}.cfg"%></td>
+<td><%= link_to "#{p.mac_address}", "#{p.mac_address}.cfg"%></td>
 
 
 <% end %>

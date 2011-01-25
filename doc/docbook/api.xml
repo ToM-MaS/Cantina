@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="api" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>API</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Wie bei Ruby-on-Rails-Projekten üblich sind die einzelnen
+  &#8222;Ressourcen&#8220; (siehe <xref linkend="data-model" />) über eine API
+  zugänglich. Dabei gibt es meist mehrere Formate, üblicherweise HTML und XML.
+  HTML &#8211; das Standard-Format &#8211; dient zur Anzeige im Browser, XML
+  dient zur automatisierten Ansteuerung, beispielsweise aus Skripten
+  heraus.</para>
+
+  <para>Betrachten wir als Beispiel mal die Ressource
+  &#8222;<literal>phone_models</literal>&#8220;, die die verfügbaren
+  Telefon-Modelle bezeichnet (siehe <xref
+  linkend="model-phone-model" />).</para>
+
+  <para>Voraussetzung: Der Web-Server ist gestartet, wie in <xref
+  linkend="server-starten" /> beschrieben.</para>
+
+  <screen>debian:/usr/src/Cantina# <emphasis role="bold"><command>rails server</command></emphasis>
+=&gt; Booting WEBrick
+=&gt; Rails 3.0.3 application starting in development on http://0.0.0.0:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+[2010-11-23 09:35:30] INFO  WEBrick 1.3.1
+[2010-11-23 09:35:30] INFO  ruby 1.9.2 (2010-08-18) [i686-linux]
+[2010-11-23 09:35:30] INFO  WEBrick::HTTPServer#start: pid=2910 port=3000
+
+</screen>
+
+  <para>Auf dem Server
+  &#8222;<literal>http://<replaceable>{host}</replaceable>:3000</literal>&#8220;
+  unter dem Pfad &#8222;<literal>/</literal>&#8220; ist jetzt die Applikation
+  erreichbar. Unter dem Pfad &#8222;<literal>/phone_models</literal>&#8220;
+  bekommen Sie im Browser eine Liste der Telefon-Modelle angezeigt. Woher weiß
+  die Applikation daß HTML ausgegeben werden soll? HTML ist &#8211; etwas
+  vereinfacht gesagt &#8211; das Standard-Format. In der Ausgabe des
+  Rails-Servers (bzw. im Log mit <emphasis role="bold"><command>tail -f
+  log/*.log</command></emphasis>) sieht man:<screen>Started GET "/phone_models" <replaceable>[...]</replaceable>
+  Processing by PhoneModelsController#index as HTML
+<replaceable>[...]</replaceable></screen></para>
+
+  <para>Ebensogut kann man an den Pfad noch die Endung
+  &#8222;<literal>.html</literal>&#8220; anhängen: Unter dem Pfad
+  &#8222;<literal>/phone_models.html</literal>&#8220; bekommt man also die
+  gleiche Ausgabe im Browser. Geloggt wird dabei:<screen>Started GET "/phone_models.html" <replaceable>[...]</replaceable>
+  Processing by PhoneModelsController#index as HTML
+<replaceable>[...]</replaceable></screen></para>
+
+  <para>Wenn man nun die Liste im XML-Format haben will, so bekommt man diese
+  mit der Endung &#8222;<literal>.xml</literal>&#8220;, also unter dem Pfad
+  &#8222;<literal>/phone_models.xml</literal>&#8220;.</para>
+
+  <note>
+    <para>Auch dies läßt sich im Web-Browser ausprobieren. Bitte beachten Sie
+    jedoch daß jeder Browser solche &#8222;nackten&#8220; XML-Daten anders
+    darstellt. U.U. müssen Sie im Browser die Funktion &#8222;Seitenquelltext
+    anzeigen&#8220; o.ä. aufrufen.</para>
+  </note>
+
+  <para>Geloggt wird dabei:<screen>Started GET "/phone_models.xml" <replaceable>[...]</replaceable>
+  Processing by PhoneModelsController#index as XML
+<replaceable>[...]</replaceable></screen></para>
+
+  <para>Das XML-Format sieht etwa wie folgt aus (hier etwas gekürzt):<screen>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;phone-models type="array"&gt;
+    
+    &lt;phone-model&gt;
+        &lt;id type="integer"&gt;4&lt;/id&gt;
+        &lt;name&gt;Snom 360&lt;/name&gt;
+        &lt;manufacturer-id type="integer"&gt;1&lt;/manufacturer-id&gt;
+        &lt;number-of-keys type="integer"&gt;12&lt;/number-of-keys&gt;
+        &lt;!-- ... --&gt;
+    &lt;/phone-model&gt;
+    
+    &lt;phone-model&gt;
+        &lt;id type="integer"&gt;5&lt;/id&gt;
+        &lt;name&gt;Snom 370&lt;/name&gt;
+        &lt;manufacturer-id type="integer"&gt;1&lt;/manufacturer-id&gt;
+        &lt;number-of-keys type="integer"&gt;12&lt;/number-of-keys&gt;
+        &lt;!-- ... --&gt;
+    &lt;/phone-model&gt;
+    
+    &lt;!-- ... --&gt;
+    
+&lt;/phone-models&gt;</screen></para>
+
+  <para>Betrachten wir nun mal im Überblick welche URL-Pfade und welche
+  HTTP-Methoden es zu der Ressource
+  &#8222;<literal>phone_models</literal>&#8220; in der REST-Architektur (siehe
+  <link
+  xlink:href="http://de.wikipedia.org/wiki/Representational_State_Transfer">http://de.wikipedia.org/wiki/Representational_State_Transfer</link>)
+  gibt:</para>
+</chapter>

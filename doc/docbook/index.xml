@@ -45,4 +45,6 @@
   </chapter>
 
   <xi:include href="data-model.xml" />
+
+  <xi:include href="api.xml" />
 </book>

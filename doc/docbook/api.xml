@@ -37,15 +37,18 @@
   dient zur automatisierten Ansteuerung, beispielsweise aus Skripten
   heraus.</para>
 
-  <para>Betrachten wir als Beispiel mal die Ressource
-  &#8222;<literal>phone_models</literal>&#8220;, die die verfügbaren
-  Telefon-Modelle bezeichnet (siehe <xref
-  linkend="model-phone-model" />).</para>
+  <section xml:id="api-rest">
+    <title>REST</title>
 
-  <para>Voraussetzung: Der Web-Server ist gestartet, wie in <xref
-  linkend="server-starten" /> beschrieben.</para>
+    <para>Betrachten wir als Beispiel mal die Ressource
+    &#8222;<literal>phone_models</literal>&#8220;, die die verfügbaren
+    Telefon-Modelle bezeichnet (siehe <xref
+    linkend="model-phone-model" />).</para>
 
-  <screen>debian:/usr/src/Cantina# <emphasis role="bold"><command>rails server</command></emphasis>
+    <para>Voraussetzung: Der Web-Server ist gestartet, wie in <xref
+    linkend="server-starten" /> beschrieben.</para>
+
+    <screen>debian:/usr/src/Cantina# <emphasis role="bold"><command>rails server</command></emphasis>
 =&gt; Booting WEBrick
 =&gt; Rails 3.0.3 application starting in development on http://0.0.0.0:3000
 =&gt; Call with -d to detach
@@ -56,41 +59,43 @@
 
 </screen>
 
-  <para>Auf dem Server
-  &#8222;<literal>http://<replaceable>{host}</replaceable>:3000</literal>&#8220;
-  unter dem Pfad &#8222;<literal>/</literal>&#8220; ist jetzt die Applikation
-  erreichbar. Unter dem Pfad &#8222;<literal>/phone_models</literal>&#8220;
-  bekommen Sie im Browser eine Liste der Telefon-Modelle angezeigt. Woher weiß
-  die Applikation daß HTML ausgegeben werden soll? HTML ist &#8211; etwas
-  vereinfacht gesagt &#8211; das Standard-Format. In der Ausgabe des
-  Rails-Servers (bzw. im Log mit <emphasis role="bold"><command>tail -f
-  log/*.log</command></emphasis>) sieht man:<screen>Started GET "/phone_models" <replaceable>[...]</replaceable>
+    <para>Auf dem Server
+    &#8222;<literal>http://<replaceable>{host}</replaceable>:3000</literal>&#8220;
+    unter dem Pfad &#8222;<literal>/</literal>&#8220; ist jetzt die
+    Applikation erreichbar. Unter dem Pfad
+    &#8222;<literal>/phone_models</literal>&#8220; bekommen Sie im Browser
+    eine Liste der Telefon-Modelle angezeigt. Woher weiß die Applikation daß
+    HTML ausgegeben werden soll? HTML ist &#8211; etwas vereinfacht gesagt
+    &#8211; das Standard-Format. In der Ausgabe des Rails-Servers (bzw. im Log
+    mit <emphasis role="bold"><command>tail -f log/*.log</command></emphasis>)
+    sieht man:<screen>Started GET "/phone_models" <replaceable>[...]</replaceable>
   Processing by PhoneModelsController#index as HTML
 <replaceable>[...]</replaceable></screen></para>
 
-  <para>Ebensogut kann man an den Pfad noch die Endung
-  &#8222;<literal>.html</literal>&#8220; anhängen: Unter dem Pfad
-  &#8222;<literal>/phone_models.html</literal>&#8220; bekommt man also die
-  gleiche Ausgabe im Browser. Geloggt wird dabei:<screen>Started GET "/phone_models.html" <replaceable>[...]</replaceable>
+    <para>Ebensogut kann man an den Pfad noch die Endung
+    &#8222;<literal>.html</literal>&#8220; anhängen: Unter dem Pfad
+    &#8222;<literal>/phone_models.html</literal>&#8220; bekommt man also die
+    gleiche Ausgabe im Browser. Geloggt wird dabei:<screen>Started GET "/phone_models.html" <replaceable>[...]</replaceable>
   Processing by PhoneModelsController#index as HTML
 <replaceable>[...]</replaceable></screen></para>
 
-  <para>Wenn man nun die Liste im XML-Format haben will, so bekommt man diese
-  mit der Endung &#8222;<literal>.xml</literal>&#8220;, also unter dem Pfad
-  &#8222;<literal>/phone_models.xml</literal>&#8220;.</para>
+    <para>Wenn man nun die Liste im XML-Format haben will, so bekommt man
+    diese mit der Endung &#8222;<literal>.xml</literal>&#8220;, also unter dem
+    Pfad &#8222;<literal>/phone_models.xml</literal>&#8220;.</para>
 
-  <note>
-    <para>Auch dies läßt sich im Web-Browser ausprobieren. Bitte beachten Sie
-    jedoch daß jeder Browser solche &#8222;nackten&#8220; XML-Daten anders
-    darstellt. U.U. müssen Sie im Browser die Funktion &#8222;Seitenquelltext
-    anzeigen&#8220; o.ä. aufrufen.</para>
-  </note>
+    <note>
+      <para>Auch dies läßt sich im Web-Browser ausprobieren. Bitte beachten
+      Sie jedoch daß jeder Browser solche &#8222;nackten&#8220; XML-Daten
+      anders darstellt. U.U. müssen Sie im Browser die Funktion
+      &#8222;Seitenquelltext anzeigen&#8220; o.ä. aufrufen.</para>
+    </note>
 
-  <para>Geloggt wird dabei:<screen>Started GET "/phone_models.xml" <replaceable>[...]</replaceable>
+    <para>Geloggt wird dabei:<screen>Started GET "/phone_models.xml" <replaceable>[...]</replaceable>
   Processing by PhoneModelsController#index as XML
 <replaceable>[...]</replaceable></screen></para>
 
-  <para>Das XML-Format sieht etwa wie folgt aus (hier etwas gekürzt):<screen>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    <para>Das XML-Format sieht etwa wie folgt aus (hier etwas
+    gekürzt):<screen>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;phone-models type="array"&gt;
     
     &lt;phone-model&gt;
@@ -113,10 +118,267 @@
     
 &lt;/phone-models&gt;</screen></para>
 
-  <para>Betrachten wir nun mal im Überblick welche URL-Pfade und welche
-  HTTP-Methoden es zu der Ressource
-  &#8222;<literal>phone_models</literal>&#8220; in der REST-Architektur (siehe
-  <link
-  xlink:href="http://de.wikipedia.org/wiki/Representational_State_Transfer">http://de.wikipedia.org/wiki/Representational_State_Transfer</link>)
-  gibt:</para>
+    <para>Betrachten wir nun mal im Überblick welche URL-Pfade und welche
+    HTTP-Methoden es zu der Ressource
+    &#8222;<literal>phone_models</literal>&#8220; in der REST-Architektur
+    (siehe <link
+    xlink:href="http://de.wikipedia.org/wiki/Representational_State_Transfer">http://de.wikipedia.org/wiki/Representational_State_Transfer</link>)
+    gibt. Zuerst die für das HTML-Format. Die Endung
+    &#8222;<literal>.html</literal>&#8220; ist dabei optional und wird
+    üblicherweise nicht mit angegeben.<informaltable>
+        <tgroup cols="4">
+          <colspec align="left" colnum="1" colwidth="4*" />
+
+          <colspec align="left" colnum="2" colwidth="2*" />
+
+          <colspec align="left" colnum="3" colwidth="2*" />
+
+          <colspec align="left" colnum="4" colwidth="3*" />
+
+          <thead>
+            <row>
+              <entry>URL-&#8203;Pfad</entry>
+
+              <entry>HTTP-&#8203;Methode</entry>
+
+              <entry>Controller-&#8203;Aktion</entry>
+
+              <entry>Datenbank</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>/phone_models</literal></entry>
+
+              <entry><literal>GET</literal></entry>
+
+              <entry><methodname>index</methodname></entry>
+
+              <entry><literal>SELECT …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/new</literal></entry>
+
+              <entry><literal>GET</literal></entry>
+
+              <entry><methodname>new</methodname></entry>
+
+              <entry>- *</entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models</literal></entry>
+
+              <entry><literal>POST</literal></entry>
+
+              <entry><methodname>create</methodname></entry>
+
+              <entry><literal>INSERT …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1</literal></entry>
+
+              <entry><literal>GET</literal></entry>
+
+              <entry><methodname>show</methodname></entry>
+
+              <entry><literal>SELECT … WHERE …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1/edit</literal></entry>
+
+              <entry><literal>GET</literal></entry>
+
+              <entry><methodname>edit</methodname></entry>
+
+              <entry><literal>SELECT … WHERE …</literal> *</entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1</literal></entry>
+
+              <entry><literal>PUT</literal></entry>
+
+              <entry><methodname>update</methodname></entry>
+
+              <entry><literal>UPDATE … WHERE …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1</literal></entry>
+
+              <entry><literal>DELETE</literal></entry>
+
+              <entry><methodname>destroy</methodname></entry>
+
+              <entry><literal>DELETE … WHERE …</literal></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable></para>
+
+    <note>
+      <para>* Die URL-Pfade <literal>/phone_models/new</literal> und
+      <literal>/phone_models/1/edit</literal>, die per <literal>GET</literal>
+      aufgerufen werden, sind eine Besonderheit für das HTML-Interface im
+      Browser. Unter diesen URLs wird ein Formular zur Eingabe dargestellt.
+      Erst beim Absenden des Formulars wird dann die manipulierende Operation
+      (Erzeugen / Verändern) auf der Datenbank vorgenommen.</para>
+
+      <para>Die Anhänge new und edit werden übrigens
+      &#8222;Modifikatoren&#8220; (<foreignphrase
+      xml:lang="en">modifiers</foreignphrase>) genannt.</para>
+    </note>
+
+    <note>
+      <para>Die meisten Web-Browser unterstützen nur die HTTP-Methoden
+      <literal>GET</literal> und <literal>POST</literal>, nicht jedoch
+      <literal>PUT</literal> und <literal>DELETE</literal>. Ruby on Rails
+      emuliert daher im Browser <literal>PUT</literal> und
+      <literal>DELETE</literal> indem die HTTP-Methode POST genutzt wird,
+      jedoch in einem nicht sichtbaren Feld die eigentliche Methode übertragen
+      wird. Dies geschieht automatisch und für den Anwender
+      transparent.</para>
+    </note>
+
+    <para>Die gleichen URLs, jedoch mit der Endung
+    &#8222;<literal>.xml</literal>&#8220;, gibt es &#8211; wie für das
+    HTML-Format &#8211; auch für das XML-Format.<informaltable>
+        <tgroup cols="4">
+          <colspec align="left" colnum="1" colwidth="4*" />
+
+          <colspec align="left" colnum="2" colwidth="2*" />
+
+          <colspec align="left" colnum="3" colwidth="2*" />
+
+          <colspec align="left" colnum="4" colwidth="3*" />
+
+          <thead>
+            <row>
+              <entry>URL-&#8203;Pfad</entry>
+
+              <entry>HTTP-&#8203;Methode</entry>
+
+              <entry>Controller-&#8203;Aktion</entry>
+
+              <entry>Datenbank</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>/phone_models.xml</literal></entry>
+
+              <entry><literal>GET</literal></entry>
+
+              <entry><methodname>index</methodname></entry>
+
+              <entry><literal>SELECT …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models.xml</literal></entry>
+
+              <entry><literal>POST</literal></entry>
+
+              <entry><methodname>create</methodname></entry>
+
+              <entry><literal>INSERT …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1.xml</literal></entry>
+
+              <entry><literal>GET</literal></entry>
+
+              <entry><methodname>show</methodname></entry>
+
+              <entry><literal>SELECT … WHERE …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1.xml</literal></entry>
+
+              <entry><literal>PUT</literal></entry>
+
+              <entry><methodname>update</methodname></entry>
+
+              <entry><literal>UPDATE … WHERE …</literal></entry>
+            </row>
+
+            <row>
+              <entry><literal>/phone_models/1.xml</literal></entry>
+
+              <entry><literal>DELETE</literal></entry>
+
+              <entry><methodname>destroy</methodname></entry>
+
+              <entry><literal>DELETE … WHERE …</literal></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable></para>
+  </section>
+
+  <section xml:id="api-active-resource">
+    <title>ActiveResource</title>
+
+    <para>Die in <xref linkend="api-rest" /> kennengelernte XML-API läßt sich
+    wunderbar aus eigenen Skripten heraus aufrufen &#8211; mann nennt das auch
+    &#8222;konsumieren&#8220;. Dazu wird <classname>ActiveResource</classname>
+    genutzt.</para>
+
+    <note>
+      <para>Sie können ein Skript zum Testen einfach auf dem gleichen Rechner
+      anlegen (z.B. in einem neuen Terminal-Fenster) oder auf einem anderen
+      Rechner.<screen>debian:~# <emphasis role="bold"><command>cd /var/tmp/</command></emphasis>
+debian:/var/tmp# <emphasis role="bold"><command>touch api-test.rb</command></emphasis>
+debian:/var/tmp# <emphasis role="bold"><command>chmod u+x api-test.rb</command></emphasis>
+debian:/var/tmp# <emphasis role="bold">vim api-test.rb</emphasis>
+</screen></para>
+    </note>
+
+    <para>Beispiel-Skript das die API verwendet:<programlisting>#! /usr/bin/env ruby
+
+require 'active_resource'
+
+class PhoneModel &lt; ActiveResource::Base
+    self.site = "http://localhost:3000/"
+    self.element_name = 'phone_model'
+end
+
+phone_models = PhoneModel.all
+phone_models.each { |pm|
+    puts "PhoneModel ID: #{pm.id}, name: #{pm.name}"
+}
+</programlisting></para>
+
+    <para>Rufen wir das Skript mal auf:<screen>debian:/var/tmp# <emphasis
+          role="bold"><command>./api-test.rb</command></emphasis>
+<replaceable>[...]</replaceable>
+PhoneModel ID: 4, name: Snom 360
+PhoneModel ID: 5, name: Snom 370
+<replaceable>[...]</replaceable>
+debian:/var/tmp# </screen></para>
+
+    <para>Auf dem Server sehen wir dabei im Log wie erwartet folgende
+    Meldung:<screen>Started GET "/phone_models.xml" for 127.0.0.1 <replaceable>[...]</replaceable>
+  Processing by PhoneModelsController#index as XML
+  PhoneModel Load (43.6ms)  SELECT "phone_models".* <replaceable>[...]</replaceable>
+Completed 200 OK in 114ms (Views: 45.3ms | ActiveRecord: 43.6ms)</screen></para>
+
+    <para>Die per API bereitgestellten Ressourcen lassen sich also
+    beispielsweise in eigenen Skripten ganz normal verwenden.</para>
+
+    <para>Weitere Parameter und Dokumentation zur Verwendung von
+    ActiveResource finden Sie in der Dokumentation von Ruby on Rails unter
+    folgender URL:</para>
+
+    <para><link
+    xlink:href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">http://api.rubyonrails.org/classes/ActiveResource/Base.html</link></para>
+  </section>
 </chapter>

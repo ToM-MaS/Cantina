@@ -288,6 +288,9 @@
     sowie einer bestimmten Taste auf einem Telefon-Modell und bezieht sich auf
     eine <classname>PhoneKeyFunctionDefinition</classname>.</para>
 
+    <para>EIn Beispiel wäre sinngemäß: Taste 1 auf Snom 370 zu SIP-Account XY
+    belegt als Zielwahl mit der Nummer 123.</para>
+
     <formalpara>
       <title>Verknüpfungen</title>
 
@@ -363,6 +366,9 @@
     <para>Enhält die auf dem jeweiligen Telefon-Model (<foreignphrase
     xml:lang="en">phone model</foreignphrase>) verfügbaren Tasten.</para>
 
+    <para>Auf einem Snom 370 wären dies beispielsweise P 1 (fkey 0) bis P 12
+    (fkey 11).</para>
+
     <formalpara>
       <title>Verknüpfungen</title>
 
@@ -412,6 +418,9 @@
 
     <para>Enthält die verfügbaren Telefon-Modelle (<foreignphrase
     xml:lang="en">phone models</foreignphrase>).</para>
+
+    <para>Beispiele für Telefon-Modelle sind: Snom 360, Snom 370, Aastra 55i,
+    Aastra 57i, Tiptel IP 286, etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>

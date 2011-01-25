@@ -176,7 +176,15 @@
     <title>Codec</title>
 
     <para>Enthält die relevanten Audio-Codecs (<foreignphrase
-    xml:lang="en">codecs</foreignphrase>).</para>
+    xml:lang="en">codecs</foreignphrase>). Diese werden verwendet zur
+    Zuordnung zu auf Telefon-Modellen unterstützten Codecs (<foreignphrase
+    xml:lang="en">phone model codecs</foreignphrase>) und den von den
+    SIP-Accounts zu verwendenden Codecs (<foreignphrase xml:lang="en">sip
+    account codecs</foreignphrase>).</para>
+
+    <para>Beispiele für Codecs sind: &#8222;gsm&#8220; (GSM-FR 06.10),
+    &#8222;alaw&#8220; (G.711 alaw), &#8222;ulaw&#8220; (G.711 ulaw),
+    &#8222;g722&#8220; (G.722) etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -201,6 +209,9 @@
     <para>Enthält die Hersteller (<foreignphrase
     xml:lang="en">manufacturer</foreignphrase>) der Telefon-Modelle
     (<foreignphrase xml:lang="en">phone models</foreignphrase>).</para>
+
+    <para>Beispiele für Hersteller sind: &#8222;Snom Technology&#8220;,
+    &#8222;Aastra DeTeWe&#8220;, &#8222;Tiptel&#8220; etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -227,6 +238,9 @@
     der Hersteller (<foreignphrase
     xml:lang="en">manufacturers</foreignphrase>).</para>
 
+    <para>Beispiele für OUIs sind: &#8222;000413&#8220;, &#8222;003042&#8220;,
+    &#8222;00085d&#8220;, &#8222;001565&#8220; etc.</para>
+
     <formalpara>
       <title>Verknüpfungen</title>
 
@@ -244,6 +258,9 @@
 
     <para>Enthält die verfügbaren Funktionen von Telefon-Tasten
     (<foreignphrase xml:lang="en">phone keys</foreignphrase>).</para>
+
+    <para>Beispiele sind: &#8222;BLF&#8220;, &#8222;Speed dial&#8220;,
+    &#8222;Line&#8220;, &#8222;ActionURL&#8220; etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -266,7 +283,10 @@
     <title>PhoneKey</title>
 
     <para>Enthält die zu den SIP-Accounts (<foreignphrase xml:lang="en">sip
-    accounts</foreignphrase>) gesetzten Softkeys.</para>
+    accounts</foreignphrase>) gesetzten Softkeys. Ein
+    <classname>PhoneKey</classname> ist jeweils einem SIP-Account zugeordnet
+    sowie einer bestimmten Taste auf einem Telefon-Modell und bezieht sich auf
+    eine <classname>PhoneKeyFunctionDefinition</classname>.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -532,7 +552,10 @@
     xml:lang="en">phones</foreignphrase>) zu provisionierenden SIP-Accounts.
     Zu einem SIP-Account gehören Softkeys (<foreignphrase xml:lang="en">phone
     keys</foreignphrase>) und zu verwendende Codecs (<foreignphrase
-    xml:lang="en">codecs</foreignphrase>).</para>
+    xml:lang="en">codecs</foreignphrase>). Es ist jedoch zu beachten daß nur
+    wenige Telefon-Modelle die Zuordnung von Codecs pro SIP-Account
+    unterstützen, meist erlaubt das Gerät nur die Codecs für alle SIP-Accounts
+    zu setzen.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>

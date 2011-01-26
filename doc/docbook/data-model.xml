@@ -176,12 +176,13 @@
   <classname>SipAccount</classname> (die SIP-Accounts) sind.</para>
 
   <para>Dabei sind immer auch die entsprechenden direkten Relationen
-  angegeben. Wir verwenden hierfür eine an ActiveRecord-Assoziationen
-  angelehnte Schreibweise, allerdings gleich mit einem Verweis bzw. Link auf
-  das jeweilige referenzierte Daten-Modell. Die verwendeten Assoziationen
-  bedeuten: <methodname>has_many</methodname> = <quote>hat viele</quote> (0,
-  1, oder mehrere), <methodname>belongs_to</methodname> = <quote>gehört
-  zu</quote> (genau eine).</para>
+  angegeben. Wir verwenden hierfür eine an
+  <classname>ActiveRecord</classname>-Assoziationen angelehnte Schreibweise,
+  allerdings gleich mit einem Verweis bzw. Link auf das jeweilige
+  referenzierte Daten-Modell. Die verwendeten Assoziationen bedeuten:
+  <methodname>has_many</methodname> = <quote>hat viele</quote> (0, 1, oder
+  mehrere), <methodname>belongs_to</methodname> = <quote>gehört zu</quote>
+  (genau eine).</para>
 
   <section xml:id="model-codec">
     <title>Codec</title>

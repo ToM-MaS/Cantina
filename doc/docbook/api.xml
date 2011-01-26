@@ -328,9 +328,10 @@
     <title>ActiveResource</title>
 
     <para>Die in <xref linkend="api-rest" /> kennengelernte XML-API läßt sich
-    wunderbar aus eigenen Skripten heraus aufrufen &#8211; mann nennt das auch
-    &#8222;konsumieren&#8220;. Dazu wird <classname>ActiveResource</classname>
-    genutzt (siehe <link
+    gut aus eigenen Skripten heraus aufrufen &#8211; man nennt das auch
+    &#8222;konsumieren&#8220; (<foreignphrase
+    xml:lang="en">consume</foreignphrase>). Dazu wird
+    <classname>ActiveResource</classname> genutzt (siehe <link
     xlink:href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">http://api.rubyonrails.org/classes/ActiveResource/Base.html</link>).</para>
 
     <note>

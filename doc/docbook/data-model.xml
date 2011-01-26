@@ -195,9 +195,23 @@
     account codecs</foreignphrase>).</para>
 
     <para>Beispiele für Codecs sind: &#8222;<literal>gsm</literal>&#8220;
-    (GSM-FR 06.10), &#8222;<literal>alaw</literal>&#8220; (G.711 a-law),
-    &#8222;<literal>ulaw</literal>&#8220; (G.711 u-law),
-    &#8222;<literal>g722</literal>&#8220; (G.722) etc.</para>
+    (GSM-FR 06.10 <footnote>
+        <para><link
+        xlink:href="http://de.wikipedia.org/wiki/Global_System_for_Mobile_Communications#Full_Rate_Codec_.28FR.29">http://de.wikipedia.org/wiki/Global_System_for_Mobile_Communications#Full_Rate_Codec_.28FR.29</link></para>
+      </footnote>), &#8222;<literal>alaw</literal>&#8220; (G.711 <footnote>
+        <para><link
+        xlink:href="http://de.wikipedia.org/wiki/G.711">http://de.wikipedia.org/wiki/G.711</link></para>
+      </footnote> A-law <footnote>
+        <para><link
+        xlink:href="http://de.wikipedia.org/wiki/A-law">http://de.wikipedia.org/wiki/A-law</link></para>
+      </footnote>), &#8222;<literal>ulaw</literal>&#8220; (G.711 μ-law
+    <footnote>
+        <para><link
+        xlink:href="http://de.wikipedia.org/wiki/%CE%9C-law">http://de.wikipedia.org/wiki/%CE%9C-law</link></para>
+      </footnote>), &#8222;<literal>g722</literal>&#8220; (G.722 <footnote>
+        <para><link
+        xlink:href="http://de.wikipedia.org/wiki/G.722">http://de.wikipedia.org/wiki/G.722</link></para>
+      </footnote>) etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>

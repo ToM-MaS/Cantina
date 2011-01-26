@@ -41,9 +41,10 @@
     <title>API im REST-Stil</title>
 
     <para>Betrachten wir als Beispiel mal die Ressource
-    &#8222;<literal>phone_models</literal>&#8220;, die die verfügbaren
-    Telefon-Modelle bezeichnet (siehe <xref
-    linkend="model-phone-model" />).</para>
+    &#8222;<literal>phone_models</literal>&#8220; zum
+    <classname>PhoneModel</classname> <foreignphrase
+    xml:lang="en">model</foreignphrase>, die die verfügbaren Telefon-Modelle
+    bezeichnet (siehe <xref linkend="model-phone-model" />).</para>
 
     <para>Voraussetzung: Der Web-Server ist gestartet, wie in <xref
     linkend="server-starten" /> beschrieben.</para>

@@ -330,7 +330,8 @@
     <para>Die in <xref linkend="api-rest" /> kennengelernte XML-API läßt sich
     wunderbar aus eigenen Skripten heraus aufrufen &#8211; mann nennt das auch
     &#8222;konsumieren&#8220;. Dazu wird <classname>ActiveResource</classname>
-    genutzt.</para>
+    genutzt (siehe <link
+    xlink:href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">http://api.rubyonrails.org/classes/ActiveResource/Base.html</link>).</para>
 
     <note>
       <para>Sie können ein Skript zum Testen einfach auf dem gleichen Rechner
@@ -355,6 +356,7 @@ phone_models = PhoneModel.all
 phone_models.each { |pm|
     puts "PhoneModel ID: #{pm.id}, name: #{pm.name}"
 }
+
 </programlisting></para>
 
     <para>Rufen wir das Skript mal auf:<screen>debian:/var/tmp# <emphasis

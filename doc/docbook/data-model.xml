@@ -34,9 +34,10 @@
   Datenbank-<quote><foreignphrase xml:lang="en">Models</foreignphrase></quote>
   im Unterverzeichnis <filename>app/models/</filename>. In jeder Datei wird
   eine Klasse definiert, die eine entsprechende Tabelle in der Datenbank hat.
-  Das komplette Schema findet sich in <filename>db/schema.rb</filename>. Auch
-  in den jeweiligen <foreignphrase xml:lang="en">Models</foreignphrase> ist
-  jeweils oben in einem Kommentar die Tabellenstruktur beschrieben.</para>
+  Das komplette <classname>ActiveRecord</classname>-Schema findet sich in
+  <filename>db/schema.rb</filename>. Auch in den jeweiligen <foreignphrase
+  xml:lang="en">Models</foreignphrase> ist jeweils oben in einem Kommentar die
+  Tabellenstruktur beschrieben.</para>
 
   <para>Ein Daten-Modell hat eine Reihe von Attributen (bzw. Feldern),
   Relationen zu anderen Daten-Modellen, sowie Methoden zur Validierung von

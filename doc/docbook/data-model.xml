@@ -194,9 +194,10 @@
     SIP-Accounts zu verwendenden Codecs (<foreignphrase xml:lang="en">sip
     account codecs</foreignphrase>).</para>
 
-    <para>Beispiele für Codecs sind: &#8222;gsm&#8220; (GSM-FR 06.10),
-    &#8222;alaw&#8220; (G.711 alaw), &#8222;ulaw&#8220; (G.711 ulaw),
-    &#8222;g722&#8220; (G.722) etc.</para>
+    <para>Beispiele für Codecs sind: &#8222;<literal>gsm</literal>&#8220;
+    (GSM-FR 06.10), &#8222;<literal>alaw</literal>&#8220; (G.711 a-law),
+    &#8222;<literal>ulaw</literal>&#8220; (G.711 u-law),
+    &#8222;<literal>g722</literal>&#8220; (G.722) etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -250,8 +251,10 @@
     der Hersteller (<foreignphrase
     xml:lang="en">manufacturers</foreignphrase>).</para>
 
-    <para>Beispiele für OUIs sind: &#8222;000413&#8220;, &#8222;003042&#8220;,
-    &#8222;00085d&#8220;, &#8222;001565&#8220; etc.</para>
+    <para>Beispiele für OUIs sind: &#8222;<literal>000413</literal>&#8220;,
+    &#8222;<literal>003042</literal>&#8220;,
+    &#8222;<literal>00085d</literal>&#8220;,
+    &#8222;<literal>001565</literal>&#8220; etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -271,8 +274,10 @@
     <para>Enthält die verfügbaren Funktionen von Telefon-Tasten
     (<foreignphrase xml:lang="en">phone keys</foreignphrase>).</para>
 
-    <para>Beispiele sind: &#8222;BLF&#8220;, &#8222;Speed dial&#8220;,
-    &#8222;Line&#8220;, &#8222;ActionURL&#8220; etc.</para>
+    <para>Beispiele sind: &#8222;<literal>BLF</literal>&#8220;,
+    &#8222;<literal>Speed dial</literal>&#8220;,
+    &#8222;<literal>Line</literal>&#8220;,
+    &#8222;<literal>ActionURL</literal>&#8220; etc.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>
@@ -378,8 +383,8 @@
     <para>Enhält die auf dem jeweiligen Telefon-Model (<foreignphrase
     xml:lang="en">phone model</foreignphrase>) verfügbaren Tasten.</para>
 
-    <para>Auf einem Snom 370 wären dies beispielsweise P 1 (fkey 0) bis P 12
-    (fkey 11).</para>
+    <para>Auf einem Snom 370 wären dies beispielsweise P 1
+    (<literal>fkey</literal> 0) bis P 12 (<literal>fkey</literal> 11).</para>
 
     <formalpara>
       <title>Verknüpfungen</title>

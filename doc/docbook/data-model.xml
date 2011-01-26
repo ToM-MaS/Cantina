@@ -592,10 +592,10 @@
     xml:lang="en">phones</foreignphrase>) zu provisionierenden SIP-Accounts.
     Zu einem SIP-Account gehören Softkeys (<foreignphrase xml:lang="en">phone
     keys</foreignphrase>) und zu verwendende Codecs (<foreignphrase
-    xml:lang="en">codecs</foreignphrase>). Es ist jedoch zu beachten daß nur
-    wenige Telefon-Modelle die Zuordnung von Codecs pro SIP-Account
-    unterstützen, meist erlaubt das Gerät nur die Codecs für alle SIP-Accounts
-    zu setzen.</para>
+    xml:lang="en">codecs</foreignphrase>). Es ist jedoch zu beachten daß nicht
+    alle Telefon-Modelle die Zuordnung von Codecs pro SIP-Account
+    unterstützen, auf einigen Geräten können die Codecs lediglich generell für
+    alle SIP-Accounts gesetzt werden.</para>
 
     <formalpara>
       <title>Verknüpfungen</title>

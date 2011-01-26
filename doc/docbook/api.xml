@@ -239,10 +239,10 @@
       <literal>GET</literal> und <literal>POST</literal>, nicht jedoch
       <literal>PUT</literal> und <literal>DELETE</literal>. Ruby on Rails
       emuliert daher im Browser <literal>PUT</literal> und
-      <literal>DELETE</literal> indem die HTTP-Methode POST genutzt wird,
-      jedoch in einem nicht sichtbaren Feld die eigentliche Methode übertragen
-      wird. Dies geschieht automatisch und für den Anwender
-      transparent.</para>
+      <literal>DELETE</literal> indem die HTTP-Methode <literal>POST</literal>
+      genutzt wird, jedoch in einem nicht sichtbaren Parameter
+      (<literal>_method</literal>) die eigentliche Methode übertragen wird.
+      Dies geschieht automatisch und für den Anwender transparent.</para>
     </note>
 
     <para>Die gleichen URLs, jedoch mit der Endung

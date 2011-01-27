@@ -4,6 +4,7 @@ class CreatePhones < ActiveRecord::Migration
       t.string :mac_address
       t.integer :phone_model_id
       t.string :ip_address
+      t.string :last_ip_address
       t.string :http_user
       t.string :http_password
 

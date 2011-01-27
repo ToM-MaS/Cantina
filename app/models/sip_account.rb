@@ -222,6 +222,12 @@ class SipAccount < ActiveRecord::Base
   #Validate realm
   validate :validate_realm
   
+  # searches the available phone_keys for this sip_account
+  def undefined_phone_model_keys
+    already_defined_phone_model_keys = self.phone_keys.collect {|phone_key| phone_key.phone_model_key}
+    all_phone_model_keys = self.phone.phone_model.phone_model_keys.order(:position)
+    all_phone_model_keys - already_defined_phone_model_keys
+  end
   
   private
   

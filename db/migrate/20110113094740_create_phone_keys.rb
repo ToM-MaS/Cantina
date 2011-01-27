@@ -5,6 +5,7 @@ class CreatePhoneKeys < ActiveRecord::Migration
       t.integer :phone_model_key_id
       t.integer :phone_key_function_definition_id
       t.string :value
+      t.string :label
 
       t.timestamps
     end

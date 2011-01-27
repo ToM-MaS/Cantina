@@ -28,8 +28,7 @@ class PhoneKeysController < ApplicationController
     @sip_account = SipAccount.find(params[:sip_account_id])
     @phone_key = @sip_account.phone_keys.build
     
-    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
-    @phone_model_keys = @sip_account.phone.phone_model.phone_model_keys.order(:position)
+    @phone_model_keys = @sip_account.undefined_phone_model_keys
     @phone_key_function_definitions = @phone_model_keys.collect {|phone_model_key| phone_model_key.phone_key_function_definitions}.flatten.uniq
     
     respond_to do |format|
@@ -42,8 +41,8 @@ class PhoneKeysController < ApplicationController
   def edit
     @sip_account = SipAccount.find(params[:sip_account_id])
     @phone_key = PhoneKey.find(params[:id])
-    
-    @phone_model_keys = @sip_account.phone.phone_model.phone_model_keys.order(:position)
+
+    @phone_model_keys = @sip_account.undefined_phone_model_keys << @phone_key.phone_model_key
     @phone_key_function_definitions = @phone_model_keys.collect {|phone_model_key| phone_model_key.phone_key_function_definitions}.flatten.uniq
 
     respond_to do |format|
@@ -73,12 +72,6 @@ class PhoneKeysController < ApplicationController
   # PUT /phone_keys/1.xml
   def update
     @phone_key = PhoneKey.find(params[:id])
-    
-    # FIXME - some kind of .find() or .where() here?
-    @sip_accounts = SipAccount.order(:name)
-    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
-    @phone_model_keys = PhoneModelKey.order(:position)
-    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
     
     respond_to do |format|
       if @phone_key.update_attributes(params[:phone_key])

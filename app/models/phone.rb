@@ -30,6 +30,7 @@ class Phone < ActiveRecord::Base
   validate :validate_phone_model_exists
   
   after_validation :format_mac_address
+  after_validation :save_old_last_ip_address
   
   # SIP Accounts
   has_many :sip_accounts, :order => 'position', :dependent => :destroy
@@ -45,12 +46,15 @@ class Phone < ActiveRecord::Base
   
   # Can be rebooted
   has_many :reboot_requests, :order => 'start', :dependent => :destroy
+  
+  # TODO mac address has to match to the mac address starts we already know (Snom example)
 
   # log a provisioning
   def log_provisioning(memo = nil, succeeded = true)
     self.provisioning_log_entries.create(:memo => memo, :succeeded => true)
   end
   
+  # Is the system able to reboot this phone?
   def rebootable?
     return ((! self.phone_model.reboot_request_path.blank?) && (! self.ip_address.blank?))
   end
@@ -102,4 +106,11 @@ class Phone < ActiveRecord::Base
     end
   end
   
+  # Saves the last IP address
+  def save_old_last_ip_address
+    if self.ip_address_changed? and self.ip_address != self.ip_address_was
+      self.last_ip_address = self.ip_address_was
+    end
+  end
+  # TODO save_old_last_ip_address muss noch getestet werden
 end

@@ -4,12 +4,13 @@
     <th>Phone model key</th>
     <th>Phone key function definition</th>
     <th>Value</th>
+    <th>Label</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @phone_keys.each do |phone_key| %>
+<% phone_keys.each do |phone_key| %>
   <tr>
     <td><%= phone_key.sip_account.user %>@<%= phone_key.sip_account.registrar %>
       (<%= phone_key.sip_account.name %>)
@@ -17,6 +18,7 @@
     <td><%= phone_key.phone_model_key ? phone_key.phone_model_key.name : '?' %> (pos.: <%= phone_key.phone_model_key ? phone_key.phone_model_key.position : '?' %>)</td>
     <td><%= phone_key.phone_key_function_definition.name %></td>
     <td><%= phone_key.value %></td>
+    <td><%= phone_key.label %></td>
     <td><%= link_to 'Show', [@sip_account, phone_key] %></td>
     <td><%= link_to 'Edit', edit_sip_account_phone_key_path(@sip_account, phone_key) %></td>
     <td><%= link_to 'Destroy', [@sip_account, phone_key], :confirm => 'Are you sure?', :method => :delete %></td>

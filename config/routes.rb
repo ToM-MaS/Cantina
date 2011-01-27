@@ -10,7 +10,7 @@ Cantina::Application.routes.draw do
 
   match 'settings/:mac_address.cfg'  => 'manufacturer_aastra#show', :format => 'txt', :constraints  => { :mac_address  => /((003042)|(00085D)|(aastra)).*/ }
   match 'settings/:mac_address.cfg'  => 'manufacturer_tiptel#show', :format => 'txt', :constraints  => { :mac_address  => /001565.*/ }
-  match 'settings/-:mac_address' => 'manufacturer_snom#show', :format => 'xml', :constraints  => { :mac_address  => /000413.*/ }
+  match 'settings-:mac_address' => 'manufacturer_snom#show', :format => 'xml', :constraints  => { :mac_address  => /000413.*/ }
 
   get "pages/index"
   

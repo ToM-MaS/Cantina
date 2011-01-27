@@ -278,5 +278,11 @@ PhoneModel.where(
 PhoneModel.where(
   :name => 'Snom 320' 
 ).first.phones.create([
+  { :mac_address => '000413271FDB' } 
+])
+PhoneModel.where(
+  :name => 'Snom 320' 
+).first.phones.create([
   { :mac_address => '000413271FD8' } 
 ])
+

@@ -250,15 +250,18 @@
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-   <span class="ruby-comment cmt"># File app/controllers/pages_controller.rb, line 2</span>
-2:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-3:     <span class="ruby-ivar">@number_of_manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">count</span>
-4:     <span class="ruby-ivar">@number_of_phone_models</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">count</span>
-5:     <span class="ruby-ivar">@number_of_phones</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">count</span>
-6:     
-7:     <span class="ruby-ivar">@popular_phones_models</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:phone_model_id</span>, <span class="ruby-value">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">x</span>)}
-8:     <span class="ruby-ivar">@popular_manufacturers</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:phone_model</span>).<span class="ruby-identifier">count</span>(<span class="ruby-value">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:manufacturer_id</span>).<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">x</span>)}
-9:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/pages_controller.rb, line 2</span>
+ 2:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+ 3:     <span class="ruby-ivar">@number_of_manufacturers</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">count</span>
+ 4:     <span class="ruby-ivar">@number_of_phone_models</span> = <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">count</span>
+ 5:     <span class="ruby-ivar">@number_of_phones</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">count</span>
+ 6:     
+ 7:     <span class="ruby-ivar">@popular_phones_models</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:phone_model_id</span>, <span class="ruby-value">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">5</span>).<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">PhoneModel</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">x</span>)}
+ 8:     <span class="ruby-ivar">@popular_manufacturers</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:phone_model</span>).<span class="ruby-identifier">count</span>(<span class="ruby-value">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:manufacturer_id</span>).<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">x</span>)}
+ 9: 
+10:     <span class="ruby-keyword kw">rescue</span>
+11:       <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value str">'/db_migrate_missing'</span>)
+12:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

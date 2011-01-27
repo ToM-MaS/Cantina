@@ -3,20 +3,20 @@
 #
 # Table name: phone_models
 #
-#  id                               :integer         not null, primary key
-#  name                             :string(255)
-#  url                              :string(255)
-#  manufacturer_id                  :integer
-#  max_number_of_sip_accounts       :integer
-#  number_of_keys                   :integer
-#  default_http_user                :string(255)
-#  default_http_password            :string(255)
-#  http_port                        :integer
-#  reboot_request_path              :string(255)
-#  ssl                              :boolean
-#  http_request_timeout             :integer
-#  created_at                       :datetime
-#  updated_at                       :datetime
+#  id                         :integer         not null, primary key
+#  name                       :string(255)
+#  url                        :string(255)
+#  manufacturer_id            :integer
+#  max_number_of_sip_accounts :integer
+#  number_of_keys             :integer
+#  default_http_user          :string(255)
+#  default_http_password      :string(255)
+#  http_port                  :integer
+#  reboot_request_path        :string(255)
+#  ssl                        :boolean
+#  http_request_timeout       :integer
+#  created_at                 :datetime
+#  updated_at                 :datetime
 #
 
 class PhoneModel < ActiveRecord::Base

@@ -1,4 +1,4 @@
-<%= form_for(@phone_key) do |f| %>
+<%= form_for([@sip_account, @phone_key]) do |f| %>
   <% if @phone_key.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@phone_key.errors.count, "error") %> prohibited this phone_key from being saved:</h2>
@@ -11,13 +11,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :sip_account_id %><br />
-    <%= f.select( :sip_account_id,
-      @sip_accounts.collect {|r| [ r.name, r.id ] },
-      { :include_blank => false, :selected => @phone_key.sip_account_id }
-    ) %>
-  </div>
   <div class="field">
     <%= f.label :phone_model_key_id %><br />
     <%= f.select( :phone_model_key_id,

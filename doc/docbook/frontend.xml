@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter version="5.0" xml:id="frontend" xml:lang="de"
+         xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <title>Frontend</title>
+
+  <info>
+    <authorgroup>
+      <author>
+        <orgname>Amooma GmbH</orgname>
+
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
+      </author>
+    </authorgroup>
+  </info>
+
+  <para>Alle für den Betrieb notwendigen Aufgaben lassen sich über das
+  Webfrontend ausführen.</para>
+
+  <para>Sobald der Server <link linkend="server-starten">gestartet</link> ist,
+  ist das Frontend über <literal>http://localhost:3000</literal>
+  erreichbar.</para>
+
+  <section xml:id="frontend-phone-manufacturers">
+    <title>Phone Manufacturers</title>
+
+    <section xml:id="frontend-phone-manufacturers-list">
+      <title>List all manufacturers</title>
+
+      <para>Über diesen Punkt können alle Telefon-Hersteller aufgelistet,
+      bearbeitet und gelöscht werden.</para>
+
+      <para>Neue Hersteller können ebenfalls angelegt werden. Bitte beachten
+      Sie für das weitere Vorgehen, dass kein Telefon angelegt werden kann,
+      für das noch kein Hersteller angelegt wurde.</para>
+    </section>
+
+    <section xml:id="frontend-phone-manufacturers-create">
+      <title>Create new manufacturer</title>
+
+      <para>An dieser Stelle können neue Hersteller in die Liste der bekannten
+      Hersteller aufgenommen werden.</para>
+
+      <para>Benötigte Informationen zum Anlegen eine neuen Herstellers
+      sind:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Name für die interne Verwendung</para>
+        </listitem>
+
+        <listitem>
+          <para>IEEE-Name des Herstellers (<link
+          xlink:href="http://de.wikipedia.org/wiki/MAC-Adresse#Herstellerkennungen">http://de.wikipedia.org/wiki/MAC-Adresse#Herstellerkennungen)</link></para>
+        </listitem>
+
+        <listitem>
+          <para>URL des Herstellers (nicht zwingend erforderlich)</para>
+        </listitem>
+      </orderedlist>
+    </section>
+  </section>
+
+  <section xml:id="frontend-phone-models">
+    <title>Phone Models</title>
+
+    <para>Hier können die unterschiedlichen Gerätetypen verwaltet
+    werden.</para>
+
+    <section xml:id="frontend-phone-models-list">
+      <title>List all phone models</title>
+
+      <para>Hier werden alle bereits angelegten Telefonmodelle
+      angezeigt.</para>
+
+      <para>Modelle können bearbeitet, gelöscht und angelegt werden.</para>
+
+      <para>Um ein neues Modell anlegen zu können muss der Hersteller bereits
+      angelegt sein, und Sie benötigen zwingend folgende Informationen:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Name des Telefonmodells</para>
+        </listitem>
+      </orderedlist>
+
+      <para>Um ein Telefonmodell vollständig anlegen zu könnnen sind folgende
+      Informationen notwendig:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Maximale Anzahl der SIP-Accounts ( default = 1 )</para>
+        </listitem>
+
+        <listitem>
+          <para>Maximale Anzahl der belegbaren Tasten ( default = 0 )</para>
+        </listitem>
+      </orderedlist>
+
+      <para><warning>
+          <para>Unter Umständen reicht es nicht ein neues Telfonmodell
+          anzulegen. Der View der die Konfiguration für das Telefon ausgibt
+          muss unter Umständen auch angepasst werden.</para>
+        </warning></para>
+    </section>
+
+    <section xml:id="frontend-phone-models-create">
+      <title>Create a new phone model</title>
+
+      <para>Hier kann ein neues Telefonmodell direkt angelegt werden.</para>
+    </section>
+  </section>
+
+  <section xml:id="frontend-phones">
+    <title>Phones</title>
+
+    <para>Hier befinden Sie sich am zentralen Punkt des Provisioning-Servers.
+    Von hier starten die meisten alltäglichen Workflows.</para>
+
+    <section xml:id="frontend-phones-list">
+      <title>List all phones</title>
+
+      <para>Alle bereits angelegten Telefone werden hier mit (wenn vorhanden)
+      den zugeordneten SIP-Accounts angezeigt.</para>
+
+      <para>Einen neuen SIP-Account legen Sie am einfachsten an indem Sie über
+      das ensprechende Telefon einsteigen. Dadurch haben Sie automatisch alle
+      das Telefon betreffenden Informationen richtig ausgefüllt.</para>
+
+      <para>Über "create new sip account" können Sie einen neuen SiIP-Account
+      für das jeweilige Telefon anlegen.</para>
+
+      <para>Sie benötigen mindestens folgende Informationen:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Name (eindeutige Zuordnung für den Account)</para>
+        </listitem>
+
+        <listitem>
+          <para>User (SIP User-ID)</para>
+        </listitem>
+      </orderedlist>
+
+      <para>In den meisten Fällen werden Sie noch zusätzlich diese
+      Informationen benötigen:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Auth. user (Benutzer für Authentifizierung beim
+          Registrar)</para>
+        </listitem>
+
+        <listitem>
+          <para>Password (Passwort zugehörig zu Auth. user)</para>
+        </listitem>
+
+        <listitem>
+          <para>Registrar (SIP-Registrar an dem Sie sich anmelden
+          wollen)</para>
+        </listitem>
+
+        <listitem>
+          <para>Registrar port (Standard: 5060)</para>
+        </listitem>
+      </orderedlist>
+
+      <para>Folgende Parameter sind optional:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Outbound proxy (Proxy für alle ausgehenden Gespräche)</para>
+        </listitem>
+
+        <listitem>
+          <para>Outbound proxy port (zugehöriger Port)</para>
+        </listitem>
+
+        <listitem>
+          <para>Realm (siehe <link
+          xlink:href="http://www.voip-info.org/wiki/view/SIP+Authentication">http://www.voip-info.org/wiki/view/SIP+Authentication</link>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Screen name (auf dem Telefon angezeigter Name)</para>
+        </listitem>
+
+        <listitem>
+          <para>Display name (beim Angerufenen angezeigter Name)</para>
+        </listitem>
+
+        <listitem>
+          <para>Registration expiry time (Zeitraum nach der eine erneute
+          Registrierung erfolgen muss)</para>
+        </listitem>
+
+        <listitem>
+          <para>DTMF mode (Art der DTMF Übertragung)</para>
+        </listitem>
+
+        <listitem>
+          <para>Remote password (Passwort zur Authentifizierung bei eingehnden
+          Gesprächen)</para>
+        </listitem>
+
+        <listitem>
+          <para>Codecs (erlaubte Sprachcodecs für diesen Account)</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+    <section xml:id="frontend-phones-create">
+      <title>Create new phone</title>
+
+      <para>Um ein neues Telefon anzulegen benötigen Sie mindestens folgende
+      Informationen:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>MAC address (MAC-Adresse des Telefons)</para>
+        </listitem>
+
+        <listitem>
+          <para>Phone model (Modell des Telefons)</para>
+        </listitem>
+      </orderedlist>
+
+      <para>Optional können Sie folgende Informationen angeben:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>IP address (IP-Adresse des Telefons)</para>
+        </listitem>
+
+        <listitem>
+          <para>HTTP user (User für Zugriff auf das Webinterface des
+          Telefons)</para>
+        </listitem>
+
+        <listitem>
+          <para>HTTP password (Passwort für Zugriff auf das Webinterface des
+          Telefons</para>
+        </listitem>
+      </orderedlist>
+    </section>
+  </section>
+</chapter>

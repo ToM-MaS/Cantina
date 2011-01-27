@@ -35,6 +35,7 @@ class PhoneKey < ActiveRecord::Base
 	validate :validate_softkey
 	validate :key_must_be_a_possible_key_from_the_phone_model
 	validate :phone_key_function_definition_must_be_valid
+	validate :phone_model_keys_has_to_be_available
 	
 	private
 	
@@ -116,5 +117,12 @@ class PhoneKey < ActiveRecord::Base
 	    errors.add( :phone_key_function_definition_id, "Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}." )
 	  end
 	end
+	
+	# Checks that a key is available
+	#
+	def phone_model_keys_has_to_be_available
+	  self.sip_account.undefined_phone_model_keys.include?(self.phone_model_key)
+  end
+  # TODO needs testing
 		
 end

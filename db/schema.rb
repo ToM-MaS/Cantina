@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110122171701) do
     t.integer  "phone_model_key_id"
     t.integer  "phone_key_function_definition_id"
     t.string   "value"
+    t.string   "label"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sip_account_id"

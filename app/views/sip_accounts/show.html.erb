@@ -104,6 +104,10 @@
 </div>
 
 <hr />
-
+<% if @sip_account.phone_keys.count > 0%>
+<%= link_to  'Phone keys', sip_account_phone_keys_path(@sip_account)  %>
+<% else %>
+<%= link_to  'New phone key', new_sip_account_phone_key_path(@sip_account)  %>
+<% end %>
 <%= link_to 'Edit', edit_sip_account_path(@sip_account) %> |
 <%= link_to 'Back', sip_accounts_path %>

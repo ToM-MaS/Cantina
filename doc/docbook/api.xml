@@ -104,7 +104,7 @@
         &lt;name&gt;Snom 360&lt;/name&gt;
         &lt;manufacturer-id type="integer"&gt;1&lt;/manufacturer-id&gt;
         &lt;number-of-keys type="integer"&gt;12&lt;/number-of-keys&gt;
-        &lt;!-- ... --&gt;
+        <replaceable>&lt;!-- ... --&gt;</replaceable>
     &lt;/phone-model&gt;
     
     &lt;phone-model&gt;
@@ -112,10 +112,10 @@
         &lt;name&gt;Snom 370&lt;/name&gt;
         &lt;manufacturer-id type="integer"&gt;1&lt;/manufacturer-id&gt;
         &lt;number-of-keys type="integer"&gt;12&lt;/number-of-keys&gt;
-        &lt;!-- ... --&gt;
+        <replaceable>&lt;!-- ... --&gt;</replaceable>
     &lt;/phone-model&gt;
     
-    &lt;!-- ... --&gt;
+    <replaceable>&lt;!-- ... --&gt;</replaceable>
     
 &lt;/phone-models&gt;</screen></para>
 
@@ -325,8 +325,40 @@
       </informaltable></para>
   </section>
 
-  <section xml:id="api-active-resource">
-    <title>ActiveResource</title>
+  <section xml:id="api-curl-wget">
+    <title>curl, wget etc.</title>
+
+    <para>Natürlich läßt sich die API mit den bekannten HTTP-Tools wie
+    <literal>curl</literal> oder <literal>wget</literal> benutzen.<screen>debian:~# curl http://localhost:3000/phone_models.xml
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;phone-models type="array"&gt;
+  &lt;phone-model&gt;
+    &lt;id type="integer"&gt;4&lt;/id&gt;
+    &lt;name&gt;Snom 360&lt;/name&gt;
+    &lt;manufacturer-id type="integer"&gt;1&lt;/manufacturer-id&gt;
+    &lt;number-of-keys type="integer"&gt;12&lt;/number-of-keys&gt;
+    <replaceable>&lt;!-- ... --&gt;</replaceable>
+  &lt;/phone-model&gt;
+  &lt;phone-model&gt;
+    &lt;id type="integer"&gt;5&lt;/id&gt;
+    &lt;name&gt;Snom 370&lt;/name&gt;
+    &lt;manufacturer-id type="integer"&gt;1&lt;/manufacturer-id&gt;
+    &lt;number-of-keys type="integer"&gt;12&lt;/number-of-keys&gt;
+    <replaceable>&lt;!-- ... --&gt;</replaceable>
+  &lt;/phone-model&gt;
+  <replaceable>&lt;!-- ... --&gt;</replaceable>
+&lt;/phone-models&gt;</screen></para>
+
+    <para>Auch <literal>POST</literal>-Operationen sind mit diesen Tools
+    möglich, auch wenn das dann auf der Shell schnell unübersichtlich wird.
+    Schöner geht es wenn man eine fertige Bibliothek benutzt, die dann
+    tatsächlich auch die XML-Daten versteht und ein komfortables Interface
+    bereitstellt, wie z.B. <classname>ActiveResource</classname> in Ruby
+    (<xref linkend="api-active-resource-ruby" />).</para>
+  </section>
+
+  <section xml:id="api-active-resource-ruby">
+    <title>ActiveResource in Ruby</title>
 
     <para>Die in <xref linkend="api-rest" /> kennengelernte XML-API läßt sich
     gut aus eigenen Skripten heraus aufrufen &#8211; man nennt das auch
@@ -354,6 +386,7 @@ class PhoneModel &lt; ActiveResource::Base
     self.element_name = 'phone_model'
 end
 
+# alle Telefon-Modelle abrufen:
 phone_models = PhoneModel.all
 phone_models.each { |pm|
     puts "PhoneModel ID: #{pm.id}, name: #{pm.name}"

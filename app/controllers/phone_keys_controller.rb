@@ -2,7 +2,8 @@ class PhoneKeysController < ApplicationController
   # GET /phone_keys
   # GET /phone_keys.xml
   def index
-    @phone_keys = PhoneKey.all
+    @sip_account = SipAccount.find(params[:sip_account_id])
+    @phone_keys = @sip_account.phone_keys
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,13 +25,12 @@ class PhoneKeysController < ApplicationController
   # GET /phone_keys/new
   # GET /phone_keys/new.xml
   def new
-    @phone_key = PhoneKey.new
+    @sip_account = SipAccount.find(params[:sip_account_id])
+    @phone_key = @sip_account.phone_keys.build
     
-    # FIXME - some kind of .find() or .where() here?
-    @sip_accounts = SipAccount.order(:name)
     # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
-    @phone_model_keys = PhoneModelKey.order(:position)
-    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
+    @phone_model_keys = @sip_account.phone.phone_model.phone_model_keys.order(:position)
+    @phone_key_function_definitions = @phone_model_keys.collect {|phone_model_key| phone_model_key.phone_key_function_definitions}.flatten.uniq
     
     respond_to do |format|
       format.html # new.html.erb
@@ -40,30 +40,27 @@ class PhoneKeysController < ApplicationController
 
   # GET /phone_keys/1/edit
   def edit
+    @sip_account = SipAccount.find(params[:sip_account_id])
     @phone_key = PhoneKey.find(params[:id])
     
-    # FIXME - some kind of .find() or .where() here?
-    @sip_accounts = SipAccount.order(:name)
-    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
-    @phone_model_keys = PhoneModelKey.order(:position)
-    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
-    
+    @phone_model_keys = @sip_account.phone.phone_model.phone_model_keys.order(:position)
+    @phone_key_function_definitions = @phone_model_keys.collect {|phone_model_key| phone_model_key.phone_key_function_definitions}.flatten.uniq
+
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.xml  { render :xml => @phone_key }
+    end
   end
 
   # POST /phone_keys
   # POST /phone_keys.xml
   def create
-    @phone_key = PhoneKey.new(params[:phone_key])
-    
-    # FIXME - some kind of .find() or .where() here?
-    @sip_accounts = SipAccount.order(:name)
-    # FIXME - some kind of .find( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id => @phone_key.phone_model_key.phone_model_id ) here?
-    @phone_model_keys = PhoneModelKey.order(:position)
-    @phone_key_function_definitions = PhoneKeyFunctionDefinition.order(:name)
+    @sip_account = SipAccount.find(params[:sip_account_id])
+    @phone_key = @sip_account.phone_keys.build(params[:phone_key])
     
     respond_to do |format|
       if @phone_key.save
-        format.html { redirect_to(@phone_key, :notice => 'Phone key was successfully created.') }
+        format.html { redirect_to(@sip_account, :notice => 'Phone key was successfully created.') }
         format.xml  { render :xml => @phone_key, :status => :created, :location => @phone_key }
       else
         format.html { render :action => "new" }
@@ -85,7 +82,7 @@ class PhoneKeysController < ApplicationController
     
     respond_to do |format|
       if @phone_key.update_attributes(params[:phone_key])
-        format.html { redirect_to(@phone_key, :notice => 'Phone key was successfully updated.') }
+        format.html { redirect_to(@phone_key.sip_account, :notice => 'Phone key was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -101,7 +98,7 @@ class PhoneKeysController < ApplicationController
     @phone_key.destroy
 
     respond_to do |format|
-      format.html { redirect_to(phone_keys_url) }
+      format.html { redirect_to(@phone_key.sip_account) }
       format.xml  { head :ok }
     end
   end

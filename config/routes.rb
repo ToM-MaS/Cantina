@@ -18,7 +18,6 @@ Cantina::Application.routes.draw do
 
   resources :phone_model_mac_addresses
 
-  resources :phone_keys
 
   match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
 
@@ -27,7 +26,12 @@ Cantina::Application.routes.draw do
     resources :sip_accounts
   end
 
-  resources :sip_accounts
+  resources :sip_accounts do
+    resources :phone_keys
+  end
+  
+#  GET 'sip_accounts/:sip_account_id/phone_keys/new(.:format)' => 'phone_keys#new', :as => :new_sip_account_phone_key
+  
 
   resources :codecs
 

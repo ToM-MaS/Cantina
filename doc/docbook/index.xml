@@ -47,4 +47,6 @@
   <xi:include href="data-model.xml" />
 
   <xi:include href="api.xml" />
+
+  <xi:include href="frontend.xml" />
 </book>

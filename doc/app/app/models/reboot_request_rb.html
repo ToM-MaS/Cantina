@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">2011-01-22 21:01:35 +0100</dd>
+			<dd class="modified-date">2011-01-23 06:42:28 +0100</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -43,7 +43,22 @@
 		
 		<div class="description">
 			<h2>Description</h2>
-			
+			<h2>Schema Information</h2>
+<p>
+Schema version: 20110122171701
+</p>
+<p>
+Table name: reboot_requests
+</p>
+<pre>
+ id         :integer         not null, primary key
+ phone_id   :integer
+ start      :datetime
+ end        :datetime
+ successful :boolean
+ created_at :datetime
+ updated_at :datetime</pre>
+
 		</div>
 		
 	</div>

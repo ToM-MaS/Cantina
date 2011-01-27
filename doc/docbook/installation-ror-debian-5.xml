@@ -21,7 +21,8 @@
       <author>
         <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
 
-        <uri>http://www.kempgen.net/</uri>
+        <uri><link
+        xlink:href="http://www.kempgen.net/">http://www.kempgen.net</link></uri>
       </author>
     </authorgroup>
   </info>

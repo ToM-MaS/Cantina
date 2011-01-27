@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">2011-01-22 16:41:07 +0100</dd>
+			<dd class="modified-date">2011-01-24 09:02:15 +0100</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -47,7 +47,7 @@
 			<h2>Description</h2>
 			<h2>Schema Information</h2>
 <p>
-Schema version: 20110121121114
+Schema version: 20110122171701
 </p>
 <p>
 Table name: phone_models
@@ -59,9 +59,12 @@ Table name: phone_models
  manufacturer_id                  :integer
  max_number_of_sip_accounts       :integer
  number_of_keys                   :integer
- max_number_of_phone_book_entries :integer
  default_http_user                :string(255)
  default_http_password            :string(255)
+ http_port                        :integer
+ reboot_request_path              :string(255)
+ ssl                              :boolean
+ http_request_timeout             :integer
  created_at                       :datetime
  updated_at                       :datetime</pre>
 

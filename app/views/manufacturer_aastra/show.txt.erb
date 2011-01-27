@@ -6,11 +6,11 @@ time format: 1
 date format: 11
 time zone name: DE-Berlin
 
-#global SIP settings
-sip proxy ip:
-sip proxy port: 5060
-sip registrar ip:
-sip registrar port: 5060
+# global SIP settings
+sip proxy ip: 0.0.0.0
+sip proxy port: 0
+sip registrar ip: 0.0.0.0
+sip registrar port: 0
 sip registration period: 3600
 sip nortel nat support: 0
 sip nortel nat timer: 0
@@ -25,26 +25,36 @@ codec_entries = []
 packetization=60
 silence_suppression="off"
 index = 0
-[
-  8,   # G711a/8000 G711a (8K)
-  0,   # G711u/8000 G711u (8K)
-  9,   # G722/8000 G722
-  98,  # G726-16/8000 G726-16
-  97,  # G726-24/8000 G726-24
-  115, # G726-32/8000 G726-32
-  96,  # G726-40/8000 G726-40
-  18,  # G729/8000 G729
-  106, # BV16/8000 BV16 (8K)
-  107, # BV32/16000 BV32 (16K)
-  110, # G711u/16000 G711u (16K)
-  111, # G711a/16000 G711a (16K)
-  113, # L16/16000 L16 (16K)
-  112 # L16/8000 L16 (8K)
-].each do |codec|
-  index = index + 1
-  codec_entries.push("payload=#{codec};ptime=#{packetization};silsupp=#{silence_suppression}")
-  if (index >= 10)
-    break
+
+supported_codecs = {
+  'alaw' => 8,   # G711a/8000 G711a (8K)
+  'ulaw' => 0,   # G711u/8000 G711u (8K)
+  'g722' => 9,   # G722/8000 G722
+  'g726' => 98,  # G726-16/8000 G726-16
+  'g726-24' => 97,  # G726-24/8000 G726-24
+  'g726-32' => 115, # G726-32/8000 G726-32
+  'g726-40' => 96,  # G726-40/8000 G726-40
+  'g729' => 18,  # G729/8000 G729
+  'bv16' => 106, # BV16/8000 BV16 (8K)
+  'bv32' => 107, # BV32/16000 BV32 (16K)
+  'ulaw-16k' => 110, # G711u/16000 G711u (16K)
+  'alaw-16k' => 111, # G711a/16000 G711a (16K)
+  'l16' => 113, # L16/16000 L16 (16K)
+  'l16-8k' => 112 # L16/8000 L16 (8K)
+}
+
+sip_account = @phone.sip_accounts.first()
+
+if (sip_account)
+  sip_account.codecs.all().each do |codec|
+    codec_id = supported_codecs[codec.name]
+    if (codec_id)
+      index = index + 1
+      codec_entries.push("payload=#{codec_id};ptime=#{packetization};silsupp=#{silence_suppression}")
+    end
+    if (index >= 10)
+      break
+    end
   end
 end
 %>
@@ -60,13 +70,13 @@ sip line<%= sip_account.position %> mode: 0
 sip line<%= sip_account.position %> user name: <%= sip_account.user %>
 sip line<%= sip_account.position %> display name: <%= sip_account.display_name %>
 sip line<%= sip_account.position %> screen name: <%= sip_account.screen_name %>
-sip line<%= sip_account.position %> proxy ip: <%= sip_account.sip_proxy %>
-sip line<%= sip_account.position %> proxy port: <%= sip_account.sip_proxy_port %>
-sip line<%= sip_account.position %> registrar ip: <%= sip_account.registrar %>
-sip line<%= sip_account.position %> registrar port: <%= sip_account.registrar_port %>
-sip line<%= sip_account.position %> outbound proxy: <%= sip_account.outbound_proxy %>
-sip line<%= sip_account.position %> outbound proxy port: <%= sip_account.outbound_proxy_port %>
-sip line<%= sip_account.position %> registration period: <%= sip_account.registration_expiry_time %>
+sip line<%= sip_account.position %> proxy ip: <%= ((! sip_account.sip_proxy.blank?) ? sip_account.sip_proxy : '0.0.0.0') %>
+sip line<%= sip_account.position %> proxy port: <%= sip_account.sip_proxy_port.to_i %>
+sip line<%= sip_account.position %> registrar ip: <%= ((! sip_account.registrar.blank?) ? sip_account.registrar : '0.0.0.0') %>
+sip line<%= sip_account.position %> registrar port: <%= sip_account.registrar_port.to_i %>
+sip line<%= sip_account.position %> outbound proxy: <%= ((! sip_account.outbound_proxy.blank?) ? sip_account.outbound_proxy : '0.0.0.0') %>
+sip line<%= sip_account.position %> outbound proxy port: <%= sip_account.outbound_proxy_port.to_i %>
+sip line<%= sip_account.position %> registration period: <%= ((sip_account.registration_expiry_time.to_i > 0) ? sip_account.registration_expiry_time.to_i : 3600) %>
 <%
 if (sip_account.dtmf_mode == 'info')
   dtmf_method = 1
@@ -103,11 +113,11 @@ sip_account.phone_keys.each do |phone_key|
 
 key_name = (phone_key.phone_model_key ? phone_key.phone_model_key.name : nil)
 key_value = phone_key.value
-key_label = phone_key.label
+key_label = phone_key.value
 %>
 <%= key_name %> type: <%= key_type %>
-<%= key_name %> label: "<%= phone_key.label %>"
-<%= key_name %> value: ""
+<%= key_name %> label: "<%= phone_key.value %>"
+<%= key_name %> value: "<%= phone_key.value %>"
 
 <%end%>
 

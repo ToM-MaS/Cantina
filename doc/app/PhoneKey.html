@@ -271,13 +271,13 @@ Checks if this key is a valid key from the phone_model
 					<div class="method-source-code"
 						id="key-must-be-a-possible-key-from-the-phone-model-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone_key.rb, line 101</span>
-101:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">key_must_be_a_possible_key_from_the_phone_model</span>
-102:           <span class="ruby-identifier">phone_model</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>
-103:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_key_id</span>)
-104:             <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_key_id</span>, <span class="ruby-node">&quot;Is not a valid PhoneModelKey for the PhoneModel #{phone_model.name} (ID #{phone_model.id}).&quot;</span> )
-105:           <span class="ruby-keyword kw">end</span>
-106:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone_key.rb, line 104</span>
+104:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">key_must_be_a_possible_key_from_the_phone_model</span>
+105:           <span class="ruby-identifier">phone_model</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>
+106:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_key_id</span>)
+107:             <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_key_id</span>, <span class="ruby-node">&quot;Is not a valid PhoneModelKey for the PhoneModel #{phone_model.name} (ID #{phone_model.id}).&quot;</span> )
+108:           <span class="ruby-keyword kw">end</span>
+109:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -311,12 +311,12 @@ href="PhoneModelKey.html">PhoneModelKey</a>
 					<div class="method-source-code"
 						id="phone-key-function-definition-must-be-valid-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/phone_key.rb, line 111</span>
-111:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_key_function_definition_must_be_valid</span>
-112:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">phone_key_function_definitions</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition_id</span>)
-113:             <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_key_function_definition_id</span>, <span class="ruby-node">&quot;Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}.&quot;</span> )
-114:           <span class="ruby-keyword kw">end</span>
-115:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone_key.rb, line 114</span>
+114:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_key_function_definition_must_be_valid</span>
+115:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">phone_key_function_definitions</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition_id</span>)
+116:             <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_key_function_definition_id</span>, <span class="ruby-node">&quot;Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}.&quot;</span> )
+117:           <span class="ruby-keyword kw">end</span>
+118:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -349,66 +349,66 @@ Validates the softkey definition.
 					<div class="method-source-code"
 						id="validate-softkey-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/phone_key.rb, line 39</span>
-39:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_softkey</span>
-40:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>
-41:                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_key_function_definition</span>, <span class="ruby-value str">&quot;cannot be nil.&quot;</span> )
-42:                 <span class="ruby-keyword kw">else</span>
-43:                         <span class="ruby-keyword kw">case</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span>.<span class="ruby-identifier">type_of_class</span>
-44:                                 
-45:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'string'</span>
-46:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-constant">String</span> )
-47:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be a string.&quot;</span> )
-48:                                         <span class="ruby-keyword kw">end</span>
-49:                                 
-50:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'integer'</span>
-51:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>( <span class="ruby-regexp re">/^\-?[0-9]{1,9}$/</span> )
-52:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be numerical.&quot;</span> )
-53:                                         <span class="ruby-keyword kw">end</span>
-54:                                 
-55:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'boolean'</span>
-56:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>( <span class="ruby-regexp re">/^(?:true|false)$/</span> )
-57:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be boolean (\&quot;true\&quot; or \&quot;false\&quot;).&quot;</span> )
-58:                                         <span class="ruby-keyword kw">end</span>
-59:                                 
-60:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'url'</span>
-61:                                         <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
-62:                                         <span class="ruby-keyword kw">begin</span>
-63:                                                 <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> )
-64:                                                 <span class="ruby-comment cmt"># Require an absolute URI (i.e. with a scheme):</span>
-65:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">absolute?</span>
-66:                                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URL with a scheme.&quot;</span> )
-67:                                                 <span class="ruby-keyword kw">end</span>
-68:                                         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
-69:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URL.&quot;</span> )
-70:                                         <span class="ruby-keyword kw">end</span>
-71:                                 
-72:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'uri'</span>
-73:                                         <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
-74:                                         <span class="ruby-keyword kw">begin</span>
-75:                                                 <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> )
-76:                                                 <span class="ruby-comment cmt"># Strictly speaking, if the thing has a fragment (&quot;#frag&quot;)</span>
-77:                                                 <span class="ruby-comment cmt"># then it's not a &quot;URI&quot; (but maybe a &quot;URI-reference&quot;).</span>
-78:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">fragment</span>.<span class="ruby-identifier">nil?</span>
-79:                                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URI (URI's don't have a fragment).&quot;</span> )
-80:                                                 <span class="ruby-keyword kw">end</span>
-81:                                         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
-82:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URI.&quot;</span> )
-83:                                         <span class="ruby-keyword kw">end</span>
-84:                                 
-85:                                 <span class="ruby-keyword kw">else</span>
-86:                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:'phone_key_function_definition.type_of_class'</span>,
-87:                                                 <span class="ruby-node">&quot;(\&quot;#{self.phone_key_function_definition.type_of_class}\&quot;) is not validatable for softkey function type \&quot;#{self.phone_key_function_definition.name}\&quot;.&quot;</span> )
-88:                         <span class="ruby-keyword kw">end</span>
-89:                         
-90:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span>.<span class="ruby-identifier">regex_validation</span>.<span class="ruby-identifier">blank?</span>
-91:                                 <span class="ruby-identifier">re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span>.<span class="ruby-identifier">regex_validation</span> )
-92:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">re</span>.<span class="ruby-identifier">match</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> )
-93:                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) does not match the required format for softkey function type \&quot;#{self.phone_key_function_definition.name}\&quot;.&quot;</span> )
-94:                                 <span class="ruby-keyword kw">end</span>
-95:                         <span class="ruby-keyword kw">end</span>
-96:                 <span class="ruby-keyword kw">end</span>
-97:         <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/phone_key.rb, line 42</span>
+ 42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_softkey</span>
+ 43:                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>
+ 44:                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_key_function_definition</span>, <span class="ruby-value str">&quot;cannot be nil.&quot;</span> )
+ 45:                 <span class="ruby-keyword kw">else</span>
+ 46:                         <span class="ruby-keyword kw">case</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span>.<span class="ruby-identifier">type_of_class</span>
+ 47:                                 
+ 48:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'string'</span>
+ 49:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">include?</span>( <span class="ruby-constant">String</span> )
+ 50:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be a string.&quot;</span> )
+ 51:                                         <span class="ruby-keyword kw">end</span>
+ 52:                                 
+ 53:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'integer'</span>
+ 54:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>( <span class="ruby-regexp re">/^\-?[0-9]{1,9}$/</span> )
+ 55:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be numerical.&quot;</span> )
+ 56:                                         <span class="ruby-keyword kw">end</span>
+ 57:                                 
+ 58:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'boolean'</span>
+ 59:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>( <span class="ruby-regexp re">/^(?:true|false)$/</span> )
+ 60:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be boolean (\&quot;true\&quot; or \&quot;false\&quot;).&quot;</span> )
+ 61:                                         <span class="ruby-keyword kw">end</span>
+ 62:                                 
+ 63:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'url'</span>
+ 64:                                         <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
+ 65:                                         <span class="ruby-keyword kw">begin</span>
+ 66:                                                 <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> )
+ 67:                                                 <span class="ruby-comment cmt"># Require an absolute URI (i.e. with a scheme):</span>
+ 68:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">absolute?</span>
+ 69:                                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URL with a scheme.&quot;</span> )
+ 70:                                                 <span class="ruby-keyword kw">end</span>
+ 71:                                         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+ 72:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URL.&quot;</span> )
+ 73:                                         <span class="ruby-keyword kw">end</span>
+ 74:                                 
+ 75:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'uri'</span>
+ 76:                                         <span class="ruby-identifier">require</span> <span class="ruby-value str">'uri'</span>
+ 77:                                         <span class="ruby-keyword kw">begin</span>
+ 78:                                                 <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> )
+ 79:                                                 <span class="ruby-comment cmt"># Strictly speaking, if the thing has a fragment (&quot;#frag&quot;)</span>
+ 80:                                                 <span class="ruby-comment cmt"># then it's not a &quot;URI&quot; (but maybe a &quot;URI-reference&quot;).</span>
+ 81:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">fragment</span>.<span class="ruby-identifier">nil?</span>
+ 82:                                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URI (URI's don't have a fragment).&quot;</span> )
+ 83:                                                 <span class="ruby-keyword kw">end</span>
+ 84:                                         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+ 85:                                                 <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) for \&quot;#{self.phone_key_function_definition.name}\&quot; softkey has to be an URI.&quot;</span> )
+ 86:                                         <span class="ruby-keyword kw">end</span>
+ 87:                                 
+ 88:                                 <span class="ruby-keyword kw">else</span>
+ 89:                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:'phone_key_function_definition.type_of_class'</span>,
+ 90:                                                 <span class="ruby-node">&quot;(\&quot;#{self.phone_key_function_definition.type_of_class}\&quot;) is not validatable for softkey function type \&quot;#{self.phone_key_function_definition.name}\&quot;.&quot;</span> )
+ 91:                         <span class="ruby-keyword kw">end</span>
+ 92:                         
+ 93:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span>.<span class="ruby-identifier">regex_validation</span>.<span class="ruby-identifier">blank?</span>
+ 94:                                 <span class="ruby-identifier">re</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition</span>.<span class="ruby-identifier">regex_validation</span> )
+ 95:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">re</span>.<span class="ruby-identifier">match</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> )
+ 96:                                         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:value</span>, <span class="ruby-node">&quot;(\&quot;#{self.value}\&quot;) does not match the required format for softkey function type \&quot;#{self.phone_key_function_definition.name}\&quot;.&quot;</span> )
+ 97:                                 <span class="ruby-keyword kw">end</span>
+ 98:                         <span class="ruby-keyword kw">end</span>
+ 99:                 <span class="ruby-keyword kw">end</span>
+100:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

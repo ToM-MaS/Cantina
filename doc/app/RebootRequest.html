@@ -206,7 +206,22 @@
 		<h1 class="class">RebootRequest</h1>
 
 		<div id="description">
-			
+			<h2>Schema Information</h2>
+<p>
+Schema version: 20110122171701
+</p>
+<p>
+Table name: reboot_requests
+</p>
+<pre>
+ id         :integer         not null, primary key
+ phone_id   :integer
+ start      :datetime
+ end        :datetime
+ successful :boolean
+ created_at :datetime
+ updated_at :datetime</pre>
+
 		</div>
 
 		<!-- Constants -->

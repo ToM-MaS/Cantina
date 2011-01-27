@@ -79,6 +79,8 @@
 					
 					<li><a href="#method-i-new">#new</a></li>
 					
+					<li><a href="#method-i-reboot">#reboot</a></li>
+					
 					<li><a href="#method-i-show">#show</a></li>
 					
 					<li><a href="#method-i-update">#update</a></li>
@@ -448,6 +450,44 @@ GET /phones/new GET /phones/new.xml
 39:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone</span> }
 40:     <span class="ruby-keyword kw">end</span>
 41:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="reboot-method" class="method-detail ">
+				<a name="method-i-reboot"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">reboot</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Reboots the phone
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="reboot-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/phones_controller.rb, line 99</span>
+ 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reboot</span>
+100:     <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+101:     <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">reboot</span>
+102:     <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone is in the process of rebooting.'</span>)
+103:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

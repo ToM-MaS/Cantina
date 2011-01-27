@@ -14,7 +14,18 @@
       <author>
         <orgname>Amooma GmbH</orgname>
 
-        <uri>http://www.amooma.de/</uri>
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
+      </author>
+
+      <author>
+        <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
+
+        <affiliation>
+          <org>
+            <orgname>Amooma GmbH</orgname>
+          </org>
+        </affiliation>
       </author>
     </authorgroup>
   </info>

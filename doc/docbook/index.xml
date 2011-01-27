@@ -20,13 +20,15 @@
       <author>
         <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
 
-        <uri>http://www.kempgen.net/</uri>
+        <uri><link
+        xlink:href="http://www.kempgen.net/">http://www.kempgen.net</link></uri>
       </author>
 
       <author>
         <orgname>Amooma GmbH</orgname>
 
-        <uri>http://www.amooma.de/</uri>
+        <uri><link
+        xlink:href="http://www.amooma.de/">http://www.amooma.de</link></uri>
       </author>
     </authorgroup>
   </info>
@@ -41,4 +43,8 @@
 
     <xi:include href="installation-cantina.xml" />
   </chapter>
+
+  <xi:include href="data-model.xml" />
+
+  <xi:include href="api.xml" />
 </book>

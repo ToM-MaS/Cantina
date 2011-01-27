@@ -1,3 +1,15 @@
+# map from Codec names as in seeds.rb to their respective name
+# (or rather: number) on Snom:
+codec_mapping_snom = {
+	'ulaw' =>  0,  # G.711 u-law
+	'alaw' =>  8,  # G.711 a-law
+	'gsm'  =>  3,  # GSM
+	'g722' =>  9,  # G.722
+	'g726' =>  2,  # G.726-32  Assume that "g726" in the codecs table means G.726-32.
+	'g729' => 18,  # G.729a
+	'g723' =>  4,  # G.723.1  Assume that "g723" in the codecs table does not mean G.723 but G.723.1.
+}
+
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.settings {
@@ -76,7 +88,7 @@ xml.settings {
 				saopts_rw = { :idx => idx, :perm => 'RW' }
 								
 				xml.comment! "SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
-				xml.user_active(            (is_defined ? 'on' : 'off') , saopts_rw )
+				xml.user_active(            (is_defined ? 'on' : 'off') , saopts_r )
 				xml.user_pname(             sac[:auth_user]       , saopts_r  )
 				xml.user_pass(              sac[:password]        , saopts_r  )
 				xml.user_host(              sac[:registrar]       , saopts_r  )
@@ -92,7 +104,6 @@ xml.settings {
 				xml.user_dp_str(            ''                    , saopts_rw )
 				xml.user_dp(                ''                    , saopts_rw )
 				xml.user_q(                 '1.0'                 , saopts_rw )
-				xml.user_full_sdp_answer(   'on'                  , saopts_rw )
 				xml.user_failover_identity( 'none'                , saopts_rw )
 				# sac.realm
 				# sac.registrar_port
@@ -101,22 +112,32 @@ xml.settings {
 				# sac.sip_proxy
 				# sac.remote_password
 				
+				xml.user_full_sdp_answer(   'on'                  , saopts_rw )
+				xml.user_dynamic_payload(   'on'                  , saopts_rw ) # "Turns on dynamic payload type for G726."
+				xml.user_g726_packing_order('on'                  , saopts_r  ) # on = RFC 3551, off = AAL2
+				xml.codec_size(             '20'                  , saopts_rw )
 				
-				# FIXME - read codecs from the database once http://groups.google.com/group/amooma-dev/browse_thread/thread/b126253ccc0419ac has been solved
 				xml.comment! "codecs for SIP account idx #{idx}, position #{sac[:position].inspect}"  # <!-- a comment -->
 				# See http://wiki.snom.com/Settings/codec_name
 				# (Note: Snom's documentation is wrong.)
-				[
-					 8,  # G.711 alaw
-					 0,  # G.711 ulaw
-					 3,  # GSM
-					 2,  # G.726-32
-					18,  # G.729a
-					 9,  # G.722
-					 4,  # G.723.1
-				].each_with_index {  |codec_num, codec_idx|
-					xml.tag! "codec#{1+codec_idx}_name", codec_num, saopts_r
+				sac_codec_names = ( is_defined ? sact.codecs.all.map{|r| r.name } : [] )
+				snom_codec_i = 1
+				max_snom_codec_i = 7
+				sac_codec_names.each { |codec_name|
+					snom_codec_name = codec_mapping_snom[codec_name]
+					if (! snom_codec_name.blank?)
+						xml.tag! "codec#{1+snom_codec_i}_name", snom_codec_name.to_s, saopts_r
+						snom_codec_i += 1
+						break if snom_codec_i > max_snom_codec_i
+					end
 				}
+				if snom_codec_i <= max_snom_codec_i
+					while snom_codec_i <= max_snom_codec_i
+						snom_codec_name = ''  # Snom didn't document what to put here.
+						xml.tag! "codec#{1+snom_codec_i}_name", snom_codec_name.to_s, saopts_r
+						snom_codec_i += 1
+					end
+				end
 			}
 		end
 		

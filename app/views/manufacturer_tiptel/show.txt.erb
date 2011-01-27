@@ -11,8 +11,7 @@ dtmf_map = {
 :"inband" => "0",
 :"info" => "2"
 }
-codec_map = {
-} 
+
 @phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 %>
 <% @phone.sip_accounts.each do |sip_account| %>
@@ -38,6 +37,18 @@ RegisterMac=1
 path = /config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
 DTMFInbandTransfer=<%= dtmf_map[ :"#{sip_account.dtmf_mode}" ] %>
 
+<% if sip_account.codecs.count > 0%>
+<% index = 0 %>
+<% sip_account.codecs.all.each do |codec| %>
+[audio<%= index %>.cfg]
+path=/config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
+enable = 1
+PayloadType = <%= codec.name.upcase %>
+priority = 0
+<% end %>
+<% else %>
+
+<% end %>
 <% @phone.sip_accounts.where( :position => sip_account.position).first.phone_keys.each do |phone_key| %>
 <% if key_map[ :"#{phone_key.phone_key_function_definition.name}" ] != nil %>
 [<%= phone_key.phone_model_key.name %>]

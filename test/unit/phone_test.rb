@@ -108,6 +108,20 @@ class PhoneTest < ActiveSupport::TestCase
   end
   
   
+  should "automatically store the previous ip_address in last_ip_address" do
+    phone = Factory.create( :phone, :ip_address => '10.0.0.55' )
+    assert phone.last_ip_address == nil
+    
+    phone.ip_address = '10.0.0.2'
+    phone.save
+    assert phone.last_ip_address == '10.0.0.55'
+    
+    phone.ip_address = '10.0.0.111'
+    phone.save
+    assert phone.last_ip_address == '10.0.0.2'
+  end
+  
+  
   # check a full setup
   #
   should "have all bells and whistles" do

@@ -112,5 +112,4 @@ class Phone < ActiveRecord::Base
       self.last_ip_address = self.ip_address_was
     end
   end
-  # TODO save_old_last_ip_address muss noch getestet werden -- (Was macht die Methode? Wo werden ip_address_changed? und ip_address_was definiert?)
 end

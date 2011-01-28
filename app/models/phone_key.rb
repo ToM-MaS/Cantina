@@ -30,13 +30,12 @@ class PhoneKey < ActiveRecord::Base
 	
 	validates_presence_of      :sip_account_id
 	validates_numericality_of  :sip_account_id, :only_integer => true
-	#TODO Validate Only existing sip_account_id
 	
 	validate :validate_softkey
 	validate :key_must_be_a_possible_key_from_the_phone_model
 	validate :phone_key_function_definition_must_be_valid
 	validate :phone_model_keys_has_to_be_available
-	
+	validate :sip_account_must_belong_to_phone
 	private
 	
 	# Validates the softkey definition.
@@ -117,7 +116,12 @@ class PhoneKey < ActiveRecord::Base
 	    errors.add( :phone_key_function_definition_id, "Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}." )
 	  end
 	end
-	
+  # Does this SipAccount belong to this phone
+	def sip_account_must_belong_to_phone
+    if self.sip_account.id != self.sip_account_id
+      errors.add( :sip_account_id, "Is not a valid sip account for this phone." )
+    end
+  end
 	# Checks that a key is available
 	#
 	def phone_model_keys_has_to_be_available

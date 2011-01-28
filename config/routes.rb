@@ -26,8 +26,6 @@ Cantina::Application.routes.draw do
     resources :sip_accounts
   end
 
-  # TODO: https://groups.google.com/group/amooma-dev/browse_thread/thread/b11dd0ba663ab7fa - move phone_keys from sip_accounts->phone_keys to phones->sip_accounts->phone_keys as I suggested so the direct route to sip_accounts can be removed?
-
   resources :sip_accounts do
     resources :phone_keys
   end

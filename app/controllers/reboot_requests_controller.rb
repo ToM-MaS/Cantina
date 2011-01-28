@@ -38,8 +38,7 @@ class RebootRequestsController < ApplicationController
   def create
     @reboot_request = RebootRequest.new(params[:reboot_request])
 
-    # TODO Reboot muss getriggert werden
-    # @Peter: Bitte hier einbauen.
+    # TODO Reboot muss getriggert werden - @Peter: Bitte hier einbauen.
     
     respond_to do |format|
       if @reboot_request.save

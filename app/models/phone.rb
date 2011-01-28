@@ -1,16 +1,17 @@
 # == Schema Information
-# Schema version: 20110121121114
+# Schema version: 20110122171701
 #
 # Table name: phones
 #
-#  id             :integer         not null, primary key
-#  mac_address    :string(255)
-#  phone_model_id :integer
-#  ip_address     :string(255)
-#  http_user      :string(255)
-#  http_password  :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id              :integer         not null, primary key
+#  mac_address     :string(255)
+#  phone_model_id  :integer
+#  ip_address      :string(255)
+#  last_ip_address :string(255)
+#  http_user       :string(255)
+#  http_password   :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 class Phone < ActiveRecord::Base
@@ -22,7 +23,6 @@ class Phone < ActiveRecord::Base
 
   validates_uniqueness_of :ip_address, :allow_nil => true, :allow_blank => true
   validates_format_of :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
-  # TODO test for '' as not uniqueness
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id
@@ -113,7 +113,6 @@ class Phone < ActiveRecord::Base
       self.last_ip_address = self.ip_address_was
     end
   end
-  # TODO save_old_last_ip_address muss noch getestet werden
   
   # Make sure that a given MAC address really belongs to a given manufacturer
   def cross_check_mac_address_with_ouis
@@ -122,5 +121,4 @@ class Phone < ActiveRecord::Base
       errors.add( :mac_address, "The given mac address doesn't match to the OUIs of the manufacturer #{self.phone_model.manufacturer.name}." )
     end
   end
-  # TODO test oui crosscheck to a new phone
 end

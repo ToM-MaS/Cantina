@@ -126,7 +126,7 @@ xml.settings {
 				sac_codec_names.each { |codec_name|
 					snom_codec_name = codec_mapping_snom[codec_name]
 					if (! snom_codec_name.blank?)
-						xml.tag! "codec#{1+snom_codec_i}_name", snom_codec_name.to_s, saopts_r
+						xml.tag! "codec#{snom_codec_i}_name", snom_codec_name.to_s, saopts_r
 						snom_codec_i += 1
 						break if snom_codec_i > max_snom_codec_i
 					end
@@ -134,7 +134,7 @@ xml.settings {
 				if snom_codec_i <= max_snom_codec_i
 					while snom_codec_i <= max_snom_codec_i
 						snom_codec_name = ''  # Snom didn't document what to put here.
-						xml.tag! "codec#{1+snom_codec_i}_name", snom_codec_name.to_s, saopts_r
+						xml.tag! "codec#{snom_codec_i}_name", snom_codec_name.to_s, saopts_r
 						snom_codec_i += 1
 					end
 				end

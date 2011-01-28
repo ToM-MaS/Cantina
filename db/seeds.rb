@@ -196,7 +196,7 @@ PhoneModel.where(
 ])
 
 
-# FIXME - removeme: Philipp's test phones:
+# more test phones:
 Phone.create(
   :mac_address    => '00-04-13-29-68-87',
   :phone_model_id => PhoneModel.where( :name => 'Snom 360' ).first.id

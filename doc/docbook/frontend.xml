@@ -259,5 +259,152 @@
         </listitem>
       </orderedlist>
     </section>
+
+    <section>
+      <title>Phone keys</title>
+
+      <para>Die auf den einzelnen Telefonen belegbaren Tasten sind nicht
+      direkt zugängliche, da sie immer von einem bereits bestehnden Sip
+      Account und einem Telefon abhängen. Um Tastenbelegungen aufzulisten oder
+      neue Tasten anzulegen gehen Sie bitte folgenden Weg:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>List all phones</para>
+        </listitem>
+
+        <listitem>
+          <para>Telefon auswählen (mit bereits angelegtem Sip Account!)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>In der Liste der angelegten Sip Accounts finden Sie entweder den
+      Link "Phone Keys" (wenn bereits Tasten angelegt wurden) oder den Link
+      "New phone key" über den Sie eine neue Taste anlegen können.</para>
+
+      <para>Um eine neu Taste anlegen zu können benötigen Sie folgende
+      Informationen:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Phone model key (welche Taste wollen Sie belegen =&gt;
+          Auswahlliste)</para>
+        </listitem>
+
+        <listitem>
+          <para>Phone key function definition (Funktion der Taste z.B Speed
+          dial = Kurzwahl)</para>
+        </listitem>
+
+        <listitem>
+          <para>Value (Wert der Taste. Unser Beispiel 42 = Kurzwahl 42)</para>
+        </listitem>
+
+        <listitem>
+          <para>Label (Beschriftung für Taste. z.B Aastra 57i)</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+    <section>
+      <title>Beispiel</title>
+
+      <para>Im folgenden Beispiel werden wir ein neues Telefon anlegen (Snom
+      370), dem Telefon einen neuen Sip Account zuweisen und eine
+      Kurzwahltaste belegen. </para>
+
+      <screenshot>
+        <info>
+          <title>Wir legen ein neues Telefon über den Punkt "Create new phone"
+          an:</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto1.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <screenshot>
+        <info>
+          <title>Die MAC Adresse muss eingegeben werden und das richtige
+          Telefonmodell muss ausgewählt werden.</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto2.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <screenshot>
+        <info>
+          <title>Das Telefon wurde angelegt. Wirgehen direct zu "Create a new
+          sip account for this phone"</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto3.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <screenshot>
+        <info>
+          <title>Wir geben die Daten unseres Registrars ein und legen die
+          erlaubten Codecs fest.</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto4.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <screenshot>
+        <info>
+          <title>Unser Telefon hat einen Sip Account. Wir wollen uns eine
+          Kurzwahltaste anlegen. Das geht über "New phone key".</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto5.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <screenshot>
+        <info>
+          <title>Wir legen eine Kurzwahltaste für die Nummer "23" an. Ein
+          Label brauchen wir für dieses Telefon nicht.</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto6.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <screenshot>
+        <info>
+          <title>Unser Telefon ist fertig konfiguriert und kann provisioniert
+          werden!</title>
+        </info>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="Bildschirmfoto7.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <para></para>
+    </section>
   </section>
 </chapter>

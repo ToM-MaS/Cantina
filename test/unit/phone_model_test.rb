@@ -86,6 +86,28 @@ class PhoneModelTest < ActiveSupport::TestCase
     end
   }
   
+  
+  # valid name
+  [
+    'Foo',
+    'Foo Model 123xy',
+  ].each { |name|
+    should "be ok to set name to #{name.inspect}" do
+      assert Factory.build( :phone_model, :name => name ).valid?
+    end
+  }
+  
+  # invalid name
+  [
+    nil,
+    '',
+  ].each { |name|
+    should "not be ok to set name to #{name.inspect}" do
+      assert ! Factory.build( :phone_model, :name => name ).valid?
+    end
+  }
+  
+  
   # Test that reducing the max_number_of_sip_accounts will not create 
   # a state where there are phones with too many sip_accounts.
   should "not be ok to reduce the max_number_of_sip_accounts to a value below the value of already existing phones" do

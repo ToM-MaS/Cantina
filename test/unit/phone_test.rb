@@ -60,7 +60,9 @@ class PhoneTest < ActiveSupport::TestCase
     '1.2.3.4',
     '255.255.255.255',
     '123.123.123.123',
-    '1.10.100.250'
+    '1.10.100.250',
+    '',
+    nil,
   ].each do |valid_ip_address|
     should "allow #{valid_ip_address} as an ip_address" do
       assert Factory.build(:phone, :ip_address => valid_ip_address).valid?

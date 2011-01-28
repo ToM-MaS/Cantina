@@ -129,6 +129,5 @@ class PhoneKey < ActiveRecord::Base
 	def phone_model_keys_has_to_be_available
 	  self.sip_account.undefined_phone_model_keys.include?(self.phone_model_key)
   end
-  # TODO needs testing
 		
 end

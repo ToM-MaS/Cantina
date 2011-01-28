@@ -28,8 +28,8 @@ class PhoneModel < ActiveRecord::Base
 
   # Validations
   #
+  
   validates_presence_of :name
-  # TODO test for name
   
   validates_presence_of     :manufacturer_id
   validates_numericality_of :manufacturer_id, :only_integer => true

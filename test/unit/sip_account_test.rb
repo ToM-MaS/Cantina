@@ -24,6 +24,28 @@ class SipAccountTest < ActiveSupport::TestCase
     end
   end
   
+  
+  # valid name
+  [
+    'Foo',
+    'Foo Account 123xy',
+  ].each { |name|
+    should "be ok to set name to #{name.inspect}" do
+      assert Factory.build( :sip_account, :name => name ).valid?
+    end
+  }
+  
+  # invalid name
+  [
+    nil,
+    '',
+  ].each { |name|
+    should "not be ok to set name to #{name.inspect}" do
+      assert ! Factory.build( :sip_account, :name => name ).valid?
+    end
+  }
+  
+  
   # Let test that it is not possible to exceed the maximum number of sip_accounts
   # for a given phone
   #

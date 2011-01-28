@@ -60,7 +60,9 @@ class PhoneTest < ActiveSupport::TestCase
     '1.2.3.4',
     '255.255.255.255',
     '123.123.123.123',
-    '1.10.100.250'
+    '1.10.100.250',
+    '',
+    nil,
   ].each do |valid_ip_address|
     should "allow #{valid_ip_address} as an ip_address" do
       assert Factory.build(:phone, :ip_address => valid_ip_address).valid?
@@ -73,6 +75,22 @@ class PhoneTest < ActiveSupport::TestCase
     phone = Factory.create(:phone)
     assert !Factory.build(:phone, :ip_address => phone.ip_address).valid?
   end
+  
+  should "be OK to create 2 phones with different IP addresses" do
+    phone = Factory.create( :phone, :ip_address => '2.3.4.5' )
+    assert  Factory.build(  :phone, :ip_address => '2.3.4.6' ).valid?
+  end
+  
+  should "be OK to create 2 phones with the IP address set to ''" do
+    phone = Factory.create( :phone, :ip_address => '' )
+    assert  Factory.build(  :phone, :ip_address => '' ).valid?
+  end
+  
+  should "be OK to create 2 phones with the IP address set to nil" do
+    phone = Factory.create( :phone, :ip_address => nil )
+    assert  Factory.build(  :phone, :ip_address => nil ).valid?
+  end
+  
   
   # Test invalid phone model
   [

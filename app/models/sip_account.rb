@@ -30,7 +30,6 @@ class SipAccount < ActiveRecord::Base
   default_value_for :dtmf_mode, 'rfc2833'
   
   validates_presence_of :name
-  # TODO test for name
   validates_presence_of :user
   validates_presence_of :phone_id
   validates_numericality_of :phone_id

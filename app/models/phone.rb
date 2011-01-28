@@ -23,7 +23,6 @@ class Phone < ActiveRecord::Base
 
   validates_uniqueness_of :ip_address, :allow_nil => true, :allow_blank => true
   validates_format_of :ip_address, :with => /^ (?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d) (?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3} $/x, :allow_blank => true, :allow_nil => true
-  # TODO test for '' as not uniqueness
   
   validates_presence_of :phone_model_id
   validates_numericality_of :phone_model_id

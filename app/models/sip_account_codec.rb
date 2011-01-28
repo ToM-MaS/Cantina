@@ -22,6 +22,7 @@ class SipAccountCodec < ActiveRecord::Base
   validates_uniqueness_of :codec_id, :scope => :sip_account_id
   
   belongs_to :sip_account
+  acts_as_list :scope => :sip_account
   belongs_to :codec
   
   private

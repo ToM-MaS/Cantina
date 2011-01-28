@@ -37,7 +37,7 @@ class SipAccount < ActiveRecord::Base
   validate :does_a_phone_to_this_sip_account_exist
   validate :number_of_sip_accounts_is_possible
   
-  has_many :sip_account_codecs, :dependent => :destroy
+  has_many :sip_account_codecs, :order => :position, :dependent => :destroy
   has_many :codecs, :through => :sip_account_codecs
   
   has_many :phone_keys, :dependent => :destroy

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110121121114
+# Schema version: 20110122171701
 #
 # Table name: phone_keys
 #
@@ -7,6 +7,7 @@
 #  phone_model_key_id               :integer
 #  phone_key_function_definition_id :integer
 #  value                            :string(255)
+#  label                            :string(255)
 #  created_at                       :datetime
 #  updated_at                       :datetime
 #  sip_account_id                   :integer

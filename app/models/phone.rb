@@ -28,6 +28,7 @@ class Phone < ActiveRecord::Base
   validates_numericality_of :phone_model_id
   
   validate :validate_phone_model_exists
+  validate :cross_check_mac_address_with_ouis
   
   after_validation :format_mac_address
   after_validation :save_old_last_ip_address
@@ -113,4 +114,13 @@ class Phone < ActiveRecord::Base
     end
   end
   # TODO save_old_last_ip_address muss noch getestet werden
+  
+  # Make sure that a given MAC address really belongs to a given manufacturer
+  def cross_check_mac_address_with_ouis
+    oui = self.mac_address.to_s.upcase.gsub(/[^A-F0-9]/,'')[0,6]
+    if Oui.where(:value => oui).first == nil or Oui.where(:value => oui).first.manufacturer != self.phone_model.manufacturer
+      errors.add( :mac_address, "The given mac address doesn't match to the OUIs of the manufacturer #{self.phone_model.manufacturer.name}." )
+    end
+  end
+  # TODO test oui crosscheck to a new phone
 end

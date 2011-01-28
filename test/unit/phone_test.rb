@@ -5,6 +5,14 @@ class PhoneTest < ActiveSupport::TestCase
     assert Factory.build(:phone).valid?
   end
 
+  # Test a wrong oui start of the mac address
+  #
+  should "not be a valid start of the mac address (oui has to be right)" do
+    phone = Factory.build(:phone)
+    phone.mac_address = phone.mac_address.reverse
+    assert !phone.valid?
+  end
+
   # Test invalid mac addresses
   #
   [
@@ -12,35 +20,40 @@ class PhoneTest < ActiveSupport::TestCase
     '007',
     'AAFF0011',
     '1122334455GG',
-    '11:22:33:aa:bb:cc:',
+    "00:11:22:aa:bb:cc:",
     '112233aabbcc11',
     'not_a_valid_MAC_address'
   ].each do |invalid_mac_address|
     should "not allow #{invalid_mac_address} as an mac_address" do
-      assert !Factory.build(:phone, :mac_address => invalid_mac_address).valid?
+      phone = Factory.build(:phone)
+      phone.mac_address = invalid_mac_address
+      assert !phone.valid?
     end
   end
-
+  
   # Test valid mac addresses
   #
   [
-    '11:22:33:aa:bb:cc',
-    '11:22:33:AA:BB:cc',
-    '112233AABBcc',
-    '00-11-22-33-44-55'
-  ].each do |valid_mac_address|
-    should "allow #{valid_mac_address} as an mac_address" do
-      assert Factory.build(:phone, :mac_address => valid_mac_address).valid?
+    ":aa:bb:cc",
+    ":AA:BB:cc",
+    "AABBcc",
+    "-33-44-55"
+  ].each do |valid_end_of_a_mac_address|
+    should "allow #{valid_end_of_a_mac_address} being the last part of a mac_address" do
+      phone = Factory.build(:phone)
+      separator = valid_end_of_a_mac_address.gsub(/[0-1A-Za-z]/,'')[0]
+      phone.mac_address = phone.mac_address.slice(0,6).scan(/../).join(separator) + valid_end_of_a_mac_address
+      assert phone.valid?
     end
   end
-
-  # mac_address has to be unique
+  
+  # test uniqueness of the mac_address
   #
-  should "not allow two phone entries with the same mac_address" do
+  should "not be possible to create a second phone with the same mac address" do
     phone = Factory.create(:phone)
-    assert !Factory.build(:phone, :mac_address => phone.mac_address).valid?
+    assert !Phone.create(:mac_address => phone.mac_address, :phone_model_id => phone.phone_model_id).valid?
   end
-
+  
   # Test invalid ip addresses
   [
     '1.2.3.',
@@ -54,7 +67,7 @@ class PhoneTest < ActiveSupport::TestCase
       assert !Factory.build(:phone, :ip_address => invalid_ip_address).valid?
     end
   end
-
+  
   # Test valid ip addresses
   [
     '1.2.3.4',
@@ -66,7 +79,7 @@ class PhoneTest < ActiveSupport::TestCase
       assert Factory.build(:phone, :ip_address => valid_ip_address).valid?
     end
   end
-
+  
   # ip_address has to be unique
   #
   should "not be valid" do
@@ -79,10 +92,11 @@ class PhoneTest < ActiveSupport::TestCase
     -1,
   ].each do |phone_model_id|
     should "not allow #{phone_model_id.inspect} as a phone_model_id" do
-      assert ! Factory.build( :phone, :phone_model_id => phone_model_id ).valid?
+      phone = Factory.create(:phone)
+      phone.phone_model_id = phone_model_id
+      assert !phone.valid?
     end
   end
-  
   
   # Test if Phone has a log_provisioning() instance method.
   should "have a \"log_provisioning\" instance method" do
@@ -93,15 +107,20 @@ class PhoneTest < ActiveSupport::TestCase
   # check a full setup
   #
   should "have all bells and whistles" do
-    # Create a phone_model with some codecs and some keys
+    phone = Factory.create(:phone)
+    manufacturer = phone.phone_model.manufacturer
+    oui = manufacturer.ouis.first
+    phone_model = phone.phone_model
+    
+    # Create some codecs and some keys
     #
-    phone_model = Factory.create(:phone_model, :max_number_of_sip_accounts => 3)
+    phone_model.update_attributes({:max_number_of_sip_accounts => 3})
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
     phone_model.codecs << Factory.create(:codec)
-
+  
     PhoneKeyFunctionDefinition.create([
       { :name => 'BLF'              , :type_of_class => 'string'  , :regex_validation => nil },
       { :name => 'Speed dial'       , :type_of_class => 'string'  , :regex_validation => nil },
@@ -124,7 +143,7 @@ class PhoneTest < ActiveSupport::TestCase
         phone.sip_accounts[i].codecs << phone_model.codecs[codec_i]
       end
     end
-
+  
     first_sip_account = phone.sip_accounts.first
     
     # Lets create a BLF 42 on the first key at the first sip_account
@@ -133,7 +152,7 @@ class PhoneTest < ActiveSupport::TestCase
     f1.phone_key_function_definition_id = phone_model.phone_model_keys.first.phone_key_function_definitions.first.id
     f1.value = "42"
     f1.save
-
+  
     assert phone_model.codecs.size == 5    
     assert phone.sip_accounts.size == 3
     assert phone.sip_accounts.first.codecs.count == 1

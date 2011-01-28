@@ -2,7 +2,7 @@
 	<%= f.input :name %>  
 
 	<% if @sip_account.phone_id.blank? %>
-	  <%= f.association :phone %>  
+	  <%= f.association :phone,  :label_method => :mac_address %>  
 	<% else %>
 	  <%= f.hidden_field :phone_id %>
 	<% end %>

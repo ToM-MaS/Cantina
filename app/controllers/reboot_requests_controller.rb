@@ -38,8 +38,6 @@ class RebootRequestsController < ApplicationController
   def create
     @reboot_request = RebootRequest.new(params[:reboot_request])
 
-    # TODO Idealerweise wird ein Reboot-Request im normalen REST Model vollzogen. Also als create und nicht als reboot im phone controller.
-    
     respond_to do |format|
       if @reboot_request.save
         format.html { redirect_to(@reboot_request, :notice => 'Reboot request was successfully created.') }

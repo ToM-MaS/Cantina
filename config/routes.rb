@@ -18,7 +18,6 @@ Cantina::Application.routes.draw do
 
   resources :phone_model_mac_addresses
 
-
   match 'phones/:id/reboot' => 'phones#reboot', :as => :phone_reboot
 
   # http://guides.rubyonrails.org/routing.html#nested-resources
@@ -30,9 +29,6 @@ Cantina::Application.routes.draw do
     resources :phone_keys
   end
   
-#  GET 'sip_accounts/:sip_account_id/phone_keys/new(.:format)' => 'phone_keys#new', :as => :new_sip_account_phone_key
-  
-
   resources :codecs
 
   resources :sip_account_codecs

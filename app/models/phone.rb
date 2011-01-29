@@ -48,8 +48,6 @@ class Phone < ActiveRecord::Base
   # Can be rebooted
   has_many :reboot_requests, :order => 'start', :dependent => :destroy
   
-  # TODO mac address has to match to the mac address starts we already know (Snom example)
-
   # log a provisioning
   def log_provisioning(memo = nil, succeeded = true)
     self.provisioning_log_entries.create(:memo => memo, :succeeded => true)

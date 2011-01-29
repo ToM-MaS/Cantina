@@ -37,7 +37,6 @@ class SipAccount < ActiveRecord::Base
   validate :does_a_phone_to_this_sip_account_exist
   validate :number_of_sip_accounts_is_possible
   
-  # TODO test das sip_account_codecs auch wirklich in der Reihenfolge eingebaut werden.
   has_many :sip_account_codecs, :order => :position, :dependent => :destroy
   has_many :codecs, :through => :sip_account_codecs
   

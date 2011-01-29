@@ -38,7 +38,7 @@ class RebootRequestsController < ApplicationController
   def create
     @reboot_request = RebootRequest.new(params[:reboot_request])
 
-    # TODO Reboot muss getriggert werden - @Peter: Bitte hier einbauen.
+    # TODO Idealerweise wird ein Reboot-Request im normalen REST Model vollzogen. Also als create und nicht als reboot im phone controller.
     
     respond_to do |format|
       if @reboot_request.save

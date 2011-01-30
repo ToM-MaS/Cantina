@@ -67,9 +67,31 @@
     &#8222;<literal>/phone_models</literal>&#8220; bekommen Sie im Browser
     eine Liste der Telefon-Modelle angezeigt. Woher weiß die Applikation daß
     HTML ausgegeben werden soll? HTML ist &#8211; etwas vereinfacht gesagt
-    &#8211; das Standard-Format. In der Ausgabe des Rails-Servers (bzw. im Log
-    mit <emphasis role="bold"><command>tail -f log/*.log</command></emphasis>)
-    sieht man:<screen>Started GET "/phone_models" <replaceable>[...]</replaceable>
+    &#8211; das Standard-Format.</para>
+
+    <note>
+      <para>Tatsächlich wird das zurückzugebende Format folgendermaßen
+      bestimmt: Wenn der Client in der URL eine Dateiendung angibt
+      (<literal>.html</literal> oder <literal>.xml</literal>), dann bekommt er
+      das entsprechende Format.</para>
+
+      <para>Wenn der Client keine Dateiendung angibt, dann kommt
+      &#8222;<foreignphrase xml:lang="en">Content
+      Negotiation</foreignphrase>&#8220; (<link
+      xlink:href="http://tools.ietf.org/html/rfc2616#section-12.1">http://tools.ietf.org/html/rfc2616#section-12.1</link>)
+      zum Einsatz. Clients senden üblicherweise einen HTTP-Header namens
+      <literal>Accept</literal> (<link
+      xlink:href="http://tools.ietf.org/html/rfc2616#section-14.1">http://tools.ietf.org/html/rfc2616#section-14.1</link>),
+      in dem sie dem Server die von ihnen verstandenen Formate mitteilen. Ein
+      Web-Browser sendet beispielsweise:<screen>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</screen>Der
+      Server erkennt daran daß der Client das HTML-Format bevorzugt. Würde der
+      Client folgendes senden:<screen>Accept: text/xml,application/xml</screen>so
+      weiß der Server daß der Client XML bevorzugt.</para>
+    </note>
+
+    <para>In der Ausgabe des Rails-Servers (bzw. im Log mit <emphasis
+    role="bold"><command>tail -f log/*.log</command></emphasis>) sieht
+    man:<screen>Started GET "/phone_models" <replaceable>[...]</replaceable>
   Processing by PhoneModelsController#index as HTML
 <replaceable>[...]</replaceable></screen></para>
 
@@ -323,13 +345,23 @@
           </tbody>
         </tgroup>
       </informaltable></para>
+
+    <note>
+      <para>Details zu den HTTP-Methoden <literal>GET</literal>,
+      <literal>POST</literal>, <literal>PUT</literal> und
+      <literal>DELETE</literal> findet man übrigens im RFC das HTTP/1.1
+      spezifiziert: <link
+      xlink:href="http://tools.ietf.org/html/rfc2616#section-9">http://tools.ietf.org/html/rfc2616#section-9</link></para>
+    </note>
   </section>
 
-  <section xml:id="api-curl-wget">
-    <title>curl, wget etc.</title>
+  <section xml:id="api-curl">
+    <title>curl</title>
 
     <para>Natürlich läßt sich die API mit den bekannten HTTP-Tools wie
-    <literal>curl</literal> oder <literal>wget</literal> benutzen.<screen>debian:~# curl http://localhost:3000/phone_models.xml
+    <literal>curl</literal> oder <literal>wget</literal> benutzen.<screen>debian:~# <emphasis
+          role="bold"><command>curl http://localhost:3000/phone_models.xml</command></emphasis>
+
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;phone-models type="array"&gt;
   &lt;phone-model&gt;
@@ -349,12 +381,178 @@
   <replaceable>&lt;!-- ... --&gt;</replaceable>
 &lt;/phone-models&gt;</screen></para>
 
-    <para>Auch <literal>POST</literal>-Operationen sind mit diesen Tools
-    möglich, auch wenn das dann auf der Shell schnell unübersichtlich wird.
-    Schöner geht es wenn man eine fertige Bibliothek benutzt, die dann
-    tatsächlich auch die XML-Daten versteht und ein komfortables Interface
-    bereitstellt, wie z.B. <classname>ActiveResource</classname> in Ruby
-    (<xref linkend="api-active-resource-ruby" />).</para>
+    <para>Im folgenden Beispiel verwenden wir die Ressource
+    <literal>phones</literal> statt <literal>phone_models</literal>.</para>
+
+    <para>Liste aller Telefone (<methodname>index</methodname>):<screen>debian:~# <emphasis
+          role="bold"><command>curl -D - http://localhost:3000/phones.xml</command></emphasis>
+
+HTTP/1.1 200 OK 
+Content-Type: application/xml; charset=utf-8
+<replaceable>[...]</replaceable>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;phones type="array"&gt;
+  &lt;phone&gt;
+    &lt;created-at type="datetime"&gt;2011-01-10T14:42:41Z&lt;/created-at&gt;
+    &lt;http-password nil="true"&gt;&lt;/http-password&gt;
+    &lt;http-user nil="true"&gt;&lt;/http-user&gt;
+    &lt;id type="integer"&gt;1&lt;/id&gt;
+    &lt;ip-address nil="true"&gt;&lt;/ip-address&gt;
+    &lt;last-ip-address nil="true"&gt;&lt;/last-ip-address&gt;
+    &lt;mac-address&gt;001565123456&lt;/mac-address&gt;
+    &lt;phone-model-id type="integer"&gt;15&lt;/phone-model-id&gt;
+    &lt;updated-at type="datetime"&gt;2011-01-10T14:42:41Z&lt;/updated-at&gt;
+  &lt;/phone&gt;
+  &lt;phone&gt;
+    &lt;created-at type="datetime"&gt;2011-01-10T14:42:41Z&lt;/created-at&gt;
+    &lt;http-password nil="true"&gt;&lt;/http-password&gt;
+    &lt;http-user nil="true"&gt;&lt;/http-user&gt;
+    &lt;id type="integer"&gt;2&lt;/id&gt;
+    &lt;ip-address nil="true"&gt;&lt;/ip-address&gt;
+    &lt;last-ip-address nil="true"&gt;&lt;/last-ip-address&gt;
+    &lt;mac-address&gt;000413123456&lt;/mac-address&gt;
+    &lt;phone-model-id type="integer"&gt;4&lt;/phone-model-id&gt;
+    &lt;updated-at type="datetime"&gt;2011-01-10T14:42:41Z&lt;/updated-at&gt;
+  &lt;/phone&gt;
+  <replaceable>&lt;!-- ... --&gt;</replaceable>
+&lt;/phones&gt;</screen></para>
+
+    <para>Geloggt wird dabei:<screen>Started GET "/phones.xml" <replaceable>[...]</replaceable>
+  Processing by PhonesController#index as XML
+  Phone Load (3.4ms)  SELECT "phones".* FROM "phones"
+Completed 200 OK <replaceable>[...]</replaceable></screen></para>
+
+    <para>Ein einzelnes Telefon abfragen
+    (<methodname>show</methodname>):<screen>debian:~# <emphasis role="bold"><command>curl -D - http://localhost:3000/phones/1.xml</command></emphasis>
+
+HTTP/1.1 200 OK 
+Content-Type: application/xml; charset=utf-8
+<replaceable>[...]</replaceable>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;phone&gt;
+  &lt;created-at type="datetime"&gt;2011-01-10T14:42:41Z&lt;/created-at&gt;
+  &lt;http-password nil="true"&gt;&lt;/http-password&gt;
+  &lt;http-user nil="true"&gt;&lt;/http-user&gt;
+  &lt;id type="integer"&gt;1&lt;/id&gt;
+  &lt;ip-address nil="true"&gt;&lt;/ip-address&gt;
+  &lt;last-ip-address nil="true"&gt;&lt;/last-ip-address&gt;
+  &lt;mac-address&gt;001565123456&lt;/mac-address&gt;
+  &lt;phone-model-id type="integer"&gt;15&lt;/phone-model-id&gt;
+  &lt;updated-at type="datetime"&gt;2011-01-10T14:42:41Z&lt;/updated-at&gt;
+&lt;/phone&gt;
+</screen></para>
+
+    <para>Geloggt wird dabei:<screen>Started GET "/phones/1.xml" <replaceable>[...]</replaceable>
+  Processing by PhonesController#show as XML
+  Parameters: {"id"=&gt;"1"}
+  Phone Load (0.7ms)  SELECT "phones".* FROM "phones" WHERE ("phones"."id" = 1) LIMIT 1
+Completed 200 OK <replaceable>[...]</replaceable></screen></para>
+
+    <para>Nun wollen wir ein neues Telefon anlegen
+    (<methodname>create</methodname>). Nehmen wir mal ein Snom 360. Zum
+    Anlegen des Telefons müssen wir die <literal>phone-model-id</literal>
+    kennen. Diese bekommen wir wie weiter oben aus der XML-Liste der
+    <literal>phone_models</literal>. Das Modell &#8222;Snom 360&#8220; hat die
+    <literal>phone-model-id</literal> 4.</para>
+
+    <para>Probieren wir das mal aus:<screen>debian:~# <emphasis role="bold"><command>curl -D - -X POST \
+  -H 'Content-Type: application/xml' \
+  --data-binary \
+    '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;phone&gt;
+      &lt;mac-address&gt;00:04:13:00:00:01&lt;/mac-address&gt;
+      &lt;phone-model-id&gt;4&lt;/phone-model-id&gt;
+    &lt;/phone&gt;' \
+  http://localhost:3000/phones.xml</command></emphasis>
+
+HTTP/1.1 201 Created 
+Location: http://localhost:3000/phones/7
+Content-Type: application/xml; charset=utf-8
+<replaceable>[...]</replaceable>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;phone&gt;
+  &lt;created-at type="datetime"&gt;2011-01-10T15:16:50Z&lt;/created-at&gt;
+  &lt;http-password nil="true"&gt;&lt;/http-password&gt;
+  &lt;http-user nil="true"&gt;&lt;/http-user&gt;
+  &lt;id type="integer"&gt;7&lt;/id&gt;
+  &lt;ip-address nil="true"&gt;&lt;/ip-address&gt;
+  &lt;last-ip-address nil="true"&gt;&lt;/last-ip-address&gt;
+  &lt;mac-address&gt;000413000001&lt;/mac-address&gt;
+  &lt;phone-model-id type="integer"&gt;4&lt;/phone-model-id&gt;
+  &lt;updated-at type="datetime"&gt;2011-01-10T15:16:50Z&lt;/updated-at&gt;
+&lt;/phone&gt;
+</screen></para>
+
+    <para>Das neue Telefon hat die ID 7 bekommen.</para>
+
+    <para>Geloggt wird dabei:<screen>Started POST "/phones.xml" <replaceable>[...]</replaceable>
+  Processing by PhonesController#create as XML
+  Parameters: {"phone"=&gt;{"mac_address"=&gt;"00:04:13:00:00:01", "phone_model_id"=&gt;"4"}}
+  Phone Load (0.1ms)  SELECT "phones"."id" FROM "phones" WHERE ("phones"."mac_address" = '00:04:13:00:00:01') LIMIT 1
+  PhoneModel Load (0.1ms)  SELECT "phone_models"."id" FROM "phone_models" WHERE ("phone_models"."id" = 4) LIMIT 1
+  Oui Load (0.2ms)  SELECT "ouis".* FROM "ouis" WHERE ("ouis"."value" = '000413') LIMIT 1
+  CACHE (0.0ms)  SELECT "ouis".* FROM "ouis" WHERE ("ouis"."value" = '000413') LIMIT 1
+  Manufacturer Load (0.2ms)  SELECT "manufacturers".* FROM "manufacturers" WHERE ("manufacturers"."id" = 1) LIMIT 1
+  PhoneModel Load (0.5ms)  SELECT "phone_models".* FROM "phone_models" WHERE ("phone_models"."id" = 4) LIMIT 1
+  CACHE (0.0ms)  SELECT "manufacturers".* FROM "manufacturers" WHERE ("manufacturers"."id" = 1) LIMIT 1
+  AREL (0.6ms)  INSERT INTO "phones" ("mac_address", "phone_model_id", "ip_address", "last_ip_address", "http_user", "http_password", "created_at", "updated_at") VALUES ('000413000001', 4, NULL, NULL, NULL, NULL, '2011-01-10 15:16:50.085697', '2011-01-10 15:16:50.085697')
+Completed 201 Created <replaceable>[...]</replaceable></screen></para>
+
+    <para>Das Telefon bearbeiten (<methodname>update</methodname>), z.B. die
+    IP-Adresse verändern:<screen>debian:~# <emphasis role="bold"><command>curl -D - -X PUT \
+  -H 'Content-Type: application/xml' \
+  --data-binary \
+    '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;phone&gt;
+      &lt;ip-address&gt;10.0.0.55&lt;/ip-address&gt;
+    &lt;/phone&gt;' \
+  http://localhost:3000/phones/7.xml</command></emphasis>
+
+HTTP/1.1 200 OK 
+Content-Type: application/xml; charset=utf-8
+<replaceable>[...]</replaceable></screen></para>
+
+    <para>Geloggt wird dabei:<screen>Started PUT "/phones/7.xml" <replaceable>[...]</replaceable>
+  Processing by PhonesController#update as XML
+  Parameters: {"phone"=&gt;{"ip_address"=&gt;"10.0.0.55"}, "id"=&gt;"7"}
+  Phone Load (0.7ms)  SELECT "phones".* FROM "phones" WHERE ("phones"."id" = 7) LIMIT 1
+  Phone Load (0.2ms)  SELECT "phones"."id" FROM "phones" WHERE ("phones"."mac_address" = '000413000001') AND ("phones".id &lt;&gt; 7) LIMIT 1
+  Phone Load (0.1ms)  SELECT "phones"."id" FROM "phones" WHERE ("phones"."ip_address" = '10.0.0.55') AND ("phones".id &lt;&gt; 7) LIMIT 1
+  PhoneModel Load (0.7ms)  SELECT "phone_models"."id" FROM "phone_models" WHERE ("phone_models"."id" = 4) LIMIT 1
+  Oui Load (0.1ms)  SELECT "ouis".* FROM "ouis" WHERE ("ouis"."value" = '000413') LIMIT 1
+  CACHE (0.0ms)  SELECT "ouis".* FROM "ouis" WHERE ("ouis"."value" = '000413') LIMIT 1
+  Manufacturer Load (0.1ms)  SELECT "manufacturers".* FROM "manufacturers" WHERE ("manufacturers"."id" = 1) LIMIT 1
+  PhoneModel Load (0.5ms)  SELECT "phone_models".* FROM "phone_models" WHERE ("phone_models"."id" = 4) LIMIT 1
+  CACHE (0.0ms)  SELECT "manufacturers".* FROM "manufacturers" WHERE ("manufacturers"."id" = 1) LIMIT 1
+  AREL (0.4ms)  UPDATE "phones" SET "ip_address" = '10.0.0.55', "updated_at" = '2011-01-10 15:20:18.588354' WHERE ("phones"."id" = 7)
+Completed 200 OK <replaceable>[...]</replaceable></screen></para>
+
+    <para>Das Telefon löschen (<methodname>destroy</methodname>):<screen>debian:~# <emphasis
+          role="bold"><command>curl -D - -X DELETE \
+  http://localhost:3000/phones/7.xml</command></emphasis>
+
+HTTP/1.1 200 OK 
+<replaceable>[...]</replaceable></screen></para>
+
+    <para>Geloggt wird dabei:<screen>Started DELETE "/phones/7.xml" <replaceable>[...]</replaceable>
+  Processing by PhonesController#destroy as XML
+  Parameters: {"id"=&gt;"7"}
+  Phone Load (0.6ms)  SELECT "phones".* FROM "phones" WHERE ("phones"."id" = 7) LIMIT 1
+  SipAccount Load (0.3ms)  SELECT "sip_accounts".* FROM "sip_accounts" WHERE ("sip_accounts".phone_id = 7) ORDER BY position
+  RebootRequest Load (0.2ms)  SELECT "reboot_requests".* FROM "reboot_requests" WHERE ("reboot_requests".phone_id = 7) ORDER BY start
+  AREL (0.2ms)  DELETE FROM "phones" WHERE ("phones"."id" = 7)
+Completed 200 OK <replaceable>[...]</replaceable></screen></para>
+
+    <para>Wir sehen daß prinzipiell alle Operationen der API mit einem Tool
+    wie <literal>curl</literal> möglich sind, auch wenn das dann auf der Shell
+    etwas unübersichtlich wird. Schöner geht es wenn man eine fertige
+    Bibliothek benutzt, die dann tatsächlich auch die XML-Daten versteht und
+    ein komfortables Interface bereitstellt, wie z.B.
+    <classname>ActiveResource</classname> in Ruby (<xref
+    linkend="api-active-resource-ruby" />).</para>
   </section>
 
   <section xml:id="api-active-resource-ruby">

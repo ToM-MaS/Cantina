@@ -17,8 +17,10 @@
 class Phone < ActiveRecord::Base
   # Validations
   #
+  
+  before_validation :format_mac_address
   validates_presence_of :mac_address
-  validates_format_of :mac_address, :with => /^ [0-9A-F]{2} (?: [:\-]? [0-9A-F]{2} ){5} $/ix
+  validates_format_of :mac_address, :with => /^ [0-9A-F]{2} (?: [0-9A-F]{2} ){5} $/x
   validates_uniqueness_of :mac_address
 
   validates_uniqueness_of :ip_address, :allow_nil => true, :allow_blank => true
@@ -30,7 +32,6 @@ class Phone < ActiveRecord::Base
   validate :validate_phone_model_exists
   validate :cross_check_mac_address_with_ouis
   
-  after_validation :format_mac_address
   after_validation :save_old_last_ip_address
   
   # SIP Accounts

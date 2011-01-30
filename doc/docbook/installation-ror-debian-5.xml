@@ -21,8 +21,7 @@
       <author>
         <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
 
-        <uri><link
-        xlink:href="http://www.kempgen.net/">http://www.kempgen.net</link></uri>
+        <email>philipp.kempgen@amooma.de</email>
       </author>
     </authorgroup>
   </info>
@@ -62,32 +61,6 @@
 
     <see>RVM</see>
   </indexterm>
-
-  <para>Es gibt zwei Hauptgründe ein Ruby-on-Rails-System mit RVM (Ruby
-  Version Manager) zu installieren:<itemizedlist>
-      <listitem>
-        <para>Man hat schlicht und ergreifend keine Root-Rechte auf dem
-        System. Dann geht es nicht anders.</para>
-      </listitem>
-
-      <listitem>
-        <para>Man möchte mehrere und sauber voneinander abgetrennte
-        Rails-Systeme und damit vielleicht Rails-Versionen betreiben. Das
-        lässt sich mit RVM und verschiedenen Accounts auf dem Linux-System
-        sehr gut realisieren. So können Sie auf einem Rechner ein Ruby 1.8.7
-        mit einem Rails 2.3.8 und parallel ein Ruby 1.9.2 mit einem Rails 3.0
-        betreiben.</para>
-      </listitem>
-
-      <listitem>
-        <para>RVM ist einfach super praktisch!</para>
-      </listitem>
-    </itemizedlist></para>
-
-  <note>
-    <para>Detaillierte Infos zu RVM finden Sie auf der RVM-Homepage unter <uri
-    xlink:href="http://rvm.beginrescueend.com/">http://rvm.beginrescueend.com/</uri>.</para>
-  </note>
 
   <para>Diese Beschreibung setzt ein frisch installiertes Debian GNU/Linux 5.0
   (<quote>Lenny</quote>) voraus. Ein ISO-Image für die Installation finden Sie

@@ -35,19 +35,28 @@
 
   <para>Cantina ist verfügbar auf <uri
   xlink:href="https://github.com/amooma/Cantina">https://github.com/amooma/Cantina</uri>
-  und kann von dort per Git installiert werden.</para>
+  und kann von dort wie folgt per Git installiert werden:<screen>debian:~# <emphasis
+        role="bold"><command>cd /usr/src</command></emphasis>
+debian:/usr/src# <command>git clone git@github.com:amooma/Cantina.git</command>
+Cloning into Cantina...
+remote: Counting objects: 3688, done.
+remote: Compressing objects: 100% (1505/1505), done.
+remote: Total 3688 (delta 2481), reused 3249 (delta 2114)
+Receiving objects: 100% (3688/3688), 2.07 MiB | 446 KiB/s, done.
+Resolving deltas: 100% (2481/2481), done.
+debian:/usr/src#</screen></para>
 
   <section xml:id="rake-db-setup">
     <title>Anlegen der Datenbank</title>
 
     <para>Initial muß die Datenbank des Provisioning-Servers angelegt werden.
     Wechseln Sie dazu in das Installations-Verzeichnis (abhängig von Ihrer
-    Installation, beispielsweise <filename>/home/cantina/</filename>):<screen>debian:~# <emphasis
+    Installation, beispielsweise <filename>/home/cantina/</filename>):<screen>debian:/usr/src# <emphasis
           role="bold"><command>cd /usr/src/Cantina/</command></emphasis></screen></para>
 
     <para>Dann geben Sie den Befehl <emphasis role="bold"><command>rake
-    db:setup</command></emphasis> ein:<screen>debian:/usr/src/Cantina# <emphasis
-          role="bold"><command>rake db:setup</command></emphasis>
+    db:migrate</command></emphasis> ein:<screen>debian:/usr/src/Cantina# <emphasis
+          role="bold"><command>rake db:migrate</command></emphasis>
 (in /usr/src/Cantina)
 <replaceable>[...]</replaceable></screen></para>
 
@@ -81,7 +90,7 @@
     Rechners auf Port 3000. Wie angezeigt läßt er sich mit <keycombo>
         <keycap function="control">Ctrl</keycap>
 
-        <keycap>W</keycap>
+        <keycap>C</keycap>
       </keycombo> stoppen.</para>
 
     <para>Wenn man an den Befehl <emphasis role="bold"><command>rails

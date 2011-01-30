@@ -2,7 +2,11 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts
   # GET /sip_accounts.xml
   def index
-    @sip_accounts = SipAccount.all
+    if !params[:phone_id].blank?
+      @sip_accounts = Phone.find(params[:phone_id]).sip_accounts
+    else
+      @sip_accounts = SipAccount.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +18,7 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts/1.xml
   def show
     @sip_account = SipAccount.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @sip_account }
@@ -54,7 +58,6 @@ class SipAccountsController < ApplicationController
     
     respond_to do |format|
       if @sip_account.save
-#        format.html { redirect_to(@sip_account, :notice => 'Sip account was successfully created.') }
         format.html { redirect_to(@sip_account.phone, :notice => 'Sip account was successfully created.') }
         format.xml  { render :xml => @sip_account, :status => :created, :location => @sip_account }
       else

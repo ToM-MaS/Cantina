@@ -2,8 +2,12 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.xml
   def index
-    @phones = Phone.all
-
+    if params[:phone_model_id].blank?
+      @phones = Phone.all
+    else
+      @phones = PhoneModel.find(params[:phone_model_id]).phones
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @phones }

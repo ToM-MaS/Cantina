@@ -19,7 +19,7 @@
 # To make it a bit faster we'll include a couple of the manufacturers here:
 #
 Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG', :url => 'http://www.snom.com/').ouis.create(:value => '000413')
-Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create(:value => '003042')
+Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create([{:value => '003042'},{:value => '00085D'}])
 Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create(:value => '00085d')
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/').ouis.create(:value => '001565')
 

@@ -118,4 +118,178 @@ Usage: rails server [mongrel, thin, etc] [options]
 =&gt; Ctrl-C to shutdown server
 <replaceable>[...]</replaceable></screen></para>
   </section>
+
+  <section>
+    <title>Installation und Konfiguration des DHCP Servers</title>
+
+    <para>Um Telefone vollautomatisch konfigurieren zu können, benötigen Sie
+    einen DHCP Server.</para>
+
+    <para>Über den DHCP Server erhalten die Telefone nicht nur eine IP,
+    sondern auch die Information wo eine Konfiguration bereitgestellt wird. Im
+    folgendn Beispiel gehen wir davon aus, dass noch kein DHCP Server im Netz
+    Ihrer Telefone vorhanden ist. Folgende Eckdaten setzen wir für das
+    Beispiel voraus:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Cantina und der DHCP Server laufen auf dem gleichen
+        Server.</para>
+      </listitem>
+
+      <listitem>
+        <para>IP des Servers 192.168.1.254</para>
+      </listitem>
+
+      <listitem>
+        <para>Netzmaske 255.255.255.0</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Als erstes muss ein DHCP Server installier werden. Wir gehen bei
+    unserem Beispiel von der Basis eines Debian "Squeeze" Systems aus.</para>
+
+    <para>Zuerst aktualisieren wir die Paketdatenbank:</para>
+
+    <para><screen>root@server:~# aptitude update
+Hole:1 http://ftp.de.debian.org squeeze Release.gpg [835 B]
+Hole:2 http://ftp.de.debian.org/debian/ squeeze/main Translation-de [1.510 kB]                                    
+Hole:3 http://www.debian-multimedia.org squeeze Release.gpg [198 B]                                                   
+Ign http://www.debian-multimedia.org/ squeeze/main Translation-de                                                     
+Ign http://www.debian-multimedia.org/ squeeze/main Translation-en                                   
+Ign http://www.debian-multimedia.org/ squeeze/non-free Translation-de                               
+Ign http://www.debian-multimedia.org/ squeeze/non-free Translation-en                               
+Hole:4 http://www.debian-multimedia.org squeeze Release [26,7 kB]                                    
+Hole:5 http://www.debian-multimedia.org squeeze/main i386 Packages/DiffIndex [2.023 B]                    
+Hole:6 http://www.debian-multimedia.org squeeze/non-free i386 Packages/DiffIndex [2.023 B]                    
+Hole:7 http://www.debian-multimedia.org squeeze/main i386 Packages [73,5 kB]                                  
+Hole:8 http://security.debian.org squeeze/updates Release.gpg [835 B]                          
+Ign http://security.debian.org/ squeeze/updates/main Translation-de                                     
+Ign http://security.debian.org/ squeeze/updates/main Translation-en                              
+Hole:9 http://security.debian.org squeeze/updates Release [44,6 kB]                              
+Hole:10 http://security.debian.org squeeze/updates/main Sources [7.934 B]                             
+Hole:11 http://security.debian.org squeeze/updates/main i386 Packages [47,6 kB]                                
+Hole:12 http://www.debian-multimedia.org squeeze/non-free i386 2011-01-06-1715.55.pdiff [2.376 B]                      
+Hole:13 http://www.debian-multimedia.org squeeze/non-free i386 2011-01-06-1715.55.pdiff [2.376 B]
+Hole:14 http://www.debian-multimedia.org squeeze/non-free i386 2011-01-06-1715.55.pdiff [2.376 B]
+Ign http://ftp.de.debian.org/debian/ squeeze/main Translation-en                      
+Hole:15 http://www.debian-multimedia.org squeeze/non-free i386 2011-01-11-1621.09.pdiff [1.357 B]
+Hole:16 http://www.debian-multimedia.org squeeze/non-free i386 2011-01-11-1621.09.pdiff [1.357 B]
+Hole:17 http://www.debian-multimedia.org squeeze/non-free i386 2011-01-11-1621.09.pdiff [1.357 B]
+Hole:18 http://ftp.de.debian.org squeeze Release [89,9 kB]                 
+Hole:19 http://ftp.de.debian.org squeeze/main Sources/DiffIndex [2.038 B]
+Hole:20 http://ftp.de.debian.org squeeze/main i386 Packages/DiffIndex [2.038 B]
+Hole:21 http://ftp.de.debian.org squeeze/main Sources [3.724 kB]
+Hole:22 http://ftp.de.debian.org squeeze/main i386 Packages [6.566 kB]
+12,1 MB wurden in 3 s heruntergeladen (3.499 kB/s)      
+</screen>Als nächstes installieren wir den DHCP Server.</para>
+
+    <screen>root@server:~# aptitude install isc-dhcp-server
+Die folgenden NEUEN Pakete werden zusätzlich installiert:
+  isc-dhcp-server 
+Die folgenden Pakete werden aktualisiert:
+  isc-dhcp-common 
+1 Pakete aktualisiert, 1 zusätzlich installiert, 0 werden entfernt und 140 nicht aktualisiert.
+Muss 693 kB an Archiven herunterladen. Nach dem Entpacken werden 885 kB zusätzlich belegt sein.
+Wollen Sie fortsetzen? [Y/n/?] y
+
+Hole:1 http://ftp.de.debian.org/debian/ squeeze/main isc-dhcp-common i386 4.1.1-P1-15 [315 kB]
+Hole:2 http://ftp.de.debian.org/debian/ squeeze/main isc-dhcp-server i386 4.1.1-P1-15 [377 kB]
+693 kB wurden in 0 s heruntergeladen (1.698 kB/s)
+Lese Changelogs... Fertig
+Vorkonfiguration der Pakete ...
+(Lese Datenbank ... 49000 Dateien und Verzeichnisse sind derzeit installiert.)
+Vorbereiten zum Ersetzen von isc-dhcp-common 4.1.1-P1-12 (durch .../isc-dhcp-common_4.1.1-P1-15_i386.deb) ...
+Entpacke Ersatz für isc-dhcp-common ...
+Wähle vormals abgewähltes Paket isc-dhcp-server.
+Entpacke isc-dhcp-server (aus .../isc-dhcp-server_4.1.1-P1-15_i386.deb) ...
+Verarbeite Trigger für man-db ...
+Richte isc-dhcp-common ein (4.1.1-P1-15) ...
+Richte isc-dhcp-server ein (4.1.1-P1-15) ...
+Generating /etc/default/isc-dhcp-server...
+Starting ISC DHCP server: dhcpdcheck syslog for diagnostics. ... failed!
+ failed!
+invoke-rc.d: initscript isc-dhcp-server, action "start" failed.
+                                              
+Aktueller Status: 140 Aktualisierungen [-1].
+root@server:~# </screen>
+
+    <para>Die Fehlermeldung ist in dem Fall in Ordnung, da der Server ohne
+    Konfiguration nicht starten kann.</para>
+
+    <para>Zuerst müssen wir dem Server sagen, an welcher Netzwerk
+    Schnittstelle er lauschen soll.</para>
+
+    <screen>root@server:~# vi /etc/default/isc-dhcp-server 
+
+# Defaults for dhcp initscript
+# sourced by /etc/init.d/dhcp
+# installed at /etc/default/isc-dhcp-server by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+#       Separate multiple interfaces with spaces, e.g. "eth0 eth1".
+INTERFACES=""
+
+</screen>
+
+    <para>Wir gehen davon aus, dass der Server nur eine Netzwerkkarte besitzt
+    und damit der Name der Karte "eth0" ist.</para>
+
+    <para>Wir ändern die Konfiguration wie folgt ab:</para>
+
+    <screen># Defaults for dhcp initscript
+# sourced by /etc/init.d/dhcp
+# installed at /etc/default/isc-dhcp-server by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+#       Separate multiple interfaces with spaces, e.g. "eth0 eth1".
+INTERFACES="eth0"
+</screen>
+
+    <para>Jetzte speichern wir die Konfiguration wie folgt ab:</para>
+
+    <para>"ESC"</para>
+
+    <para>:wq</para>
+
+    <para>Jetzt müssen wir noch eine Konfiguration für den DHCP Server
+    anlegen.</para>
+
+    <para><screen>root@server:~# mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf_DEBIAN
+root@server:~# vi /etc/dhcp/dhcpd.conf</screen>Folgende Minimalkonfiguration
+    reicht aus um die Telefone mit den benötigten Informationen zu
+    versorgen.</para>
+
+    <para><screen>option domain-name "example.org";
+option domain-name-servers ns1.example.org, ns2.example.org;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+ddns-updates off;
+
+ddns-update-style none;
+log-facility local7;
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+              range 192.168.1.1 192.168.1.100;
+               option tftp-server-name "http://192.168.1.254:3000/settings";
+}</screen>Die Werte für "domain-name" und "domain-name-server" müssen Ihren
+    Gegebenheiten angepasst werden, haben aber für einen ersten Test keine
+    Bedeutung. Weitere Informationen zu sinnvollen Parametern entnehmen Sie
+    bitte der Dokumentation des DHCP Servers.</para>
+
+    <para>Wir können den Server jetzt starten.</para>
+
+    <para><screen>root@start:~# /etc/init.d/isc-dhcp-server start
+</screen>Jetzt können Sie Ihr erstes Telefon provisionieren.</para>
+  </section>
 </section>

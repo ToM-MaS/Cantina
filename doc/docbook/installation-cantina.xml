@@ -55,8 +55,8 @@ debian:/usr/src#</screen></para>
           role="bold"><command>cd /usr/src/Cantina/</command></emphasis></screen></para>
 
     <para>Dann geben Sie den Befehl <emphasis role="bold"><command>rake
-    db:migrate</command></emphasis> ein:<screen>debian:/usr/src/Cantina# <emphasis
-          role="bold"><command>rake db:migrate</command></emphasis>
+    db:setup</command></emphasis> ein:<screen>debian:/usr/src/Cantina# <emphasis
+          role="bold"><command>rake db:setup</command></emphasis>
 (in /usr/src/Cantina)
 <replaceable>[...]</replaceable></screen></para>
 

@@ -3,8 +3,10 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts.xml
   def index
     if !params[:phone_id].blank?
+      # GET /phones/{phone_id}/sip_accounts
       @sip_accounts = Phone.find(params[:phone_id]).sip_accounts
     else
+      # GET /sip_accounts
       @sip_accounts = SipAccount.all
     end
 

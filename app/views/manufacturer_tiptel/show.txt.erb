@@ -17,7 +17,10 @@ codec_map = {
 :"g722"  => "G722",
 :"g723"  => "G723_53",
 :"g726"  => "G726-32",
-:"g729"  => "G729"
+:"g729"  => "G729",
+:"nouse1" => "G726-16",
+:"nouse2" => "G726-24",
+:"nouse3" => "G726-40"
 }
 cmapping_map = {
 :"PCMU"    => "0",
@@ -29,6 +32,24 @@ cmapping_map = {
 }
 @phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
 %>
+<% (@phone.sip_accounts.count..@phone.phone_model.max_number_of_sip_accounts).each do |delnum| %>
+[account]
+path=/yealink/config/voip/sipAccount<%= delnum %>.cfg
+Enable=0
+Label=%NULL%
+Username=%NULL%
+AuthName=%NULL%
+Password=%NULL%
+DisplayName=%NULL%
+SIPServerHost=%NULL%
+SIPServerPort=%NULL%
+UseOutboundProxy=0
+OutboundHost=%NULL%
+OutboundPort=%NULL%
+RegisterLine=1
+RegisterMac=1
+
+<% end %>
 <% @phone.sip_accounts.each do |sip_account| %>
 [account]
 path=/yealink/config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
@@ -53,15 +74,24 @@ path = /config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
 DTMFInbandTransfer=<%= dtmf_map[ :"#{sip_account.dtmf_mode}" ] %>
 
 <% if sip_account.codecs.count != 0 %>
+<% codec_pos = 0 %>
 <% sip_account.sip_account_codecs.each do |c| %>
 <% if codec_map[ :"#{c.codec.name}" ] != nil %>
-[audio<%= c.position %>.cfg]
+<% codec_pos = codec_pos + 1 %>
+[audio<%= codec_pos - 1 %>]
 path=/config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
 enable = 1
 PayloadType = <%= codec_map[ :"#{c.codec.name}" ] %>
-priority = <%= "#{c.position}" %>
+priority = <%= "#{ codec_pos }" %>
 rtpmap = <%= cmapping_map[ :"#{codec_map[ :"#{c.codec.name}" ]}"]%>
 <% end %>
+
+<% end %>
+<% (codec_pos..codec_map.count).each do |cdelete| %>
+[audio<%= cdelete %>]
+path=/config/voip/sipAccount<%= sip_account.position - 1 %>.cfg
+enable = 0
+
 <% end %>
 <% end %>
 <% @phone.sip_accounts.where( :position => sip_account.position).first.phone_keys.each do |phone_key| %>

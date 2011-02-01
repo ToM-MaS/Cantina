@@ -20,8 +20,13 @@
       <author>
         <personname><firstname>Philipp</firstname><surname>Kempgen</surname></personname>
 
-        <uri><link
-        xlink:href="http://www.kempgen.net/">http://www.kempgen.net</link></uri>
+        <email>philipp.kempgen@amooma.de</email>
+      </author>
+
+      <author>
+        <personname><firstname>Sascha</firstname><surname>Daniels</surname></personname>
+
+        <email>sascha.daniels@amooma.de</email>
       </author>
 
       <author>

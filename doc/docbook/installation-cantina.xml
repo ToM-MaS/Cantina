@@ -160,7 +160,7 @@ Usage: rails server [mongrel, thin, etc] [options]
 
     <para>Zuerst aktualisieren wir die Paketdatenbank:</para>
 
-    <para><screen>root@server:~# aptitude update
+    <para><screen>root@server:~# <command>aptitude update</command>
 Hole:1 http://ftp.de.debian.org squeeze Release.gpg [835 B]
 Hole:2 http://ftp.de.debian.org/debian/ squeeze/main Translation-de [1.510 kB]                                    
 Hole:3 http://www.debian-multimedia.org squeeze Release.gpg [198 B]                                                   
@@ -193,7 +193,7 @@ Hole:22 http://ftp.de.debian.org squeeze/main i386 Packages [6.566 kB]
 12,1 MB wurden in 3 s heruntergeladen (3.499 kB/s)      
 </screen>Als nächstes installieren wir den DHCP Server.</para>
 
-    <screen>root@server:~# aptitude install isc-dhcp-server
+    <screen>root@server:~# <command>aptitude install isc-dhcp-server</command>
 Die folgenden NEUEN Pakete werden zusätzlich installiert:
   isc-dhcp-server 
 Die folgenden Pakete werden aktualisiert:
@@ -229,7 +229,7 @@ root@server:~# </screen>
     <para>Zuerst müssen wir dem Server sagen, an welcher Netzwerk
     Schnittstelle er lauschen soll.</para>
 
-    <screen>root@server:~# vi /etc/default/isc-dhcp-server 
+    <screen>root@server:~# <command>vi /etc/default/isc-dhcp-server</command> 
 
 # Defaults for dhcp initscript
 # sourced by /etc/init.d/dhcp
@@ -265,17 +265,17 @@ INTERFACES="eth0"
 
     <para>Jetzte speichern wir die Konfiguration wie folgt ab:</para>
 
-    <para>"ESC"</para>
+    <para>"<keycap>ESC</keycap>"</para>
 
-    <para>:wq</para>
+    <para><keycap>:wq</keycap></para>
 
     <para>Jetzt müssen wir noch eine Konfiguration für den DHCP Server
     anlegen.</para>
 
-    <para><screen>root@server:~# mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf_DEBIAN
-root@server:~# vi /etc/dhcp/dhcpd.conf</screen>Folgende Minimalkonfiguration
-    reicht aus um die Telefone mit den benötigten Informationen zu
-    versorgen.</para>
+    <para><screen>root@server:~# <command>mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf_DEBIAN</command>
+root@server:~# <command>vi /etc/dhcp/dhcpd.conf</command></screen>Folgende
+    Minimalkonfiguration reicht aus um die Telefone mit den benötigten
+    Informationen zu versorgen.</para>
 
     <para><screen>option domain-name "example.org";
 option domain-name-servers ns1.example.org, ns2.example.org;
@@ -294,11 +294,37 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 }</screen>Die Werte für "domain-name" und "domain-name-server" müssen Ihren
     Gegebenheiten angepasst werden, haben aber für einen ersten Test keine
     Bedeutung. Weitere Informationen zu sinnvollen Parametern entnehmen Sie
-    bitte der Dokumentation des DHCP Servers.</para>
+    bitte der Dokumentation des DHCP Servers. Natürlich müssen Sie die Daten
+    des Subnets auch an Ihre Gegebenheiten anpassen.</para>
 
     <para>Wir können den Server jetzt starten.</para>
 
-    <para><screen>root@start:~# /etc/init.d/isc-dhcp-server start
+    <para><screen>root@start:~# <command>/etc/init.d/isc-dhcp-server start</command>
 </screen>Jetzt können Sie Ihr erstes Telefon provisionieren.</para>
+  </section>
+
+  <section>
+    <title>Telefon provisionieren am Beispiel eines Snom 360/370</title>
+
+    <para>Wir empfehlen zum ersten Testen des Provisionings ein eigenes
+    Testnetz anzulegen. Dann können Sie leichter das System ausprobieren und
+    verstehen.<itemizedlist>
+        <listitem>
+          <para>Stellen Sie sicher, das auf dem benutzen Snom 360/370 eine
+          aktuelle 8er Firmware installiert ist.</para>
+        </listitem>
+
+        <listitem>
+          <para>Starten Sie den Rails-Server.</para>
+        </listitem>
+
+        <listitem>
+          <para>Starten Sie den DHCP-Server.</para>
+        </listitem>
+
+        <listitem>
+          <para>Stecken Sie das Telefon an das Netzwerk.</para>
+        </listitem>
+      </itemizedlist></para>
   </section>
 </section>

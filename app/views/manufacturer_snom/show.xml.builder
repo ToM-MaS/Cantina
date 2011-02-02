@@ -13,9 +13,7 @@ codec_mapping_snom = {
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.settings {
-
-	
-    
+		
 		xml.tag! 'phone-settings' do
 			xml.web_language( 'English', :perm => 'RW' )
 			xml.timezone( 'GMT+1', :perm => 'RW' )
@@ -215,13 +213,12 @@ xml.settings {
 				xml.fkey( kdef,
 					:idx     => idx,
 					:context => (snom_softkey[:acctidx].to_i > 0) ? snom_softkey[:acctidx] : 'active',
-				  #:label  => snom_softkey[:label],
+				#	:label   => snom_softkey[:label],
 					:perm    => is_defined ? 'R' : 'RW', 
-          )
+				)
 			}
 		end
 		
-	
 }
 
 

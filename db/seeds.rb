@@ -22,26 +22,6 @@ Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Te
 Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create([{:value => '003042'},{:value => '00085D'}])
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/').ouis.create(:value => '001565')
 
-# TODO alle Codecs von allen Phones eintragen
-#
-Codec.create(:name => 'gsm')
-Codec.create(:name => 'ulaw')
-Codec.create(:name => 'alaw')
-Codec.create(:name => 'g722')
-Codec.create(:name => 'g723')
-Codec.create(:name => 'g726')
-Codec.create(:name => 'g729')
-Codec.create(:name => 'ilbc')
-Codec.create(:name => 'speex')
-Codec.create(:name => 'lpc10')
-Codec.create(:name => 'slin')
-Codec.create(:name => 'adpcm')
-Codec.create(:name => 'amr')
-Codec.create(:name => 'h261')
-Codec.create(:name => 'h263')
-Codec.create(:name => 'h263+')
-Codec.create(:name => 'h264')
-
 # Softkey functions:
 # DO NOT RENAME THEM! The name is magic and serves as an identifier!
 #
@@ -184,7 +164,7 @@ Manufacturer.where(
 Manufacturer.find_by_ieee_name('SNOM Technology AG').phone_models.each do |phone_model|
   [ 'ulaw', 'alaw', 'gsm', 'g722', 'g726', 'g729', 'g723'
   ].each do |codec_name|
-    codec = Codec.find_by_name(codec_name)
+    codec = Codec.find_or_create_by_name(codec_name)
     phone_model.codecs << codec if codec != nil
   end
 end
@@ -193,7 +173,7 @@ end
 Manufacturer.find_by_ieee_name('DeTeWe-Deutsche Telephonwerke').phone_models.all.each do |phone_model|
   [ 'alaw', 'ulaw', 'g722', 'g726', 'g726-24', 'g726-32', 'g726-40', 'g729', 'bv16', 'bv32', 'ulaw-16k', 'alaw-16k', 'l16', 'l16-8k'
   ].each do |codec_name|
-    codec = Codec.find_by_name(codec_name)
+    codec = Codec.find_or_create_by_name(codec_name)
     phone_model.codecs << codec if codec != nil
   end
 end
@@ -202,7 +182,7 @@ end
 Manufacturer.find_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').phone_models.all.each do |phone_model|
   [ 'ulaw', 'alaw', 'g722', 'g723', 'g726', 'g729'
   ].each do |codec_name|
-    codec = Codec.find_by_name(codec_name)
+    codec = Codec.find_or_create_by_name(codec_name)
     phone_model.codecs << codec if codec != nil
   end
 end

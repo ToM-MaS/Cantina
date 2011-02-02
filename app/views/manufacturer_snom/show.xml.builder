@@ -28,9 +28,7 @@ xml.settings {
 		end
 		
 	else
-		@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
-    @phone.update_attributes(:ip_address => "#{request.remote_ip}")
-
+	
     
 		xml.tag! 'phone-settings' do
 			xml.web_language( 'English', :perm => 'RW' )

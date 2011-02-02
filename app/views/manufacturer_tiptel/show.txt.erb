@@ -30,8 +30,7 @@ cmapping_map = {
 :"G726-32" => "2",
 :"G729"    => "18"
 }
-@phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
-@phone.update_attributes(:ip_address => "#{request.remote_ip}")
+
 %>
 <% (@phone.sip_accounts.count..@phone.phone_model.max_number_of_sip_accounts).each do |delnum| %>
 [account]

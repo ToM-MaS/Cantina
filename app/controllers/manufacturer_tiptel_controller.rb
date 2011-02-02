@@ -19,7 +19,29 @@ def show
       # send "404 Not Found" if phone with the given MAC address does not exists }
       
     end
-
+    
+    # Codec mapping {
+    @codec_map = {
+      :"ulaw"  => "PCMU",
+      :"alaw"  => "PCMA",
+      :"g722"  => "G722",
+      :"g723"  => "G723_53",
+      :"g726"  => "G726-32",
+      :"g729"  => "G729",
+      :"nouse1" => "G726-16",
+      :"nouse2" => "G726-24",
+      :"nouse3" => "G726-40"
+    }
+    @cmapping_map = {
+      :"PCMU"    => "0",
+      :"PCMA"    => "8",
+      :"G722"    => "9",
+      :"G723_53" => "4",
+      :"G726-32" => "2",
+      :"G729"    => "18"
+    }
+    # Codec mapping }
+    
     respond_to do |format|
       format.txt
     end

@@ -22,6 +22,8 @@ Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Te
 Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create([{:value => '003042'},{:value => '00085D'}])
 Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/').ouis.create(:value => '001565')
 
+# TODO alle Codecs von allen Phones eintragen
+#
 Codec.create(:name => 'gsm')
 Codec.create(:name => 'ulaw')
 Codec.create(:name => 'alaw')

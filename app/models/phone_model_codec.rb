@@ -17,6 +17,8 @@ class PhoneModelCodec < ActiveRecord::Base
   
   acts_as_list :scope => :phone_model
 
+  # TODO testing das ein codec nur einmal pro phone_model eingetragen werden darf.
+  validates_uniqueness_of :codec_id, :scope => :phone_model_id
 
   validates_presence_of(:phone_model_id, :message => "Need phone_model_id")
   validates_numericality_of(:phone_model_id, :message => "Only integer allowed as phone_model_id")

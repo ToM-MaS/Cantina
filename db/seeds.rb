@@ -178,12 +178,33 @@ Manufacturer.where(
 ])
 
 
-
-# Codecs for phone_models
-#
-PhoneModel.all.each do |phone_model|
-  phone_model.codecs << Codec.all
+# Codecs for Snom
+# TODO Codecs fuer Snoms eintragen
+Manufacturer.find_by_ieee_name('SNOM Technology AG').phone_models.each do |phone_model|
+  ['gsm','ulaw','alaw'].each do |codec_name|
+    codec = Codec.find_by_name(codec_name)
+    phone_model.codecs << codec if codec != nil
+  end
 end
+
+# Codecs for AASTRA
+# TODO Codecs fuer AASTRA eintragen
+Manufacturer.find_by_ieee_name('DeTeWe-Deutsche Telephonwerke').phone_models.all.each do |phone_model|
+  ['gsm','ulaw','alaw'].each do |codec_name|
+    codec = Codec.find_by_name(codec_name)
+    phone_model.codecs << codec if codec != nil
+  end
+end
+  
+# Codecs for Tiptel
+# TODO Codecs fuer Tiptel eintragen
+Manufacturer.find_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').phone_models.all.each do |phone_model|
+  ['gsm','ulaw','alaw'].each do |codec_name|
+    codec = Codec.find_by_name(codec_name)
+    phone_model.codecs << codec if codec != nil
+  end
+end
+
 
 # Sample Phones (Testphones Sascha)
 

@@ -24,6 +24,8 @@ class PhoneModelCodec < ActiveRecord::Base
   validates_presence_of(:codec_id, :message => "Need codec_id")
   validates_numericality_of(:codec_id, :message => "Only integer allowes as codec_id")
   validate :codec_exists
+  
+  private
   def codec_exists
     if !Codec.all.collect {|c| c.id}.include? self.codec_id
       errors.add(:codec_id, "#{self.codec_id} is not a valid codec_id")

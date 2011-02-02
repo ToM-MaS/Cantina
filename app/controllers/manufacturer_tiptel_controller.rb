@@ -1,20 +1,20 @@
 class ManufacturerTiptelController < ApplicationController
 def show
-  if params[:mac_address].nil?
-      @phone = Phone.find(params[:id])
-    else
-      mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
-      @phone = Phone.where(:mac_address => mac_address).first
-      
-      if @phone != nil
-        @phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
-        @phone.update_attributes(:ip_address => request.remote_ip)
-      end
-    end
-
+  
+  mac_address = params[:mac_address].upcase.gsub(/[^A-F0-9]/,'')
+  @phone = Phone.where(:mac_address => mac_address).first
+  
+  if ! @phone.nil?
+    @phone.provisioning_log_entries.create(:succeeded => true, :memo => "Phone got config")
+    @phone.update_attributes(:ip_address => request.remote_ip)
     respond_to do |format|
       format.txt
-    end
+    end 
+  else
+    respond_to do |format|
+      format.html
+    end 
+  end
 end
 
 def index

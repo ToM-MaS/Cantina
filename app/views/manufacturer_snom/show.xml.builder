@@ -13,21 +13,7 @@ codec_mapping_snom = {
 xml.instruct!  # <?xml version="1.0" encoding="UTF-8"?>
 
 xml.settings {
-	if @phone == nil
-		
-		xml.comment! "Phone with the given MAC address not found."  # <!-- a comment -->
-		
-		xml.tag! 'phone-settings' do
-			xml.web_language( 'English', :perm => 'RW' )
-			xml.timezone( 'GMT+1', :perm => 'RW' )
-			xml.date_us_format( 'off', :perm => 'RW' )
-			xml.time_24_format( 'on', :perm => 'RW' )
-			xml.tone_scheme('GER', :perm => 'RW' )
-			xml.update_policy( 'settings_only', :perm => 'RW' )
-			xml.firmware_status( '', :perm => 'RW' )
-		end
-		
-	else
+
 	
     
 		xml.tag! 'phone-settings' do
@@ -229,13 +215,13 @@ xml.settings {
 				xml.fkey( kdef,
 					:idx     => idx,
 					:context => (snom_softkey[:acctidx].to_i > 0) ? snom_softkey[:acctidx] : 'active',
-				#	:label  => snom_softkey[:label],
-					:perm    => is_defined ? 'R' : 'RW',
-				)
+				  #:label  => snom_softkey[:label],
+					:perm    => is_defined ? 'R' : 'RW', 
+          )
 			}
 		end
 		
-	end
+	
 }
 
 

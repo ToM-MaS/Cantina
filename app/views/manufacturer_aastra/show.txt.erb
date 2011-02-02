@@ -1,4 +1,3 @@
-<% if @phone != nil %>
 # configuration file for phone <%= @phone.mac_address %>
 
 # time configuration options
@@ -123,10 +122,3 @@ key_label = phone_key.value
 
 <% end %>
 
-<% else %>
-<% if (@mac_address == "aastra") %>
-# No global configuration file for Aastra phones provided.
-<% else %>
-# ERROR: Phone "<%= @mac_address %>" not found!
-<% end %>
-<% end %>

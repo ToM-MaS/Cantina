@@ -28,7 +28,7 @@
 	<% if phone.rebootable? %>
     <%= link_to 'Reboot', phone_reboot_path(phone), :confirm => "Do you really want to reboot this #{phone.phone_model.name}?" %>
     <% else %>
-    <small>(IP address is unknown)</small>
+    <small>(IP address is unknown or reboot_path is nil)</small>
     <% end %>
     </td>
     <td><%= link_to 'Edit', edit_phone_path(phone) %></td>

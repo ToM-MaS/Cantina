@@ -181,27 +181,27 @@ Manufacturer.where(
 
 
 # Codecs for Snom
-# TODO Codecs fuer Snoms eintragen
 Manufacturer.find_by_ieee_name('SNOM Technology AG').phone_models.each do |phone_model|
-  ['gsm','ulaw','alaw'].each do |codec_name|
+  [ 'ulaw', 'alaw', 'gsm', 'g722', 'g726', 'g729', 'g723'
+  ].each do |codec_name|
     codec = Codec.find_by_name(codec_name)
     phone_model.codecs << codec if codec != nil
   end
 end
 
-# Codecs for AASTRA
-# TODO Codecs fuer AASTRA eintragen
+# Codecs for Aastra
 Manufacturer.find_by_ieee_name('DeTeWe-Deutsche Telephonwerke').phone_models.all.each do |phone_model|
-  ['gsm','ulaw','alaw'].each do |codec_name|
+  [ 'alaw', 'ulaw', 'g722', 'g726', 'g726-24', 'g726-32', 'g726-40', 'g729', 'bv16', 'bv32', 'ulaw-16k', 'alaw-16k', 'l16', 'l16-8k'
+  ].each do |codec_name|
     codec = Codec.find_by_name(codec_name)
     phone_model.codecs << codec if codec != nil
   end
 end
   
 # Codecs for Tiptel
-# TODO Codecs fuer Tiptel eintragen
 Manufacturer.find_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').phone_models.all.each do |phone_model|
-  ['gsm','ulaw','alaw'].each do |codec_name|
+  [ 'ulaw', 'alaw', 'g722', 'g723', 'g726', 'g729'
+  ].each do |codec_name|
     codec = Codec.find_by_name(codec_name)
     phone_model.codecs << codec if codec != nil
   end

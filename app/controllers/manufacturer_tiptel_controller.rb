@@ -12,9 +12,15 @@ class ManufacturerTiptelController < ApplicationController
 				format.txt
 			}
 		else
-			respond_to { |format|
-				format.html
-			}
+			#respond_to { |format|
+			#	format.html
+			#}
+			render(
+				:status => 404,
+				:layout => false,
+				:content_type => 'text/plain',
+				:text => "<!-- Phone #{mac_address.inspect} not found. -->",
+			)
 		end
 	end
 	

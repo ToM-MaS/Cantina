@@ -72,7 +72,26 @@ class Phone < ActiveRecord::Base
       request = Net::HTTP::Get.new(self.phone_model.reboot_request_path, nil)
       request.basic_auth(self.http_user, self.http_password)
       response = http.request(request)
-
+      if (response.code == "401")
+	request = Net::HTTP::Get.new(self.phone_model.reboot_request_path, nil)
+	request.basic_auth(self.phone_model.default_http_user, self.phone_model.default_http_password)
+	response = http.request(request)
+	if (response.code != "401")
+	  self.http_user = self.phone_model.default_http_user
+	  self.http_password = self.phone_model.default_http_password
+	end
+      end
+      if (self.phone_model.reboot_request_path == 'logout.html' && self.phone_model.manufacturer.ieee_name == "DeTeWe-Deutsche Telephonwerke")
+	http = Net::HTTP.new(self.ip_address, self.phone_model.http_port)
+	request = Net::HTTP::Get.new('logout.html', nil)
+	request.basic_auth(self.http_user, self.http_password)
+	response = http.request(request)
+	http = Net::HTTP.new(self.ip_address, self.phone_model.http_port)
+	request = Net::HTTP::Post.new('reset.html', nil)
+	request.set_form_data({"resetOption" => "0"})
+	request.basic_auth(self.http_user, self.http_password)
+	response = http.request(request)
+      end
       success = case response.code
       when "200" then true
       when "302" then true
@@ -88,9 +107,8 @@ class Phone < ActiveRecord::Base
     
   rescue => error
     reboot_request.update_attributes(:end => Time.now, :successful => false)
-    return false
+    return 'error'
   end
-  
   
   private
   

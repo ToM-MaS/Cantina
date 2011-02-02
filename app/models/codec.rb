@@ -19,4 +19,11 @@ class Codec < ActiveRecord::Base
   
   has_many :phone_model_codecs, :dependent => :destroy
   has_many :phone_models, :through => :phone_model_codecs
+  
+  before_validation :downcase_codec_name
+  
+  private
+  def downcase_codec_name
+    self.name = self.name.downcase if !self.name.blank?
+  end
 end

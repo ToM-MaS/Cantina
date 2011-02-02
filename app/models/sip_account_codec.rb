@@ -25,6 +25,9 @@ class SipAccountCodec < ActiveRecord::Base
   acts_as_list :scope => :sip_account
   belongs_to :codec
   
+  after_destroy :reboot_phone
+  after_update :reboot_phone
+  
   private
   
   # A sip_account can only uses codecs which are codecs for the phone_model 
@@ -34,5 +37,11 @@ class SipAccountCodec < ActiveRecord::Base
     if phone_model.codecs.where(:id => self.codec_id).count == 0
       errors.add(:codec_id, "The PhoneModel #{phone_model.name} (ID #{phone_model.id}) doesn't support this codec (ID #{self.codec_id}).")
     end
+  end
+  
+  # reboot the phone so that the configuration is up to date
+  #
+  def reboot_phone
+    self.sip_account.phone.reboot if self.sip_account.phone.rebootable?
   end
 end

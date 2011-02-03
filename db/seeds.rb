@@ -16,13 +16,7 @@
 #   end
 # }
 
-# To make it a bit faster we'll include a couple of the manufacturers here:
-#
-Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG', :url => 'http://www.snom.com/').ouis.create(:value => '000413')
-Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/').ouis.create([{:value => '003042'},{:value => '00085D'}])
-Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/').ouis.create(:value => '001565')
-
-# Softkey functions:
+# General softkey functions:
 # DO NOT RENAME THEM! The name is magic and serves as an identifier!
 #
 PhoneKeyFunctionDefinition.create([
@@ -39,7 +33,8 @@ PhoneKeyFunctionDefinition.create([
 # Snom
 # http://wiki.snom.com/Settings/mac
 #
-snom = Manufacturer.where(:ieee_name => 'SNOM Technology AG').first
+snom = Manufacturer.find_or_create_by_ieee_name('SNOM Technology AG', :name => 'SNOM Technology AG', :url => 'http://www.snom.com/')
+snom.ouis.create(:value => '000413')
 snom.phone_models.create(:name => 'Snom 190').phone_model_mac_addresses.create(:starts_with => '00041322')
 snom300 = snom.phone_models.create(:name => 'Snom 300', 
                                    :url => 'http://www.snom.com/en/products/ip-phones/snom-300/',
@@ -102,11 +97,8 @@ snom.phone_models.create(:name => 'Snom 820',
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-820/',
                         :max_number_of_sip_accounts => 12,
                         :number_of_keys => 12 ).
-                        phone_model_mac_addresses.create([
-                          {:starts_with => '00041326'},
-                          {:starts_with => '0004132E'},
-                          {:starts_with => '0004133A'},
-                          {:starts_with => '00041352'}
+			phone_model_mac_addresses.create([
+                          {:starts_with => '00041340'},
                                         ])
 snom.phone_models.create(:name => 'Snom 821', 
                         :url => 'http://www.snom.com/en/products/ip-phones/snom-821/',
@@ -122,6 +114,7 @@ snom.phone_models.create(:name => 'Snom 870',
                         phone_model_mac_addresses.create([
                           {:starts_with => '00041341'}
                                         ])
+			
 # Define Snom keys:
 snom.phone_models.each do |pm|
 	num_exp_modules = 0	
@@ -136,56 +129,99 @@ snom.phone_models.each do |pm|
 	end
 end
 
+# Set http parameters
 snom.phone_models.each do |phone_model|
   phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'confirm.htm?REBOOT=yes', :http_request_timeout => 5)
 end
 
-Manufacturer.where(
-  :ieee_name => 'DeTeWe-Deutsche Telephonwerke'
-).first.phone_models.create([
-  { :name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30 },
-  { :name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26 },
-  { :name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6 },
-  { :name => '51i' }
-])
-
-Manufacturer.where(
-  :ieee_name => 'XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD'
-).first.phone_models.create([
-  { :name => 'IP 286', :max_number_of_sip_accounts => 16, :number_of_keys => 10 },
-  { :name => 'IP 280', :max_number_of_sip_accounts => 2 },
-  { :name => 'IP 284', :max_number_of_sip_accounts => 13, :number_of_keys => 10 },
-  { :name => 'VP 28' },
-  { :name => 'IP 28 XS' }
-])
-
-
-# Codecs for Snom
-Manufacturer.find_by_ieee_name('SNOM Technology AG').phone_models.each do |phone_model|
+# Set codecs for Snom
+snom.phone_models.each do |phone_model|
   [ 'alaw', 'ulaw', 'gsm', 'g722', 'g726', 'g729', 'g723'
   ].each do |codec_name|
     phone_model.codecs << Codec.find_or_create_by_name(codec_name)
   end
 end
 
-# Codecs for Aastra
-Manufacturer.find_by_ieee_name('DeTeWe-Deutsche Telephonwerke').phone_models.all.each do |phone_model|
+
+# Aastra
+#
+aastra = Manufacturer.find_or_create_by_ieee_name('DeTeWe-Deutsche Telephonwerke', :name => 'AASTRA DeTeWe', :url => 'http://www.detewe.de/')
+aastra.ouis.create([{:value => '003042'},{:value => '00085D'}])
+aastra.phone_models.create(:name => '57i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  30,  :url => 'http://www.aastra.com/aastra-6757i.htm')
+aastra.phone_models.create(:name => '55i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  26,  :url => 'http://www.aastra.com/aastra-6753i.htm')
+aastra.phone_models.create(:name => '53i',  :max_number_of_sip_accounts => 9, :number_of_keys =>  6,   :url => 'http://www.aastra.com/aastra-6753i.htm')
+aastra.phone_models.create(:name => '51i',  :max_number_of_sip_accounts => 1, :number_of_keys =>  0,   :url => 'http://www.aastra.com/aastra-6751i.htm')
+
+# Set http parameters
+aastra.phone_models.each do |phone_model|
+  phone_model.update_attributes(:http_port => 80, :reboot_request_path => 'logout.html', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => '22222')
+end
+
+aastra.phone_models.each do |phone_model|
   [ 'alaw', 'ulaw', 'g722', 'g726', 'g726-24', 'g726-32', 'g726-40', 'g729', 'bv16', 'bv32', 'ulaw-16k', 'alaw-16k', 'l16', 'l16-8k'
   ].each do |codec_name|
     phone_model.codecs << Codec.find_or_create_by_name(codec_name)
   end
 end
   
+# Set softkeys
+['55i', '57i'].each do |p_model|
+ (1..20).each { |mem_num| 
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+      { :name => "softkey#{mem_num}", :position => "#{mem_num}" }
+    ])
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "softkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+
+  } 
+end
+
+# Set topsoftkeys
+['57i'].each do |p_model|
+ (1..10).each { |mem_num| 
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+      { :name => "topsoftkey#{mem_num}", :position => "#{mem_num+20}" }
+    ])
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "topsoftkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+
+  } 
+end
+
+# Tiptel
+#
+
+tiptel = Manufacturer.find_or_create_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD', :name => 'Tiptel', :url => 'http://www.tiptel.de/')
+tiptel.ouis.create(:value => '001565')
+tiptel.phone_models.create(:name => 'IP 286', :max_number_of_sip_accounts => 16, :number_of_keys => 10,  :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-286-6/')
+tiptel.phone_models.create(:name => 'IP 280', :max_number_of_sip_accounts => 2, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-280-6/')
+tiptel.phone_models.create(:name => 'IP 284', :max_number_of_sip_accounts => 13, :number_of_keys => 10, :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-284-6/')
+tiptel.phone_models.create(:name => 'VP 28', :url => 'http://www.tiptel.com/products/details/article/tiptel-vp-28-4/')
+tiptel.phone_models.create(:name => 'IP 28 XS', :url => 'http://www.tiptel.com/products/details/article/tiptel-ip-28-xs-6/')
+
+# Set http parameters
+tiptel.phone_models.each do |phone_model|
+  phone_model.update_attributes(:http_port => 80, :reboot_request_path => '/cgi-bin/ConfigManApp.com', :http_request_timeout => 5, :default_http_user => 'admin',  :default_http_password => 'admin')
+end
+
 # Codecs for Tiptel
-Manufacturer.find_by_ieee_name('XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD').phone_models.all.each do |phone_model|
+tiptel.phone_models.each do |phone_model|
   [ 'alaw', 'ulaw', 'g722', 'g723', 'g726', 'g729'
   ].each do |codec_name|
     phone_model.codecs << Codec.find_or_create_by_name(codec_name)
   end
 end
 
+['IP 284', 'IP 286'].each do |p_model|
+  (1..10).each { |mem_num| 
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
+      { :name => "memory#{mem_num}", :position => "#{mem_num}" }
+    ])
+    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "memory#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
+
+  }
+end
 
 # Sample Phones (Testphones Sascha)
+#
 
 PhoneModel.where(
   :name => 'IP 284' 
@@ -199,43 +235,6 @@ Phone.create(
   :mac_address    => '00-04-13-29-68-87',
   :phone_model_id => PhoneModel.where( :name => 'Snom 360' ).first.id
 )
-
-
-
-# ...
-
-['IP 284', 'IP 286'].each do |p_model|
-  (1..10).each { |mem_num| 
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-      { :name => "memory#{mem_num}", :position => "#{mem_num}" }
-    ])
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "memory#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
-
-  }
-
-end
-
-# Aastra softkeys
-['55i', '57i'].each do |p_model|
- (1..20).each { |mem_num| 
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-      { :name => "softkey#{mem_num}", :position => "#{mem_num}" }
-    ])
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "softkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
-
-  } 
-end
-
-#Aastra topsoftkeys
-['57i'].each do |p_model|
- (1..10).each { |mem_num| 
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.create([
-      { :name => "topsoftkey#{mem_num}", :position => "#{mem_num+20}" }
-    ])
-    PhoneModel.where( :name => "#{p_model}" ).first.phone_model_keys.where( :name => "topsoftkey#{mem_num}" ).first.phone_key_function_definitions << PhoneKeyFunctionDefinition.all
-
-  } 
-end
 
 PhoneModel.where(
   :name => '57i' 

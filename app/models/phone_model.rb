@@ -25,10 +25,11 @@ class PhoneModel < ActiveRecord::Base
   default_value_for :ssl, false
   default_value_for :http_port, 80
   default_value_for :http_request_timeout, 5
+  default_value_for :random_password_length, 8
+  default_value_for :random_password_contains_of, ((0 ..9).to_a + ('A'..'Z').to_a + ('a'..'z').to_a).join
 
   # Validations
   #
-  
   validates_presence_of :name
   
   validates_presence_of     :manufacturer_id
@@ -39,6 +40,12 @@ class PhoneModel < ActiveRecord::Base
 
   validates_presence_of     :number_of_keys
   validates_numericality_of :number_of_keys, :only_integer => true, :greater_than_or_equal_to => 0
+
+  validates_presence_of :random_password_length
+  validates_numericality_of :random_password_length, :only_integer => true, :greater_than_or_equal_to => 0
+
+  validates_presence_of :random_password_contains_of
+  validates_length_of :random_password_contains_of, :minimum => 1
 
   validate :does_a_manufacturer_to_this_phone_model_exist
   validate :validate_url
@@ -74,6 +81,20 @@ class PhoneModel < ActiveRecord::Base
       end
     end
     phone_model
+  end
+  
+  # Generate a random password for a Phone of this PhoneModel
+  #
+  def random_new_password
+    if self.random_password_length == 0
+      nil
+    else
+      new_password = String.new
+      for i in 0 .. self.random_password_length
+         new_password += self.random_password_contains_of.scan(/./).sort_by {rand}.first
+      end
+      new_password
+    end
   end
   
   private

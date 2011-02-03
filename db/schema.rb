@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110122171701) do
+ActiveRecord::Schema.define(:version => 20110203153159) do
 
   create_table "codecs", :force => true do |t|
     t.string   "name"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20110122171701) do
     t.integer  "http_request_timeout"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "random_password_length"
+    t.string   "random_password_contains_of"
   end
 
   create_table "phones", :force => true do |t|

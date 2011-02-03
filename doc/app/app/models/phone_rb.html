@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">2011-01-24 05:59:40 +0100</dd>
+			<dd class="modified-date">2011-02-02 09:35:09 +0100</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -47,20 +47,21 @@
 			<h2>Description</h2>
 			<h2>Schema Information</h2>
 <p>
-Schema version: 20110121121114
+Schema version: 20110122171701
 </p>
 <p>
 Table name: phones
 </p>
 <pre>
- id             :integer         not null, primary key
- mac_address    :string(255)
- phone_model_id :integer
- ip_address     :string(255)
- http_user      :string(255)
- http_password  :string(255)
- created_at     :datetime
- updated_at     :datetime</pre>
+ id              :integer         not null, primary key
+ mac_address     :string(255)
+ phone_model_id  :integer
+ ip_address      :string(255)
+ last_ip_address :string(255)
+ http_user       :string(255)
+ http_password   :string(255)
+ created_at      :datetime
+ updated_at      :datetime</pre>
 
 		</div>
 		

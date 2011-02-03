@@ -65,6 +65,17 @@
 
 			<!-- Method Quickref -->
 			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-validate_phone_key_function_definition">#validate_phone_key_function_definition</a></li>
+					
+					<li><a href="#method-i-validate_phone_model_key">#validate_phone_model_key</a></li>
+					
+				</ul>
+			</div>
+			
 
 			<!-- Included Modules -->
 			
@@ -230,6 +241,88 @@ Table name: phone_key_to_function_mappings
 
 		<!-- Methods -->
 		
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="validate-phone-key-function-definition-method" class="method-detail ">
+				<a name="method-i-validate_phone_key_function_definition"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">validate_phone_key_function_definition</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Checks if the phone_key_function_definition exists.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="validate-phone-key-function-definition-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/phone_key_to_function_mapping.rb, line 39</span>
+39:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_phone_key_function_definition</span>()
+40:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">PhoneKeyFunctionDefinition</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_key_function_definition_id</span> )
+41:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_key_function_definition_id</span>, <span class="ruby-value str">&quot;is invalid.&quot;</span>)
+42:     <span class="ruby-keyword kw">end</span>
+43:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="validate-phone-model-key-method" class="method-detail ">
+				<a name="method-i-validate_phone_model_key"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">validate_phone_model_key</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Checks if the phone_model_key exists.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="validate-phone-model-key-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/phone_key_to_function_mapping.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_phone_model_key</span>()
+33:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-constant">PhoneModelKey</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_model_key_id</span> )
+34:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:phone_model_key_id</span>, <span class="ruby-value str">&quot;is invalid.&quot;</span>)
+35:     <span class="ruby-keyword kw">end</span>
+36:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

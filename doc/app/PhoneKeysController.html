@@ -264,21 +264,21 @@ POST /phone_keys POST /phone_keys.xml
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 57</span>
-57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-58:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>])
-59:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">phone_keys</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_key</span>])
-60:     
-61:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-62:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">save</span>
-63:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone key was successfully created.'</span>) }
-64:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span> }
-65:       <span class="ruby-keyword kw">else</span>
-66:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-67:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-68:       <span class="ruby-keyword kw">end</span>
-69:     <span class="ruby-keyword kw">end</span>
-70:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 56</span>
+56:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+57:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>])
+58:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">phone_keys</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_key</span>])
+59:     
+60:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+61:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">save</span>
+62:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone key was successfully created.'</span>) }
+63:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span> }
+64:       <span class="ruby-keyword kw">else</span>
+65:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+66:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+67:       <span class="ruby-keyword kw">end</span>
+68:     <span class="ruby-keyword kw">end</span>
+69:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -311,16 +311,16 @@ DELETE /phone_keys/1 DELETE /phone_keys/1.xml
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 96</span>
- 96:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
- 97:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-constant">PhoneKey</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
- 98:     <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">destroy</span>
- 99: 
-100:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-101:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">sip_account</span>) }
-102:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-103:     <span class="ruby-keyword kw">end</span>
-104:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 89</span>
+89:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+90:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-constant">PhoneKey</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+91:     <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">destroy</span>
+92: 
+93:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+94:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">sip_account</span>) }
+95:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+96:     <span class="ruby-keyword kw">end</span>
+97:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -353,19 +353,19 @@ GET /phone_keys/1/edit
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 42</span>
-42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-43:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>])
-44:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-constant">PhoneKey</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-45:     
-46:     <span class="ruby-ivar">@phone_model_keys</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:position</span>)
-47:     <span class="ruby-ivar">@phone_key_function_definitions</span> = <span class="ruby-ivar">@phone_model_keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_model_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_model_key</span>.<span class="ruby-identifier">phone_key_function_definitions</span>}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
-48: 
-49:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-50:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># edit.html.erb</span>
-51:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span> }
-52:     <span class="ruby-keyword kw">end</span>
-53:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 41</span>
+41:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+42:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>])
+43:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-constant">PhoneKey</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+44: 
+45:     <span class="ruby-ivar">@phone_model_keys</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">undefined_phone_model_keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">phone_model_key</span>
+46:     <span class="ruby-ivar">@phone_key_function_definitions</span> = <span class="ruby-ivar">@phone_model_keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_model_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_model_key</span>.<span class="ruby-identifier">phone_key_function_definitions</span>}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
+47: 
+48:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+49:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># edit.html.erb</span>
+50:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span> }
+51:     <span class="ruby-keyword kw">end</span>
+52:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -445,15 +445,14 @@ GET /phone_keys/new GET /phone_keys/new.xml
 28:     <span class="ruby-ivar">@sip_account</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sip_account_id</span>])
 29:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">phone_keys</span>.<span class="ruby-identifier">build</span>
 30:     
-31:     <span class="ruby-comment cmt"># FIXME - some kind of .find( :phone_model_id =&gt; @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id =&gt; @phone_key.phone_model_key.phone_model_id ) here?</span>
-32:     <span class="ruby-ivar">@phone_model_keys</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:position</span>)
-33:     <span class="ruby-ivar">@phone_key_function_definitions</span> = <span class="ruby-ivar">@phone_model_keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_model_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_model_key</span>.<span class="ruby-identifier">phone_key_function_definitions</span>}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
-34:     
-35:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span> }
-38:     <span class="ruby-keyword kw">end</span>
-39:   <span class="ruby-keyword kw">end</span></pre>
+31:     <span class="ruby-ivar">@phone_model_keys</span> = <span class="ruby-ivar">@sip_account</span>.<span class="ruby-identifier">undefined_phone_model_keys</span>
+32:     <span class="ruby-ivar">@phone_key_function_definitions</span> = <span class="ruby-ivar">@phone_model_keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_model_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_model_key</span>.<span class="ruby-identifier">phone_key_function_definitions</span>}.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
+33:     
+34:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+35:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span> }
+37:     <span class="ruby-keyword kw">end</span>
+38:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -527,26 +526,20 @@ PUT /phone_keys/1 PUT /phone_keys/1.xml
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 74</span>
-74:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-75:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-constant">PhoneKey</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-76:     
-77:     <span class="ruby-comment cmt"># FIXME - some kind of .find() or .where() here?</span>
-78:     <span class="ruby-ivar">@sip_accounts</span> = <span class="ruby-constant">SipAccount</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
-79:     <span class="ruby-comment cmt"># FIXME - some kind of .find( :phone_model_id =&gt; @phone_key.phone_model_key.phone_model_id ) or .where( :phone_model_id =&gt; @phone_key.phone_model_key.phone_model_id ) here?</span>
-80:     <span class="ruby-ivar">@phone_model_keys</span> = <span class="ruby-constant">PhoneModelKey</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:position</span>)
-81:     <span class="ruby-ivar">@phone_key_function_definitions</span> = <span class="ruby-constant">PhoneKeyFunctionDefinition</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:name</span>)
-82:     
-83:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-84:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_key</span>])
-85:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone key was successfully updated.'</span>) }
-86:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-87:       <span class="ruby-keyword kw">else</span>
-88:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-89:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-90:       <span class="ruby-keyword kw">end</span>
-91:     <span class="ruby-keyword kw">end</span>
-92:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/phone_keys_controller.rb, line 73</span>
+73:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+74:     <span class="ruby-ivar">@phone_key</span> = <span class="ruby-constant">PhoneKey</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+75:     
+76:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+77:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_key</span>])
+78:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">sip_account</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Phone key was successfully updated.'</span>) }
+79:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+80:       <span class="ruby-keyword kw">else</span>
+81:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+82:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phone_key</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+83:       <span class="ruby-keyword kw">end</span>
+84:     <span class="ruby-keyword kw">end</span>
+85:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

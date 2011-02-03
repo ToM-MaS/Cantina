@@ -65,6 +65,15 @@
 
 			<!-- Method Quickref -->
 			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-downcase_codec_name">#downcase_codec_name</a></li>
+					
+				</ul>
+			</div>
+			
 
 			<!-- Included Modules -->
 			
@@ -229,6 +238,46 @@ Table name: codecs
 
 		<!-- Methods -->
 		
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="downcase-codec-name-method" class="method-detail ">
+				<a name="method-i-downcase_codec_name"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">downcase_codec_name</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="downcase-codec-name-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/codec.rb, line 26</span>
+26:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">downcase_codec_name</span>
+27:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">name</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">blank?</span>
+28:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
 
 	</div>
 

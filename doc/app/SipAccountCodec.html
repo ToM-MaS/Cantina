@@ -71,6 +71,8 @@
 					
 					<li><a href="#method-i-check_if_the_phone_model_offers_this_codec">#check_if_the_phone_model_offers_this_codec</a></li>
 					
+					<li><a href="#method-i-reboot_phone">#reboot_phone</a></li>
+					
 				</ul>
 			</div>
 			
@@ -267,13 +269,49 @@ the phone.
 					<div class="method-source-code"
 						id="check-if-the-phone-model-offers-this-codec-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/sip_account_codec.rb, line 31</span>
-31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_the_phone_model_offers_this_codec</span>
-32:     <span class="ruby-identifier">phone_model</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>
-33:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">codecs</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">codec_id</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-34:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:codec_id</span>, <span class="ruby-node">&quot;The PhoneModel #{phone_model.name} (ID #{phone_model.id}) doesn't support this codec (ID #{self.codec_id}).&quot;</span>)
-35:     <span class="ruby-keyword kw">end</span>
-36:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account_codec.rb, line 35</span>
+35:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_if_the_phone_model_offers_this_codec</span>
+36:     <span class="ruby-identifier">phone_model</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>
+37:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">codecs</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">codec_id</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+38:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:codec_id</span>, <span class="ruby-node">&quot;The PhoneModel #{phone_model.name} (ID #{phone_model.id}) doesn't support this codec (ID #{self.codec_id}).&quot;</span>)
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="reboot-phone-method" class="method-detail ">
+				<a name="method-i-reboot_phone"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">reboot_phone</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+reboot the phone so that the configuration is up to date
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="reboot-phone-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account_codec.rb, line 44</span>
+44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reboot_phone</span>
+45:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">reboot</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sip_account</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">rebootable?</span>
+46:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

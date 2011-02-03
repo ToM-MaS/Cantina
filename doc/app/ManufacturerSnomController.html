@@ -252,16 +252,16 @@
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 17</span>
-17: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
-18:     <span class="ruby-identifier">mfc</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SNOM Technology AG&quot;</span>).<span class="ruby-identifier">first</span>
-19:     <span class="ruby-ivar">@phones</span> = <span class="ruby-identifier">mfc</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mfc</span>.<span class="ruby-identifier">phones</span> <span class="ruby-operator">:</span> []
-20: 
-21:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-22:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
-23:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phones</span> }
-24:     <span class="ruby-keyword kw">end</span>
-25:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 41</span>
+41:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+42:                 <span class="ruby-identifier">mfc</span> = <span class="ruby-constant">Manufacturer</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:ieee_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;SNOM Technology AG&quot;</span>).<span class="ruby-identifier">first</span>
+43:                 <span class="ruby-ivar">@phones</span> = <span class="ruby-identifier">mfc</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">mfc</span>.<span class="ruby-identifier">phones</span> <span class="ruby-operator">:</span> []
+44:                 
+45:                 <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+46:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
+47:                         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@phones</span> }
+48:                 }
+49:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -292,21 +292,44 @@
 					<div class="method-source-code"
 						id="show-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 2</span>
- 2: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
- 3:   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">nil?</span>
- 4:       <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
- 5:     <span class="ruby-keyword kw">else</span>
- 6:       <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
- 7:       <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:mac_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>).<span class="ruby-identifier">first</span>
- 8:       
- 9:     <span class="ruby-keyword kw">end</span>
-10: 
-11:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-12:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
-13:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  <span class="ruby-comment cmt">#{ render :xml =&gt; @phone }</span>
-14:     <span class="ruby-keyword kw">end</span>
-15: <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/manufacturer_snom_controller.rb, line 3</span>
+ 3:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+ 4:                 <span class="ruby-identifier">mac_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mac_address</span>].<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[^A-F0-9]/</span>,<span class="ruby-value str">''</span>)
+ 5:                 <span class="ruby-ivar">@phone</span> = <span class="ruby-constant">Phone</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:mac_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mac_address</span>).<span class="ruby-identifier">first</span>
+ 6:                 
+ 7:                 <span class="ruby-comment cmt">##### Codec mapping {</span>
+ 8:                 <span class="ruby-comment cmt"># map from Codec names as in seeds.rb to their respective name</span>
+ 9:                 <span class="ruby-comment cmt"># (or rather: number) on Snom:</span>
+10:                 <span class="ruby-ivar">@codec_mapping_snom</span> = {
+11:                         <span class="ruby-value str">'ulaw'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">0</span>,  <span class="ruby-comment cmt"># G.711 u-law</span>
+12:                         <span class="ruby-value str">'alaw'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">8</span>,  <span class="ruby-comment cmt"># G.711 a-law</span>
+13:                         <span class="ruby-value str">'gsm'</span>  =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">3</span>,  <span class="ruby-comment cmt"># GSM</span>
+14:                         <span class="ruby-value str">'g722'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">9</span>,  <span class="ruby-comment cmt"># G.722</span>
+15:                         <span class="ruby-value str">'g726'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">2</span>,  <span class="ruby-comment cmt"># G.726-32  Assume that &quot;g726&quot; in the codecs table means G.726-32.</span>
+16:                         <span class="ruby-value str">'g729'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">18</span>,  <span class="ruby-comment cmt"># G.729a</span>
+17:                         <span class="ruby-value str">'g723'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value">4</span>,  <span class="ruby-comment cmt"># G.723.1  Assume that &quot;g723&quot; in the codecs table does not mean G.723 but G.723.1.</span>
+18:                 }
+19:                 <span class="ruby-comment cmt">##### Codec mapping }</span>
+20:                 
+21:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">nil?</span>
+22:                         <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">provisioning_log_entries</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:succeeded</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-value">:memo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Phone got config&quot;</span>)
+23:                         <span class="ruby-ivar">@phone</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-value">:ip_address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_ip</span>)
+24:                         
+25:                         <span class="ruby-identifier">respond_to</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+26:                                 <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> 
+27:                         }
+28:                 <span class="ruby-keyword kw">else</span>
+29:                         <span class="ruby-comment cmt">#respond_to { |format|</span>
+30:                         <span class="ruby-comment cmt">#    format.html</span>
+31:                         <span class="ruby-comment cmt">#}</span>
+32:                         <span class="ruby-identifier">render</span>(
+33:                                 <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">404</span>,
+34:                                 <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+35:                                 <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>,
+36:                                 <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;&lt;!-- Phone #{mac_address.inspect} not found. --&gt;&quot;</span>,
+37:                         )
+38:                 <span class="ruby-keyword kw">end</span>
+39:         <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

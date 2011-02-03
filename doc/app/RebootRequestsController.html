@@ -262,19 +262,16 @@ POST /reboot_requests POST /reboot_requests.xml
 38:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
 39:     <span class="ruby-ivar">@reboot_request</span> = <span class="ruby-constant">RebootRequest</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:reboot_request</span>])
 40: 
-41:     <span class="ruby-comment cmt"># TODO Reboot muss getriggert werden</span>
-42:     <span class="ruby-comment cmt"># @Peter: Bitte hier einbauen.</span>
-43:     
-44:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-45:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reboot_request</span>.<span class="ruby-identifier">save</span>
-46:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@reboot_request</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Reboot request was successfully created.'</span>) }
-47:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reboot_request</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reboot_request</span> }
-48:       <span class="ruby-keyword kw">else</span>
-49:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reboot_request</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-51:       <span class="ruby-keyword kw">end</span>
-52:     <span class="ruby-keyword kw">end</span>
-53:   <span class="ruby-keyword kw">end</span></pre>
+41:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+42:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reboot_request</span>.<span class="ruby-identifier">save</span>
+43:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@reboot_request</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Reboot request was successfully created.'</span>) }
+44:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reboot_request</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reboot_request</span> }
+45:       <span class="ruby-keyword kw">else</span>
+46:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+47:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@reboot_request</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+48:       <span class="ruby-keyword kw">end</span>
+49:     <span class="ruby-keyword kw">end</span>
+50:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

@@ -69,19 +69,14 @@ class Phone < ActiveRecord::Base
       http.use_ssl = self.phone_model.ssl
       http.open_timeout = self.phone_model.http_request_timeout
       http.read_timeout = self.phone_model.http_request_timeout
-      request = Net::HTTP::Get.new(self.phone_model.reboot_request_path, nil)
-      request.basic_auth(self.http_user, self.http_password)
-      response = http.request(request)
-      if (response.code == "401")
-	request = Net::HTTP::Get.new(self.phone_model.reboot_request_path, nil)
-	request.basic_auth(self.phone_model.default_http_user, self.phone_model.default_http_password)
-	response = http.request(request)
-	if (response.code != "401")
-	  self.http_user = self.phone_model.default_http_user
-	  self.http_password = self.phone_model.default_http_password
-	end
-      end
+      if ((self.http_user.length() == 0) && (self.http_password.length() == 0))
+	self.http_user = self.phone_model.default_http_user
+	self.http_password = self.phone_model.default_http_password
+      end   
       if (self.phone_model.reboot_request_path == 'logout.html' && self.phone_model.manufacturer.ieee_name == "DeTeWe-Deutsche Telephonwerke")
+	request = Net::HTTP::Get.new('logout.html', nil)
+	request.basic_auth(self.http_user, self.http_password)
+	response = http.request(request)
 	request = Net::HTTP::Get.new('logout.html', nil)
 	request.basic_auth(self.http_user, self.http_password)
 	response = http.request(request)
@@ -92,6 +87,10 @@ class Phone < ActiveRecord::Base
       elsif (self.phone_model.reboot_request_path == '/cgi-bin/ConfigManApp.com' && self.phone_model.manufacturer.ieee_name == "XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD")
 	request = Net::HTTP::Post.new('/cgi-bin/ConfigManApp.com', nil)
 	request.set_form_data({"PAGEID" => "7", "CONFIG_DATA" => "REBOOT"})
+	request.basic_auth(self.http_user, self.http_password)
+	response = http.request(request)
+      else
+	request = Net::HTTP::Get.new(self.phone_model.reboot_request_path, nil)
 	request.basic_auth(self.http_user, self.http_password)
 	response = http.request(request)
       end

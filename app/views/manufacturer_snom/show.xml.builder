@@ -13,6 +13,13 @@ xml.settings {
 		xml.update_policy( 'settings_only', :perm => 'RW' )
 		xml.firmware_status( '', :perm => 'RW' )
 		
+		xml.webserver_type( 'http_https', :perm => 'R' )
+		xml.http_scheme( 'off', :perm => 'RW' )  # off = Basic, on = Digest
+		xml.http_port( '80', :perm => 'R' )
+		xml.https_port( '443', :perm => 'R' )
+		xml.http_user( @phone.http_user.to_s, :perm => 'R' )
+		xml.http_pass( @phone.http_password.to_s, :perm => 'R' )
+		
 		xml.retry_after_failed_register( '70', :perm => 'RW' )
 		xml.encode_display_name( 'on', :perm => 'R' )
 		xml.dtmf_payload_type( '101', :perm => 'RW' )

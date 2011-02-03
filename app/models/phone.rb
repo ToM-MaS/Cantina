@@ -82,13 +82,16 @@ class Phone < ActiveRecord::Base
 	end
       end
       if (self.phone_model.reboot_request_path == 'logout.html' && self.phone_model.manufacturer.ieee_name == "DeTeWe-Deutsche Telephonwerke")
-	http = Net::HTTP.new(self.ip_address, self.phone_model.http_port)
 	request = Net::HTTP::Get.new('logout.html', nil)
 	request.basic_auth(self.http_user, self.http_password)
 	response = http.request(request)
-	http = Net::HTTP.new(self.ip_address, self.phone_model.http_port)
 	request = Net::HTTP::Post.new('reset.html', nil)
 	request.set_form_data({"resetOption" => "0"})
+	request.basic_auth(self.http_user, self.http_password)
+	response = http.request(request)
+      elsif (self.phone_model.reboot_request_path == '/cgi-bin/ConfigManApp.com' && self.phone_model.manufacturer.ieee_name == "XIAMEN YEALINK NETWORK TECHNOLOGY CO.,LTD")
+	request = Net::HTTP::Post.new('/cgi-bin/ConfigManApp.com', nil)
+	request.set_form_data({"PAGEID" => "7", "CONFIG_DATA" => "REBOOT"})
 	request.basic_auth(self.http_user, self.http_password)
 	response = http.request(request)
       end

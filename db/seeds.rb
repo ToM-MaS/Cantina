@@ -204,7 +204,7 @@ end
 
 # Codecs for Tiptel
 tiptel.phone_models.each do |phone_model|
-  [ 'alaw', 'ulaw', 'g722', 'g723', 'g726', 'g729'
+  [ "ulaw", "alaw", "g722", "g723", "g726", "g729", "g726-16", "g726-24", "g726-40"
   ].each do |codec_name|
     phone_model.codecs << Codec.find_or_create_by_name(codec_name)
   end

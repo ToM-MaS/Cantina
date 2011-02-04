@@ -1,20 +1,20 @@
 	<% if @phone != nil %>
 <%
-key_map = {
-:"BLF" => "16",
-:"Speed dial" => "13",
-:"Action	Url" => "17",
-:"Line"	=> "15"
-}
-dtmf_map = {
-:"rfc2833" => "1",
-:"inband" => "0",
-:"info" => "2"
-}
+
+dtmf_map		= @dtmf_map
+key_map			= @key_map
 codec_map    = @codec_map     # defined in the controller
 cmapping_map = @cmapping_map  # defined in the controller
 
 %>
+[AdminPassword]
+path = /config/Setting/autop.cfg
+Password=<%=@phone.http_password%>
+[UserName]
+path = /config/Advanced/Advanced.cfg
+Admin=<%=@phone.http_user%>
+
+
 <% (@phone.sip_accounts.count..@phone.phone_model.max_number_of_sip_accounts).each do |delnum| %>
 [account]
 path=/yealink/config/voip/sipAccount<%= delnum %>.cfg
@@ -97,6 +97,4 @@ DKtype=0
 
 <% end %>
 <% end %>
-<% else %>
-No Phone found!
 <% end %>

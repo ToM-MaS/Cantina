@@ -75,7 +75,9 @@ class PhonesController < ApplicationController
     @phone = Phone.find(params[:id])
     
     @phone_models = PhoneModel.order(:name)
-    
+    if @phone.update_attributes(params[:http_password]) || @phone.update_attributes(params[:http_user])
+      @phone.reboot
+    end
     respond_to do |format|
       if @phone.update_attributes(params[:phone])
         format.html { redirect_to(@phone, :notice => 'Phone was successfully updated.') }

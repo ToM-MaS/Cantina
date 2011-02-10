@@ -234,7 +234,7 @@ class SipAccount < ActiveRecord::Base
   # id as self.phone_id exists.
   def does_a_phone_to_this_sip_account_exist
     if !Phone.exists?(:id => self.phone_id)
-      errors.add(:phone_id, "There is no Phone with the given id #{self.phone_id}.")
+      errors.add(:phone_id, "(ID #{self.phone_id}) does not exist.")
     end      
   end
   

@@ -44,15 +44,17 @@ class SipAccount < ActiveRecord::Base
   
   belongs_to :phone, :validate => true
   acts_as_list :scope => :phone
+  after_validation :phone_reboot
+  before_destroy :phone_reboot
   
   
   # Validate auth_user. This is the "user" rule from RFC 3261.
   validates_format_of :auth_user , :with =>
-    /^
-      (?:
-        (?:
-          [A-Za-z0-9] |
-          [\-_.!~*'()]
+  /^
+   (?:
+   (?:
+   [A-Za-z0-9] |
+   [\-_.!~*'()]
         ) |
         %[0-9A-F]{2} |
         [&=+$,;?\/]
@@ -65,20 +67,20 @@ class SipAccount < ActiveRecord::Base
         (?:
           [A-Za-z0-9] |
           [\-_.!~*'()]
-        ) |
+  ) |
         %[0-9A-F]{2} |
-        [&=+$,;?\/]
-      ){1,255}
-    $/x#, :allow_nil => false, :allow_blank => false
+  [&=+$,;?\/]
+  ){1,255}
+  $/x#, :allow_nil => false, :allow_blank => false
   
   
   # Validate password, remote_password. This is the "password" rule from RFC 3261.
   validates_format_of [ :password, :remote_password ], :with =>
-    /^
-      (?:
-        (?:
-          [A-Za-z0-9] |
-          [\-_.!~*'()]
+  /^
+   (?:
+   (?:
+   [A-Za-z0-9] |
+   [\-_.!~*'()]
         ) |
         %[0-9A-F]{2} |
         [&=+$,]
@@ -303,26 +305,29 @@ class SipAccount < ActiveRecord::Base
           )
         )*
       $/x.match( val.dup.force_encoding('BINARY') )
-        ret = false
-      end
-    end
-    return ret
-  end
-  
-  # Validates if a display_name is valid refering to
-  # the RFC 3261.
-  def validate_display_name
-    if ! validate_a_display_name( self.display_name )
-      errors.add( :display_name , "Invalid display name (see RFC 3261)." )
-    end
-  end
-  
-  # Validates if a realm is valid refering to
-  # the RFC 3261.
-  def validate_realm
-    if ! validate_a_display_name( self.realm )
-      errors.add( :realm        , "Invalid realm (see RFC 3261)." )
-    end
-  end
-  
+  ret = false
+end
+end
+return ret
+end
+
+# Validates if a display_name is valid refering to
+# the RFC 3261.
+def validate_display_name
+if ! validate_a_display_name( self.display_name )
+errors.add( :display_name , "Invalid display name (see RFC 3261)." )
+end
+end
+
+# Validates if a realm is valid refering to
+# the RFC 3261.
+def validate_realm
+if ! validate_a_display_name( self.realm )
+errors.add( :realm        , "Invalid realm (see RFC 3261)." )
+end
+end
+# reboot phone that belongs to sip_account  
+def phone_reboot
+self.phone.reboot
+end
 end

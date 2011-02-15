@@ -328,6 +328,6 @@ end
 end
 # reboot phone that belongs to sip_account  
 def phone_reboot
-self.phone.reboot
+self.phone.reboot if self.phone
 end
 end

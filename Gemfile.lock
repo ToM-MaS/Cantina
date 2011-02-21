@@ -41,6 +41,7 @@ GEM
       railties (>= 3.0.0)
     faker (0.9.4)
       i18n (~> 0.4)
+    fcgi (0.8.8)
     hirb (0.3.6)
     i18n (0.5.0)
     mail (2.2.14)
@@ -96,10 +97,12 @@ DEPENDENCIES
   default_value_for
   factory_girl_rails
   faker
+  fcgi
   hirb
   rails (= 3.0.3)
   rails-erd
   rails3-generators
+  rake
   shoulda
   simple_form
   sqlite3-ruby

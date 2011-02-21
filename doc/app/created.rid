@@ -1,4 +1,4 @@
-Thu, 03 Feb 2011 17:30:49 +0100
+Mon, 21 Feb 2011 18:33:11 +0100
 doc/README_FOR_APP	Thu, 27 Jan 2011 20:35:26 +0100
 app/helpers/application_helper.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/helpers/manufacturer_tiptel_helper.rb	Fri, 21 Jan 2011 02:54:40 +0100
@@ -27,18 +27,18 @@ app/models/phone_model_codec.rb	Wed, 02 Feb 2011 09:35:09 +0100
 app/models/manufacturer.rb	Sun, 23 Jan 2011 06:42:20 +0100
 app/models/codec.rb	Wed, 02 Feb 2011 09:35:09 +0100
 app/models/phone_key.rb	Sun, 30 Jan 2011 18:37:33 +0100
-app/models/phone.rb	Thu, 03 Feb 2011 14:35:30 +0100
+app/models/phone.rb	Thu, 03 Feb 2011 22:45:36 +0100
 app/models/phone_key_to_function_mapping.rb	Fri, 28 Jan 2011 00:05:22 +0100
 app/models/provisioning_log_entry.rb	Sun, 23 Jan 2011 23:44:49 +0100
-app/models/sip_account.rb	Tue, 01 Feb 2011 17:00:35 +0100
+app/models/sip_account.rb	Tue, 15 Feb 2011 16:43:31 +0100
 app/models/phone_key_function_definition.rb	Mon, 24 Jan 2011 00:19:43 +0100
 app/controllers/provisioning_log_entries_controller.rb	Thu, 20 Jan 2011 13:40:31 +0100
 app/controllers/reboot_requests_controller.rb	Sun, 30 Jan 2011 18:37:33 +0100
 app/controllers/application_controller.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/controllers/codecs_controller.rb	Tue, 11 Jan 2011 22:43:59 +0100
 app/controllers/phone_key_function_definitions_controller.rb	Fri, 21 Jan 2011 01:15:53 +0100
-app/controllers/manufacturer_tiptel_controller.rb	Wed, 02 Feb 2011 09:35:09 +0100
-app/controllers/phones_controller.rb	Sun, 30 Jan 2011 22:14:53 +0100
+app/controllers/manufacturer_tiptel_controller.rb	Thu, 03 Feb 2011 22:45:36 +0100
+app/controllers/phones_controller.rb	Thu, 03 Feb 2011 22:45:36 +0100
 app/controllers/manufacturer_aastra_controller.rb	Wed, 02 Feb 2011 09:35:09 +0100
 app/controllers/phone_model_keys_controller.rb	Fri, 21 Jan 2011 02:07:45 +0100
 app/controllers/pages_controller.rb	Sun, 23 Jan 2011 08:14:53 +0100

@@ -102,7 +102,6 @@ DEPENDENCIES
   rails (= 3.0.3)
   rails-erd
   rails3-generators
-  rake
   shoulda
   simple_form
   sqlite3-ruby

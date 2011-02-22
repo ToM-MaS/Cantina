@@ -44,10 +44,10 @@ Password=<%= sip_account.password %>
 DisplayName=<%= sip_account.display_name %>
 SIPServerHost=<%= sip_account.registrar %>
 SIPServerPort=<%= sip_account.registrar_port %>
-<% if sip_account.outbound_proxy != "" %>
+<% if sip_account.sip_proxy != "" %>
 UseOutboundProxy=1
-OutboundHost=<%= sip_account.outbound_proxy %>
-OutboundPort=<%= sip_account.outbound_proxy_port %>
+OutboundHost=<%= sip_account.sip_proxy %>
+OutboundPort=<%= sip_account.sip_proxy_port %>
 <% end %>
 RegisterLine=1
 RegisterMac=1

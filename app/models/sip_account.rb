@@ -46,7 +46,13 @@ class SipAccount < ActiveRecord::Base
   acts_as_list :scope => :phone
   after_validation :phone_reboot
   before_destroy :phone_reboot
+  after_create :check_codecs
   
+  def check_codecs
+    if sip_account_codecs.count == 0
+      phone.phone_model.phone_model_codecs.collect {|c| c.codec_id} .each do |i| SipAccountCodec.create(:codec_id => i, :sip_account_id => id ) end
+    end
+  end
   
   # Validate auth_user. This is the "user" rule from RFC 3261.
   validates_format_of :auth_user , :with =>

@@ -38,7 +38,9 @@ gem "simple_form"
 # https://github.com/FooBarWidget/default_value_for
 gem 'default_value_for'
 
+# FastCGI (aptitude install libfcgi-dev)
 gem 'fcgi'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

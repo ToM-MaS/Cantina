@@ -21,7 +21,7 @@
     <td><%= phone_key.label %></td>
     <td><%= link_to 'Show', [@sip_account, phone_key] %></td>
     <td><%= link_to 'Edit', edit_sip_account_phone_key_path(@sip_account, phone_key) %></td>
-    <td><%= link_to 'Destroy', [@sip_account, phone_key], :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', [@sip_account, phone_key], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -15,7 +15,7 @@
     <td><%= phone_model_mac_address.starts_with.gsub(/[0-9A-Z]{2}/i, '\\0:') %></td>
     <td><%= link_to 'Show', phone_model_mac_address %></td>
     <td><%= link_to 'Edit', edit_phone_model_mac_address_path(phone_model_mac_address) %></td>
-    <td><%= link_to 'Destroy', phone_model_mac_address, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', phone_model_mac_address, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

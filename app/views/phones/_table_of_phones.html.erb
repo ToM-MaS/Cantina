@@ -32,7 +32,7 @@
     <% end %>
     </td>
     <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
-    <td><%= link_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -2,20 +2,24 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts
   # GET /sip_accounts.xml
   def index
-    if params[:phone_id].blank?
+    if params[:auth_user]
+      @sip_accounts = SipAccount.where('auth_user'=> params[:auth_user])
+    elsif params[:name] 
+      @sip_accounts = SipAccount.where('name' => params[:name])
+    elsif params[:phone_id].blank?
       # GET /sip_accounts
       @sip_accounts = SipAccount.all
     else
       # GET /phones/{phone_id}/sip_accounts
       @sip_accounts = Phone.find(params[:phone_id]).sip_accounts
     end
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sip_accounts }
     end
   end
-
+  
   # GET /sip_accounts/1
   # GET /sip_accounts/1.xml
   def show
@@ -26,7 +30,7 @@ class SipAccountsController < ApplicationController
       format.xml  { render :xml => @sip_account }
     end
   end
-
+  
   # GET /sip_accounts/new
   # GET /sip_accounts/new.xml
   def new
@@ -41,7 +45,7 @@ class SipAccountsController < ApplicationController
       format.xml  { render :xml => @sip_account }
     end
   end
-
+  
   # GET /sip_accounts/1/edit
   def edit
     @sip_account = SipAccount.find(params[:id])
@@ -49,7 +53,7 @@ class SipAccountsController < ApplicationController
     @phones = Phone.order(:mac_address)
     @dtmf_modes = [ 'rfc2833', 'inband', 'info' ]
   end
-
+  
   # POST /sip_accounts
   # POST /sip_accounts.xml
   def create
@@ -68,7 +72,7 @@ class SipAccountsController < ApplicationController
       end
     end
   end
-
+  
   # PUT /sip_accounts/1
   # PUT /sip_accounts/1.xml
   def update
@@ -87,13 +91,13 @@ class SipAccountsController < ApplicationController
       end
     end
   end
-
+  
   # DELETE /sip_accounts/1
   # DELETE /sip_accounts/1.xml
   def destroy
     @sip_account = SipAccount.find(params[:id])
     @sip_account.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to(sip_accounts_url) }
       format.xml  { head :ok }

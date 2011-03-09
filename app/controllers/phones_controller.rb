@@ -2,10 +2,14 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.xml
   def index
-    if params[:phone_model_id].blank?
-      @phones = Phone.all
-    else
+    if params[:mac_address]
+      @phones = Phone.where('mac_address'=> params[:mac_address])
+    elsif params[:ip_address]
+      @phones = Phone.where('ip_address' => params[:ip_address])
+    elsif ! params[:phone_model_id].blank?
       @phones = PhoneModel.find(params[:phone_model_id]).phones
+    else
+      @phones = Phone.all      
     end
     
     respond_to do |format|
@@ -13,20 +17,20 @@ class PhonesController < ApplicationController
       format.xml  { render :xml => @phones }
     end
   end
-
+  
   # GET /phones/1
   # GET /phones/1.xml
   def show
     @phone = Phone.find(params[:id])
     
     @sip_accounts = @phone.sip_accounts
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @phone }
     end
   end
-
+  
   # GET /phones/new
   # GET /phones/new.xml
   def new
@@ -37,20 +41,20 @@ class PhonesController < ApplicationController
     else
       @phone.phone_model_id = Phone.last ? Phone.last.phone_model.id : nil
     end
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @phone }
     end
   end
-
+  
   # GET /phones/1/edit
   def edit
     @phone = Phone.find(params[:id])
     
     @phone_models = PhoneModel.order(:name)
   end
-
+  
   # POST /phones
   # POST /phones.xml
   def create
@@ -68,7 +72,7 @@ class PhonesController < ApplicationController
       end
     end
   end
-
+  
   # PUT /phones/1
   # PUT /phones/1.xml
   def update
@@ -88,13 +92,13 @@ class PhonesController < ApplicationController
       end
     end
   end
-
+  
   # DELETE /phones/1
   # DELETE /phones/1.xml
   def destroy
     @phone = Phone.find(params[:id])
     @phone.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to(phones_url) }
       format.xml  { head :ok }

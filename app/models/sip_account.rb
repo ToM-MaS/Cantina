@@ -56,11 +56,11 @@ class SipAccount < ActiveRecord::Base
   
   # Validate auth_user. This is the "user" rule from RFC 3261.
   validates_format_of :auth_user , :with =>
-  /^
-   (?:
-   (?:
-   [A-Za-z0-9] |
-   [\-_.!~*'()]
+    /^
+      (?:
+        (?:
+          [A-Za-z0-9] |
+          [\-_.!~*'()]
         ) |
         %[0-9A-F]{2} |
         [&=+$,;?\/]
@@ -68,25 +68,25 @@ class SipAccount < ActiveRecord::Base
     $/x, :allow_nil => true, :allow_blank => true
   
   # Validate user. This is the "user" rule from RFC 3261.
-  validates_format_of :user      , :with => /^
+  validates_format_of :user      , :with =>
+    /^
       (?:
         (?:
           [A-Za-z0-9] |
           [\-_.!~*'()]
-  ) |
+        ) |
         %[0-9A-F]{2} |
-  [&=+$,;?\/]
-  ){1,255}
-  $/x#, :allow_nil => false, :allow_blank => false
-  
+        [&=+$,;?\/]
+      ){1,255}
+    $/x #, :allow_nil => false, :allow_blank => false
   
   # Validate password, remote_password. This is the "password" rule from RFC 3261.
   validates_format_of [ :password, :remote_password ], :with =>
-  /^
-   (?:
-   (?:
-   [A-Za-z0-9] |
-   [\-_.!~*'()]
+    /^
+      (?:
+        (?:
+          [A-Za-z0-9] |
+          [\-_.!~*'()]
         ) |
         %[0-9A-F]{2} |
         [&=+$,]

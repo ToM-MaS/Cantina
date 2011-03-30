@@ -99,7 +99,7 @@ DEPENDENCIES
   faker
   fcgi
   hirb
-  rails (= 3.0.3)
+  rails (~> 3.0.3)
   rails-erd
   rails3-generators
   shoulda

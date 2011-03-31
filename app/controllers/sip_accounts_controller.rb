@@ -2,9 +2,12 @@ class SipAccountsController < ApplicationController
   # GET /sip_accounts
   # GET /sip_accounts.xml
   def index
+    #TODO Add tests to ensure that the search parameters really work.
     if params[:auth_user]
+      # GET /sip_accounts(.fmt)?auth_user={auth_user}
       @sip_accounts = SipAccount.where('auth_user'=> params[:auth_user])
     elsif params[:name] 
+      # GET /sip_accounts(.fmt)?name={name}
       @sip_accounts = SipAccount.where('name' => params[:name])
     elsif params[:phone_id].blank?
       # GET /sip_accounts

@@ -69,6 +69,8 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
+					<li><a href="#method-i-check_codecs">#check_codecs</a></li>
+					
 					<li><a href="#method-i-does_a_phone_to_this_sip_account_exist">#does_a_phone_to_this_sip_account_exist</a></li>
 					
 					<li><a href="#method-i-number_of_sip_accounts_is_possible">#number_of_sip_accounts_is_possible</a></li>
@@ -271,6 +273,42 @@ Table name: sip_accounts
 			<h3 class="section-header">Public Instance Methods</h3>
 
 		
+			<div id="check-codecs-method" class="method-detail ">
+				<a name="method-i-check_codecs"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">check_codecs</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="check-codecs-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 51</span>
+51:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_codecs</span>
+52:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sip_account_codecs</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+53:       <span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_codecs</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">codec_id</span>} .<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">SipAccountCodec</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:codec_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">i</span>, <span class="ruby-value">:sip_account_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span> ) <span class="ruby-keyword kw">end</span>
+54:     <span class="ruby-keyword kw">end</span>
+55:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
 			<div id="undefined-phone-model-keys-method" class="method-detail ">
 				<a name="method-i-undefined_phone_model_keys"></a>
 
@@ -293,12 +331,12 @@ searches the available phone_keys for this sip_account
 					<div class="method-source-code"
 						id="undefined-phone-model-keys-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 227</span>
-227:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">undefined_phone_model_keys</span>
-228:     <span class="ruby-identifier">already_defined_phone_model_keys</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_key</span>.<span class="ruby-identifier">phone_model_key</span>}
-229:     <span class="ruby-identifier">all_phone_model_keys</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:position</span>)
-230:     <span class="ruby-identifier">all_phone_model_keys</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">already_defined_phone_model_keys</span>
-231:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 233</span>
+233:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">undefined_phone_model_keys</span>
+234:     <span class="ruby-identifier">already_defined_phone_model_keys</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_keys</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">phone_key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">phone_key</span>.<span class="ruby-identifier">phone_model_key</span>}
+235:     <span class="ruby-identifier">all_phone_model_keys</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">phone_model_keys</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:position</span>)
+236:     <span class="ruby-identifier">all_phone_model_keys</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">already_defined_phone_model_keys</span>
+237:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -338,12 +376,12 @@ exists.
 					<div class="method-source-code"
 						id="does-a-phone-to-this-sip-account-exist-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 237</span>
-237:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">does_a_phone_to_this_sip_account_exist</span>
-238:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">Phone</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_id</span>)
-239:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:phone_id</span>, <span class="ruby-node">&quot;(ID #{self.phone_id}) does not exist.&quot;</span>)
-240:     <span class="ruby-keyword kw">end</span>      
-241:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 243</span>
+243:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">does_a_phone_to_this_sip_account_exist</span>
+244:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">Phone</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone_id</span>)
+245:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:phone_id</span>, <span class="ruby-node">&quot;(ID #{self.phone_id}) does not exist.&quot;</span>)
+246:     <span class="ruby-keyword kw">end</span>      
+247:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -377,17 +415,17 @@ method checks if this sip_account is  within this range.
 					<div class="method-source-code"
 						id="number-of-sip-accounts-is-possible-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 246</span>
-246:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">number_of_sip_accounts_is_possible</span>
-247:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>)
-248:       <span class="ruby-identifier">my_self</span> = <span class="ruby-value">1</span>
-249:     <span class="ruby-keyword kw">else</span>
-250:       <span class="ruby-identifier">my_self</span> = <span class="ruby-value">0</span>
-251:     <span class="ruby-keyword kw">end</span>
-252:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span>((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">my_self</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">max_number_of_sip_accounts</span>) 
-253:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:phone_id</span>, <span class="ruby-node">&quot;only #{self.phone.phone_model.max_number_of_sip_accounts} SIP Accounts for the Phone with the ID #{self.phone.id} possible&quot;</span>)
-254:     <span class="ruby-keyword kw">end</span>  
-255:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 252</span>
+252:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">number_of_sip_accounts_is_possible</span>
+253:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>)
+254:       <span class="ruby-identifier">my_self</span> = <span class="ruby-value">1</span>
+255:     <span class="ruby-keyword kw">else</span>
+256:       <span class="ruby-identifier">my_self</span> = <span class="ruby-value">0</span>
+257:     <span class="ruby-keyword kw">end</span>
+258:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span>((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">sip_accounts</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">my_self</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">phone_model</span>.<span class="ruby-identifier">max_number_of_sip_accounts</span>) 
+259:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:phone_id</span>, <span class="ruby-node">&quot;only #{self.phone.phone_model.max_number_of_sip_accounts} SIP Accounts for the Phone with the ID #{self.phone.id} possible&quot;</span>)
+260:     <span class="ruby-keyword kw">end</span>  
+261:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -420,10 +458,10 @@ reboot phone that belongs to sip_account
 					<div class="method-source-code"
 						id="phone-reboot-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 330</span>
-330: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_reboot</span>
-331: <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">reboot</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>
-332: <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 336</span>
+336: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">phone_reboot</span>
+337: <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>.<span class="ruby-identifier">reboot</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phone</span>
+338: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -501,37 +539,37 @@ UTF8-CONT       =  %x80-BF
 					<div class="method-source-code"
 						id="validate-a-display-name-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 283</span>
-283:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_a_display_name</span>( <span class="ruby-identifier">val</span> )
-284:     <span class="ruby-identifier">ret</span> = <span class="ruby-keyword kw">true</span>
-285:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
-286:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-regexp re">/^
-287:         (?:
-288:           (?:
-289:             (?:
-290:               (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,}
-291:             ) |
-292:             (?:
-293:               [\x21\x23-\x5B\x5D-\x7E]
-294:             ) |
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 289</span>
+289:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_a_display_name</span>( <span class="ruby-identifier">val</span> )
+290:     <span class="ruby-identifier">ret</span> = <span class="ruby-keyword kw">true</span>
+291:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
+292:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-regexp re">/^
+293:         (?:
+294:           (?:
 295:             (?:
-296:               [\xC0-\xDF] [\x80-\xBF]{1} |
-297:               [\xE0-\xEF] [\x80-\xBF]{2} |
-298:               [\xF0-\xF7] [\x80-\xBF]{3} |
-299:               [\xF8-\xFB] [\x80-\xBF]{4} |
-300:               [\xFC-\xFD] [\x80-\xBF]{5}
-301:             )
-302:           ) |
-303:           (?:
-304:             [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F]
-305:           )
-306:         )*
-307:       $/</span>.<span class="ruby-identifier">match</span>( <span class="ruby-identifier">val</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-value str">'BINARY'</span>) )
-308:   <span class="ruby-identifier">ret</span> = <span class="ruby-keyword kw">false</span>
-309: <span class="ruby-keyword kw">end</span>
-310: <span class="ruby-keyword kw">end</span>
-311: <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ret</span>
-312: <span class="ruby-keyword kw">end</span></pre>
+296:               (?: [\x20\x09]* \x0D\x0A )? [\x20\x09]{1,}
+297:             ) |
+298:             (?:
+299:               [\x21\x23-\x5B\x5D-\x7E]
+300:             ) |
+301:             (?:
+302:               [\xC0-\xDF] [\x80-\xBF]{1} |
+303:               [\xE0-\xEF] [\x80-\xBF]{2} |
+304:               [\xF0-\xF7] [\x80-\xBF]{3} |
+305:               [\xF8-\xFB] [\x80-\xBF]{4} |
+306:               [\xFC-\xFD] [\x80-\xBF]{5}
+307:             )
+308:           ) |
+309:           (?:
+310:             [\\] [\x00-\x09\x0B-\x0C\x0E-\x7F]
+311:           )
+312:         )*
+313:       $/</span>.<span class="ruby-identifier">match</span>( <span class="ruby-identifier">val</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-value str">'BINARY'</span>) )
+314:   <span class="ruby-identifier">ret</span> = <span class="ruby-keyword kw">false</span>
+315: <span class="ruby-keyword kw">end</span>
+316: <span class="ruby-keyword kw">end</span>
+317: <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ret</span>
+318: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -564,12 +602,12 @@ Validates if a display_name is valid refering to the RFC 3261.
 					<div class="method-source-code"
 						id="validate-display-name-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 316</span>
-316: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_display_name</span>
-317: <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">validate_a_display_name</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">display_name</span> )
-318: <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:display_name</span> , <span class="ruby-value str">&quot;Invalid display name (see RFC 3261).&quot;</span> )
-319: <span class="ruby-keyword kw">end</span>
-320: <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 322</span>
+322: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_display_name</span>
+323: <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">validate_a_display_name</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">display_name</span> )
+324: <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:display_name</span> , <span class="ruby-value str">&quot;Invalid display name (see RFC 3261).&quot;</span> )
+325: <span class="ruby-keyword kw">end</span>
+326: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -602,12 +640,12 @@ Validates if a realm is valid refering to the RFC 3261.
 					<div class="method-source-code"
 						id="validate-realm-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 324</span>
-324: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_realm</span>
-325: <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">validate_a_display_name</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">realm</span> )
-326: <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:realm</span>        , <span class="ruby-value str">&quot;Invalid realm (see RFC 3261).&quot;</span> )
-327: <span class="ruby-keyword kw">end</span>
-328: <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/sip_account.rb, line 330</span>
+330: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_realm</span>
+331: <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">validate_a_display_name</span>( <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">realm</span> )
+332: <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>( <span class="ruby-value">:realm</span>        , <span class="ruby-value str">&quot;Invalid realm (see RFC 3261).&quot;</span> )
+333: <span class="ruby-keyword kw">end</span>
+334: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

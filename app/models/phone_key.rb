@@ -104,30 +104,33 @@ class PhoneKey < ActiveRecord::Base
 	# Checks if this key is a valid key from the phone_model
 	#
 	def key_must_be_a_possible_key_from_the_phone_model
-	  phone_model = self.sip_account.phone.phone_model
-	  if !phone_model.phone_model_keys.exists?(self.phone_model_key_id)
-	    errors.add( :phone_model_key_id, "Is not a valid PhoneModelKey for the PhoneModel #{phone_model.name} (ID #{phone_model.id})." )
-	  end
+		phone_model = self.sip_account.phone.phone_model
+			if ! phone_model.phone_model_keys.exists?(self.phone_model_key_id)
+			errors.add( :phone_model_key_id, "Is not a valid PhoneModelKey for the PhoneModel #{phone_model.name} (ID #{phone_model.id})." )
+		end
 	end
 	
 	# Checks if the phone_key_function_definition is valid for 
 	# the given PhoneModelKey
 	#
 	def phone_key_function_definition_must_be_valid
-	  if !self.sip_account.phone.phone_model.phone_model_keys.first.phone_key_function_definitions.exists?(self.phone_key_function_definition_id)
-	    errors.add( :phone_key_function_definition_id, "Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}." )
-	  end
+		if ! self.sip_account.phone.phone_model.phone_model_keys.first.phone_key_function_definitions.exists?(self.phone_key_function_definition_id)
+			errors.add( :phone_key_function_definition_id, "Is not a valid phone_key_function_definition for the PhoneModelKey ID #{self.phone_model_key_id}." )
+		end
 	end
-  # Does this SipAccount belong to this phone
+	
+	# Does this SipAccount belong to this phone
+	#
 	def sip_account_must_belong_to_phone
-    if self.sip_account.id != self.sip_account_id
-      errors.add( :sip_account_id, "Is not a valid sip account for this phone." )
-    end
-  end
+		if self.sip_account.id != self.sip_account_id
+			errors.add( :sip_account_id, "Is not a valid sip account for this phone." )
+		end
+	end
+	
 	# Checks that a key is available
 	#
 	def phone_model_keys_has_to_be_available
-	  self.sip_account.undefined_phone_model_keys.include?(self.phone_model_key)
-  end
-		
+		self.sip_account.undefined_phone_model_keys.include?(self.phone_model_key)
+	end
+	
 end

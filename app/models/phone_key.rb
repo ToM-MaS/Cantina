@@ -38,6 +38,7 @@ class PhoneKey < ActiveRecord::Base
 	validate :phone_key_function_definition_must_be_valid
 	validate :phone_model_keys_has_to_be_available
 	validate :sip_account_must_belong_to_phone
+	
 	private
 	
 	# Validates the softkey definition.
